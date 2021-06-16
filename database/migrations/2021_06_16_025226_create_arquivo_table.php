@@ -17,8 +17,13 @@ class CreateArquivoTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('diretorio_arquivo');
+
+            $table->unsignedBigInteger('grupo_id');
             $table->foreign('grupo_id')->references('id')->on('grupos');
+
+            $table->unsignedBigInteger('inscricao_id');
             $table->foreign('inscricao_id')->references('id')->on('inscricoes');
+
             $table->timestamps();
         });
     }

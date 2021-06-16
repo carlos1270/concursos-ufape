@@ -9,18 +9,11 @@ class InscricaoAvaliacao extends Pivot
 {
     use HasFactory;
 
+    public $incrementing = true;
+
     protected $fillable = [
-        'inscricao_id',
+        'avaliacao_id',
         'grupo_id',
+        'nota'
     ];
-
-    public function inscricao()
-    {
-        return $this->belongsTo(Inscricao::class, 'inscricao_id');
-    }
-
-    public function grupo()
-    {
-        return $this->belongsTo(Grupo::class, 'grupo_id');
-    }
 }

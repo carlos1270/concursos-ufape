@@ -27,7 +27,10 @@ class CreateConcursosTable extends Migration
             $table->date('data_resultado_selecao');
             $table->string('modelos_documentos');
             $table->string('edital');
+
+            $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

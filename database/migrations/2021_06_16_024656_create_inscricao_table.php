@@ -18,9 +18,16 @@ class CreateInscricaoTable extends Migration
             $table->string('status');
             $table->string('titulacao');
             $table->boolean('cotista');
+
+            $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('concursos_id');
             $table->foreign('concursos_id')->references('id')->on('concursos');
+
+            $table->unsignedBigInteger('vagas_id');
             $table->foreign('vagas_id')->references('id')->on('opcoes_vaga');
+
             $table->timestamps();
         });
     }

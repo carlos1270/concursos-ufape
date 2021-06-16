@@ -53,11 +53,11 @@ class User extends Authenticatable
 
     public function concurso()
     {
-        return $this->belongsTo(Concurso::class, 'concurso_id');
+        return $this->hasMany(Concurso::class, 'concurso_id');
     }
 
     public function inscricao()
     {
-        return $this->belongsTo(Inscricao::class, 'inscricao_id');
+        return $this->hasMany(Inscricao::class, 'inscricao_id');
     }
 }

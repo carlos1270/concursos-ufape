@@ -14,4 +14,9 @@ class Grupo extends Model
         'descricao',
         'peso',
     ];
+
+    public function avaliacao()
+    {
+        return $this->belongsToMany(Avaliacao::class, 'inscricoes_avalicoes', 'grupo_id', 'avaliacao_id')->withPivot('nota');
+    }
 }

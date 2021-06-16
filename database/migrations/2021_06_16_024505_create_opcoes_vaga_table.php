@@ -16,7 +16,10 @@ class CreateOpcoesVagaTable extends Migration
         Schema::create('opcoes_vaga', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+
+            $table->unsignedBigInteger('concursos_id');
             $table->foreign('concursos_id')->references('id')->on('concursos');
+
             $table->timestamps();
         });
     }

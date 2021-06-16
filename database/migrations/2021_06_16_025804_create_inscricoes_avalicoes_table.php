@@ -15,8 +15,15 @@ class CreateInscricoesAvalicoesTable extends Migration
     {
         Schema::create('inscricoes_avalicoes', function (Blueprint $table) {
             $table->id();
-            $table->foreign('inscricao_id')->references('id')->on('inscricoes');
+
+            $table->unsignedBigInteger('avaliacao_id');
+            $table->foreign('avaliacao_id')->references('id')->on('avaliacoes');
+
+            $table->unsignedBigInteger('grupo_id');
             $table->foreign('grupo_id')->references('id')->on('grupos');
+
+
+            $table->integer('nota');
             $table->timestamps();
         });
     }

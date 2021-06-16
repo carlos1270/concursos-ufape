@@ -18,6 +18,6 @@ class Arquivo extends Model
 
     public function inscricao()
     {
-        return $this->hasOne(Concurso::class, 'concurso_id');
+        return $this->belongsTo(Inscricao::class, 'inscricao_id');
     }
 }

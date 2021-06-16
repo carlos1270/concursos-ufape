@@ -11,5 +11,11 @@ class Avaliacao extends Model
 
     protected $fillable = [
         'nota',
+        'inscricao_id'
     ];
+
+    public function grupo()
+    {
+        return $this->belongsToMany(Grupo::class, 'inscricoes_avalicoes', 'avaliacao_id', 'grupo_id')->withPivot('nota');
+    }
 }
