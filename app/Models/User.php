@@ -11,6 +11,13 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public const TIPO_ENUM = [
+        "admin" => "admin",
+        "chefeSetorConcursos" => "chefeSetorConcursos",
+        "presidenteBancaExaminadora" => "presidenteBancaExaminadora",
+        "candidato" => "candidato",
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,7 +26,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'cpf',
+        'celular',
         'password',
+        'tipo_usuario'
     ];
 
     /**
@@ -40,4 +50,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function concurso()
+    {
+        return $this->belongsTo(Concurso::class, 'concurso_id');
+    }
+
+    public function inscricao()
+    {
+        return $this->belongsTo(Inscricao::class, 'inscricao_id');
+    }
 }
