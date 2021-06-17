@@ -59,19 +59,31 @@ class Concurso extends Model
 
     public function salvarEdital($file) {
         if ($file != null) {
-            $path = 'public/concursos/'. $this->id . '/'; 
+            $path = 'concursos/'. $this->id . '/'; 
             $nome = 'edital.pdf';
-            Storage::putFileAs($path, $file, $nome);
+            Storage::putFileAs('public/' . $path, $file, $nome);
             $this->edital = $path . $nome;
         }
     }
 
     public function salvarModelos($file) {
         if ($file != null) {
-            $path = 'public/concursos/'. $this->id . '/'; 
+            $path = 'concursos/'. $this->id . '/'; 
             $nome = 'modelos.zip';
-            Storage::putFileAs($path, $file, $nome);
+            Storage::putFileAs('public/' . $path, $file, $nome);
             $this->modelos_documentos = $path . $nome;
         }
+    }
+
+    public function deletar() {
+        if (Storage::disk()->exists('public/'.$this->edital)) {
+            Storage::delete('public/'.$this->edital);
+        }
+
+        if (Storage::disk()->exists('public/'.$this->modelos_documentos)) {
+            Storage::delete('public/'.$this->modelos_documentos);
+        }
+
+        $this->delete();
     }
 }

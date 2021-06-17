@@ -15,7 +15,8 @@ class ConcursoController extends Controller
      */
     public function index()
     {
-        return view('concurso.index');
+        $concursos = Concurso::all();
+        return view('concurso.index', compact('concursos'));
     }
 
     /**
@@ -44,7 +45,7 @@ class ConcursoController extends Controller
         $concurso->salvarModelos($request->modelos_documentos);
         $concurso->update();
 
-        return view('concurso.index');
+        return redirect( route('concurso.index') )->with(['mensage' => 'Concurso criado com sucesso!']);
     }
 
     /**
@@ -66,7 +67,8 @@ class ConcursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $concurso = Concurso::find($id);
+        return view('concurso.edit', compact('concurso'));
     }
 
     /**
@@ -76,9 +78,16 @@ class ConcursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(StoreConcursoRequest $request, $id)
+    {   
+        $request->validated();
+        $concurso = Concurso::find($id);
+        $concurso->setAtributes($request);
+        $concurso->salvarEdital($request->edital);
+        $concurso->salvarModelos($request->modelos_documentos);
+        $concurso->update();
+        
+        return redirect( route('concurso.index') )->with(['mensage' => 'Concurso salvo com sucesso!']);
     }
 
     /**
@@ -89,6 +98,9 @@ class ConcursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $concurso = Concurso::find($id);
+        $concurso->deletar();
+
+        return redirect( route('concurso.index') )->with(['mensage' => 'Concurso deletado com sucesso!']);
     }
 }
