@@ -20,7 +20,7 @@ class Inscricao extends Model
 
     public function inscricao()
     {
-        return $this->hasOne(Concurso::class, 'concurso_id');
+        return $this->belongsTo(Concurso::class, 'concurso_id');
     }
 
     public function user()
@@ -30,6 +30,6 @@ class Inscricao extends Model
 
     public function vagas()
     {
-        return $this->hasMany(OpcoesVagas::class, 'vagas_id');
+        return $this->belongsTo(OpcoesVagas::class, 'vagas_id');
     }
 }
