@@ -28,9 +28,9 @@ class Concurso extends Model
         'users_id'
     ];
 
-    public function inscricao()
+    public function inscricoes()
     {
-        return $this->belongsTo(Inscricao::class, 'inscricao_id');
+        return $this->hasMany(Inscricao::class, 'concurso_id');
     }
 
     public function user()

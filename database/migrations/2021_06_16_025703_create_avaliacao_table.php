@@ -17,7 +17,7 @@ class CreateAvaliacaoTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('inscricao_id');
-            $table->foreign('inscricao_id')->references('id')->on('inscricoes');
+            $table->foreign('inscricao_id')->references('id')->on('inscricaos');
 
             $table->timestamps();
         });

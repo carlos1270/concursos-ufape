@@ -29,6 +29,26 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="opcoes-de-vaga" style="border: solid 1px black; border-radius: 5px; padding: 25px;">
+                                <div id="opcoes" class="row">
+                                    @foreach ($concurso->vagas as $vaga)
+                                        <div class="col-sm-3" style="border: solid 1px black; border-radius: 5px; padding: 5px; margin: 5px;">
+                                            <label>Nome da opção</label>
+                                            <input type="hidden" name="opcoes_id[]" value="{{$vaga->id}}">
+                                            <input class="form-control" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]" value="{{$vaga->nome}}">               
+                                            <button type="button" onclick="this.parentElement.remove()" class="btn btn-danger">Excluir</button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9"></div>
+                                    <div class="col-sm-3">
+                                        <button type="button" id="btn-adicionar-escolhar" onclick="adicionarEscolha()" class="btn btn-danger">Adicionar escolha de vaga</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="descricao">Descrição</label>
@@ -107,4 +127,15 @@
             </div>
         </div>
     </div>
+    <script>
+        function adicionarEscolha() {
+            var escolha = `<div class="col-sm-3" style="border: solid 1px black; border-radius: 5px; padding: 5px; margin: 5px;">
+                            <label>Nome da opção</label>
+                            <input type="hidden" name="opcoes_id[]" value="0">
+                            <input class="form-control" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]">               
+                            <button type="button" onclick="this.parentElement.remove()" class="btn btn-danger">Excluir</button>
+                           </div>`;
+            $('#opcoes').append(escolha);
+        }
+    </script>
 </x-app-layout>
