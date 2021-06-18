@@ -22,7 +22,7 @@ class CreateArquivoTable extends Migration
             $table->foreign('grupo_id')->references('id')->on('grupos');
 
             $table->unsignedBigInteger('inscricao_id');
-            $table->foreign('inscricao_id')->references('id')->on('inscricoes');
+            $table->foreign('inscricao_id')->references('id')->on('inscricaos');
 
             $table->timestamps();
         });

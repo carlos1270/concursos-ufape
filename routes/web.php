@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ConcursoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +41,5 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
     Route::get('/delete-usuario/{id}', [AdminController::class, 'deleteUsuario'])
         ->name('delete.usuario');
 });
+
+Route::resource('concurso', ConcursoController::class)->middleware(['auth:sanctum', 'verified']);
