@@ -26,7 +26,7 @@ class CreateInscricaoTable extends Migration
             $table->foreign('concursos_id')->references('id')->on('concursos');
 
             $table->unsignedBigInteger('vagas_id');
-            $table->foreign('vagas_id')->references('id')->on('opcoes_vaga');
+            $table->foreign('vagas_id')->references('id')->on('opcoes_vagas');
 
             $table->timestamps();
         });

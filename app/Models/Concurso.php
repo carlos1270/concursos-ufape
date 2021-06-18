@@ -40,7 +40,7 @@ class Concurso extends Model
 
     public function vagas()
     {
-        return $this->hasMany(OpcoesVagas::class, 'opcoes_vagas_id');
+        return $this->hasMany(OpcoesVagas::class, 'concursos_id');
     }
 
     public function setAtributes(StoreConcursoRequest $request) {

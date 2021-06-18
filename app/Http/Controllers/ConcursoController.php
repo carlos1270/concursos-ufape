@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreConcursoRequest;
 use App\Models\Concurso;
+use App\Models\OpcoesVagas;
 
 class ConcursoController extends Controller
 {
@@ -44,7 +45,7 @@ class ConcursoController extends Controller
         $concurso->salvarEdital($request->edital);
         $concurso->salvarModelos($request->modelos_documentos);
         $concurso->update();
-
+        OpcoesVagas::criarOpcoesVagas($concurso, $request);
         return redirect( route('concurso.index') )->with(['mensage' => 'Concurso criado com sucesso!']);
     }
 

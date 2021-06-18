@@ -13,7 +13,7 @@ class CreateOpcoesVagaTable extends Migration
      */
     public function up()
     {
-        Schema::create('opcoes_vaga', function (Blueprint $table) {
+        Schema::create('opcoes_vagas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
 

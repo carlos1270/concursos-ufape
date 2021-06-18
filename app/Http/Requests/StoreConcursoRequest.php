@@ -36,6 +36,8 @@ class StoreConcursoRequest extends FormRequest
             'data_resultado_selecao'        => 'required|after:data_fim_envio_doc',
             'edital'                        => 'nullable|file|max:2048',
             'modelos_documentos'            => 'nullable|file|max:2048',
+            'opcoes_vaga'                   => 'required',
+            'opcoes_vaga.*'                 => 'required',
         ];
     }
 }
