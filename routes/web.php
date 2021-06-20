@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CandidatoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConcursoController;
 /*
@@ -42,4 +43,5 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
         ->name('delete.usuario');
 });
 
-Route::resource('concurso', ConcursoController::class)->middleware(['auth:sanctum', 'verified']);
+Route::resource('concurso', ConcursoController::class)
+    ->middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso']);

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Notifications\UsuarioCadastrado;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -42,7 +41,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), User::$rules, User::$messages)->validate();
 
-        if (!$this->validar_cpf($request['cpf'])) {
+        if (!Controller::validar_cpf($request['cpf'])) {
             return redirect()->back()->with('error', 'Número de CPF inválido')->withInput();
         }
 
@@ -89,7 +88,7 @@ class AdminController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
-        if (!$this->validar_cpf($request['cpf'])) {
+        if (!Controller::validar_cpf($request['cpf'])) {
             return redirect()->back()->with('error', 'Número de CPF inválido')->withInput();
         }
 
