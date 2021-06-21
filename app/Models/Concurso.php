@@ -30,7 +30,7 @@ class Concurso extends Model
 
     public function inscricoes()
     {
-        return $this->hasMany(Inscricao::class, 'concurso_id');
+        return $this->hasMany(Inscricao::class, 'concursos_id');
     }
 
     public function user()

@@ -84,6 +84,7 @@ class ConcursoController extends Controller
     {   
         $request->validated();
         $concurso = Concurso::find($id);
+        $this->authorize('update', $concurso);
         $opcoesEditadas = OpcoesVagas::whereIn('id', $request->opcoes_id)->get();
         $opcoesExcluidas = $concurso->vagas->diff($opcoesEditadas);
         if ($opcoesExcluidas != null && $opcoesExcluidas->count() > 0 && $this->podeExcluir($opcoesExcluidas)) {
@@ -138,6 +139,7 @@ class ConcursoController extends Controller
     public function destroy($id)
     {
         $concurso = Concurso::find($id);
+        $this->authorize('delete', $concurso);
         $inscricoes = $concurso->inscricoes;
 
         if ($inscricoes != null && $inscricoes > 0) {

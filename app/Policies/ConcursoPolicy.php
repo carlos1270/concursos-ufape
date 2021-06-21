@@ -30,7 +30,7 @@ class ConcursoPolicy
      */
     public function view(User $user, Concurso $concurso)
     {
-        //
+        return $concurso->user->id == $user->id;
     }
 
     /**
@@ -41,10 +41,7 @@ class ConcursoPolicy
      */
     public function create(User $user)
     {
-        if ($user->tipo_usuario == User::TIPO_ENUM["admin"] || $user->tipo_usuario == User::TIPO_ENUM["chefeSetorConcursos"]) {
-            return true;
-        }
-        return false;
+        return $user->tipo_usuario == User::TIPO_ENUM["admin"] || $user->tipo_usuario == User::TIPO_ENUM["chefeSetorConcursos"];
     }
 
     /**
@@ -56,7 +53,7 @@ class ConcursoPolicy
      */
     public function update(User $user, Concurso $concurso)
     {
-        $this->updateOrDelete($user, $concurso);
+        return $concurso->user->id == $user->id;
     }
 
     /**
@@ -68,7 +65,7 @@ class ConcursoPolicy
      */
     public function delete(User $user, Concurso $concurso)
     {
-        $this->updateOrDelete($user, $concurso);
+        return $concurso->user->id == $user->id;
     }
 
     /**
@@ -93,12 +90,5 @@ class ConcursoPolicy
     public function forceDelete(User $user, Concurso $concurso)
     {
         //
-    }
-
-    public function updateOrDelete(User $user, Concurso $concurso) {
-        if (($user->tipo_usuario == User::TIPO_ENUM["admin"] || $user->tipo_usuario == User::TIPO_ENUM["chefeSetorConcursos"]) && $concurso->user->id == $user->id) {
-            return true;
-        }
-        return false;
     }
 }
