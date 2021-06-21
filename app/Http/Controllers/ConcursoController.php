@@ -69,6 +69,7 @@ class ConcursoController extends Controller
     public function edit($id)
     {
         $concurso = Concurso::find($id);
+        $this->authorize('update', $concurso);
         return view('concurso.edit', compact('concurso'));
     }
 

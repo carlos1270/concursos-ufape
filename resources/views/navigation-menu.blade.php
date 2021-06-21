@@ -18,24 +18,14 @@
                     <x-jet-nav-link href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.*')">
                         {{ __('Concursos') }}
                     </x-jet-nav-link>
-                </div>
-
-                @if(Auth::user()->tipo_usuario == "admin")
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Auth::user()->tipo_usuario == "admin")
                         <x-jet-nav-link href="{{ route('show.usuarios') }}" :active="request()->routeIs('show.usuarios')">
                             {{ __('Usuários') }}
                         </x-jet-nav-link>
-                    </div>
-                @endif
+                    @endif
+                </div>
 
-                @if(Auth::user()->tipo_usuario == "admin" || 
-                        Auth::user()->tipo_usuario == "chefeSetorConcursos" )
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.index')">
-                            {{ __('Concursos') }}
-                        </x-jet-nav-link>
-                    </div>
-                @endif
+                
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -98,6 +88,11 @@
             <x-jet-responsive-nav-link href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.*')">
                 {{ __('Concursos') }}
             </x-jet-responsive-nav-link>
+            @if(Auth::user()->tipo_usuario == "admin")
+                <x-jet-nav-link href="{{ route('show.usuarios') }}" :active="request()->routeIs('show.usuarios')">
+                    {{ __('Usuários') }}
+                </x-jet-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

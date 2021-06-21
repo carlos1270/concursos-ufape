@@ -6,9 +6,11 @@
                     {{ __('Concursos') }}
                 </h2>
             </div>
-    
+            
             <div class="col-sm-2">
-                <a href="{{route('concurso.create')}}" class="btn btn-primary">Criar novo</a>
+                {{-- @can('create', Concurso::class) --}}
+                    <a href="{{route('concurso.create')}}" class="btn btn-primary">Criar novo</a>
+                {{-- @endcan --}}
             </div>
         </div>
     </x-slot>
