@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -20,17 +21,16 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-        ])->validate();
+        $input['tipo_usuario'] = User::TIPO_ENUM['candidato'];
 
-        return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-        ]);
+        Validator::make($input, User::$rules, User::$messages)->validate();
+
+        if (!Controller::validar_cpf($input['cpf'])) {
+            return redirect()->back()->with('error', 'Número de CPF inválido')->withrequest();
+        }
+
+        $input['password'] = Hash::make($input['password']);
+
+        return User::create($input);
     }
 }

@@ -2,19 +2,19 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
     public function run()
     {
-        //
+        \App\Models\User::factory(1)->create(['email' => 'admin@admin.com']);
+        \App\Models\User::factory(1)->create(['email' => 'chefe@chefe.com', 'tipo_usuario' => User::TIPO_ENUM["chefeSetorConcursos"]]);
     }
 }
