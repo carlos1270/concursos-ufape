@@ -47,6 +47,7 @@ class AdminController extends Controller
 
         $data = [
             'nome' => $request['nome'],
+            'sobrenome' => $request['sobrenome'],
             'email' => $request['email'],
             'cpf' => $request['cpf'],
             'celular' => $request['celular'],
@@ -72,8 +73,8 @@ class AdminController extends Controller
         $messages = User::$messages;
 
         if (!$request['password']) {
-            $rules = array_slice(User::$rules, 0, 4);
-            $messages = array_slice(User::$messages, 0, 16);
+            $rules = array_slice(User::$rules, 0, 5);
+            $messages = array_slice(User::$messages, 0, 20);
         }
 
         $rules['cpf'] = [
@@ -94,6 +95,7 @@ class AdminController extends Controller
 
         $data = [
             'nome' => $request['nome'],
+            'sobrenome' => $request['sobrenome'],
             'email' => $request['email'],
             'cpf' => $request['cpf'],
             'celular' => $request['celular']
