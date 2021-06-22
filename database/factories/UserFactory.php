@@ -26,6 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'nome' => $this->faker->name(),
+            'sobrenome' => $this->faker->lastName(),
             'cpf' => rand(10000000000, 99999999999),
             'celular' => rand(10000000000, 99999999999),
             'email' => $this->faker->unique()->safeEmail(),

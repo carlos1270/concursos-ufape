@@ -16,5 +16,6 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create(['email' => 'admin@admin.com']);
         \App\Models\User::factory(1)->create(['email' => 'chefe@chefe.com', 'tipo_usuario' => User::TIPO_ENUM["chefeSetorConcursos"]]);
+        \App\Models\User::factory(1)->create(['email' => 'candidato@candidato.com', 'tipo_usuario' => User::TIPO_ENUM["candidato"]]);
     }
 }

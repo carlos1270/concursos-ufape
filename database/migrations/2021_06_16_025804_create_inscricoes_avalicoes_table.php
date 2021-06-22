@@ -13,15 +13,14 @@ class CreateInscricoesAvalicoesTable extends Migration
      */
     public function up()
     {
-        Schema::create('inscricoes_avalicoes', function (Blueprint $table) {
+        Schema::create('inscricoes_avaliacoes', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('avaliacao_id');
-            $table->foreign('avaliacao_id')->references('id')->on('avaliacoes');
+            $table->unsignedBigInteger('avaliacoes_id');
+            $table->foreign('avaliacoes_id')->references('id')->on('avaliacoes');
 
             $table->unsignedBigInteger('grupo_id');
             $table->foreign('grupo_id')->references('id')->on('grupos');
-
 
             $table->integer('nota');
             $table->timestamps();

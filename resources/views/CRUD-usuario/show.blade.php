@@ -1,67 +1,61 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{ route('create.usuario') }}">
-                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                        Cadastrar usuário
-                    </button>
-                </a>
-            </div>
-        </div>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="container">
-            <div class="row">
-                    @if(session('success'))
-                    <div class="col-md-12">
-                        <div class="alert alert-success" role="alert">
-                            <p>{{session('success')}}</p>
-                        </div>
-                    </div>
-                    @endif
+@extends('templates.template-principal')
+@section('content')
+<div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
+    <div class="form-row justify-content-center">
+        <div class="col-md-11">
+            <div class="card shadow bg-white style_card_container">
+                <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
+                    <h6 class="style_card_container_header_titulo">Usuários</h6>
+                    <a class="btn btn-primary" href="{{ route('create.usuario') }}" style="margin-top:10px;">Criar usuário</a>
                 </div>
-                <div class="row">
-                    <table id="table-usuarios" class="table table-responsove-md">
+                <div class="card-body">
+                    <table class="table table-bordered table-hover tabela_container table-responsove-md">
                         <thead>
                             <tr>
-                                <th scope="col" style="padding-left: 10px">Nome</th>
-                                <th scope="col" style="padding-left: 10px">CPF</th>
-                                <th scope="col" style="padding-left: 10px">Celular</th>
-                                <th scope="col" style="padding-left: 10px">E-mail</th>
-                                <th scope="col" style="text-align: center">Ações</th>
+                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Nome</th>
+                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Sobrenome</th>
+                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">CPF</th>
+                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Celular</th>
+                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">E-mail</th>
+                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             @forelse ($usuarios as $user)
                                 <tr>
-                                    <td>
+                                    <td id="tabela_container_linha">
                                         {{ $user->nome }}
-                                    <td>
-                                    <td>
+                                    </td>
+                                    <td id="tabela_container_linha">
+                                        {{ $user->sobrenome }}
+                                    </td>
+                                    <td id="tabela_container_linha">
                                         {{ $user->cpf }}
-                                    <td>
-                                    <td>
+                                    </td>
+                                    <td id="tabela_container_linha">
                                         {{ $user->celular }}
-                                    <td>
-                                    <td>
+                                    </td>
+                                    <td id="tabela_container_linha">
                                         {{ $user->email }}
-                                    <td>
-                                    <td>
-                                    <button type="button"
-                                            onclick ="location.href='{{ route('edit.usuario', ['usuario' => $user->id]) }}'">
-                                            Editar
-                                    </button>
-                                        <button type="button"
-                                            onclick="if(confirm('Tem certeza que deseja deletar o usuário?')) location.href='{{route('delete.usuario', $user->id)}}'">
-                                            Remover
-                                        </button>
-                                    <td>
+                                    </td>
+                                    <td id="tabela_container_linha" style="text-align: center;">
+                                        <div class="btn-group">
+                                            <div>
+                                                <button class="btn btn-info" onclick ="location.href='{{ route('edit.usuario', ['usuario' => $user->id]) }}'">
+                                                    <img src="{{ asset('img/icon_editar.svg') }}" alt="Orientação" width="22px" >
+                                                </button>
+                                                <button class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja deletar o usuário?')) 
+                                                    location.href='{{route('delete.usuario', $user->id)}}'">
+                                                    <img src="{{ asset('img/icon_lixeira.svg') }}" alt="Orientação" width="22px">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @empty
-                                <td colspan="5">Sem usuários cadastrados ainda</td>
+                                <td id="tabela_container_linha">
+                                    Sem usuários cadastrados ainda
+                                </td>
                             @endforelse
                         </tbody>
                     </table>
@@ -69,4 +63,5 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection

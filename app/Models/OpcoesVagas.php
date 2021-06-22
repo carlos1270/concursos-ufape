@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Concurso;
-use App\Http\Requests\StoreConcursoRequest;
+use Illuminate\Support\Facades\DB;
 
 class OpcoesVagas extends Model
 {
@@ -21,16 +21,23 @@ class OpcoesVagas extends Model
         return $this->belongsTo(Concurso::class, 'concurso_id');
     }
 
-    public function inscricoes() {
+    public function inscricoes()
+    {
         return $this->hasMany(Inscricao::class, 'vagas_id');
     }
 
-    public static function criarOpcoesVagas(Concurso $concurso, $opcoes_vaga) {
+    public static function criarOpcoesVagas(Concurso $concurso, $opcoes_vaga)
+    {
         foreach ($opcoes_vaga as $op_vaga) {
             $vaga = new OpcoesVagas();
             $vaga->nome = $op_vaga;
             $vaga->concursos_id = $concurso->id;
             $vaga->save();
         }
+    }
+
+    public static function deletarOpcoesVagas(Concurso $concurso)
+    {
+        DB::table('opcoes_vagas')->where('concursos_id', $concurso->id)->delete();
     }
 }

@@ -13,11 +13,11 @@ class Arquivo extends Model
         'nome',
         'diretorio_arquivo',
         'grupo_id',
-        'inscricao_id'
+        'inscricoes_id'
     ];
 
     public function inscricao()
     {
-        return $this->belongsTo(Inscricao::class, 'inscricao_id');
+        return $this->belongsTo(Inscricao::class, 'inscricoes_id');
     }
 }

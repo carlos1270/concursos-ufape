@@ -28,7 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public static $rules = [
-        'nome' => 'required|string|min:5|max:100',
+        'nome' => 'required|string|min:4|max:50',
+        'sobrenome' => 'required|string|min:4|max:50',
         'email' => 'required|email|min:5|max:100|unique:users',
         'cpf' => 'required|numeric|min:0|digits_between:10,11|unique:users',
         'celular' => 'required|integer|digits:11',
@@ -38,8 +39,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static $messages = [
         'nome.required' => 'O nome é um campo obrigatório.',
-        'nome.min' => 'O nome deve ter no mínimo 5 caracteres.',
-        'nome.max' => 'O nome deve ter no máximo 100 caracteres.',
+        'nome.min' => 'O nome deve ter no mínimo 4 caracteres.',
+        'nome.max' => 'O nome deve ter no máximo 50 caracteres.',
+        'sobrenome.required' => 'O sobrenome é um campo obrigatório.',
+        'sobrenome.min' => 'O sobrenome deve ter no mínimo 4 caracteres.',
+        'sobrenome.max' => 'O sobrenome deve ter no máximo 50 caracteres.',
         'email.required' => 'O e-mail é um campo obrigatório.',
         'email.min' => 'O e-mail deve ter no mínimo 5 caracteres.',
         'email.max' => 'O e-mail deve ter no máximo 100 caracteres.',
@@ -66,6 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'nome',
+        'sobrenome',
         'email',
         'cpf',
         'celular',
