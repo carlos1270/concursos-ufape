@@ -9,6 +9,8 @@ class Inscricao extends Model
 {
     use HasFactory;
 
+    protected $table = 'inscricoes';
+
     protected $fillable = [
         'status',
         'titulacao',
@@ -20,12 +22,12 @@ class Inscricao extends Model
 
     public function inscricao()
     {
-        return $this->belongsTo(Concurso::class, 'concurso_id');
+        return $this->belongsTo(Concurso::class, 'concursos_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function vagas()

@@ -11,7 +11,7 @@ class Avaliacao extends Model
 
     protected $fillable = [
         'nota',
-        'inscricao_id'
+        'inscricoes_id'
     ];
 
     public function grupo()

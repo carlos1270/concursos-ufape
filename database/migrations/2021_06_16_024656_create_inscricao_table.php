@@ -13,7 +13,7 @@ class CreateInscricaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('inscricaos', function (Blueprint $table) {
+        Schema::create('inscricoes', function (Blueprint $table) {
             $table->id();
             $table->string('status');
             $table->string('titulacao');
@@ -39,6 +39,6 @@ class CreateInscricaoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inscricao');
+        Schema::dropIfExists('inscricoes');
     }
 }

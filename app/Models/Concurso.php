@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreConcursoRequest;
 
 class Concurso extends Model
@@ -30,12 +29,12 @@ class Concurso extends Model
 
     public function inscricoes()
     {
-        return $this->hasMany(Inscricao::class, 'concurso_id');
+        return $this->hasMany(Inscricao::class, 'concursos_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function vagas()
@@ -43,7 +42,8 @@ class Concurso extends Model
         return $this->hasMany(OpcoesVagas::class, 'concursos_id');
     }
 
-    public function setAtributes(StoreConcursoRequest $request) {
+    public function setAtributes(StoreConcursoRequest $request)
+    {
         $this->titulo                           = $request->titulo;
         $this->qtd_vagas                        = $request->quantidade_vagas;
         $this->descricao                        = $request->descricao;
@@ -57,31 +57,34 @@ class Concurso extends Model
         $this->users_id                         = auth()->user()->id;
     }
 
-    public function salvarEdital($file) {
+    public function salvarEdital($file)
+    {
         if ($file != null) {
-            $path = 'concursos/'. $this->id . '/'; 
+            $path = 'concursos/' . $this->id . '/';
             $nome = 'edital.pdf';
             Storage::putFileAs('public/' . $path, $file, $nome);
             $this->edital = $path . $nome;
         }
     }
 
-    public function salvarModelos($file) {
+    public function salvarModelos($file)
+    {
         if ($file != null) {
-            $path = 'concursos/'. $this->id . '/'; 
+            $path = 'concursos/' . $this->id . '/';
             $nome = 'modelos.zip';
             Storage::putFileAs('public/' . $path, $file, $nome);
             $this->modelos_documentos = $path . $nome;
         }
     }
 
-    public function deletar() {
-        if (Storage::disk()->exists('public/'.$this->edital)) {
-            Storage::delete('public/'.$this->edital);
+    public function deletar()
+    {
+        if (Storage::disk()->exists('public/' . $this->edital)) {
+            Storage::delete('public/' . $this->edital);
         }
 
-        if (Storage::disk()->exists('public/'.$this->modelos_documentos)) {
-            Storage::delete('public/'.$this->modelos_documentos);
+        if (Storage::disk()->exists('public/' . $this->modelos_documentos)) {
+            Storage::delete('public/' . $this->modelos_documentos);
         }
 
         $this->delete();

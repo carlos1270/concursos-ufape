@@ -6,9 +6,11 @@
                     {{ __('Concursos') }}
                 </h2>
             </div>
-    
+            
             <div class="col-sm-2">
-                <a href="{{route('concurso.create')}}" class="btn btn-primary">Criar novo</a>
+                @can('create', App\Models\Concurso::class)
+                    <a href="{{route('concurso.create')}}" class="btn btn-primary">Criar novo</a>
+                @endcan
             </div>
         </div>
     </x-slot>
@@ -38,18 +40,22 @@
                                 <tr>
                                     <td>{{$concurso->titulo}}</td>
                                     <td>
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <a href="{{route('concurso.edit', ['concurso' => $concurso->id])}}" class="btn btn-primary">Editar</a>
+                                        @can('update', $concurso)
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <a href="{{route('concurso.edit', ['concurso' => $concurso->id])}}" class="btn btn-primary">Editar</a>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <form method="POST" action="{{route('concurso.destroy', ['concurso' => $concurso->id])}}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <button href="" class="btn btn-danger">Excluir</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <form method="POST" action="{{route('concurso.destroy', ['concurso' => $concurso->id])}}" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <button href="" class="btn btn-danger">Excluir</button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        @else
+                                            Sem permissão
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

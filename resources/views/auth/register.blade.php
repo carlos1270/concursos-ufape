@@ -1,60 +1,81 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <x-jet-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-jet-label for="name" value="{{ __('Name') }}" />
-                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jet-label for="terms">
-                        <div class="flex items-center">
-                            <x-jet-checkbox name="terms" id="terms"/>
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                                ]) !!}
+@extends('templates.template-principal')
+@section('content')
+<div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
+    <div class="form-row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow bg-white style_card_container">
+                <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
+                    <h6 class="style_card_container_header_titulo">Cadastre-se</h6>
+                    <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6></div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <h6 class="style_card_container_header_subtitulo">Informações pessoais</h6>
                             </div>
                         </div>
-                    </x-jet-label>
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="nome" class="style_campo_titulo">Nome</label>
+                                    <input type="text" class="form-control style_campo" id="nome" name="nome"
+                                        placeholder="Digite seu nome" value="{{ old('nome') }}" required autofocus autocomplete="nome"/>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="sobrenome" class="style_campo_titulo">Sobrenome</label>
+                                    <input type="text" class="form-control style_campo" id="sobrenome" name="sobrenome"
+                                        value="{{ old('sobrenome') }}" placeholder="Digite seu sobrenome" required />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="cpf" class="style_campo_titulo">CPF</label>
+                                    <input type="number" class="form-control style_campo" id="cpf" name="cpf"
+                                        placeholder="Digite seu CPF" value="{{ old('cpf') }}" required />
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="celular" class="style_campo_titulo">Celular</label>
+                                    <input type="number" class="form-control style_campo" id="celular" name="celular"
+                                        placeholder="Digite o seu número" value="{{ old('celular') }}" required />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <h6 class="style_card_container_header_subtitulo">Acesso ao sistema</h6>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 form-group">
+                                    <label for="email" class="style_campo_titulo">E-mail</label>
+                                    <input type="email" class="form-control style_campo" id="email" name="email"
+                                        placeholder="Digite seu e-mail" value="{{ old('email') }}" required />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label for="password" class="style_campo_titulo">Senha</label>
+                                    <input type="password" class="form-control style_campo" id="password" name="password"
+                                        placeholder="Digite sua senha" required autocomplete="new-password"/>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="password_confirmation" class="style_campo_titulo">Confirmar senha</label>
+                                    <input type="password" class="form-control style_campo" id="password_confirmation" name="password_confirmation"
+                                        placeholder="Confirme sua senha" required autocomplete="new-password" />
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <hr>
+                            </div>
+                            <div class="col-md-12 form-group" style="margin-bottom: 9px;">
+                                <button class="btn btn-success shadow-sm" style="width: 100%;">Cadastre-se</button>
+                                <h6 style="font-size: 13px; color: #909090; font-weight: normal; margin-top: 15px; margin-bottom: -10px;">Ao clicar em Cadastre-se, você concorda com nossos Termos e Política de Cookies. </h6>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jet-button class="ml-4">
-                    {{ __('Register') }}
-                </x-jet-button>
             </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+        </div>
+    </div>
+</div>
+@endsection
