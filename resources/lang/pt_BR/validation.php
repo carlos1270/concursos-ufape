@@ -133,6 +133,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'opcoes_vaga.*' => [
+            'required' => 'O nome da opção é obrigatório.'
+        ]
     ],
 
     /*
