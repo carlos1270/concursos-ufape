@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>Programa de vacinação</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -24,7 +24,7 @@
                     </a>
                     <div class="form-group" style="margin-bottom: 0px;">
                         @auth
-                            <a style="margin-right: 15px;" href="{{ url('/dashboard') }}">Início</a>
+                            <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
 
                             @if(Auth::user()->tipo_usuario == "admin")
                                 <a href="{{ route('show.usuarios') }}" :active="request()->routeIs('show.usuarios')" 

@@ -41,8 +41,7 @@ class ConcursoController extends Controller
         $concurso = new Concurso;
         $concurso->setAtributes($request);
         $concurso->save();
-        $concurso->salvarEdital($request->edital);
-        $concurso->salvarModelos($request->modelos_documentos);
+        $concurso->salvarArquivos($request);
         $concurso->update();
         OpcoesVagas::criarOpcoesVagas($concurso, $request->opcoes_vaga);
         return redirect(route('concurso.index'))->with(['mensage' => 'Concurso criado com sucesso!']);
@@ -55,8 +54,9 @@ class ConcursoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $concurso = Concurso::find($id);
+        return view('concurso.show', compact('concurso'));
     }
 
     /**
@@ -91,8 +91,7 @@ class ConcursoController extends Controller
         }
 
         $concurso->setAtributes($request);
-        $concurso->salvarEdital($request->edital);
-        $concurso->salvarModelos($request->modelos_documentos);
+        $concurso->salvarArquivos($request);
         $concurso->update();
 
         //Criando novas opções
