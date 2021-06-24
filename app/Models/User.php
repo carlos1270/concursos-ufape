@@ -31,8 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'nome' => 'required|string|min:4|max:50',
         'sobrenome' => 'required|string|min:4|max:50',
         'email' => 'required|email|min:5|max:100|unique:users',
-        'cpf' => 'required|numeric|min:0|digits_between:10,11|unique:users',
-        'celular' => 'required|integer|digits:11',
+        'cpf' => 'required|unique:users|cpf',
+        'celular' => 'required|celular',
         'tipo_usuario' => 'required|in:admin,chefeSetorConcursos,presidenteBancaExaminadora,candidato',
         'password' => 'required|string|min:8|confirmed',
     ];

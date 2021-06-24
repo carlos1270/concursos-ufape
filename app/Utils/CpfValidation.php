@@ -1,27 +1,18 @@
-<?php
+<?php namespace App\Utils;
 
-namespace App\Http\Controllers;
-
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-
-class Controller extends BaseController
+class CpfValidation
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    protected function validar_telefone($telefone) {
-        return preg_match('/^\(\d{2}\)\s?\d{5}-\d{4}$/', $telefone) > 0 || preg_match('/^\(\d{2}\)\s?\d{4}-\d{4}$/', $telefone) > 0;
+    public function validate($attribute, $value, $parameters, $validator)
+    {
+        return $this->isValidate($attribute, $value);
     }
 
-    protected function validar_cpf($cpf)
+    protected function isValidate($attribute, $value)
     {
-
         // https://gist.github.com/rafael-neri/ab3e58803a08cb4def059fce4e3c0e40
         
         // Extrai somente os números
-        $cpf = preg_replace('/[^0-9]/is', '', $cpf);
+        $cpf = preg_replace('/[^0-9]/is', '', $value);
 
         // Verifica se foi informado todos os digitos corretamente
         if (strlen($cpf) != 11) {
