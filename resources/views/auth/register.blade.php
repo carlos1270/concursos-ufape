@@ -19,25 +19,47 @@
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
                                     <label for="nome" class="style_campo_titulo">Nome</label>
-                                    <input type="text" class="form-control style_campo" id="nome" name="nome"
+                                    <input type="text" class="form-control style_campo @error('nome') is-invalid @enderror" id="nome" name="nome"
                                         placeholder="Digite seu nome" value="{{ old('nome') }}" required autofocus autocomplete="nome"/>
+                                    @error('nome')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="sobrenome" class="style_campo_titulo">Sobrenome</label>
-                                    <input type="text" class="form-control style_campo" id="sobrenome" name="sobrenome"
+                                    <input type="text" class="form-control style_campo @error('sobrenome') is-invalid @enderror" id="sobrenome" name="sobrenome"
                                         value="{{ old('sobrenome') }}" placeholder="Digite seu sobrenome" required />
+                                    @error('sobrenome')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
                                     <label for="cpf" class="style_campo_titulo">CPF</label>
-                                    <input type="text" class="form-control style_campo" id="cpf" name="cpf"
+                                    <input type="text" class="form-control style_campo @error('cpf') is-invalid @enderror" id="cpf" name="cpf"
                                         placeholder="Digite seu CPF" value="{{ old('cpf') }}" required />
+
+                                    @error('cpf')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="celular" class="style_campo_titulo">Celular</label>
-                                    <input type="text" class="form-control style_campo" id="celular" name="celular"
+                                    <input type="text" class="form-control style_campo @error('celular') is-invalid @enderror" id="celular" name="celular"
                                         placeholder="Digite o seu número" value="{{ old('celular') }}" required />
+
+                                    @error('celular')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
@@ -48,15 +70,27 @@
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
                                     <label for="email" class="style_campo_titulo">E-mail</label>
-                                    <input type="email" class="form-control style_campo" id="email" name="email"
+                                    <input type="email" class="form-control style_campo  @error('email') is-invalid @endif" id="email" name="email"
                                         placeholder="Digite seu e-mail" value="{{ old('email') }}" required />
+                                    
+                                    @error('email')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
                                     <label for="password" class="style_campo_titulo">Senha</label>
-                                    <input type="password" class="form-control style_campo" id="password" name="password"
+                                    <input type="password" class="form-control style_campo @error('password') is-invalid @endif" id="password" name="password"
                                         placeholder="Digite sua senha" required autocomplete="new-password"/>
+                                    
+                                    @error('password')
+                                        <div id="validationServer03Feedback" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="password_confirmation" class="style_campo_titulo">Confirmar senha</label>
