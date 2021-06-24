@@ -42,6 +42,10 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), User::$rules, User::$messages)->validate();
 
+        if (!Controller::validar_cpf($request['cpf'])) {
+            return redirect()->back()->withErrors('cpf', 'Número de CPF inválido.')->withInput();
+        }
+
         $data = [
             'nome' => $request['nome'],
             'sobrenome' => $request['sobrenome'],

@@ -25,9 +25,10 @@ class CreateConcursosTable extends Migration
             $table->date('data_inicio_envio_doc');
             $table->date('data_fim_envio_doc');
             $table->date('data_resultado_selecao');
-            $table->string('modelos_documentos')->nullable(true);
-            $table->string('edital')->nullable(true);
-
+            $table->string('edital_geral')->nullable(true);
+            $table->string('edital_especifico')->nullable(true);
+            $table->string('declaracao_veracidade')->nullable(true);
+            
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
 

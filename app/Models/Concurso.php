@@ -22,8 +22,9 @@ class Concurso extends Model
         'data_inicio_envio_doc',
         'data_fim_envio_doc',
         'data_resultado_selecao',
-        'modelos_documentos',
-        'edital',
+        'edital_geral',
+        'edital_especifico',
+        'declaracao_veracidade',
         'users_id'
     ];
 
@@ -57,34 +58,40 @@ class Concurso extends Model
         $this->users_id                         = auth()->user()->id;
     }
 
-    public function salvarEdital($file)
+    public function salvarArquivos(StoreConcursoRequest $request)
     {
-        if ($file != null) {
+        if ($request->edital_geral != null) {
             $path = 'concursos/' . $this->id . '/';
-            $nome = 'edital.pdf';
-            Storage::putFileAs('public/' . $path, $file, $nome);
-            $this->edital = $path . $nome;
+            $nome = 'edital_geral.pdf';
+            Storage::putFileAs('public/' . $path, $request->edital_geral, $nome);
+            $this->edital_geral = $path . $nome;
         }
-    }
-
-    public function salvarModelos($file)
-    {
-        if ($file != null) {
+        if ($request->edital_especifico != null) {
             $path = 'concursos/' . $this->id . '/';
-            $nome = 'modelos.zip';
-            Storage::putFileAs('public/' . $path, $file, $nome);
-            $this->modelos_documentos = $path . $nome;
+            $nome = 'edital_especifico.pdf';
+            Storage::putFileAs('public/' . $path, $request->edital_especifico, $nome);
+            $this->edital_especifico = $path . $nome;
+        }
+        if ($request->declaracao_de_veracidade != null) {
+            $path = 'concursos/' . $this->id . '/';
+            $nome = 'declaracao_veracidade.pdf';
+            Storage::putFileAs('public/' . $path, $request->declaracao_de_veracidade, $nome);
+            $this->declaracao_veracidade = $path . $nome;
         }
     }
 
     public function deletar()
     {
-        if (Storage::disk()->exists('public/' . $this->edital)) {
-            Storage::delete('public/' . $this->edital);
+        if (Storage::disk()->exists('public/' . $this->edital_geral)) {
+            Storage::delete('public/' . $this->edital_geral);
         }
 
-        if (Storage::disk()->exists('public/' . $this->modelos_documentos)) {
-            Storage::delete('public/' . $this->modelos_documentos);
+        if (Storage::disk()->exists('public/' . $this->edital_especifico)) {
+            Storage::delete('public/' . $this->edital_especifico);
+        }
+
+        if (Storage::disk()->exists('public/' . $this->declaracao_veracidade)) {
+            Storage::delete('public/' . $this->declaracao_veracidade);
         }
 
         $this->delete();

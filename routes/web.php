@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConcursoController;
+use App\Http\Controllers\WelcomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,7 @@ use App\Http\Controllers\ConcursoController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+Route::get('/', [WelcomeController::class, 'index'])->name('index');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -42,11 +41,9 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
         ->name('delete.user');
 });
 
-Route::get('/', [ConcursoController::class, 'showConcursos'])
-    ->name('/');
-
 Route::get('/info-concurso', [ConcursoController::class, 'infoConcurso'])
     ->name('info.concurso');
 
 Route::resource('concurso', ConcursoController::class)
     ->middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso']);
+Route::resource('concurso', ConcursoController::class);
