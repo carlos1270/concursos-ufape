@@ -24,7 +24,7 @@
                     </a>
                     <div class="form-group" style="margin-bottom: 0px;">
                         @auth
-                            <a style="margin-right: 15px;" href="{{ url('/dashboard') }}">Início</a>
+                            <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
 
                             @if(Auth::user()->tipo_usuario == "admin")
                                 <a href="{{ route('show.usuarios') }}" :active="request()->routeIs('show.usuarios')" 

@@ -169,7 +169,7 @@
                                         
                                     </div>
                                     <div class="col-sm-6 form-group">
-                                        <label for="edital_geral" class="style_campo_titulo">Edital geral &nbsp;</label><a href="">Arquivo atual</a>
+                                        <label for="edital_geral" class="style_campo_titulo">Edital geral &nbsp;</label><a href="{{asset('storage/' . $concurso->edital_geral)}}" target="_black">Arquivo atual</a>
                                         <input type="file" class="form-control style_campo @error('edital_geral') is-invalid @enderror" name="edital_geral" id="edital_geral" value="{{old('edital_geral')}}">
                                         <small>Para editar o arquivo envie um novo</small>
                                         @error('edital_geral')
@@ -179,7 +179,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 form-group">
-                                        <label for="edital_especifico" class="style_campo_titulo">Edital especifico &nbsp;</label><a href="">Arquivo atual</a>
+                                        <label for="edital_especifico" class="style_campo_titulo">Edital especifico &nbsp;</label><a href="{{asset('storage/' . $concurso->edital_especifico)}}" target="_black">Arquivo atual</a>
                                         <input type="file" class="form-control style_campo @error('edital_especifico') is-invalid @enderror" name="edital_especifico" id="edital_especifico" value="{{old('edital_especifico')}}">
                                         <small>Para editar o arquivo envie um novo</small>
                                         @error('edital_especifico')
@@ -190,7 +190,7 @@
                                     </div>
 
                                     <div class="col-sm-6 form-group">
-                                        <label for="declaracao_de_veracidade" class="style_campo_titulo">Declaração de veracidade &nbsp;</label><a href="">Arquivo atual</a>
+                                        <label for="declaracao_de_veracidade" class="style_campo_titulo">Declaração de veracidade &nbsp;</label><a href="{{asset('storage/' . $concurso->declaracao_veracidade)}}" target="_black">Arquivo atual</a>
                                         <input type="file" class="form-control style_campo @error('declaracao_de_veracidade') is-invalid @enderror" name="declaracao_de_veracidade" id="declaracao_de_veracidade" value="{{old('declaracao_de_veracidade')}}">
                                         <small>Para editar o arquivo envie um novo</small>
                                         @error('declaracao_de_veracidade')

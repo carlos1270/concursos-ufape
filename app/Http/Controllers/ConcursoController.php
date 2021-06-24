@@ -54,8 +54,9 @@ class ConcursoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        dd($id);
+    {   
+        $concurso = Concurso::find($id);
+        return view('concurso.show', compact('concurso'));
     }
 
     /**
