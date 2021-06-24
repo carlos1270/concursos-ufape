@@ -7,52 +7,47 @@ use App\Notifications\UsuarioCadastrado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
-    public function dashboardCRUDUsuario()
+    public function dashboardCRUDUUser()
     {
         return view('CRUD-usuario.dashboard');
     }
 
-    public function createUsuario()
+    public function createUser()
     {
         return view('CRUD-usuario.create');
     }
 
-    public function showUsuario()
+    public function showUser()
     {
         $usuarios = User::all()->except(Auth::id());
 
         return view('CRUD-usuario.show')->with(['usuarios' => $usuarios]);
     }
 
-    public function editUsuario(Request $request)
+    public function editUser(Request $request)
     {
         $usuario = User::find($request->usuario);
 
         return view('CRUD-usuario.edit')->with(['usuario' => $usuario]);
     }
 
-    public function saveUsuario(Request $request)
+    public function saveUser(Request $request)
     {
         $validator = Validator::make($request->all(), User::$rules, User::$messages)->validate();
-
-        if (!Controller::validar_cpf($request['cpf'])) {
-            return redirect()->back()->with('error', 'Número de CPF inválido')->withInput();
-        }
 
         $data = [
             'nome' => $request['nome'],
             'sobrenome' => $request['sobrenome'],
             'email' => $request['email'],
-            'cpf' => $request['cpf'],
-            'celular' => $request['celular'],
             'password' => Hash::make($request['password']),
-            'tipo_usuario' => $request['tipo_usuario']
+            'role' => $request['role']
         ];
 
         $usuario = new User();
@@ -66,39 +61,30 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Cadastro realizado com sucesso');
     }
 
-    public function saveEditUsuario(Request $request)
+    public function saveEditUser(Request $request)
     {
         $usuario = User::find($request->usuario);
         $rules = User::$rules;
         $messages = User::$messages;
 
         if (!$request['password']) {
-            $rules = array_slice(User::$rules, 0, 5);
-            $messages = array_slice(User::$messages, 0, 20);
+            $rules = array_slice(User::$rules, 0, 3);
+            $messages = array_slice(User::$messages, 0, 10);
         }
-
-        $rules['cpf'] = [
-            'required', 'numeric', 'min:0', 'digits_between:10,11',
-            Rule::unique('users')->ignore($usuario->id),
-        ];
 
         $rules['email'] = [
             'required', 'email', 'min:5', 'max:100',
             Rule::unique('users')->ignore($usuario->id),
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages)->validate();
+        $request['role'] = $usuario->role;
 
-        if (!Controller::validar_cpf($request['cpf'])) {
-            return redirect()->back()->with('error', 'Número de CPF inválido')->withInput();
-        }
+        $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
             'nome' => $request['nome'],
             'sobrenome' => $request['sobrenome'],
             'email' => $request['email'],
-            'cpf' => $request['cpf'],
-            'celular' => $request['celular']
         ];
 
         if ($request['password'])
@@ -109,12 +95,12 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Usuário editado com sucesso');
     }
 
-    public function deleteUsuario($id)
+    public function deleteUser($id)
     {
 
         $usuario = User::find($id);
         $usuario->delete();
 
-        return redirect()->route('show.usuarios')->with('success', 'Usuário deletado com sucesso!');
+        return redirect()->route('show.users')->with('success', 'Usuário deletado com sucesso!');
     }
 }

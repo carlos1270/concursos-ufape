@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use TwoFactorAuthenticatable;
     use SoftDeletes;
 
-    public const TIPO_ENUM = [
+    public const ROLE_ENUM = [
         "admin" => "admin",
         "chefeSetorConcursos" => "chefeSetorConcursos",
         "presidenteBancaExaminadora" => "presidenteBancaExaminadora",
@@ -31,9 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'nome' => 'required|string|min:4|max:50',
         'sobrenome' => 'required|string|min:4|max:50',
         'email' => 'required|email|min:5|max:100|unique:users',
-        'cpf' => 'required|numeric|min:0|digits_between:10,11|unique:users',
-        'celular' => 'required|integer|digits:11',
-        'tipo_usuario' => 'required|in:admin,chefeSetorConcursos,presidenteBancaExaminadora,candidato',
+        'role' => 'required|in:admin,chefeSetorConcursos,presidenteBancaExaminadora,candidato',
         'password' => 'required|string|min:8|confirmed',
     ];
 
@@ -48,16 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email.min' => 'O e-mail deve ter no mínimo 5 caracteres.',
         'email.max' => 'O e-mail deve ter no máximo 100 caracteres.',
         'email.unique' => 'Este e-mail já está sendo usado.',
-        'cpf.required' => 'O CPF é um campo obrigatório.',
-        'cpf.numeric' => 'O CPF deve conter apenas números.',
-        'cpf.min' => 'O CPF não pode ser um número negativo.',
-        'cpf.digits_between' => 'O CPF deve ter entre 10 e 11 dígitos.',
-        'cpf.unique' => 'O CPF já está cadastrado',
-        'celular.required' => 'O número de celular é um campo obrigatório.',
-        'celular.integer' => 'O número de celular deve conter apenas números.',
-        'celular.min' => 'O número de celular não pode ser um número negativo.',
-        'celular.digits' => 'O número de celular deve ter 11 dígitos.',
-        'tipo_usuario.*' => 'Tipo de usuário inválido',
+        'role.*' => 'Tipo de usuário inválido',
         'password.required' => 'A senha é um campo obrigatório.',
         'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         'password.confirmed' => 'As senhas devem ser iguais.',
@@ -72,11 +61,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'nome',
         'sobrenome',
         'email',
-        'cpf',
-        'celular',
         'password',
         'concursos_id',
-        'tipo_usuario'
+        'role',
     ];
 
     /**

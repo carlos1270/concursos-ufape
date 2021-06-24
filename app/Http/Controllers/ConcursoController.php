@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreConcursoRequest;
 use App\Models\Concurso;
 use App\Models\OpcoesVagas;
+use Illuminate\Http\Request;
 
 class ConcursoController extends Controller
 {
+    public function showConcursos()
+    {
+        $concursos = Concurso::all();
+
+        return view('welcome')->with(['concursos' => $concursos]);
+    }
+
+    public function infoConcurso(Request $request)
+    {
+        $concurso = Concurso::find($request->concurso);
+
+        return view('concurso.info')->with(['concurso' => $concurso]);
+    }
+
     /**
      * Display a listing of the resource.
      *

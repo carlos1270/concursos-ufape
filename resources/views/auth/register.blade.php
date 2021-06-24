@@ -18,26 +18,38 @@
                             @csrf
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
-                                    <label for="nome" class="style_campo_titulo">Nome</label>
+                                    <label for="nome" class="style_campo_titulo">Nome <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="text" class="form-control style_campo" id="nome" name="nome"
                                         placeholder="Digite seu nome" value="{{ old('nome') }}" required autofocus autocomplete="nome"/>
+                                    @error('nome')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="sobrenome" class="style_campo_titulo">Sobrenome</label>
+                                    <label for="sobrenome" class="style_campo_titulo">Sobrenome <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="text" class="form-control style_campo" id="sobrenome" name="sobrenome"
                                         value="{{ old('sobrenome') }}" placeholder="Digite seu sobrenome" required />
+                                    @error('sobrenome')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
-                                    <label for="cpf" class="style_campo_titulo">CPF</label>
+                                    <label for="cpf" class="style_campo_titulo">CPF <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="number" class="form-control style_campo" id="cpf" name="cpf"
                                         placeholder="Digite seu CPF" value="{{ old('cpf') }}" required />
+                                    @error('cpf')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="celular" class="style_campo_titulo">Celular</label>
+                                    <label for="celular" class="style_campo_titulo">Celular <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="number" class="form-control style_campo" id="celular" name="celular"
                                         placeholder="Digite o seu número" value="{{ old('celular') }}" required />
+                                    @error('celular')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
@@ -47,19 +59,25 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
-                                    <label for="email" class="style_campo_titulo">E-mail</label>
+                                    <label for="email" class="style_campo_titulo">E-mail <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="email" class="form-control style_campo" id="email" name="email"
                                         placeholder="Digite seu e-mail" value="{{ old('email') }}" required />
+                                    @error('email')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
-                                    <label for="password" class="style_campo_titulo">Senha</label>
+                                    <label for="password" class="style_campo_titulo">Senha <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="password" class="form-control style_campo" id="password" name="password"
                                         placeholder="Digite sua senha" required autocomplete="new-password"/>
+                                    @error('password')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="password_confirmation" class="style_campo_titulo">Confirmar senha</label>
+                                    <label for="password_confirmation" class="style_campo_titulo">Confirmar senha <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="password" class="form-control style_campo" id="password_confirmation" name="password_confirmation"
                                         placeholder="Confirme sua senha" required autocomplete="new-password" />
                                 </div>

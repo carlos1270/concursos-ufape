@@ -17,13 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('sobrenome');
-            $table->string('cpf')->unique();
-            $table->string('celular');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('tipo_usuario');
+            $table->string('role');
             $table->softDeletes();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

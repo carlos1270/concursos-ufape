@@ -41,7 +41,7 @@ class ConcursoPolicy
      */
     public function create(User $user)
     {
-        return $user->tipo_usuario == User::TIPO_ENUM["admin"] || $user->tipo_usuario == User::TIPO_ENUM["chefeSetorConcursos"];
+        return $user->tipo_usuario == User::ROLE_ENUM["admin"] || $user->tipo_usuario == User::ROLE_ENUM["chefeSetorConcursos"];
     }
 
     /**

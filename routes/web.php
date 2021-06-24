@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CandidatoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConcursoController;
 /*
@@ -15,33 +14,39 @@ use App\Http\Controllers\ConcursoController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(function () {
-    Route::get('/create-usuario', [AdminController::class, 'createUsuario'])
-        ->name('create.usuario');
+    Route::get('/create-user', [AdminController::class, 'createUser'])
+        ->name('create.user');
 
-    Route::post('/save-usuario', [AdminController::class, 'saveUsuario'])
-        ->name('save.usuario');
+    Route::post('/save-user', [AdminController::class, 'saveUser'])
+        ->name('save.user');
 
-    Route::get('/show-usuarios', [AdminController::class, 'showUsuario'])
-        ->name('show.usuarios');
+    Route::get('/show-users', [AdminController::class, 'showUser'])
+        ->name('show.users');
 
-    Route::get('/edit-usuario', [AdminController::class, 'editUsuario'])
-        ->name('edit.usuario');
+    Route::get('/edit-user', [AdminController::class, 'editUser'])
+        ->name('edit.user');
 
-    Route::post('/save-edit-usuario', [AdminController::class, 'saveEditUsuario'])
-        ->name('save.edit.usuario');
+    Route::post('/save-edit-user', [AdminController::class, 'saveEditUser'])
+        ->name('save.edit.user');
 
-    Route::get('/delete-usuario/{id}', [AdminController::class, 'deleteUsuario'])
-        ->name('delete.usuario');
+    Route::get('/delete-user/{id}', [AdminController::class, 'deleteUser'])
+        ->name('delete.user');
 });
+
+Route::get('/', [ConcursoController::class, 'showConcursos'])
+    ->name('/');
+
+Route::get('/info-concurso', [ConcursoController::class, 'infoConcurso'])
+    ->name('info.concurso');
 
 Route::resource('concurso', ConcursoController::class)
     ->middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso']);

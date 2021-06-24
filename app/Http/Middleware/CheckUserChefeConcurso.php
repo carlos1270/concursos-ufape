@@ -19,8 +19,8 @@ class CheckUserChefeConcurso
     public function handle(Request $request, Closure $next)
     {
         if (
-            Auth::user()->tipo_usuario == User::TIPO_ENUM['chefeSetorConcursos'] ||
-            Auth::user()->tipo_usuario == User::TIPO_ENUM['admin']
+            Auth::user()->role == User::ROLE_ENUM['chefeSetorConcursos'] ||
+            Auth::user()->role == User::ROLE_ENUM['admin']
         ) {
             return $next($request);
         } else {
