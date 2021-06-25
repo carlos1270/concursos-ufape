@@ -56,4 +56,9 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
         ->name('show.inscricao');
 });
 
+Route::middleware(['auth:sanctum', 'verified', 'CheckUserBancaExaminadora'])->group(function () {
+    Route::get('/concurso/{id}/avaliar-inscricoes', [InscricaoController::class, 'avaliar'])
+        ->name('candidatos.avaliar');
+});
+
 Route::resource('concurso', ConcursoController::class);

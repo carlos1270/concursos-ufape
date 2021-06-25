@@ -102,4 +102,11 @@ class InscricaoController extends Controller
             'endereco' => $endereco
         ]);
     }
+
+    public function avaliar($id) {
+        $concurso = Concurso::find($id);
+        $inscricoes = $concurso->inscricoes;
+
+        return view('candidatos.avaliar', compact('concurso', 'inscricoes'));
+    }
 }

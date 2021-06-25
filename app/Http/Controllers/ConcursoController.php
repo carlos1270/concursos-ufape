@@ -15,7 +15,12 @@ class ConcursoController extends Controller
      */
     public function index()
     {
-        $concursos = auth()->user()->concursos;
+        $concursos = collect();
+        if (auth()->user()->role == "presidenteBancaExaminadora") {
+            $concursos = auth()->user()->concursosChefeBanca;
+        } else {
+            $concursos = auth()->user()->concursos;
+        }
         return view('concurso.index', compact('concursos'));
     }
 

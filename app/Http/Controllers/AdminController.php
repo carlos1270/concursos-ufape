@@ -54,18 +54,16 @@ class AdminController extends Controller
         ];
 
         $usuario = new User();
-        $usuario->fill($data);
+        $usuario->fill($data);;
         $usuario->save();
 
         if ($request->concurso != null && $request->role == "presidenteBancaExaminadora") {
             $usuario->concursosChefeBanca()->attach($request->concurso);
         }
 
-        $usuario->password = $request['password'];
-
         Notification::send($usuario, new UsuarioCadastrado($usuario));
 
-        return redirect()->back()->with('success', 'Cadastro realizado com sucesso');
+        return redirect()->back()->with('success', 'Cadastro realizado com sucesso.');
     }
 
     public function saveEditUser(Request $request)
