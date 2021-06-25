@@ -53,10 +53,10 @@
                             @if($concurso->data_inicio_inscricao <= now())
                                 @if(now() <= $concurso->data_fim_inscricao)
                                     <div class="col-md-12" style="margin-bottom:18px">
-                                        <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', ['concurso' => $concurso->id]) }}'"  
+                                        <a class="btn btn-success " href="{{ route('inscricao.concurso', ['id' => $concurso->id]) }}"  
                                             style="width:100%; height:50px; padding-top:7px; font-size:20px">
                                             <img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição
-                                        </button>
+                                        </a>
                                     </div>
                                 @endif
                             @endif

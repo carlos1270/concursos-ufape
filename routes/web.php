@@ -43,7 +43,7 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(function () {
-    Route::get('/inscricao-concurso', [InscricaoController::class, 'inscreverseConcurso'])
+    Route::get('/inscricao-concurso/{id}', [InscricaoController::class, 'inscreverseConcurso'])
         ->name('inscricao.concurso');
 
     Route::post('/save-inscricao', [InscricaoController::class, 'saveInscricao'])
@@ -55,8 +55,5 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
     Route::get('/show-inscricao', [InscricaoController::class, 'showInscricao'])
         ->name('show.inscricao');
 });
-
-Route::resource('concurso', ConcursoController::class)
-    ->middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso']);
 
 Route::resource('concurso', ConcursoController::class);
