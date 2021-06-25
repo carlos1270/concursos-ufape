@@ -22,6 +22,15 @@
                                     </div>
                                 </div>
                             @endif
+                            @error('error')
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 5px;">
+                                        <div class="alert alert-danger" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @enderror
                             <table class="table table-bordered table-hover tabela_container">
                                 <thead>
                                     <tr>

@@ -105,4 +105,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Inscricao::class, 'inscricao_id');
     }
+
+    public function concursosChefeBanca() {
+        return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'concursos_id', 'users_id');
+    }
 }
