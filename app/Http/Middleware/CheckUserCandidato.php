@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckUserChefeConcurso
+class CheckUserCandidato
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,7 @@ class CheckUserChefeConcurso
      */
     public function handle(Request $request, Closure $next)
     {
-        if (
-            Auth::user()->role == User::ROLE_ENUM['chefeSetorConcursos'] ||
-            Auth::user()->role == User::ROLE_ENUM['admin']
-        ) {
+        if (Auth::user()->role == User::ROLE_ENUM['candidato']) {
             return $next($request);
         } else {
             return redirect()->back();

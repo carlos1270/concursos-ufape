@@ -28,13 +28,11 @@ class UserFactory extends Factory
         return [
             'nome' => $this->faker->name(),
             'sobrenome' => $this->faker->lastName(),
-            'cpf' => rand(10000000000, 99999999999),
-            'celular' => rand(10000000000, 99999999999),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), // password
+            'password' => Hash::make('12345678'),
             'remember_token' => Str::random(10),
-            'tipo_usuario' => User::TIPO_ENUM["admin"],
+            'role' => User::ROLE_ENUM["admin"],
         ];
     }
 

@@ -6,7 +6,7 @@
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Usuários</h6>
-                    <a class="btn btn-primary" href="{{ route('create.usuario') }}" style="margin-top:10px;">Criar usuário</a>
+                    <a class="btn btn-primary" href="{{ route('create.user') }}" style="margin-top:10px;">Criar usuário</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover tabela_container table-responsove-md">
@@ -14,8 +14,6 @@
                             <tr>
                                 <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Nome</th>
                                 <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Sobrenome</th>
-                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">CPF</th>
-                                <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Celular</th>
                                 <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">E-mail</th>
                                 <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Ações</th>
                             </tr>
@@ -30,22 +28,16 @@
                                         {{ $user->sobrenome }}
                                     </td>
                                     <td id="tabela_container_linha">
-                                        {{ $user->cpf }}
-                                    </td>
-                                    <td id="tabela_container_linha">
-                                        {{ $user->celular }}
-                                    </td>
-                                    <td id="tabela_container_linha">
                                         {{ $user->email }}
                                     </td>
                                     <td id="tabela_container_linha" style="text-align: center;">
                                         <div class="btn-group">
                                             <div>
-                                                <button class="btn btn-info" onclick ="location.href='{{ route('edit.usuario', ['usuario' => $user->id]) }}'">
+                                                <button class="btn btn-info" onclick ="location.href='{{ route('edit.user', ['usuario' => $user->id]) }}'">
                                                     <img src="{{ asset('img/icon_editar.svg') }}" alt="Orientação" width="22px" >
                                                 </button>
                                                 <button class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja deletar o usuário?')) 
-                                                    location.href='{{route('delete.usuario', $user->id)}}'">
+                                                    location.href='{{route('delete.user', $user->id)}}'">
                                                     <img src="{{ asset('img/icon_lixeira.svg') }}" alt="Orientação" width="22px">
                                                 </button>
                                             </div>

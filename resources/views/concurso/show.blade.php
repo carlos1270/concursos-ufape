@@ -13,7 +13,6 @@
           @endif
         </div>
         <div class="col-md-7" style="margin-bottom:10px">
-  
           <div class="form-row">
             <div class="col-md-12" style="margin-bottom:20px">
               <div class="card shadow bg-white" style="border-radius:12px; border-width:0px;">
@@ -52,14 +51,21 @@
                           <div class="form-row">
                             
                             @if($concurso->data_inicio_inscricao <= now())
-                              @if(now() <= $concurso->data_fim_inscricao)
-                              <div class="col-md-12" style="margin-bottom:18px">
-                                <a class="btn btn-success " href="" style="width:100%; height:50px; padding-top:7px; font-size:20px"><img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição</a>
-                              </div>
-                              @endif
+                                @if(now() <= $concurso->data_fim_inscricao)
+                                    <div class="col-md-12" style="margin-bottom:18px">
+                                        <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', ['concurso' => $concurso->id]) }}'"  
+                                            style="width:100%; height:50px; padding-top:7px; font-size:20px">
+                                            <img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição
+                                        </button>
+                                    </div>
+                                @endif
                             @endif
                             <div class="col-md-12">
-                              <a class="btn btn-primary" href="" class="card-img-top" alt="..." style="width: 100%; margin-right:10px; margin-top:-5px">Minhas inscrições</a>
+                              <button class="btn btn-primary" href="" class="card-img-top" alt="..." 
+                                style="width: 100%; margin-right:10px; margin-top:-5px"
+                                onclick ="location.href='{{ route('show.inscricoes') }}'">
+                                  Minhas inscrições
+                                </button>
                             </div>
                           </div>
                         </div>

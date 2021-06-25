@@ -18,7 +18,7 @@ class CheckUserAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->tipo_usuario == User::TIPO_ENUM['admin']) {
+        if (Auth::user()->role == User::ROLE_ENUM['admin']) {
             return $next($request);
         } else {
             return redirect()->back();
