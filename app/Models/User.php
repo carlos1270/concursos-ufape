@@ -31,8 +31,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'nome' => 'required|string|min:4|max:50',
         'sobrenome' => 'required|string|min:4|max:50',
         'email' => 'required|email|min:5|max:100|unique:users',
+        'cpf'   => 'required|cpf',
+        'celular' => 'required',
+        'password' => 'required|string|min:8|confirmed',
+    ];
+
+    public static $rulesAdmin = [
+        'nome' => 'required|string|min:4|max:50',
+        'sobrenome' => 'required|string|min:4|max:50',
+        'email' => 'required|email|min:5|max:100|unique:users',
         'role' => 'required|in:admin,chefeSetorConcursos,presidenteBancaExaminadora,candidato',
         'password' => 'required|string|min:8|confirmed',
+        'concurso' => 'required_if:role,presidenteBancaExaminadora',
     ];
 
     public static $messages = [
@@ -50,6 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password.required' => 'A senha é um campo obrigatório.',
         'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         'password.confirmed' => 'As senhas devem ser iguais.',
+        'concurso.required_if' => 'Escolha o concurso a qual o chefe da banca pertencerá.'
     ];
 
     /**
@@ -107,6 +118,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function concursosChefeBanca() {
-        return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'concursos_id', 'users_id');
+        return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'users_id', 'concursos_id');
     }
 }

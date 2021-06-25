@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Models\Concurso;
 
 class AdminController extends Controller
 {
@@ -21,7 +22,8 @@ class AdminController extends Controller
 
     public function createUser()
     {
-        return view('CRUD-usuario.create');
+        $concursos = auth()->user()->concursos;
+        return view('CRUD-usuario.create', compact('concursos'));
     }
 
     public function showUser()
@@ -40,12 +42,9 @@ class AdminController extends Controller
 
     public function saveUser(Request $request)
     {
-        $validator = Validator::make($request->all(), User::$rules, User::$messages)->validate();
-
-        if (!Controller::validar_cpf($request['cpf'])) {
-            return redirect()->back()->withErrors('cpf', 'Número de CPF inválido.')->withInput();
-        }
-
+        dd($request['email']);
+        $validator = Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
+        
         $data = [
             'nome' => $request['nome'],
             'sobrenome' => $request['sobrenome'],
@@ -57,6 +56,10 @@ class AdminController extends Controller
         $usuario = new User();
         $usuario->fill($data);
         $usuario->save();
+
+        if ($request->concurso != null && $request->role == "presidenteBancaExaminadora") {
+            $usuario->concursosChefeBanca()->attach($request->concurso);
+        }
 
         $usuario->password = $request['password'];
 
