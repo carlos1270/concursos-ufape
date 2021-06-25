@@ -25,10 +25,14 @@
                     </a>
                     <div class="form-group" style="margin-bottom: 0px;">
 
-                        <a style="margin-right: 15px;" href="{{ url('/') }}">Início</a>
+                        <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
                         @auth
                             <a style="margin-right: 15px;" href="{{ url('/dashboard') }}">Dashboard</a>
-                            <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
+
+                            @if(Auth::user()->role == "candidato")
+                                <a href="{{ route('show.inscricoes') }}" :active="request()->routeIs('show.inscricoes')" 
+                                    style="margin-right: 15px;">Inscrições</a>
+                            @endif
 
                             @if(Auth::user()->role == "admin")
                                 <a href="{{ route('show.users') }}" :active="request()->routeIs('show.users')" 

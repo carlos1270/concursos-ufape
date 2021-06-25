@@ -24,6 +24,9 @@ class CreateNewUser implements CreatesNewUsers
     {
         $input['role'] = User::ROLE_ENUM['candidato'];
 
+        $input['cpf'] = preg_replace('/[^0-9]/', '', $input['cpf']);
+        $input['celular'] = preg_replace('/[^0-9]/', '', $input['celular']);
+
         $candidatosRules = array_slice(Candidato::$rules, 0, 2);
         $candidatosMessages = array_slice(Candidato::$messages, 0, 9);
 
@@ -47,7 +50,7 @@ class CreateNewUser implements CreatesNewUsers
 
         Candidato::create([
             'cpf' => $input['cpf'],
-            'celular' => $input['cpf'],
+            'celular' => $input['celular'],
             'users_id' => $usuario->id,
         ]);
 

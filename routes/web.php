@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConcursoController;
+use App\Http\Controllers\InscricaoController;
 use App\Http\Controllers\WelcomeController;
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,21 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
         ->name('delete.user');
 });
 
-Route::get('/info-concurso', [ConcursoController::class, 'infoConcurso'])
-    ->name('info.concurso');
+Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(function () {
+    Route::get('/inscricao-concurso', [InscricaoController::class, 'inscreverseConcurso'])
+        ->name('inscricao.concurso');
+
+    Route::post('/save-inscricao', [InscricaoController::class, 'saveInscricao'])
+        ->name('save.inscricao');
+
+    Route::get('/show-inscricoes', [InscricaoController::class, 'showInscricoes'])
+        ->name('show.inscricoes');
+
+    Route::get('/show-inscricao', [InscricaoController::class, 'showInscricao'])
+        ->name('show.inscricao');
+});
 
 Route::resource('concurso', ConcursoController::class)
     ->middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso']);
+
 Route::resource('concurso', ConcursoController::class);

@@ -17,7 +17,9 @@ class CreateInscricaoTable extends Migration
             $table->id();
             $table->string('status');
             $table->string('titulacao');
+            $table->string('area_conhecimento');
             $table->boolean('cotista');
+            $table->boolean('pcd');
 
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');

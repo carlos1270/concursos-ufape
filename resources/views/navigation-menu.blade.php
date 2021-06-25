@@ -18,8 +18,8 @@
                     <x-jet-nav-link href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.*')">
                         {{ __('Concursos') }}
                     </x-jet-nav-link>
-                    @if(Auth::user()->tipo_usuario == "admin")
-                        <x-jet-nav-link href="{{ route('show.usuarios') }}" :active="request()->routeIs('show.usuarios')">
+                    @if(Auth::user()->role == "admin")
+                        <x-jet-nav-link href="{{ route('show.users') }}" :active="request()->routeIs('show.users')">
                             {{ __('Usuários') }}
                         </x-jet-nav-link>
                     @endif
