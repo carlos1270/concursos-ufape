@@ -15,7 +15,7 @@ class ConcursoController extends Controller
      */
     public function index()
     {
-        $concursos = Concurso::all();
+        $concursos = auth()->user()->concursos;
         return view('concurso.index', compact('concursos'));
     }
 

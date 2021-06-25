@@ -109,9 +109,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    public function concurso()
+    public function concursos()
     {
-        return $this->hasMany(Concurso::class, 'concurso_id');
+        return $this->hasMany(Concurso::class, 'users_id');
     }
 
     public function inscricao()
