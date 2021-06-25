@@ -7,7 +7,6 @@ use App\Notifications\UsuarioCadastrado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -40,11 +39,7 @@ class AdminController extends Controller
 
     public function saveUser(Request $request)
     {
-        $validator = Validator::make($request->all(), User::$rules, User::$messages)->validate();
-
-        if (!Controller::validar_cpf($request['cpf'])) {
-            return redirect()->back()->withErrors('cpf', 'Número de CPF inválido.')->withInput();
-        }
+        Validator::make($request->all(), User::$rules, User::$messages)->validate();
 
         $data = [
             'nome' => $request['nome'],
