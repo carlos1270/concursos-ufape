@@ -35,7 +35,7 @@
                                     <div><h6 class="style_card_data">{{date('d/m/Y',strtotime($concurso->data_fim_inscricao))}}</h6></div>
                                 </div>
                                 <div class="d-flex justify-content-left">
-                                    <h6 class="style_card_detalhe">{{$concurso->descricao}}</h6>
+                                    <h6 class="style_card_detalhe">{{mb_strimwidth($concurso->descricao, 0, 170, "...")}}</h6>
                                 </div>
                                 <div style="text-align: left;">
                                     <hr class="style_card_linha">
