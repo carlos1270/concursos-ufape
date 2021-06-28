@@ -18,7 +18,9 @@ class CheckUserBancaExaminadora
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role == User::ROLE_ENUM['presidenteBancaExaminadora']) {
+        if (Auth::user()->role == User::ROLE_ENUM['presidenteBancaExaminadora'] || 
+                Auth::user()->role == User::ROLE_ENUM['chefeSetorConcursos'] ||
+                Auth::user()->role == User::ROLE_ENUM['admin']) {
             return $next($request);
         } else {
             return redirect()->back();

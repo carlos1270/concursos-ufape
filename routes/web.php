@@ -57,8 +57,7 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
 });
 
 
-Route::middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso'])->group(function () {
-
+Route::middleware(['auth:sanctum', 'verified', 'CheckUserBancaExaminadora'])->group(function () {
     Route::get('/show-candidatos', [ConcursoController::class, 'showCandidatos'])
         ->name('show.candidatos');
 
