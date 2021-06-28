@@ -56,7 +56,15 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
         ->name('show.inscricao');
 });
 
-Route::resource('concurso', ConcursoController::class)
-    ->middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso']);
+Route::middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso'])->group(function () {
+    Route::resource('concurso', ConcursoController::class);
 
-Route::resource('concurso', ConcursoController::class);
+    Route::get('/show-candidatos', [ConcursoController::class, 'showCandidatos'])
+        ->name('show.candidatos');
+
+    Route::get('/inscricao-candidato', [ConcursoController::class, 'inscricaoCandidato'])
+        ->name('inscricao.candidato');
+
+    Route::post('/aprovar-reprovar-candidato', [ConcursoController::class, 'aprovarReprovarCandidato'])
+        ->name('aprovar-reprovar-candidato');
+});

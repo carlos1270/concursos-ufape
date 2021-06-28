@@ -45,12 +45,14 @@
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <div style="margin-right: 15px;">
-                                                        <a class="btn btn-success"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" ></a>
+                                                        <button class="btn btn-success" onclick ="location.href='{{ route('show.candidatos', ['concurso' => $concurso->id]) }}'">
+                                                            <img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" >
+                                                        </button>
                                                         <a class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px" ></a>
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
                                                     <div >
-                                                        <a class="btn btn-primary" href="{{route('concurso.show', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" ></a>
+                                                        <a class="btn btn-primary" href="{{route('concurso.show', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px"></a>
                                                         <a class="btn btn-info" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_editar.svg') }}" alt="Editar concurso" width="22px" ></a>
                                                         <a class="btn btn-danger" data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}"><img src="{{ asset('img/icon_lixeira.svg') }}" alt="Deletar concurso" width="22px" ></a>
                                                     </div>

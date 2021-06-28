@@ -78,7 +78,7 @@ class AdminController extends Controller
 
         $request['role'] = $usuario->role;
 
-        $validator = Validator::make($request->all(), $rules, $messages)->validate();
+        Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
             'nome' => $request['nome'],

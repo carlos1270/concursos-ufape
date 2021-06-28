@@ -5,7 +5,8 @@
         <div class="col-md-9">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                    <h6 class="style_card_container_header_titulo">Formulário de inscrição</h6>
+                    <h6 class="style_card_container_header_titulo">{{ $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}</h6>
+                </div>
                 <div class="card-body">
                     <div>
                         <div class="form-row">
@@ -19,7 +20,7 @@
                                     <div class="col-md-12 form-group">
                                         <label class="style_campo_titulo">Nome Completo</label>
                                         <input type="text" class="form-control style_campo" 
-                                            value="{{ Auth::user()->nome . ' ' . Auth::user()->sobrenome }}" disabled/>
+                                            value="{{ $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}" disabled/>
                                     </div>
                                 </div>
 
@@ -178,15 +179,72 @@
                                         @endif
                                     </div>
                                 </div>
+                                <hr/>
                                 <div class="form-row">
-                                    <div class="col-md-12">
-                                        <h6 class="style_card_container_header_subtitulo">Informações adicionais</h6>
+                                    <div class="col-md-6 form-group" style="margin-bottom: 9px;">
+                                        <button class="btn btn-danger shadow-sm" style="width: 100%;" 
+                                            data-toggle="modal" data-target="#reprovar-candidato-{{$candidato->id}}">
+                                            Reprovado
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6 form-group" style="margin-bottom: 9px;">
+                                        <button class="btn btn-success shadow-sm" style="width: 100%;"
+                                            data-toggle="modal" data-target="#aprovar-candidato-{{$candidato->id}}">
+                                            Aprovado
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reprovar-candidato-{{$candidato->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reprovar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-reprova-candidato-{{$candidato->id}}" method="POST" action="{{ route('aprovar-reprovar-candidato', ['inscricao' => $inscricao->id]) }}">
+                    <input type="hidden" name="aprovar" value="false">
+                    @csrf
+                    Tem certeza que deseja reprovar o candidato {{  $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}?
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-danger" form="form-reprova-candidato-{{$candidato->id}}">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="aprovar-candidato-{{$candidato->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aprovar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-aprova-candidato-{{$candidato->id}}" method="POST" action="{{ route('aprovar-reprovar-candidato', ['inscricao' => $inscricao->id]) }}">
+                    <input type="hidden" name="aprovar" value="true">
+                    @csrf
+                    Tem certeza que deseja Aprovar o candidato {{  $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}?
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-success" form="form-aprova-candidato-{{$candidato->id}}">Sim</button>
             </div>
         </div>
     </div>
