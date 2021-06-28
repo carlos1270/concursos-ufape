@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreConcursoRequest;
+use App\Models\Candidato;
 use App\Models\Concurso;
+use App\Models\Endereco;
+use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ConcursoController extends Controller
 {
@@ -205,5 +211,42 @@ class ConcursoController extends Controller
             }
         }
         return null;
+    }
+
+    public function showCandidatos(Request $request)
+    {
+        $inscricoes = Inscricao::where('concursos_id', $request->concurso)->get();
+        return view('concurso.show-candidatos')->with(['inscricoes' => $inscricoes]);
+    }
+
+    public function inscricaoCandidato(Request $request)
+    {
+        $inscricao = Inscricao::find($request->inscricao);
+        $candidato = Candidato::where('users_id', $inscricao->users_id)->first();
+        $endereco = Endereco::where('users_id', $inscricao->users_id)->first();
+        return view('concurso.inscricao-candidato')->with([
+            'inscricao' => $inscricao, 'candidato' => $candidato,
+            'endereco' => $endereco
+        ]);
+    }
+
+    public function aprovarReprovarCandidato(Request $request)
+    {
+        $inscricao = Inscricao::find($request->inscricao);
+        $mensagem = "";
+
+        Log::info($request->all());
+
+        if ($request->aprovar == "true") {
+            $inscricao->status = "aprovado";
+            $mensagem = "Candidato aprovado com sucesso!";
+        } else if ($request->aprovar == "false") {
+            $inscricao->status = "reprovado";
+            $mensagem = "Candidato reprovado com sucesso!";
+        }
+
+        $inscricao->save();
+
+        return redirect()->route('show.candidatos', ['concurso' => $inscricao->id])->with('success', $mensagem);
     }
 }

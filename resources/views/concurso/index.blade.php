@@ -54,7 +54,7 @@
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <div style="margin-right: 15px;">
-                                                        <a class="btn btn-success" href="{{route('candidatos.avaliar', ['id' => $concurso->id])}}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" ></a>
+                                                        <a class="btn btn-success" href="{{ route('show.candidatos', ['concurso' => $concurso->id]) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" ></a>
                                                         <a class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px" ></a>
                                                     </div>
                                                     @if(Auth::user()->role != "presidenteBancaExaminadora")
