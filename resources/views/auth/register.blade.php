@@ -106,9 +106,9 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <p for="estrangeiro" class="style_campo_titulo">Estrangeiro <span style="color: red; font-weight: bold;">*</span></p>
-                                <input type="radio" class="style_campo" id="sim" name="estrangeiro" placeholder="Digite o seu número" value="sim" required onclick="exibirMsg(this)"/>
+                                <input type="radio" class="style_campo" id="sim" name="estrangeiro" placeholder="Digite o seu número" value="sim" required onclick="exibirMsg(this)" @if(old('estrangeiro') == "sim") checked @endif/>
                                 <label for="sim">Sim</label>
-                                <input type="radio" class="style_campo" id="nao" name="estrangeiro" placeholder="Digite o seu número" value="não" required onclick="exibirMsg(this)"/>
+                                <input type="radio" class="style_campo" id="nao" name="estrangeiro" placeholder="Digite o seu número" value="não" required onclick="exibirMsg(this)" @if(old('estrangeiro') == "não") checked @endif/>
                                 <label for="nao">Não</label>
 
                                 @error('estrangeiro')
@@ -123,7 +123,7 @@
                                 <label for="documento_de_identificação" class="style_campo_titulo">Documento de identificação <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('documento_de_identificação') is-invalid @enderror" id="documento_de_identificação" name="documento_de_identificação"
                                     placeholder="Digite o número do documento de identificação" value="{{ old('documento_de_identificação') }}" required />
-                                <small id="msg-estrangeiro-pasaporte" style="display: none;">Caso candidato estrangeiro informar número de passaporte com letras e números.</small>
+                                <small id="msg-estrangeiro-pasaporte" style="@if(old('documento_de_identificação') != null) display: inline; @else display: none; @endif">Caso candidato estrangeiro informar número de passaporte com letras e números.</small>
                                 @error('documento_de_identificação')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -143,7 +143,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="cpf" class="style_campo_titulo">CPF <span id="msg-cpf-obrigatorio" style="color: red; font-weight: bold; display: none;">*</span></label>
+                                <label for="cpf" class="style_campo_titulo">CPF <span id="msg-cpf-obrigatorio" style="color: red; font-weight: bold; @if(old('estrangeiro') == "não") display: inline; @else display: none; @endif">*</span></label>
                                 <input type="text" class="form-control style_campo @error('cpf') is-invalid @enderror" id="cpf" name="cpf"
                                     placeholder="Digite seu CPF" value="{{ old('cpf') }}" />
                                 @error('cpf')

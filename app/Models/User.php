@@ -28,12 +28,26 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public static $rules = [
+        'email' => 'required|email|min:5|max:100|unique:users',
+        'password' => 'required|string|min:8|confirmed',
         'nome' => 'required|string|min:4|max:50',
         'sobrenome' => 'required|string|min:4|max:50',
-        'email' => 'required|email|min:5|max:100|unique:users',
-        'cpf'   => 'required|cpf',
-        'celular' => 'required',
-        'password' => 'required|string|min:8|confirmed',
+        'nome_do_pai' => 'nullable|string|min:8|max:100',
+        'nome_da_mãe' => 'required|string|min:8|max:100',
+        'data_de_nascimento' => 'nullable|date',
+        'estrangeiro'   => 'required',
+        'documento_de_identificação' => 'required|string|min:8|max:50',
+        'órgao_emissor' => 'required|string|min:4|max:20',
+        'cpf' => 'required_if:estrangeiro,não|cpf|min:13|max:14',
+        'telefone' => 'nullable|min:10|max:20',
+        'celular' => 'required|min:10|max:20',
+        'cep' => 'required',
+        'logradouro' => 'required|min:4|max:100',
+        'bairro' => 'nullable|min:4|max:100',
+        'número' => 'nullable|min:4|max:100',
+        'cidade' => 'nullable|min:4|max:100',
+        'uf'     => 'required',
+        'complemento' => 'nullable|min:4|max:150',
     ];
 
     public static $rulesAdmin = [
@@ -60,7 +74,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password.required' => 'A senha é um campo obrigatório.',
         'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         'password.confirmed' => 'As senhas devem ser iguais.',
-        'concurso.required_if' => 'Escolha o concurso a qual o chefe da banca pertencerá.'
+        'concurso.required_if' => 'Escolha o concurso a qual o chefe da banca pertencerá.',
+        'cpf.required_if' => 'O campo CPF é obrigatório quando não for estrangeiro.'
     ];
 
     /**
