@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Concurso;
 use App\Models\User;
 use App\Notifications\UsuarioCadastrado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Models\Concurso;
 
 class AdminController extends Controller
 {
@@ -21,8 +22,9 @@ class AdminController extends Controller
 
     public function createUser()
     {
-        $concursos = auth()->user()->concursos;
-        return view('CRUD-usuario.create', compact('concursos'));
+        $concursos = auth()->user()->concursos()->where('data_resultado_selecao', '>', now())->get();
+
+        return view('CRUD-usuario.create')->with(['concursos' => $concursos]);
     }
 
     public function showUser()
@@ -100,7 +102,6 @@ class AdminController extends Controller
 
     public function deleteUser($id)
     {
-
         $usuario = User::find($id);
         $usuario->delete();
 

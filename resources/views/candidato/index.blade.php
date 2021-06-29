@@ -35,12 +35,19 @@
                                         <td id="tabela_container_linha">{{ $inscricao->status }}</td>
                                         <td id="tabela_container_linha" style="text-align: center;">
                                             <div class="btn-group">
-                                                <div >
+                                                <div>
                                                     <button class="btn btn-primary" 
-                                                        onclick ="location.href='{{ route('show.inscricao', ['inscricao' => $inscricao->id]) }}'">
+                                                        onclick ="location.href='{{ route('minha.inscricao', ['inscricao' => $inscricao->id]) }}'">
                                                         <img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" >
                                                     </button>
                                                 </div>
+                                                @if (/*$inscricao->data_inicio_envio_doc <= now() && now() <= $inscricao->data_fim_envio_doc 
+                                                        &&*/ $inscricao->status == "aprovado")
+                                                    <button class="btn btn-light" style="margin-left: 5px" 
+                                                        onclick ="location.href='{{ route('envio.documentos') }}'">
+                                                        <img src="{{asset('img/file-download-solid.svg')}}" alt="" width="26px" >
+                                                    </button>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

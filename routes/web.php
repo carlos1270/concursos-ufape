@@ -3,8 +3,10 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConcursoController;
-use App\Http\Controllers\InscricaoController;
+use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,8 @@ use App\Http\Controllers\WelcomeController;
 */
 
 Route::get('/', [WelcomeController::class, 'index'])->name('index');
+
+Route::get('/user/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -43,17 +47,20 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(function () {
-    Route::get('/inscricao-concurso/{id}', [InscricaoController::class, 'inscreverseConcurso'])
+    Route::get('/inscricao-concurso/{id}', [CandidatoController::class, 'inscreverseConcurso'])
         ->name('inscricao.concurso');
 
-    Route::post('/save-inscricao', [InscricaoController::class, 'saveInscricao'])
+    Route::post('/save-inscricao', [CandidatoController::class, 'saveInscricao'])
         ->name('save.inscricao');
 
-    Route::get('/show-inscricoes', [InscricaoController::class, 'showInscricoes'])
+    Route::get('/show-inscricoes', [CandidatoController::class, 'showInscricoes'])
         ->name('show.inscricoes');
 
-    Route::get('/show-inscricao', [InscricaoController::class, 'showInscricao'])
-        ->name('show.inscricao');
+    Route::get('/minha-inscricao', [CandidatoController::class, 'minhaInscricao'])
+        ->name('minha.inscricao');
+
+    Route::get('/envio-documentos', [CandidatoController::class, 'showEnvioDocumentos'])
+        ->name('envio.documentos');
 });
 
 

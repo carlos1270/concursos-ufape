@@ -116,6 +116,18 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div id="concurso-presidente" class="form-group" style="display: none">
+                                <label for="concurso-disponiveis" class="style_campo_titulo">Concurso a ser avaliado <span style="color: red; font-weight: bold;">*</span></label>
+                                <select id="concurso-disponiveis" name="concurso-disponiveis" class="custom-select">
+                                    @foreach ($concursos as $concurso)
+                                        <option selected>Selecione...</option>
+                                        <option value="{{ $concurso->id }}">{{ $concurso->titulo }}</option>
+                                    @endforeach
+                                </select>
+                                @error('concurso')
+                                    <span style="color: red">{{ $message }}</span>
+                                @enderror
+                            </div>
                             <div class="col-md-12" style="margin-bottom: 5px;">
                                 <hr>
                             </div>

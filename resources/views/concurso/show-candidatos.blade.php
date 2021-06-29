@@ -50,10 +50,19 @@
                                                 <div class="btn-group">
                                                     <div>
                                                         <button class="btn btn-primary" onclick ="location.href='{{ route('inscricao.candidato', ['inscricao' => $inscricao->id]) }}'">
-                                                            Avaliar
+                                                            Avaliar 1º Etapa
                                                         </button>
                                                     </div>
                                                 </div>
+                                                @if ($inscricao->status == "aprovado")
+                                                    <div class="btn-group">
+                                                        <div style="margin-left: 5px">
+                                                            <button class="btn btn-primary" onclick ="location.href=''">
+                                                                Avaliar 2º Etapa
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
