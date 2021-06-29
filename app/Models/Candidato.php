@@ -48,10 +48,13 @@ class Candidato extends Model
     protected $fillable = [
         'cpf',
         'celular',
-        'rg',
-        'data_nascimento',
-        'pis',
+        'telefone',
+        'documento_de_identificacao',
+        'data_de_nascimento',
+        'orgao_emissor',
         'nome_mae',
+        'nome_do_pai',
+        'estrangeiro',
         'users_id',
     ];
 }

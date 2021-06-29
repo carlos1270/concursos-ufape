@@ -15,12 +15,15 @@ class CreateCandidatosTable extends Migration
     {
         Schema::create('candidatos', function (Blueprint $table) {
             $table->id();
-            $table->string('cpf')->unique();
-            $table->string('pis')->nullable()->unique();
+            $table->string('cpf')->nullable()->unique();
+            $table->string('documento_de_identificacao')->nullable()->unique();
+            $table->string('orgao_emissor')->nullable()->unique();
+            $table->date('data_de_nascimento')->unique();
+            $table->string('nome_do_pai')->nullable();
+            $table->string('nome_da_mae');
+            $table->boolean('estrangeiro');
             $table->string('celular')->nullable();
-            $table->string('rg')->nullable()->unique();
-            $table->date('data_nascimento')->nullable();
-            $table->string('nome_mae')->nullable();
+            $table->string('telefone')->nullable();
 
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
