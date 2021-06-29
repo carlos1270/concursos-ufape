@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
@@ -33,7 +32,7 @@ class UsuarioCadastrado extends Notification
         $this->linha_p1 = "Sr(a). " . $this->usuario->nome . ",";
         $this->linha_p2 = "Informamos que você foi cadastrado no Concursos-UFAPE";
         $this->linha_p3 = "Suas informações de login são: ";
-        $this->linha_p4 = "Login: " . $this->usuario->nome;
+        $this->linha_p4 = "Login: " . $this->usuario->email;
         $this->linha_p5 = "Senha: " . $this->usuario->password;
     }
 

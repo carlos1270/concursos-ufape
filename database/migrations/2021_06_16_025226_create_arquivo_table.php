@@ -15,11 +15,10 @@ class CreateArquivoTable extends Migration
     {
         Schema::create('arquivo', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('diretorio_arquivo');
-
-            $table->unsignedBigInteger('grupo_id');
-            $table->foreign('grupo_id')->references('id')->on('grupos');
+            $table->string('formacao_academica');
+            $table->string('expericencia_didatica');
+            $table->string('producao_cientifica');
+            $table->string('experiencia_profissional');
 
             $table->unsignedBigInteger('inscricoes_id');
             $table->foreign('inscricoes_id')->references('id')->on('inscricoes');

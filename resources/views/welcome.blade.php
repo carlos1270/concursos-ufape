@@ -3,7 +3,7 @@
 <div class="container" style="margin-top: 3rem; margin-bottom: 8rem;">
     <div class="form-row justify-content-center" style="text-align: center;">
         <div class="col-md-12">
-            <img src="img/logo_ufape_concursos.png" alt="Orientação" width="30%"> 
+            <img src="{{ asset('img/logo_ufape_concursos.png') }}" alt="Orientação" width="30%"> 
         </div>
         <div class="col-md-8" style="margin-top: 20px;">
             <h6 style="color: #909090;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </h6>

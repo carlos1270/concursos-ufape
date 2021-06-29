@@ -17,12 +17,18 @@
                             <div class="form-group col-md-12">
                                 <label for="email" class="style_campo_titulo">E-mail</label>
                                 <input type="email" class="form-control style_campo" id="email" name="email" 
-                                    :value="old('email')" placeholder="Digite seu e-mail" required autofocus/>
+                                    value="{{ old('email') }}" placeholder="Digite seu e-mail" required autofocus/>
+                                @error('email')
+                                    <span style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="password" class="style_campo_titulo">Senha</label>
                                 <input type="password" class="form-control style_campo" id="password" name="password"
                                     placeholder="Digite sua senha" required autocomplete="current-password" />
+                                @error('password')
+                                    <span style="color: red">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-md-12" style="margin-top: -10px; margin-bottom: 15px;">
                                 <div class="form-check">
