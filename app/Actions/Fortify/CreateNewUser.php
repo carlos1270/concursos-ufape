@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Candidato;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
@@ -30,13 +29,14 @@ class CreateNewUser implements CreatesNewUsers
         $candidatosRules = array_slice(Candidato::$rules, 0, 2);
         $candidatosMessages = array_slice(Candidato::$messages, 0, 9);
 
-        Validator::make($input, User::$rules, User::$messages)->validate();
+        Validator::make($input, User::$rules, User::$messages)
+            ->after(function ($validator) use ($input) {
+                if (!Controller::validar_cpf($input['cpf'])) {
+                    $validator->errors()->add('cpf', __('Informe um CPF valido.'));
+                }
+            })->validate();
 
         Validator::make($input, $candidatosRules, $candidatosMessages)->validate();
-
-        /*if (!Controller::validar_cpf($input['cpf'])) {
-            return redirect()->back()->withInput();
-        }*/
 
         $input['password'] = Hash::make($input['password']);
 

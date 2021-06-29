@@ -50,6 +50,9 @@
                                     Olá, {{ Auth::user()->nome }}
                                 </a>
                                 <div class="dropdown-menu">
+                                    <a type="button" class="dropdown-item" onclick ="location.href='{{ route('profile.show') }}'">
+                                        Editar perfil
+                                    </a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
 

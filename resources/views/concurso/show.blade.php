@@ -11,6 +11,14 @@
               </button>
             </div>
           @endif
+          @if($inscricao)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong> Você já realizou o cadastro nesse concurso. </strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
         </div>
         <div class="col-md-7" style="margin-bottom:10px">
           <div class="form-row">
@@ -49,15 +57,14 @@
                         </div>
                         <div class="card-body">
                           <div class="form-row">
-                            
-                            @if($concurso->data_inicio_inscricao <= now())
-                                @if(now() <= $concurso->data_fim_inscricao)
-                                    <div class="col-md-12" style="margin-bottom:18px">
-                                        <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', ['concurso' => $concurso->id]) }}'"  
-                                            style="width:100%; height:50px; padding-top:7px; font-size:20px">
-                                            <img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição
-                                        </button>
-                                    </div>
+                            @if($concurso->data_inicio_inscricao <= now() && now() <= $concurso->data_fim_inscricao)
+                                @if (!$inscricao)
+                                  <div class="col-md-12" style="margin-bottom:18px">
+                                      <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', ['concurso' => $concurso->id]) }}'"  
+                                          style="width:100%; height:50px; padding-top:7px; font-size:20px">
+                                          <img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição
+                                      </button>
+                                  </div>
                                 @endif
                             @endif
                             <div class="col-md-12">
@@ -205,7 +212,7 @@
                                             </div>
                                             <div class="form-group" style="width: 100%">
                                                 <div class="d-flex justify-content-between" style="width: 100%">
-                                                    <div><h5 style=" font-size:19px; margin-top:9px">Edital<br>especifico</h5></div>
+                                                    <div><h5 style=" font-size:19px; margin-top:9px">Documento de <br>veracidade</h5></div>
                                                 <div style="float: right"><a class="btn btn-light" href="{{asset('storage/'.$concurso->declaracao_veracidade)}}" target="_new" style="" >
                                                     <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
                                                     Baixar</a>
@@ -214,7 +221,7 @@
                                         </div>
                                     </div>
                                 @else 
-                                    <h6 style="color: #909090">O criador do concurso não disponibilizou o edital especifico</h6>
+                                    <h6 style="color: #909090">O criador do concurso não disponibilizou o documento de veracidade</h6>
                                 @endif
                             </div>
                         </div>

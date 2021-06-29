@@ -3,24 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidato;
-use App\Models\Concurso;
 use App\Models\Endereco;
 use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-class InscricaoController extends Controller
+class CandidatoController extends Controller
 {
+    public function showEnvioDocumentos()
+    {
+        return view('candidato.envio-documentos');
+    }
+
+    public function showInscricoes()
+    {
+        $inscricoes = Inscricao::where('users_id', Auth::user()->id)->get();
+
+        return view('candidato.index')->with(['inscricoes' => $inscricoes]);
+    }
+
+    public function minhaInscricao(Request $request)
+    {
+        $inscricao = Inscricao::find($request->inscricao);
+        $candidato = Candidato::where('users_id', Auth::user()->id)->first();
+        $endereco = Endereco::where('users_id', Auth::user()->id)->first();
+
+        return view('candidato.minha-inscricao')->with([
+            'candidato' => $candidato, 'inscricao' => $inscricao,
+            'endereco' => $endereco
+        ]);
+    }
+
     public function inscreverseConcurso(Request $request)
     {
         $vagas = OpcoesVagas::where('concursos_id', $request->concurso)->get();
 
         $candidato = Candidato::where('users_id', Auth::user()->id)->first();
 
-        return view('inscricao.formulario')->with(['vagas' => $vagas, 'candidato' => $candidato]);
+        return view('candidato.inscricao')->with(['vagas' => $vagas, 'candidato' => $candidato]);
     }
 
     public function saveInscricao(Request $request)
@@ -81,24 +103,5 @@ class InscricaoController extends Controller
         ]);
 
         return redirect()->route('show.inscricoes')->with('success', 'Sua inscrição foi realizada com sucesso');
-    }
-
-    public function showInscricoes()
-    {
-        $inscricoes = Inscricao::where('users_id', Auth::user()->id)->get();
-
-        return view('inscricao.index')->with(['inscricoes' => $inscricoes]);
-    }
-
-    public function showInscricao(Request $request)
-    {
-        $inscricao = Inscricao::find($request->inscricao);
-        $candidato = Candidato::where('users_id', Auth::user()->id)->first();
-        $endereco = Endereco::where('users_id', Auth::user()->id)->first();
-
-        return view('inscricao.minha-inscricao')->with([
-            'candidato' => $candidato, 'inscricao' => $inscricao,
-            'endereco' => $endereco
-        ]);
     }
 }

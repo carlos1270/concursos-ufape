@@ -11,15 +11,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function validar_telefone($telefone) {
+    protected function validar_telefone($telefone)
+    {
         return preg_match('/^\(\d{2}\)\s?\d{5}-\d{4}$/', $telefone) > 0 || preg_match('/^\(\d{2}\)\s?\d{4}-\d{4}$/', $telefone) > 0;
     }
 
-    protected function validar_cpf($cpf)
+    public static function validar_cpf($cpf)
     {
 
         // https://gist.github.com/rafael-neri/ab3e58803a08cb4def059fce4e3c0e40
-        
+
         // Extrai somente os números
         $cpf = preg_replace('/[^0-9]/is', '', $cpf);
 

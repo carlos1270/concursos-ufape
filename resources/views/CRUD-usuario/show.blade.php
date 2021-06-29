@@ -52,6 +52,19 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer" style="background-color: #fff; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                    <div><h6 style="font-weight: bold">Legenda:</h6></div>
+                    <div class="form-row">
+                        <div style="margin: 5px">
+                            <button class="btn btn-info" class="btn btn-success" style="margin-right: 10px" disabled>
+                            <img class="card-img-left example-card-img-responsive" src="img/icon_editar.svg" width="16px"/>
+                            </button> Editar Usuário</div>
+                        <div style="margin: 5px">
+                            <button class="btn btn-danger" class="btn btn-success" style="margin-right: 10px" disabled>
+                            <img class="card-img-left example-card-img-responsive" src="img/icon_lixeira.svg" width="16px"/>
+                            </button> Deletar Usuário</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

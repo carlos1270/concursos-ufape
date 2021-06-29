@@ -30,10 +30,10 @@
                                         <div class="col-md-6 form-group">
                                             <label for="sexo" class="style_campo_titulo">Sexo <span style="color: red; font-weight: bold;">*</span></label>
                                             <select id="sexo" name="sexo" class="custom-select" required>
-                                            <option selected>Selecione...</option>
-                                            <option value="masculino">Masculino</option>
-                                            <option value="feminino">Feminino</option>
-                                            <option value="outros">Outros</option>
+                                                <option selected>Selecione...</option>
+                                                <option value="masculino">Masculino</option>
+                                                <option value="feminino">Feminino</option>
+                                                <option value="outros">Outros</option>
                                             </select>
                                             @error('sexo')
                                                 <span style="color: red">{{ $message }}</span>
@@ -233,7 +233,7 @@
                                             <label for="pcd-true">Sim</label>
                                         </div>
                                    </div>
-                                   <div class="form-row">
+                                    <div class="form-row">
                                         <div class="col-md-12">
                                             <h6 class="style_card_container_header_subtitulo">Informações Adicionais</h6>
                                         </div>

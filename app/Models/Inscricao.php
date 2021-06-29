@@ -14,19 +14,19 @@ class Inscricao extends Model
     public const titulacao_ENUM = ["graduacao", "especializacao", "mestrado", "doutorado"];
 
     public static $rules = [
-        'titulacao' => 'required|in:graduacao,especializacao,mestrado,doutorado',
-        'cotista' => 'required|in:true,false',
+        'titulacao'         => 'required|in:graduacao,especializacao,mestrado,doutorado',
+        'cotista'           => 'required|in:true,false',
         'area_conhecimento' => 'required|string|min:5|max:100',
-        'pcd' => 'required|in:true,false'
+        'pcd'               => 'required|in:true,false'
     ];
 
     public static $messages = [
-        'titulacao.*' => 'Titulação inválida.',
-        'cotista.required' => 'O campo de Cota é obrigatório.',
+        'titulacao.*'                => 'Titulação inválida.',
+        'cotista.required'           => 'O campo de Cota é obrigatório.',
         'area_conhecimento.required' => 'A campo de Área de conhecimento é obrigatório',
-        'area_conhecimento.min' => 'A Área de conhecimento deve ter no mínimo 5 caracteres.',
-        'area_conhecimento.max' => 'A Área de conhecimento deve ter no máximo 100 caracteres.',
-        'pcd.required' => 'O campo de PCD é obrigatório.'
+        'area_conhecimento.min'      => 'A Área de conhecimento deve ter no mínimo 5 caracteres.',
+        'area_conhecimento.max'      => 'A Área de conhecimento deve ter no máximo 100 caracteres.',
+        'pcd.required'               => 'O campo de PCD é obrigatório.'
     ];
 
     protected $fillable = [
@@ -35,6 +35,8 @@ class Inscricao extends Model
         'cotista',
         'pcd',
         'area_conhecimento',
+        'data_inicio_envio_doc',
+        'data_fim_envio_doc',
         'users_id',
         'concursos_id',
         'vagas_id'

@@ -10,7 +10,6 @@ use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ConcursoController extends Controller
 {
@@ -62,7 +61,12 @@ class ConcursoController extends Controller
     public function show($id)
     {
         $concurso = Concurso::find($id);
-        return view('concurso.show', compact('concurso'));
+        $inscricao = null;
+        if (Auth::check()) {
+            $inscricao = Inscricao::where('concursos_id', $concurso->id)->where('users_id', Auth::user()->id)->first();
+        }
+
+        return view('concurso.show', compact('concurso', 'inscricao'));
     }
 
     /**
@@ -229,8 +233,6 @@ class ConcursoController extends Controller
     {
         $inscricao = Inscricao::find($request->inscricao);
         $mensagem = "";
-
-        Log::info($request->all());
 
         if ($request->aprovar == "true") {
             $inscricao->status = "aprovado";
