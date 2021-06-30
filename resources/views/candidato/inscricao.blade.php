@@ -62,40 +62,6 @@
                                             <h6 class="style_card_container_header_subtitulo">Inscrição</h6>
                                         </div>
                                     </div>
-                                    {{-- <div class="form-row">
-                                        <div class="col-md-12 form-group">
-                                            <label for="area_conhecimento" class="style_campo_titulo">Área de Conhecimento <span style="color: red; font-weight: bold;">*</span></label>
-                                            <input type="text" class="form-control style_campo" id="area_conhecimento" name="area_conhecimento"
-                                                placeholder="Digite a área de conhecimento" value="{{ old('area_conhecimento') }}" required/>
-                                            @error('area_conhecimento')
-                                                <span style="color: red">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="form-row">
-                                        <label for="titulacao" class="style_campo_titulo">Selecione a sua titulação <span style="color: red; font-weight: bold;">*</span></label>
-                                        @error('titulacao')
-                                            <div class="form-row col-md-12">
-                                                <span style="color: red">{{ $message }}</span>
-                                            </div>
-                                        @enderror
-                                        <div class="col-md-12">
-                                            <input type="radio" id="titulacao-graduacao" name="titulacao" value="graduacao">
-                                            <label for="titulacao-graduacao">Graduação</label>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <input type="radio" id="titulacao-especializacao" name="titulacao" value="especializacao">
-                                            <label for="titulacao-especializacao">Especialização</label>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <input type="radio" id="titulacao-mestrado" name="titulacao" value="mestrado">
-                                            <label for="titulacao-mestrado">Mestrado</label>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <input type="radio" id="titulacao-doutorado" name="titulacao" value="doutorado">
-                                            <label for="titulacao-doutorado">Doutorado</label>
-                                        </div>
-                                    </div> --}}
                                     <div class="form-row">
                                         <div class="col-md-12">
                                             <label for="cotista" class="style_campo_titulo">Sou declaradamente preto ou pardo e desejo concorrer à vaga reservada pela Lei no 12.990/2014, caso
@@ -129,15 +95,9 @@
                                             <label for="pcd-true">Sim</label>
                                         </div>
                                    </div>
-                                   {{-- <div class="form-row">
-                                        <div class="col-md-12">
-                                            <h6 class="style_card_container_header_subtitulo">Informações Adicionais</h6>
-                                        </div>
-                                    </div> --}}
                                     <hr/>
                                     <div class="form-row">
                                         <div class="col-md-6 form-group" style="margin-bottom: 9px;">
-                                            {{-- <button type="button" class="btn btn-primary shadow-sm" style="width: 100%;">Salvar formulário para continuar depois</button> --}}
                                         </div>
                                         <div class="col-md-6 form-group" style="margin-bottom: 9px;">
                                             <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>

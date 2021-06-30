@@ -33,6 +33,7 @@ class Inscricao extends Model
         'status',
         // 'titulacao',
         'cotista',
+        'solicitou_isencao',
         'pcd',
         'users_id',
         'concursos_id',
@@ -49,7 +50,7 @@ class Inscricao extends Model
         return $this->belongsTo(User::class, 'users_id');
     }
 
-    public function vagas()
+    public function vaga()
     {
         return $this->belongsTo(OpcoesVagas::class, 'vagas_id');
     }

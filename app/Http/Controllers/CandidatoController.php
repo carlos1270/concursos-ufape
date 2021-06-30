@@ -29,12 +29,11 @@ class CandidatoController extends Controller
     public function minhaInscricao(Request $request)
     {
         $inscricao = Inscricao::find($request->inscricao);
-        $candidato = Candidato::where('users_id', Auth::user()->id)->first();
-        $endereco = Endereco::where('users_id', Auth::user()->id)->first();
+        // $candidato = Candidato::where('users_id', Auth::user()->id)->first();
+        // $endereco = Endereco::where('users_id', Auth::user()->id)->first();
 
         return view('candidato.minha-inscricao')->with([
-            'candidato' => $candidato, 'inscricao' => $inscricao,
-            'endereco' => $endereco
+            'inscricao' => $inscricao,
         ]);
     }
 
