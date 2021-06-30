@@ -40,7 +40,7 @@ class Endereco extends Model
         'numero',
         'bairro',
         'cidade',
-        'estado',
+        'uf',
         'users_id'
     ];
 

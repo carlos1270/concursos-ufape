@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'cep' => 'required',
         'logradouro' => 'required|min:4|max:100',
         'bairro' => 'nullable|min:4|max:100',
-        'número' => 'nullable|min:4|max:100',
+        'número' => 'nullable|min:1|max:100',
         'cidade' => 'nullable|min:4|max:100',
         'uf'     => 'required',
         'complemento' => 'nullable|min:4|max:150',
