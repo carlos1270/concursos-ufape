@@ -33,14 +33,16 @@
                                     <div  class="form-row">
                                         <div class="col-md-12 form-group">
                                             <label for="vagas">Opção <span style="color: red; font-weight: bold;">*</span></label>
-                                            <select id="vagas" name="vagas" class="custom-select" required>
-                                                <option selected disabled>Selecione...</option>
+                                            <select id="vagas" name="vaga" class="custom-select" required>
+                                                <option value="" selected disabled>Selecione...</option>
                                                 @foreach ($vagas as $vaga)
                                                     <option value="{{ $vaga->id }}">{{ $vaga->nome }}</option>
                                                 @endforeach
                                             </select>
-                                            @if(Session::has('vagas'))
-                                                <span style="color: red">{{ Session::get('vagas') }}</span>
+                                            @error('vaga')
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
@@ -99,15 +101,15 @@
                                             <label for="cotista" class="style_campo_titulo">Sou declaradamente preto ou pardo e desejo concorrer à vaga reservada pela Lei no 12.990/2014, caso
                                                 exista em Edital Específico. <span style="color: red; font-weight: bold;">*</span></label>
                                             @error('cotista')
-                                                <div class="form-row col-md-12">
-                                                    <span style="color: red">{{ $message }}</span>
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
                                             @enderror
                                             <br>
-                                            <input type="radio" id="cotista-false" name="cotista" value="false">
+                                            <input type="radio" id="cotista-false" name="cotista" value="false" required>
                                             <label for="cotista-false">Não</label>
                                             <br>
-                                            <input type="radio" id="cotista-true" name="cotista" value="true">
+                                            <input type="radio" id="cotista-true" name="cotista" value="true" required>
                                             <label for="cotista-true">Sim</label>
                                         </div>
                                     </div>
@@ -115,15 +117,15 @@
                                         <div class="col-md-12">
                                             <label for="pcd" class="style_campo_titulo">Portador de necessidades especiais <span style="color: red; font-weight: bold;">*</span></label>
                                             @error('pcd')
-                                                <div class="form-row col-md-12">
-                                                    <span style="color: red">{{ $message }}</span>
+                                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
                                             @enderror
                                             <br>
-                                            <input type="radio" id="pcd-false" name="pcd" value="false">
+                                            <input type="radio" id="pcd-false" name="pcd" value="false" required>
                                             <label for="pcd-false">Não</label>
                                             <br>
-                                            <input type="radio" id="pcd-true" name="pcd" value="true">
+                                            <input type="radio" id="pcd-true" name="pcd" value="true" required>
                                             <label for="pcd-true">Sim</label>
                                         </div>
                                    </div>

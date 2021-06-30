@@ -31,12 +31,9 @@ class Inscricao extends Model
 
     protected $fillable = [
         'status',
-        'titulacao',
+        // 'titulacao',
         'cotista',
         'pcd',
-        'area_conhecimento',
-        'data_inicio_envio_doc',
-        'data_fim_envio_doc',
         'users_id',
         'concursos_id',
         'vagas_id'

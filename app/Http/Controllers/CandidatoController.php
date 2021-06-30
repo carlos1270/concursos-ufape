@@ -8,6 +8,7 @@ use App\Models\Inscricao;
 use App\Models\Concurso;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreInscricaoRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -47,62 +48,24 @@ class CandidatoController extends Controller
         return view('candidato.inscricao')->with(['vagas' => $vagas, 'candidato' => $candidato]);
     }
 
-    public function saveInscricao(Request $request)
+    public function saveInscricao(StoreInscricaoRequest $request)
     {
-        $request['pis'] = preg_replace('/[^0-9]/', '', $request['pis']);
-        $request['rg'] = preg_replace('/[^0-9]/', '', $request['rg']);
-        $request['cep'] = preg_replace('/[^0-9]/', '', $request['cep']);
-
-        $candidatosRules = array_slice(Candidato::$rules, 2, 7);
-        $candidatosMessages = array_slice(Candidato::$messages, 9, 21);
-
-        Validator::make($request->all(), $candidatosRules, $candidatosMessages)->validate();
-
-        Validator::make(
-            $request->all(),
-            Endereco::$rules,
-            Endereco::$messages
-        )->validate();
-
-        Validator::make(
-            $request->all(),
-            Inscricao::$rules,
-            Inscricao::$messages
-        )->validate();
-
-        if (is_string($request['vagas']) && !is_numeric($request['vagas'])) {
-            return redirect()->back()->with('vagas', 'Selecione uma vaga valida')->withInput();
-        }
-
-        $vagas = OpcoesVagas::find($request['vagas']);
+        $request->validated();
+        $vagas = OpcoesVagas::find($request->vaga);
 
         if (!$vagas) {
             return redirect()->back()->with('vagas', 'Selecione uma vaga valida')->withInput();
         }
 
-        $candidato = Candidato::where('users_id', Auth::user()->id)->first();
-        $candidato->fill($request->all());
-        $candidato->save();
-
-        Endereco::create([
-            'cep' => $request['cep'],
-            'rua' => $request['rua'],
-            'bairro' => $request['bairro'],
-            'cidade' => $request['cidade'],
-            'estado' => $request['estado'],
-            'users_id' => Auth::user()->id
-        ]);
-
-        Inscricao::create([
-            'status' => "primeira fase",
-            'titulacao' => $request['titulacao'],
-            'cotista' => $request['cotista'],
-            'area_conhecimento' => $request['area_conhecimento'],
-            'pcd' => $request['pcd'],
-            'users_id' =>  Auth::user()->id,
-            'concursos_id' => $vagas->concursos_id,
-            'vagas_id' => $vagas->id
-        ]);
+        $inscricao = new Inscricao();
+        $inscricao->status = "Aguardando pagamento";
+        $inscricao->cotista = $request->cotista;
+        $inscricao->pcd = $request->pcd;
+        $inscricao->solicitou_isencao = $request->desejo_isencao == "on";
+        $inscricao->users_id = Auth::user()->id;
+        $inscricao->concursos_id = $vagas->concursos_id;
+        $inscricao->vagas_id = $vagas->id;
+        $inscricao->save();
 
         return redirect()->route('show.inscricoes')->with('success', 'Sua inscrição foi realizada com sucesso');
     }
