@@ -42,7 +42,7 @@
                                         <tr>
                                             <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$inscricao->id}}</th>
                                             <td id="tabela_container_linha">{{ $inscricao->user->nome }}</td>
-                                            <td id="tabela_container_linha">{{ $inscricao->vagas->nome }}</td>
+                                            <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
                                             <td id="tabela_container_linha">
                                                 {{date('d/m/Y', strtotime($inscricao->created_at))}}
                                             </td>

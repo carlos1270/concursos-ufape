@@ -31,12 +31,10 @@ class Inscricao extends Model
 
     protected $fillable = [
         'status',
-        'titulacao',
+        // 'titulacao',
         'cotista',
+        'solicitou_isencao',
         'pcd',
-        'area_conhecimento',
-        'data_inicio_envio_doc',
-        'data_fim_envio_doc',
         'users_id',
         'concursos_id',
         'vagas_id'
@@ -52,7 +50,7 @@ class Inscricao extends Model
         return $this->belongsTo(User::class, 'users_id');
     }
 
-    public function vagas()
+    public function vaga()
     {
         return $this->belongsTo(OpcoesVagas::class, 'vagas_id');
     }
