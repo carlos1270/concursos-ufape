@@ -13,7 +13,7 @@
           @endif
           @if($inscricao)
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              <strong> Você já realizou o cadastro nesse concurso. </strong>
+              <strong> Você já realizou uma inscrição nesse concurso.</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
