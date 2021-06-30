@@ -6,6 +6,7 @@
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Formulário de inscrição</h6>
+                    {{-- <h6 class="style_card_container_header_campo_obrigatorio"> Campo obrigatório</h6> --}}
                 </div>
                 <div class="card-body">
                     <div>
@@ -178,11 +179,11 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                {{-- <div class="form-row">
                                     <div class="col-md-12">
                                         <h6 class="style_card_container_header_subtitulo">Informações adicionais</h6>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

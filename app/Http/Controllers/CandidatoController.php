@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Candidato;
 use App\Models\Endereco;
 use App\Models\Inscricao;
+use App\Models\Concurso;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +37,10 @@ class CandidatoController extends Controller
         ]);
     }
 
-    public function inscreverseConcurso(Request $request)
+    public function inscreverseConcurso($id)
     {
-        $vagas = OpcoesVagas::where('concursos_id', $request->concurso)->get();
+        $concurso = Concurso::find($id);
+        $vagas = $concurso->vagas;
 
         $candidato = Candidato::where('users_id', Auth::user()->id)->first();
 

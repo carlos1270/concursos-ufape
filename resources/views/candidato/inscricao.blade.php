@@ -50,7 +50,7 @@
                                     <div class="form-row">
                                         <div class="col-md-4 form-group">
                                             <label for="rg" class="style_campo_titulo">RG <span style="color: red; font-weight: bold;">*</span></label>
-                                            <input type="text" class="form-control style_campo" id="rg" name="rg" 
+                                            <input type="text" id="rg" class="form-control style_campo" id="rg" name="rg" 
                                                 placeholder="Digite o RG" value="{{ old('rg') }}" required />
                                             @error('rg')
                                                 <span style="color: red">{{ $message }}</span>
@@ -58,11 +58,11 @@
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label class="style_campo_titulo">CPF <span style="color: red; font-weight: bold;">*</span></label>
-                                            <input type="text" class="form-control style_campo" value="{{ $candidato->cpf }}" disabled/>
+                                            <input type="text" id="cpf" class="form-control style_campo" value="{{ $candidato->cpf }}" disabled/>
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label for="pis" class="style_campo_titulo">PIS <span style="color: red; font-weight: bold;">*</span></label>
-                                            <input type="text" class="form-control style_campo" id="pis" name="pis" 
+                                            <input type="text" id="pis" class="form-control style_campo" id="pis" name="pis" 
                                                 placeholder="Digite o PIS" value="{{ old('pis') }}" required />
                                             @error('pis')
                                                 <span style="color: red">{{ $message }}</span>
@@ -233,15 +233,15 @@
                                             <label for="pcd-true">Sim</label>
                                         </div>
                                    </div>
-                                    <div class="form-row">
+                                   {{-- <div class="form-row">
                                         <div class="col-md-12">
                                             <h6 class="style_card_container_header_subtitulo">Informações Adicionais</h6>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <hr/>
                                     <div class="form-row">
                                         <div class="col-md-6 form-group" style="margin-bottom: 9px;">
-                                            <button class="btn btn-primary shadow-sm" style="width: 100%;">Salvar formulário para continuar depois</button>
+                                            <button type="button" class="btn btn-primary shadow-sm" style="width: 100%;">Salvar formulário para continuar depois</button>
                                         </div>
                                         <div class="col-md-6 form-group" style="margin-bottom: 9px;">
                                             <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
@@ -260,6 +260,7 @@
 <script>
     $(document).ready(function($) {
         $('#cpf').mask('000.000.000-00');
+        $('#rg').mask('00.000.000');
         $('#cep').mask('00000-000');
         $('#pis').mask('000.00000-00-0');
         var SPMaskBehavior = function(val) {

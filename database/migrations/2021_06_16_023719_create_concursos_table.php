@@ -17,7 +17,7 @@ class CreateConcursosTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->integer('qtd_vagas');
-            $table->string('descricao');
+            $table->text('descricao');
             $table->date('data_inicio_inscricao');
             $table->date('data_fim_inscricao');
             $table->date('data_fim_isencao_inscricao');

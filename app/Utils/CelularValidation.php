@@ -11,6 +11,6 @@ class CelularValidation
 
     protected function isValidate($attribute, $value)
     {
-        return preg_match('/^\(\d{2}\)\s?\d{5}-\d{4}$/', $value) > 0 || preg_match('/^\(\d{2}\)\s?\d{4}-\d{4}$/', $value) > 0; 
+        return preg_match('/^\(\d{2}\)\s?\d{4}-\d{4}$/', $value) > 0 || preg_match('/^\(\d{2}\)\s?\d{5}-\d{4}$/', $value) > 0; 
     }
 }

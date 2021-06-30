@@ -15,6 +15,11 @@
                             <div class="col-md-12">
                                 <h6 style="color: #707070; font-weight: normal; font-size: 22px;">Informações</h6>
                             </div>
+                            @error('error')
+                                <div class="alert alert-danger">
+                                    {{$menssage}}
+                                </div>    
+                            @enderror
                             <form method="POST" action="{{route('concurso.update', ['concurso' => $concurso->id])}}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">

@@ -96,4 +96,8 @@ class Concurso extends Model
 
         $this->delete();
     }
+
+    public function chefeDaBanca() {
+        return $this->belongsToMany(User::class, 'chefe_da_banca', 'concursos_id', 'users_id');
+    }
 }

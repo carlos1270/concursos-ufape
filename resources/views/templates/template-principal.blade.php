@@ -39,8 +39,7 @@
                                     style="margin-right: 15px;">Usuários</a>
                             @endif
 
-                            @if(Auth::user()->role == "admin" || 
-                                    Auth::user()->role == "chefeSetorConcursos" )
+                            @if(Auth::user()->role != "candidato")
                                 <a href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.index')" 
                                     style="margin-right: 15px;">Concursos</a>
                             @endif
