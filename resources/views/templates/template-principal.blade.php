@@ -27,7 +27,7 @@
 
                         <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
                         @auth
-                            <a style="margin-right: 15px;" href="{{ url('/dashboard') }}">Dashboard</a>
+                            {{-- <a style="margin-right: 15px;" href="{{ url('/dashboard') }}">Dashboard</a> --}}
 
                             @if(Auth::user()->role == "candidato")
                                 <a href="{{ route('show.inscricoes') }}" :active="request()->routeIs('show.inscricoes')" 

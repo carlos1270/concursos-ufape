@@ -23,7 +23,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('index');
 Route::get('/user/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect(route('index'));
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(function () {
