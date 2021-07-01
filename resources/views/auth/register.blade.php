@@ -19,7 +19,7 @@
                             <div class="col-md-12 form-group">
                                 <label for="email" class="style_campo_titulo">E-mail <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="email" class="form-control style_campo @error('email') is-invalid @enderror" id="email" name="email"
-                                    placeholder="Digite seu e-mail" value="{{ old('email') }}" required />
+                                    placeholder="Digite seu e-mail" value="{{ old('email') }}" required autofocus/>
                                 @error('email')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -30,18 +30,38 @@
                         <div class="form-row">
                             <div class="col-md-6 form-group">
                                 <label for="password" class="style_campo_titulo">Senha <span style="color: red; font-weight: bold;">*</span></label>
-                                <input type="password" class="form-control style_campo @error('password') is-invalid @enderror" id="password" name="password"
-                                    placeholder="Digite sua senha" required autocomplete="new-password"/>
+                                <div class="input-group">
+                                    <input type="password" class="form-control style_campo @error('password') is-invalid @enderror" id="password" name="password"
+                                        placeholder="Digite sua senha" required autocomplete="new-password" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" style="padding: 0px; padding-left: 10px; padding-right: 10px;"
+                                                onmouseover="alterarImagem(this)" onmouseout="alterarImagem(this)"
+                                                onclick="visualizarSenha(this)">
+                                            <img src="{{asset('img/icon_visualizar_cinza.svg')}}" alt="" style="width: 20px;">
+                                        </button>
+                                    </div>
+                                </div>
+                                
                                 @error('password')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <small>A senha deve ter no mínimo 8 caracteres e pode ser composta de letras e números.</small>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="password_confirmation" class="style_campo_titulo">Confirmar senha <span style="color: red; font-weight: bold;">*</span></label>
-                                <input type="password" class="form-control style_campo" id="password_confirmation" name="password_confirmation"
-                                    placeholder="Confirme sua senha" required autocomplete="new-password" />
+                                <div class="input-group">
+                                    <input type="password" class="form-control style_campo" id="password_confirmation" name="password_confirmation"
+                                        placeholder="Confirme sua senha" required autocomplete="new-password" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" style="padding: 0px; padding-left: 10px; padding-right: 10px;"
+                                                onmouseover="alterarImagem(this)" onmouseout="alterarImagem(this)"
+                                                onclick="visualizarSenha(this)">
+                                            <img src="{{asset('img/icon_visualizar_cinza.svg')}}" alt="" style="width: 20px;">
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -53,7 +73,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="nome" class="style_campo_titulo">Nome <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('nome') is-invalid @enderror" id="nome" name="nome"
-                                    placeholder="Digite seu nome" value="{{ old('nome') }}" required autofocus autocomplete="nome"/>
+                                    placeholder="Digite seu nome" value="{{ old('nome') }}" required autocomplete="nome"/>
                                 @error('nome')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -392,5 +412,34 @@
             limpa_formulário_cep();
         }
     };
+
+    function visualizarSenha(button) {
+        var img = button.children[0];
+        var input = button.parentElement.parentElement.children[0];
+        if (input.type == "password") {
+            input.type = "text";
+            img.src =  "{{asset('img/icon_no_visualizar_white.svg')}}";
+        } else {
+            input.type = "password";
+            img.src = "{{asset('img/icon_visualizar_white.svg')}}";
+        }
+    }
+
+    function alterarImagem(button) {
+        var img = button.children[0];
+        var input = button.parentElement.parentElement.children[0];
+
+        if (img.src == "{{asset('img/icon_visualizar_cinza.svg')}}") {
+            img.src = "{{asset('img/icon_visualizar_white.svg')}}";
+        } else if (img.src == "{{asset('img/icon_visualizar_white.svg')}}") {
+            img.src = "{{asset('img/icon_visualizar_cinza.svg')}}";
+        }
+
+        if (img.src == "{{asset('img/icon_no_visualizar_cinza.svg')}}") {
+            img.src = "{{asset('img/icon_no_visualizar_white.svg')}}";
+        } else if (img.src == "{{asset('img/icon_no_visualizar_white.svg')}}") {
+            img.src = "{{asset('img/icon_no_visualizar_cinza.svg')}}";
+        }
+    }
 </script>
 @endsection
