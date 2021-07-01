@@ -67,12 +67,23 @@
                                   </div>
                                 @endif
                             @endif
-                            <div class="col-md-12">
-                              <button class="btn btn-primary" href="" class="card-img-top" alt="..." 
-                                style="width: 100%; margin-right:10px; margin-top:-5px"
-                                onclick ="location.href='{{ route('show.inscricoes') }}'">
-                                  Minhas inscrições
-                                </button>
+                            <div class="col-md-12 btn-group">
+                              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%; height:50px; padding-top:7px; font-size:20px">
+                                <img src="{{asset('img/icon_compartilhar.svg')}}" class="card-img-top" alt="dropdown-compartilhar" style="width:30px; margin-right:5px">Compartilhar
+                              </button>
+                              <div class="dropdown-menu" style="width: 97%">
+                                <a class="dropdown-item" onclick="shareWhatsapp('{{route('concurso.show', ['concurso' => $concurso->id])}}')">
+                                  <img src="{{asset('img/whatsapp.svg')}}" class="card-img-top" alt="whatsapp" style="width:30px; margin-right:5px">Whatsapp
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="shareFacebook('{{route('concurso.show', ['concurso' => $concurso->id])}}')">
+                                  <img src="{{asset('img/facebook.png')}}" class="card-img-top" alt="facebook" style="width:30px; margin-right:5px">Facebook
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="shareTwitter('{{route('concurso.show', ['concurso' => $concurso->id])}}')">
+                                  <img src="{{asset('img/twitter.png')}}" class="card-img-top" alt="twitter" style="width:30px; margin-right:5px">Twitter
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -232,4 +243,15 @@
         </div>
     </div>
   </div>
+  <script>
+    function shareWhatsapp(url) {
+      window.open("https://api.whatsapp.com/send?text="+url, "Compartilhar com o facebook", "height=1000,width=1000");
+    }
+    function shareFacebook(url) {
+      window.open("https://www.facebook.com/sharer/sharer.php?u="+url, "Compartilhar com o facebook", "height=1000,width=1000");
+    }
+    function shareTwitter(url) {
+      window.open("https://twitter.com/intent/tweet?url="+url, "Compartilhar com o facebook", "height=1000,width=1000");
+    }
+  </script>
 @endsection
