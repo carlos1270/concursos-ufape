@@ -45,16 +45,16 @@ class Concurso extends Model
 
     public function setAtributes(StoreConcursoRequest $request)
     {
-        $this->titulo                           = $request->titulo;
-        $this->qtd_vagas                        = $request->quantidade_vagas;
-        $this->descricao                        = $request->descricao;
-        $this->data_inicio_inscricao            = $request->data_inicio_inscricao;
-        $this->data_fim_inscricao               = $request->data_fim_inscricao;
-        $this->data_fim_isencao_inscricao       = $request->data_fim_isencao_inscricao;
-        $this->data_fim_pagamento_inscricao     = $request->data_fim_pagamento_inscricao;
-        $this->data_inicio_envio_doc            = $request->data_inicio_envio_doc;
-        $this->data_fim_envio_doc               = $request->data_fim_envio_doc;
-        $this->data_resultado_selecao           = $request->data_resultado_selecao;
+        $this->titulo                           = $request->título;
+        $this->qtd_vagas                        = $request->quantidade_de_vagas;
+        $this->descricao                        = $request->descrição;
+        $this->data_inicio_inscricao            = $request->data_de_início_da_inscrição;
+        $this->data_fim_inscricao               = $request->data_de_término_da_inscrição;
+        $this->data_fim_isencao_inscricao       = $request->data_limite_para_isenção;
+        $this->data_fim_pagamento_inscricao     = $request->data_limite_para_pagamento;
+        $this->data_inicio_envio_doc            = $request->data_de_início_para_envio_dos_documentos;
+        $this->data_fim_envio_doc               = $request->data_final_para_envio_dos_documentos;
+        $this->data_resultado_selecao           = $request->data_do_resultado_do_concurso;
         $this->users_id                         = auth()->user()->id;
     }
 
