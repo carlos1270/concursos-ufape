@@ -115,9 +115,9 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="data_de_nascimento" class="style_campo_titulo">Data de nascimento </label>
+                                <label for="data_de_nascimento" class="style_campo_titulo">Data de nascimento <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="date" class="form-control style_campo @error('data_de_nascimento') is-invalid @enderror" id="data_de_nascimento" name="data_de_nascimento"
-                                    placeholder="Digite seu CPF" value="{{ old('data_de_nascimento') }}" />
+                                    placeholder="Digite seu CPF" value="{{ old('data_de_nascimento') }}" required/>
                                 @error('data_de_nascimento')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}

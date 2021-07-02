@@ -66,16 +66,16 @@ class Concurso extends Model
             Storage::putFileAs('public/' . $path, $request->edital_geral, $nome);
             $this->edital_geral = $path . $nome;
         }
-        if ($request->edital_especifico != null) {
+        if ($request->file('edital_específico') != null) {
             $path = 'concursos/' . $this->id . '/';
             $nome = 'edital_especifico.pdf';
-            Storage::putFileAs('public/' . $path, $request->edital_especifico, $nome);
+            Storage::putFileAs('public/' . $path, $request->file('edital_específico'), $nome);
             $this->edital_especifico = $path . $nome;
         }
-        if ($request->declaracao_de_veracidade != null) {
+        if ($request->file('declaração_de_veracidade') != null) {
             $path = 'concursos/' . $this->id . '/';
-            $nome = 'declaracao_veracidade.pdf';
-            Storage::putFileAs('public/' . $path, $request->declaracao_de_veracidade, $nome);
+            $nome = 'declaracao_de_veracidade.pdf';
+            Storage::putFileAs('public/' . $path, $request->file('declaração_de_veracidade'), $nome);
             $this->declaracao_veracidade = $path . $nome;
         }
     }
