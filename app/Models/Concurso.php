@@ -45,14 +45,14 @@ class Concurso extends Model
 
     public function setAtributes(StoreConcursoRequest $request)
     {
-        $this->titulo                           = $request->título;
+        $this->titulo                           = $request->input('título');
         $this->qtd_vagas                        = $request->quantidade_de_vagas;
-        $this->descricao                        = $request->descrição;
-        $this->data_inicio_inscricao            = $request->data_de_início_da_inscrição;
-        $this->data_fim_inscricao               = $request->data_de_término_da_inscrição;
-        $this->data_fim_isencao_inscricao       = $request->data_limite_para_isenção;
+        $this->descricao                        = $request->input('descrição');
+        $this->data_inicio_inscricao            = $request->input('data_de_início_da_inscrição');
+        $this->data_fim_inscricao               = $request->input('data_de_término_da_inscrição');
+        $this->data_fim_isencao_inscricao       = $request->input('data_limite_para_isenção');
         $this->data_fim_pagamento_inscricao     = $request->data_limite_para_pagamento;
-        $this->data_inicio_envio_doc            = $request->data_de_início_para_envio_dos_documentos;
+        $this->data_inicio_envio_doc            = $request->input('data_de_início_para_envio_dos_documentos');
         $this->data_fim_envio_doc               = $request->data_final_para_envio_dos_documentos;
         $this->data_resultado_selecao           = $request->data_do_resultado_do_concurso;
         $this->users_id                         = auth()->user()->id;
