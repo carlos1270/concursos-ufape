@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
-                                        <label for="nome_mae" class="style_campo_titulo">Nome da Pai </label>
+                                        <label for="nome_mae" class="style_campo_titulo">Nome do Pai </label>
                                         <input type="text" class="form-control style_campo" value="{{$candidato->nome_do_pai}}" disabled/>
                                     </div>
                                     <div class="col-md-6 form-group">
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12 form-group">
-                                        <input id="isencao" type="checkbox" name="desejo_isencao" @if($inscricao->solicitou_isencao) selected @endif disabled>
+                                        <input id="isencao" type="checkbox" name="desejo_isencao" @if($inscricao->solicitou_isencao) checked @endif disabled>
                                         <label for="isencao">Solicito issenção da taxa de pagamento.</label>
                                     </div>
                                 </div>

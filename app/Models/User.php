@@ -38,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'estrangeiro'   => 'required',
         'documento_de_identificação' => 'required|string|min:8|max:50',
         'órgao_emissor' => 'required|string|min:4|max:20',
-        'cpf' => 'required_if:estrangeiro,não|cpf|min:13|max:14',
+        'cpf' => 'required_if:estrangeiro,não|cpf|min:11|max:12|unique:candidatos',
         'telefone' => 'nullable|min:10|max:20',
         'celular' => 'required|min:10|max:20',
         'cep' => 'required',
@@ -75,7 +75,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         'password.confirmed' => 'As senhas devem ser iguais.',
         'concurso.required_if' => 'Escolha o concurso a qual o chefe da banca pertencerá.',
-        'cpf.required_if' => 'O campo CPF é obrigatório quando não for estrangeiro.'
+        'cpf.required_if' => 'O campo CPF é obrigatório quando não for estrangeiro.',
+        'cpf.unique' => 'Esse CPF já está cadastrado.',
     ];
 
     /**
@@ -127,12 +128,20 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Concurso::class, 'users_id');
     }
 
-    public function inscricao()
+    public function inscricoes()
     {
-        return $this->hasMany(Inscricao::class, 'inscricao_id');
+        return $this->hasMany(Inscricao::class, 'users_id');
     }
 
     public function concursosChefeBanca() {
         return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'users_id', 'concursos_id');
+    }
+
+    public function candidato() {
+        return $this->hasOne(Candidato::class, 'users_id');
+    }
+
+    public function endereco() {
+        return $this->hasOne(Endereco::class, 'users_id');
     }
 }

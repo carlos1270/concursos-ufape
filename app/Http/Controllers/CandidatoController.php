@@ -29,6 +29,7 @@ class CandidatoController extends Controller
     public function minhaInscricao(Request $request)
     {
         $inscricao = Inscricao::find($request->inscricao);
+        $this->authorize('view', $inscricao);
         // $candidato = Candidato::where('users_id', Auth::user()->id)->first();
         // $endereco = Endereco::where('users_id', Auth::user()->id)->first();
 
@@ -40,6 +41,7 @@ class CandidatoController extends Controller
     public function inscreverseConcurso($id)
     {
         $concurso = Concurso::find($id);
+        $this->authorize('create', Inscricao::class);
         $vagas = $concurso->vagas;
 
         $candidato = Candidato::where('users_id', Auth::user()->id)->first();
