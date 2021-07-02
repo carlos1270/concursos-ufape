@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12">
-                                        <input id="isencao" type="checkbox" name="desejo_isencao" disabled @if($inscricao->solicitou_isencao) selected @endif>
+                                        <input id="isencao" type="checkbox" name="desejo_isencao" @if($inscricao->solicitou_isencao) checked @endif disabled>
                                         <label for="isencao">Solicitar isenção - Declaro atender às condições estabelecidas no edital.</label>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                         <input type="radio" id="pcd-false" name="pcd" value="false" disabled @if(!$inscricao->pcd) checked @endif>
                                         <label for="pcd-false">Não</label>
                                         <br>
-                                        <input type="radio" id="pcd-true" name="pcd" value="true" disabled @if(!$inscricao->pcd) checked @endif>
+                                        <input type="radio" id="pcd-true" name="pcd" value="true" disabled @if($inscricao->pcd) checked @endif>
                                         <label for="pcd-true">Sim</label>
                                     </div>
                                 </div>

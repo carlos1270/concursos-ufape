@@ -226,8 +226,8 @@ class ConcursoController extends Controller
     public function inscricaoCandidato(Request $request)
     {
         $inscricao = Inscricao::find($request->inscricao);
-        $candidato = Candidato::where('users_id', $inscricao->users_id)->first();
-        $endereco = Endereco::where('users_id', $inscricao->users_id)->first();
+        $candidato = $inscricao->user->candidato;
+        $endereco = $inscricao->user->endereco;
         return view('concurso.inscricao-candidato')->with([
             'inscricao' => $inscricao, 'candidato' => $candidato,
             'endereco' => $endereco

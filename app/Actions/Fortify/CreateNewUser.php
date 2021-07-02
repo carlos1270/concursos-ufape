@@ -23,10 +23,10 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         $input['role'] = User::ROLE_ENUM['candidato'];
-    
+        $input['cpf'] = preg_replace('/[^0-9]/', '', $input['cpf']);
+
         Validator::make($input, User::$rules, User::$messages)->validate();
 
-        $input['cpf'] = preg_replace('/[^0-9]/', '', $input['cpf']);
         $input['celular'] = preg_replace('/[^0-9]/', '', $input['celular']);
         $input['telefone'] = preg_replace('/[^0-9]/', '', $input['telefone']);
 
