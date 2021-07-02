@@ -102,7 +102,7 @@ class ConcursoController extends Controller
         $opcoesEditadas = OpcoesVagas::whereIn('id', $request->opcoes_id)->get();
         $opcoesExcluidas = $concurso->vagas->diff($opcoesEditadas);
         if ($opcoesExcluidas != null && $opcoesExcluidas->count() > 0 && $this->podeExcluir($opcoesExcluidas)) {
-            return redirect()->back()->withErrors(['error' => 'A opção ' . $this->errorVaga($opcoesExcluidas)->nome . ' não pode ser excluida pois foi escolhida em algum agendamento'])->withInput();
+            return redirect()->back()->withErrors(['error' => 'A opção ' . $this->errorVaga($opcoesExcluidas)->nome . ' não pode ser excluída pois foi escolhida em algum agendamento'])->withInput();
         }
 
         $concurso->setAtributes($request);
@@ -167,10 +167,10 @@ class ConcursoController extends Controller
     }
 
     /*
-        TODO 
+        TODO
         Checagem se não tem risco em excluir tal opção de seleção
         @param OpcoesVagas $opcao
-        @return Boolean 
+        @return Boolean
     */
 
     public function checarExclusao(OpcoesVagas $opcao)
