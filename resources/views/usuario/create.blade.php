@@ -109,7 +109,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            {{-- <div id="concurso-presidente" class="form-group" style="display: none">
+                            <div id="concurso-presidente" class="form-group" style="display: none">
                                 <label for="concurso-disponiveis" class="style_campo_titulo">Concurso a ser avaliado <span style="color: red; font-weight: bold;">*</span></label>
                                 <select id="concurso-disponiveis" name="concurso-disponiveis" class="custom-select">
                                     @foreach ($concursos as $concurso)
@@ -120,7 +120,7 @@
                                 @error('concurso')
                                     <span style="color: red">{{ $message }}</span>
                                 @enderror
-                            </div> --}}
+                            </div>
                             <div class="col-md-12" style="margin-bottom: 5px;">
                                 <hr>
                             </div>
@@ -135,12 +135,12 @@
     </div>
 </div>
 <script>
-    {{-- function mostrarDivChefe(select) {
+    function mostrarDivChefe(select) {
         if (select.value == "presidenteBancaExaminadora") {
             document.getElementById('concurso-chefe').style.display = "block";
         } else {
             document.getElementById('concurso-chefe').style.display = "none";
         }
-    } --}}
+    }
 </script>
 @endsection

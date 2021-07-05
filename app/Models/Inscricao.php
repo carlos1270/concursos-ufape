@@ -31,7 +31,6 @@ class Inscricao extends Model
 
     protected $fillable = [
         'status',
-        // 'titulacao',
         'cotista',
         'solicitou_isencao',
         'pcd',

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreConcursoRequest;
 use App\Models\Arquivo;
 use App\Models\Avaliacao;
-use App\Models\Candidato;
 use App\Models\Concurso;
-use App\Models\Endereco;
 use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
@@ -208,13 +206,14 @@ class ConcursoController extends Controller
 
         $inscricao->save();
 
-        return redirect()->route('show.candidatos', ['concurso' => $inscricao->id])->with('success', $mensagem);
+        return redirect()->route('show.candidatos.concurso', $inscricao->id)->with('success', $mensagem);
     }
 
     public function avaliarDocumentosCandidato(Request $request)
     {
         $arquivos = Arquivo::where('inscricoes_id', $request->inscricao_id)->first();
-        return view('concurso.avalia-documentos-candidato')->with(['arquivos' => $arquivos]);
+        $avaliacao = Avaliacao::where('inscricoes_id',  $request->inscricao_id)->first();
+        return view('concurso.avalia-documentos-candidato')->with(['arquivos' => $arquivos, 'avaliacao' => $avaliacao]);
     }
 
     public function savePontuacaoDocumentosCandidato(Request $request)
