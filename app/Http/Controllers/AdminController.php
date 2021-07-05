@@ -8,16 +8,16 @@ use App\Notifications\UsuarioCadastrado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
-    public function dashboardCRUDUUser()
+    public function index()
     {
-        return view('CRUD-usuario.dashboard');
+        $usuarios = User::all()->except(Auth::id());
+        return view('usuario.index', compact('usuarios'));
     }
 
     public function createUser()
@@ -27,24 +27,16 @@ class AdminController extends Controller
         return view('CRUD-usuario.create')->with(['concursos' => $concursos]);
     }
 
-    public function showUser()
+    public function create()
     {
-        $usuarios = User::all()->except(Auth::id());
-
-        return view('CRUD-usuario.show')->with(['usuarios' => $usuarios]);
+        $concursos = Concurso::where('data_resultado_selecao', '>', now())->get();
+        return view('usuario.create',  compact('concursos'));
     }
 
-    public function editUser(Request $request)
+    public function store(Request $request)
     {
-        $usuario = User::find($request->usuario);
+        Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
 
-        return view('CRUD-usuario.edit')->with(['usuario' => $usuario]);
-    }
-
-    public function saveUser(Request $request)
-    {
-        $validator = Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
-        
         $data = [
             'nome' => $request['nome'],
             'sobrenome' => $request['sobrenome'],
@@ -61,14 +53,22 @@ class AdminController extends Controller
             $usuario->concursosChefeBanca()->attach($request->concurso);
         }
 
+        $usuario->password = $request['password'];
+
         Notification::send($usuario, new UsuarioCadastrado($usuario));
 
-        return redirect()->back()->with('success', 'Cadastro realizado com sucesso.');
+        return redirect(route('user.index'))->with(['success' => 'Cadastro realizado com sucesso!']);
     }
 
-    public function saveEditUser(Request $request)
+    public function edit($id)
     {
-        $usuario = User::find($request->usuario);
+        $user = User::find($id);
+        return view('usuario.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuario = User::find($id);
         $rules = User::$rules;
         $messages = User::$messages;
 
@@ -97,14 +97,14 @@ class AdminController extends Controller
 
         $usuario->fill($data)->update();
 
-        return redirect()->back()->with('success', 'Usuário editado com sucesso');
+        return redirect(route('usuario.index'))->with(['success' => 'Usuário editado com sucesso!']);
     }
 
-    public function deleteUser($id)
+    public function destroy($id)
     {
         $usuario = User::find($id);
         $usuario->delete();
 
-        return redirect()->route('show.users')->with('success', 'Usuário deletado com sucesso!');
+        return redirect(route('usuario.index'))->with(['success' => 'Usuário deletado com sucesso!']);
     }
 }

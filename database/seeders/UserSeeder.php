@@ -16,5 +16,6 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create(['email' => 'admin@admin.com']);
         \App\Models\User::factory(1)->create(['email' => 'chefe@chefe.com', 'role' => User::ROLE_ENUM["chefeSetorConcursos"]]);
+        \App\Models\User::factory(1)->create(['email' => 'presidente@presidente.com', 'role' => User::ROLE_ENUM["presidenteBancaExaminadora"]]);
     }
 }

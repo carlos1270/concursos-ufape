@@ -14,15 +14,8 @@
                                 <h6 class="style_card_container_header_subtitulo">Informações pessoais</h6>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('save.user') }}">
+                        <form method="POST" action="{{ route('user.store') }}">
                             @csrf
-                             @if(session('success'))
-                                <div class="col-md-12">
-                                    <div class="alert alert-success" role="alert">
-                                        <p>{{session('success')}}</p>
-                                    </div>
-                                </div>
-                            @endif
                             @if(session('error'))
                                 <div class="col-md-12">
                                     <div class="alert alert-danger" role="alert">
