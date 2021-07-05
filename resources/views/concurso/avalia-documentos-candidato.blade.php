@@ -17,7 +17,7 @@
                                         Formação Acadêmica(Documento ainda não enviado)
                                     </a>
                                 @else
-                                    <a class="btn btn-light" href="{{asset('storage/'. $arquivos->formacao_academica)}}" target="_new">
+                                    <a class="btn btn-light" href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_new">
                                         <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
                                         Formação Acadêmica
                                     </a>
@@ -30,7 +30,7 @@
                                         Experiência Didática(Documento ainda não enviado)
                                     </a>
                                 @else
-                                    <a class="btn btn-light" href="{{asset('storage/'. $arquivos->experiencia_didatica)}}" target="_new">
+                                    <a class="btn btn-light" href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_new">
                                         <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
                                         Experiência Didática
                                     </a>
@@ -45,7 +45,7 @@
                                         Produção Ciêntifica(Documento ainda não enviado)
                                     </a>
                                 @else
-                                    <a class="btn btn-light" href="{{asset('storage/'. $arquivos->producao_cientifica)}}" target="_new">
+                                    <a class="btn btn-light" href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_new">
                                         <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
                                         Produção Ciêntifica
                                     </a>
@@ -58,7 +58,7 @@
                                         Experiência Profissional(Documento ainda não enviado)
                                     </a>
                                 @else
-                                    <a class="btn btn-light" href="{{asset('storage/'. $arquivos->experiencia_profissional)}}" target="_new">
+                                    <a class="btn btn-light" href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_new">
                                         <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
                                         Experiência Profissional
                                     </a>

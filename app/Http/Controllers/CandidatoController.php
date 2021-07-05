@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Validator;
 
 class CandidatoController extends Controller
 {
-    public function showEnvioDocumentos(Request $request)
+    public function showEnvioDocumentos($inscricao_id)
     {
-        return view('candidato.envio-documentos')->with('inscricao', $request->inscricao_id);
+        $arquivos = Arquivo::find($inscricao_id);
+        return view('candidato.envio-documentos')->with(['inscricao' => $inscricao_id,
+                                                         'arquivos' => $arquivos]);
     }
 
     public function index()
@@ -73,13 +75,15 @@ class CandidatoController extends Controller
     {
         Validator::make($request->all(), Arquivo::$rules, Arquivo::$messages)->validate();
 
-        $arquivos = Arquivo::find($request->inscricao);
+        $arquivos = Arquivo::where('inscricoes_id', $request->inscricao)->first();
+        $inscricao = Inscricao::find($request->inscricao);
+        $concurso = $inscricao->concurso;
 
         if ($arquivos && $arquivos->formacao_academica) {
             Storage::delete('public/' . $arquivos->formacao_academica);
         }
 
-        $path_formacao_academica = 'concursos/inscricao/' . Auth::user()->nome . '/' . $request->inscricao . '/';
+        $path_formacao_academica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
         $nome_formacao_academica = 'formacao_academica.pdf';
         Storage::putFileAs('public/' . $path_formacao_academica, $request->formacao_academica, $nome_formacao_academica);
 
@@ -87,7 +91,7 @@ class CandidatoController extends Controller
             Storage::delete('public/' . $arquivos->experiencia_didatica);
         }
 
-        $path_experiencia_didatica = 'concursos/inscricao/' . Auth::user()->nome . '/' . $request->inscricao . '/';
+        $path_experiencia_didatica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
         $nome_experiencia_didatica = 'experiencia_didatica.pdf';
         Storage::putFileAs('public/' . $path_experiencia_didatica, $request->experiencia_didatica, $nome_experiencia_didatica);
 
@@ -95,7 +99,7 @@ class CandidatoController extends Controller
             Storage::delete('public/' . $arquivos->producao_cientifica);
         }
 
-        $path_producao_cientifica = 'concursos/inscricao/' . Auth::user()->nome . '/' . $request->inscricao . '/';
+        $path_producao_cientifica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
         $nome_producao_cientifica = 'producao_cientifica.pdf';
         Storage::putFileAs('public/' . $path_producao_cientifica, $request->producao_cientifica, $nome_producao_cientifica);
 
@@ -103,7 +107,7 @@ class CandidatoController extends Controller
             Storage::delete('public/' . $arquivos->experiencia_profissional);
         }
 
-        $path_experiencia_profissional = 'concursos/inscricao/' . Auth::user()->nome . '/' . $request->inscricao . '/';
+        $path_experiencia_profissional = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
         $nome_experiencia_profissional = 'experiencia_profissional.pdf';
         Storage::putFileAs('public/' . $path_experiencia_profissional, $request->experiencia_profissional, $nome_experiencia_profissional);
 
@@ -115,9 +119,16 @@ class CandidatoController extends Controller
                 'experiencia_profissional' => $path_experiencia_profissional . $nome_experiencia_profissional,
                 'inscricoes_id'            => $request->inscricao
             ]);
+        } else if ($arquivos != null) {
+            $arquivos->formacao_academica = $path_formacao_academica . $nome_formacao_academica;
+            $arquivos->experiencia_didatica = $path_experiencia_didatica . $nome_experiencia_didatica;
+            $arquivos->producao_cientifica = $path_producao_cientifica . $nome_producao_cientifica;
+            $arquivos->experiencia_profissional = $path_experiencia_profissional . $nome_experiencia_profissional;
+            $arquivos->inscricoes_id = $request->inscricao;
+            $arquivos->update();
         }
 
         return redirect()->route('candidato.index')->with('success', 'Seus documentos foram enviados 
-            e serão examinados pela banca pela banca avaliadora.');
+            e serão examinados pela banca avaliadora.');
     }
 }
