@@ -47,21 +47,53 @@
                                                 {{date('d/m/Y', strtotime($inscricao->created_at))}}
                                             </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
-                                                <div class="btn-group">
-                                                    <div>
-                                                        <button class="btn btn-primary" onclick ="location.href='{{ route('inscricao.candidato', ['inscricao' => $inscricao->id]) }}'">
-                                                            Avaliar 1º Etapa
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                @if ($inscricao->status == "aprovado")
+                                                @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
                                                     <div class="btn-group">
-                                                        <div style="margin-left: 5px">
-                                                            <button class="btn btn-primary" onclick ="location.href=''">
-                                                                Avaliar 2º Etapa
-                                                            </button>
+                                                        <div>
+                                                            @if ($inscricao->concurso->data_inicio_inscricao <= now() && now() <= $inscricao->concurso->data_fim_inscricao)
+                                                                <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
+                                                                    @if (Auth::user()->role == "admin")
+                                                                        Avaliar 1º Etapa
+                                                                    @else
+                                                                        Avaliar
+                                                                    @endif
+                                                                </button>
+                                                            @else
+                                                                <button class="btn btn-primary" disabled>
+                                                                    @if (Auth::user()->role == "admin")
+                                                                        Avaliar 1º Etapa
+                                                                    @else
+                                                                        Avaliar
+                                                                    @endif
+                                                                </button>
+                                                            @endif
                                                         </div>
                                                     </div>
+                                                @endif
+                                                @if (Auth::user()->role == "admin" || Auth::user()->role == "presidenteBancaExaminadora")
+                                                    @if ($inscricao->status == "aprovado")
+                                                        <div class="btn-group">
+                                                            <div style="margin-left: 5px">
+                                                                @if ($inscricao->concurso->data_inicio_envio_doc <= now() && now() <= $inscricao->concurso->data_fim_envio_doc)
+                                                                    <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
+                                                                        @if (Auth::user()->role == "admin")
+                                                                            Avaliar 2º Etapa
+                                                                        @else
+                                                                            Avaliar
+                                                                        @endif
+                                                                    </button>
+                                                                @else
+                                                                    <button class="btn btn-primary" disabled>
+                                                                        @if (Auth::user()->role == "admin")
+                                                                            Avaliar 2º Etapa
+                                                                        @else
+                                                                            Avaliar
+                                                                        @endif
+                                                                    </button>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    @endif  
                                                 @endif
                                             </td>
                                         </tr>

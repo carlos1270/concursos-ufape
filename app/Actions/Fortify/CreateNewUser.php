@@ -2,7 +2,6 @@
 
 namespace App\Actions\Fortify;
 
-use App\Http\Controllers\Controller;
 use App\Models\Candidato;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -29,11 +28,6 @@ class CreateNewUser implements CreatesNewUsers
 
         $input['celular'] = preg_replace('/[^0-9]/', '', $input['celular']);
         $input['telefone'] = preg_replace('/[^0-9]/', '', $input['telefone']);
-
-        $candidatosRules = array_slice(Candidato::$rules, 0, 2);
-        $candidatosMessages = array_slice(Candidato::$messages, 0, 9);
-
-        // Validator::make($input, $candidatosRules, $candidatosMessages)->validate();
 
         $input['password'] = Hash::make($input['password']);
 

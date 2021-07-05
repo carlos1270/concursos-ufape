@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'CheckUserAdmin' => \App\Http\Middleware\CheckUserAdmin::class,
         'CheckUserChefeConcurso' => \App\Http\Middleware\CheckUserChefeConcurso::class,
         'CheckUserCandidato' => \App\Http\Middleware\CheckUserCandidato::class,
-        'CheckUserBancaExaminadora' => \App\Http\Middleware\CheckUserBancaExaminadora::class,
+        'CheckUserPresidenteBanca' => \App\Http\Middleware\CheckUserPresidenteBanca::class,
+        'CheckUserIsNotCandadidato' => \App\Http\Middleware\CheckUserIsNotCandadidato::class,
     ];
 }

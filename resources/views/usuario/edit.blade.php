@@ -14,7 +14,7 @@
                                 <h6 class="style_card_container_header_subtitulo">Informações pessoais</h6>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('save.edit.user') }}">
+                        <form method="POST" action="{{ route('user.update', $user->id) }}">
                             @csrf
                             @if(session('success'))
                                 <div class="col-md-12">
@@ -34,7 +34,7 @@
                                 <div class="col-md-6 form-group">
                                     <label for="nome" class="style_campo_titulo">Nome <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="text" class="form-control style_campo" id="nome" name="nome"
-                                        placeholder="Digite seu nome" value="{{ $usuario->nome }}" required autofocus autocomplete="nome"/>
+                                        placeholder="Digite seu nome" value="{{ $user->nome }}" required autofocus autocomplete="nome"/>
                                     @error('nome')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
@@ -42,7 +42,7 @@
                                 <div class="col-md-6 form-group">
                                     <label for="sobrenome" class="style_campo_titulo">Sobrenome <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="text" class="form-control style_campo" id="sobrenome" name="sobrenome"
-                                        value="{{ $usuario->sobrenome }}" placeholder="Digite seu sobrenome" required />
+                                        value="{{ $user->sobrenome }}" placeholder="Digite seu sobrenome" required />
                                     @error('sobrenome')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
@@ -57,7 +57,7 @@
                                 <div class="col-md-12 form-group">
                                     <label for="email" class="style_campo_titulo">E-mail <span style="color: red; font-weight: bold;">*</span></label>
                                     <input type="email" class="form-control style_campo" id="email" name="email"
-                                        placeholder="Digite seu e-mail" value="{{ $usuario->email }}" required />
+                                        placeholder="Digite seu e-mail" value="{{ $user->email }}" required />
                                     @error('email')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
@@ -78,8 +78,6 @@
                                         placeholder="Confirme sua senha" autocomplete="new-password" />
                                 </div>
                             </div>
-                            
-                            <input type="hidden" name="usuario" value="{{ $usuario->id }}"/>
 
                             <div class="col-md-12" style="margin-bottom: 5px;">
                                 <hr>

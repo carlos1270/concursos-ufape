@@ -19,7 +19,7 @@
                             </div>
                         @endif
                         <div class="form-row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <form method="POST" action="{{ route('verification.send') }}">
                                     @csrf
                                     <div class="col-md-12 form-group">
@@ -27,7 +27,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 

@@ -6,9 +6,16 @@
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Usuários</h6>
-                    <a class="btn btn-primary" href="{{ route('create.user') }}" style="margin-top:10px;">Criar usuário</a>
+                    <a class="btn btn-primary" href="{{ route('user.create') }}" style="margin-top:10px;">Criar usuário</a>
                 </div>
                 <div class="card-body">
+                    @if(session('success'))
+                        <div class="col-md-12">
+                            <div class="alert alert-success" role="alert">
+                                <p>{{session('success')}}</p>
+                            </div>
+                        </div>
+                    @endif
                     <table class="table table-bordered table-hover tabela_container table-responsove-md">
                         <thead>
                             <tr>
@@ -33,11 +40,11 @@
                                     <td id="tabela_container_linha" style="text-align: center;">
                                         <div class="btn-group">
                                             <div>
-                                                <button class="btn btn-info" onclick ="location.href='{{ route('edit.user', ['usuario' => $user->id]) }}'">
+                                                <button class="btn btn-info" onclick ="location.href='{{ route('user.edit', $user->id) }}'">
                                                     <img src="{{ asset('img/icon_editar.svg') }}" alt="Orientação" width="22px" >
                                                 </button>
                                                 <button class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja deletar o usuário?')) 
-                                                    location.href='{{route('delete.user', $user->id)}}'">
+                                                    location.href='{{route('user.destroy', $user->id)}}'">
                                                     <img src="{{ asset('img/icon_lixeira.svg') }}" alt="Orientação" width="22px">
                                                 </button>
                                             </div>

@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreConcursoRequest;
-use App\Models\Candidato;
+use App\Models\Arquivo;
+use App\Models\Avaliacao;
 use App\Models\Concurso;
-use App\Models\Endereco;
 use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ConcursoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $concursos = collect();
@@ -29,22 +25,11 @@ class ConcursoController extends Controller
         return view('concurso.index', compact('concursos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('concurso.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreConcursoRequest $request)
     {
         $request->validated();
@@ -57,12 +42,6 @@ class ConcursoController extends Controller
         return redirect(route('concurso.index'))->with(['mensage' => 'Concurso criado com sucesso!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $concurso = Concurso::find($id);
@@ -74,12 +53,6 @@ class ConcursoController extends Controller
         return view('concurso.show', compact('concurso', 'inscricao'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $concurso = Concurso::find($id);
@@ -87,13 +60,6 @@ class ConcursoController extends Controller
         return view('concurso.edit', compact('concurso'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(StoreConcursoRequest $request, $id)
     {
         $request->validated();
@@ -143,12 +109,6 @@ class ConcursoController extends Controller
         return redirect(route('concurso.index'))->with(['mensage' => 'Concurso salvo com sucesso!']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $concurso = Concurso::find($id);
@@ -219,24 +179,21 @@ class ConcursoController extends Controller
 
     public function showCandidatos(Request $request)
     {
-        $inscricoes = Inscricao::where('concursos_id', $request->concurso)->get();
-        return view('concurso.show-candidatos')->with(['inscricoes' => $inscricoes]);
+        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->get();
+        return view('concurso.show-candidatos', compact('inscricoes'));
     }
 
     public function inscricaoCandidato(Request $request)
     {
-        $inscricao = Inscricao::find($request->inscricao);
+        $inscricao = Inscricao::find($request->inscricao_id);
         $candidato = $inscricao->user->candidato;
         $endereco = $inscricao->user->endereco;
-        return view('concurso.inscricao-candidato')->with([
-            'inscricao' => $inscricao, 'candidato' => $candidato,
-            'endereco' => $endereco
-        ]);
+        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco'));
     }
 
     public function aprovarReprovarCandidato(Request $request)
     {
-        $inscricao = Inscricao::find($request->inscricao);
+        $inscricao = Inscricao::find($request->inscricao_id);
         $mensagem = "";
 
         if ($request->aprovar == "true") {
@@ -249,6 +206,25 @@ class ConcursoController extends Controller
 
         $inscricao->save();
 
-        return redirect()->route('show.candidatos', ['concurso' => $inscricao->id])->with('success', $mensagem);
+        return redirect()->route('show.candidatos.concurso', $inscricao->id)->with('success', $mensagem);
+    }
+
+    public function avaliarDocumentosCandidato(Request $request)
+    {
+        $arquivos = Arquivo::where('inscricoes_id', $request->inscricao_id)->first();
+        $avaliacao = Avaliacao::where('inscricoes_id',  $request->inscricao_id)->first();
+        return view('concurso.avalia-documentos-candidato')->with(['arquivos' => $arquivos, 'avaliacao' => $avaliacao]);
+    }
+
+    public function savePontuacaoDocumentosCandidato(Request $request)
+    {
+        Validator::make($request->all(), Avaliacao::$rules, Avaliacao::$messages)->validate();
+
+        Avaliacao::create([
+            'nota' => $request->nota,
+            'inscricoes_id' => $request->inscricao_id
+        ]);
+
+        return redirect()->route('concurso.index')->with('mensage', 'Pontuação salva com sucesso!');
     }
 }

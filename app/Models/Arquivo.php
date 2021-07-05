@@ -10,19 +10,19 @@ class Arquivo extends Model
     use HasFactory;
 
     public static $rules = [
-        'formacao_academica'       => 'file|mimes:pdf|max:2048',
-        'expericencia_didatica'    => 'file|mimes:pdf|max:2048',
-        'producao_cientifica'      => 'file|mimes:pdf|max:2048',
-        'experiencia_profissional' => 'file|mimes:pdf|max:2048',
+        'formacao_academica'       => 'required|file|mimes:pdf|max:2048',
+        'experiencia_didatica'     => 'required|file|mimes:pdf|max:2048',
+        'producao_cientifica'      => 'required|file|mimes:pdf|max:2048',
+        'experiencia_profissional' => 'required|file|mimes:pdf|max:2048',
     ];
 
     public static $messages = [
         'formacao_academica.required'       => 'O arquivo de formação acadêmica é obrigatório.',
         'formacao_academica.max'            => 'O tamanho máximo do arquivo de formação acadêmica são 2MB.',
         'formacao_academica.mimes'          => 'O arquivo de formação acadêmica só pode ser um PDF.',
-        'expericencia_didatica.required'    => 'O arquivo de experiência didática é obrigatório.',
-        'expericencia_didatica.max'         => 'O tamanho máximo do arquivo de experiência didática são 2MB.',
-        'expericencia_didatica.mimes'       => 'O arquivo de experiência didática só pode ser um PDF.',
+        'experiencia_didatica.required'     => 'O arquivo de experiência didática é obrigatório.',
+        'experiencia_didatica.max'          => 'O tamanho máximo do arquivo de experiência didática são 2MB.',
+        'experiencia_didatica.mimes'        => 'O arquivo de experiência didática só pode ser um PDF.',
         'producao_cientifica.required'      => 'O arquivo de produção didática é obrigatório.',
         'producao_cientifica.max'           => 'O tamanho máximo do arquivo de produção didática são 2MB.',
         'producao_cientifica.mimes'         => 'O arquivo de produção didática só pode ser um PDF.',
@@ -33,7 +33,7 @@ class Arquivo extends Model
 
     protected $fillable = [
         'formacao_academica',
-        'expericencia_didatica',
+        'experiencia_didatica',
         'producao_cientifica',
         'experiencia_profissional',
         'inscricoes_id'
