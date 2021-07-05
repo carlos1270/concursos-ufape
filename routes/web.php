@@ -6,6 +6,7 @@ use App\Http\Controllers\ConcursoController;
 use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ArquivoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ use App\Http\Controllers\WelcomeController;
 */
 
 Route::get('/', [WelcomeController::class, 'index'])->name('index');
+
+Route::get('/dashboard', function() {
+    return redirect(route('index'));
+})->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/user/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
@@ -71,3 +76,4 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->gr
 });
 
 Route::resource('concurso', ConcursoController::class);
+Route::get('/visualizar-arquivo/{arquivo}/{cod}', [ArquivoController::class, 'show'])->name('visualizar.arquivo')->middleware('auth');

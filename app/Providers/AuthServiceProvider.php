@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Concurso::class =>  ConcursoPolicy::class,
         Inscricao::class => InscricaoPolicy::class,
+        Arquivo::class => ArquivoPolicy::class,
     ];
 
     /**

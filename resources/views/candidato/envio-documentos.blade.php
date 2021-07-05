@@ -13,35 +13,39 @@
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="formacao_academica" class="style_campo_titulo">Formação Acadêmica</label>
+                                    <label for="formacao_academica" class="style_campo_titulo">Formação Acadêmica</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="formacao_academica" name="formacao_academica" 
                                         value="{{ old('formacao_academica') }}" required/>
                                     @error('formacao_academica')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
+                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="experiencia_didatica" class="style_campo_titulo">Experiência Didática</label>
+                                    <label for="experiencia_didatica" class="style_campo_titulo">Experiência Didática</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="experiencia_didatica" name="experiencia_didatica" required/>
                                     @error('experiencia_didatica')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
+                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
-                                    <label for="producao_cientifica" class="style_campo_titulo">Produção Científica</label>
+                                    <label for="producao_cientifica" class="style_campo_titulo">Produção Científica</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="producao_cientifica" name="producao_cientifica" required/>
                                     @error('producao_cientifica')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
+                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="experiencia_profissional" class="style_campo_titulo">Experiência Profissional</label>
+                                    <label for="experiencia_profissional" class="style_campo_titulo">Experiência Profissional</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="experiencia_profissional" name="experiencia_profissional" required/>
                                     @error('experiencia_profissional')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
+                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
 
