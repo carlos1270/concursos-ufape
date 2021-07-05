@@ -45,16 +45,16 @@ class Concurso extends Model
 
     public function setAtributes(StoreConcursoRequest $request)
     {
-        $this->titulo                           = $request->titulo;
-        $this->qtd_vagas                        = $request->quantidade_vagas;
-        $this->descricao                        = $request->descricao;
-        $this->data_inicio_inscricao            = $request->data_inicio_inscricao;
-        $this->data_fim_inscricao               = $request->data_fim_inscricao;
-        $this->data_fim_isencao_inscricao       = $request->data_fim_isencao_inscricao;
-        $this->data_fim_pagamento_inscricao     = $request->data_fim_pagamento_inscricao;
-        $this->data_inicio_envio_doc            = $request->data_inicio_envio_doc;
-        $this->data_fim_envio_doc               = $request->data_fim_envio_doc;
-        $this->data_resultado_selecao           = $request->data_resultado_selecao;
+        $this->titulo                           = $request->input('título');
+        $this->qtd_vagas                        = $request->quantidade_de_vagas;
+        $this->descricao                        = $request->input('descrição');
+        $this->data_inicio_inscricao            = $request->input('data_de_início_da_inscrição');
+        $this->data_fim_inscricao               = $request->input('data_de_término_da_inscrição');
+        $this->data_fim_isencao_inscricao       = $request->input('data_limite_para_isenção');
+        $this->data_fim_pagamento_inscricao     = $request->data_limite_para_pagamento;
+        $this->data_inicio_envio_doc            = $request->input('data_de_início_para_envio_dos_documentos');
+        $this->data_fim_envio_doc               = $request->data_final_para_envio_dos_documentos;
+        $this->data_resultado_selecao           = $request->data_do_resultado_do_concurso;
         $this->users_id                         = auth()->user()->id;
     }
 
@@ -66,16 +66,16 @@ class Concurso extends Model
             Storage::putFileAs('public/' . $path, $request->edital_geral, $nome);
             $this->edital_geral = $path . $nome;
         }
-        if ($request->edital_especifico != null) {
+        if ($request->file('edital_específico') != null) {
             $path = 'concursos/' . $this->id . '/';
             $nome = 'edital_especifico.pdf';
-            Storage::putFileAs('public/' . $path, $request->edital_especifico, $nome);
+            Storage::putFileAs('public/' . $path, $request->file('edital_específico'), $nome);
             $this->edital_especifico = $path . $nome;
         }
-        if ($request->declaracao_de_veracidade != null) {
+        if ($request->file('declaração_de_veracidade') != null) {
             $path = 'concursos/' . $this->id . '/';
-            $nome = 'declaracao_veracidade.pdf';
-            Storage::putFileAs('public/' . $path, $request->declaracao_de_veracidade, $nome);
+            $nome = 'declaracao_de_veracidade.pdf';
+            Storage::putFileAs('public/' . $path, $request->file('declaração_de_veracidade'), $nome);
             $this->declaracao_veracidade = $path . $nome;
         }
     }
@@ -95,5 +95,9 @@ class Concurso extends Model
         }
 
         $this->delete();
+    }
+
+    public function chefeDaBanca() {
+        return $this->belongsToMany(User::class, 'chefe_da_banca', 'concursos_id', 'users_id');
     }
 }

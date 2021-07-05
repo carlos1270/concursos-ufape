@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnderecosTable extends Migration
+class ChefeDaBanca extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateEnderecosTable extends Migration
      */
     public function up()
     {
-        Schema::create('enderecos', function (Blueprint $table) {
+        Schema::create('chefe_da_banca', function (Blueprint $table) {
             $table->id();
-            $table->string('cep');
-            $table->string('logradouro');
-            $table->string('numero')->nullable();
-            $table->string('bairro');
-            $table->string('cidade')->nullable();
-            $table->string('uf');
-            $table->string('complemento')->nullable();
+
+            $table->unsignedBigInteger('concursos_id');
+            $table->foreign('concursos_id')->references('id')->on('concursos');
 
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users');
@@ -37,6 +33,6 @@ class CreateEnderecosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 }

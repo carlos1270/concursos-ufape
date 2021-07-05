@@ -24,21 +24,21 @@ class StoreConcursoRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo'                        => 'required|max:100',
-            'quantidade_vagas'              => 'required',
-            'descricao'                     => 'required|max:1000',
-            'data_inicio_inscricao'         => 'required',
-            'data_fim_inscricao'            => 'required|after:data_inicio_inscricao',
-            'data_fim_isencao_inscricao'    => 'required|after:data_inicio_inscricao',
-            'data_fim_pagamento_inscricao'  => 'required|after:data_inicio_inscricao',
-            'data_inicio_envio_doc'         => 'required|after:data_fim_inscricao',
-            'data_fim_envio_doc'            => 'required|after:data_inicio_envio_doc',
-            'data_resultado_selecao'        => 'required|after:data_fim_envio_doc',
-            'edital_geral'                  => 'nullable|file|mimes:pdf|max:2048',
-            'edital_especifico'             => 'nullable|file|mimes:pdf|max:2048',
-            'declaracao_de_veracidade'      => 'nullable|file|mimes:pdf|max:2048',
-            'opcoes_vaga'                   => 'required',
-            'opcoes_vaga.*'                 => 'required',
+            'título'                                        => 'required|max:100',
+            'quantidade_de_vagas'                           => 'required',
+            'descrição'                                     => 'required|max:1000',
+            'data_de_início_da_inscrição'                   => 'required',
+            'data_de_término_da_inscrição'                  => 'required|after:data_de_início_da_inscrição',
+            'data_limite_para_isenção'                      => 'required|after:data_de_início_da_inscrição',
+            'data_limite_para_pagamento'                    => 'required|after:data_de_início_da_inscrição',
+            'data_de_início_para_envio_dos_documentos'      => 'required|after:data_de_término_da_inscrição',
+            'data_final_para_envio_dos_documentos'          => 'required|after:data_de_início_para_envio_dos_documentos',
+            'data_do_resultado_do_concurso'                 => 'required|after:data_fim_envio_doc',
+            'edital_geral'                                  => 'nullable|file|mimes:pdf|max:2048',
+            'edital_específico'                             => 'nullable|file|mimes:pdf|max:2048',
+            'declaração_de_veracidade'                      => 'nullable|file|mimes:pdf|max:2048',
+            'opcoes_vaga'                                   => 'required',
+            'opcoes_vaga.*'                                 => 'required',
         ];
     }
 }

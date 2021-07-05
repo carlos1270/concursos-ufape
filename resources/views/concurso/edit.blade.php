@@ -15,15 +15,20 @@
                             <div class="col-md-12">
                                 <h6 style="color: #707070; font-weight: normal; font-size: 22px;">Informações</h6>
                             </div>
+                            @error('error')
+                                <div class="alert alert-danger">
+                                    {{$menssage}}
+                                </div>
+                            @enderror
                             <form method="POST" action="{{route('concurso.update', ['concurso' => $concurso->id])}}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
                                 <div class="form-row">
                                     <div class="col-sm-8 form-group">
                                         <label for="titulo" class="style_campo_titulo">Título</label>
-                                        <input type="text" class="form-control style_campo @error('titulo') is-invalid @enderror" id="titulo" name="titulo" placeholder="Concurso professores substitutos 2021" value="{{old('titulo') != null ? old('titulo') : $concurso->titulo}}">
+                                        <input type="text" class="form-control style_campo @error('título') is-invalid @enderror" id="titulo" name="título" placeholder="Concurso de professores substitutos 2021.1" value="{{old('título') != null ? old('título') : $concurso->titulo}}">
 
-                                        @error('titulo')
+                                        @error('título')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -31,9 +36,9 @@
                                     </div>
                                     <div class="col-sm-4 form-group">
                                         <label for="quantidade_vagas" class="style_campo_titulo">Quantidade vagas</label>
-                                        <input type="number" class="form-control style_campo @error('quantidade_vagas') is-invalid @enderror" id="quantidade_vagas" name="quantidade_vagas" placeholder="5" value="{{old('quantidade_vagas') != null ? old('quantidade_vagas') : $concurso->qtd_vagas}}">
+                                        <input type="number" class="form-control style_campo @error('quantidade_de_vagas') is-invalid @enderror" id="quantidade_vagas" name="quantidade_de_vagas" placeholder="5" value="{{old('quantidade_de_vagas') != null ? old('quantidade_de_vagas') : $concurso->qtd_vagas}}">
 
-                                        @error('quantidade_vagas')
+                                        @error('quantidade_de_vagas')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -52,64 +57,64 @@
                                                             <div class="col-sm-5 form-group" style="border: 1px solid #ced4da; border-radius: 10px; padding: 20px; margin-left: 35px; margin-right: 25px;">
                                                                 <label class="style_campo_titulo">Nome da opção</label>
                                                                 <input type="hidden" name="opcoes_id[]" value="{{old('opcoes_id.'.$i)}}">
-                                                                <input class="form-control style_campo @error('opcoes_vaga.'.$i) is-invalid @enderror" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]" value="{{$opcao}}">               
-                                                                
+                                                                <input class="form-control style_campo @error('opcoes_vaga.'.$i) is-invalid @enderror" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]" value="{{$opcao}}">
+
                                                                 @error('opcoes_vaga.'.$i)
                                                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                                                         {{ $message }}
                                                                     </div>
                                                                 @enderror
-                                                                
+
                                                                 <button type="button" onclick="this.parentElement.remove()" class="btn btn-danger" style="margin-top: 10px;">Excluir</button>
-                                                            </div>    
+                                                            </div>
                                                         @endforeach
                                                     @else
                                                         @foreach ($concurso->vagas as $i => $opcao)
                                                             <div class="col-sm-5 form-group" style="border: 1px solid #ced4da; border-radius: 10px; padding: 20px; margin-left: 35px; margin-right: 25px;">
                                                                 <label class="style_campo_titulo">Nome da opção</label>
                                                                 <input type="hidden" name="opcoes_id[]" value="{{$opcao->id}}">
-                                                                <input class="form-control style_campo @error('opcoes_vaga.'.$i) is-invalid @enderror" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]" value="{{$opcao->nome}}">               
-                                                                
+                                                                <input class="form-control style_campo @error('opcoes_vaga.'.$i) is-invalid @enderror" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]" value="{{$opcao->nome}}">
+
                                                                 @error('opcoes_vaga.'.$i)
                                                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                                                         {{ $message }}
                                                                     </div>
                                                                 @enderror
-                                                                
+
                                                                 <button type="button" onclick="this.parentElement.remove()" class="btn btn-danger" style="margin-top: 10px;">Excluir</button>
-                                                            </div>    
+                                                            </div>
                                                         @endforeach
                                                     @endif
                                                 </div>
                                             </div>
-                                        
+
                                         </div>
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="descricao" class="style_campo_titulo">Descrição</label>
-                                        <textarea type="text" class="form-control style_campo @error('descricao') is-invalid @enderror" id="descricao" name="descricao" placeholder="Esse concurso se refere há..." rows="5" cols="30">{{old('descricao') != null ? old('descricao') : $concurso->descricao}}</textarea>   
-                                    
-                                        @error('descricao')
-                                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        <label for="data_inicio_inscricao" class="style_campo_titulo">Data de inicio das inscrições</label>
-                                        <input type="date" class="form-control style_campo @error('data_inicio_inscricao') is-invalid @enderror" id="data_inicio_inscricao" name="data_inicio_inscricao" value="{{old('data_inicio_inscricao') != null ? old('data_inicio_inscricao') : $concurso->data_inicio_inscricao}}">
-                                    
-                                        @error('data_inicio_inscricao')
-                                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        <label for="data_fim_inscricao" class="style_campo_titulo">Data de termino das inscrições</label>
-                                        <input type="date" class="form-control style_campo @error('data_fim_inscricao') is-invalid @enderror" id="data_fim_inscricao" name="data_fim_inscricao" value="{{old('data_fim_inscricao') != null ? old('data_fim_inscricao') : $concurso->data_fim_inscricao}}">
+                                        <textarea type="text" class="form-control style_campo @error('descrição') is-invalid @enderror" id="descricao" name="descrição" placeholder="Esse concurso se refere há..." rows="5" cols="30">{{old('descrição') != null ? old('descrição') : $concurso->descricao}}</textarea>
 
-                                        @error('data_fim_inscricao')
+                                        @error('descrição')
+                                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="data_inicio_inscricao" class="style_campo_titulo">Data de início das inscrições</label>
+                                        <input type="date" class="form-control style_campo @error('data_de_início_da_inscrição') is-invalid @enderror" id="data_inicio_inscricao" name="data_de_início_da_inscrição" value="{{old('data_de_início_da_inscrição') != null ? old('data_de_início_da_inscrição') : $concurso->data_inicio_inscricao}}">
+
+                                        @error('data_de_início_da_inscrição')
+                                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="data_fim_inscricao" class="style_campo_titulo">Data de término das inscrições</label>
+                                        <input type="date" class="form-control style_campo @error('data_de_término_da_inscrição') is-invalid @enderror" id="data_fim_inscricao" name="data_de_término_da_inscrição" value="{{old('data_de_término_da_inscrição') != null ? old('data_de_término_da_inscrição') : $concurso->data_fim_inscricao}}">
+
+                                        @error('data_de_término_da_inscrição')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -117,9 +122,9 @@
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="data_fim_isencao_inscricao" class="style_campo_titulo">Data limite para isenção</label>
-                                        <input type="date" class="form-control style_campo @error('data_fim_isencao_inscricao') is-invalid @enderror" id="data_fim_isencao_inscricao" name="data_fim_isencao_inscricao" value="{{old('data_fim_isencao_inscricao') != null ? old('data_fim_isencao_inscricao') : $concurso->data_fim_isencao_inscricao}}">
-                                    
-                                        @error('data_fim_isencao_inscricao')
+                                        <input type="date" class="form-control style_campo @error('data_limite_para_isenção') is-invalid @enderror" id="data_fim_isencao_inscricao" name="data_limite_para_isenção" value="{{old('data_limite_para_isenção') != null ? old('data_limite_para_isenção') : $concurso->data_fim_isencao_inscricao}}">
+
+                                        @error('data_limite_para_isenção')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -127,19 +132,19 @@
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="data_fim_pagamento_inscricao" class="style_campo_titulo">Data limite para pagamento</label>
-                                        <input type="date" class="form-control style_campo @error('data_fim_pagamento_inscricao') is-invalid @enderror" id="data_fim_pagamento_inscricao" name="data_fim_pagamento_inscricao" value="{{old('data_fim_pagamento_inscricao') != null ? old('data_fim_pagamento_inscricao') : $concurso->data_fim_pagamento_inscricao}}">
-                                    
-                                        @error('data_fim_pagamento_inscricao')
+                                        <input type="date" class="form-control style_campo @error('data_limite_para_pagamento') is-invalid @enderror" id="data_fim_pagamento_inscricao" name="data_limite_para_pagamento" value="{{old('data_limite_para_pagamento') != null ? old('data_limite_para_pagamento') : $concurso->data_fim_pagamento_inscricao}}">
+
+                                        @error('data_limite_para_pagamento')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 form-group">
-                                        <label for="data_inicio_envio_doc" class="style_campo_titulo">Data inicio para envio dos documentos</label>
-                                        <input type="date" class="form-control style_campo @error('data_inicio_envio_doc') is-invalid @enderror" id="data_inicio_envio_doc" name="data_inicio_envio_doc" value="{{old('data_inicio_envio_doc') != null ? old('data_inicio_envio_doc') : $concurso->data_inicio_envio_doc}}">
-                                    
-                                        @error('data_inicio_envio_doc')
+                                        <label for="data_inicio_envio_doc" class="style_campo_titulo">Data início para envio dos documentos</label>
+                                        <input type="date" class="form-control style_campo @error('data_de_início_para_envio_dos_documentos') is-invalid @enderror" id="data_inicio_envio_doc" name="data_de_início_para_envio_dos_documentos" value="{{old('data_de_início_para_envio_dos_documentos') != null ? old('data_de_início_para_envio_dos_documentos') : $concurso->data_inicio_envio_doc}}">
+
+                                        @error('data_de_início_para_envio_dos_documentos')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -147,9 +152,9 @@
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="data_fim_envio_doc" class="style_campo_titulo">Data fim para envio dos documentos</label>
-                                        <input type="date" class="form-control style_campo @error('data_fim_envio_doc') is-invalid @enderror" id="data_fim_envio_doc" name="data_fim_envio_doc" value="{{old('data_fim_envio_doc') != null ? old('data_fim_envio_doc') : $concurso->data_fim_envio_doc}}">
+                                        <input type="date" class="form-control style_campo @error('data_final_para_envio_dos_documentos') is-invalid @enderror" id="data_fim_envio_doc" name="data_final_para_envio_dos_documentos" value="{{old('data_final_para_envio_dos_documentos') != null ? old('data_final_para_envio_dos_documentos') : $concurso->data_fim_envio_doc}}">
 
-                                        @error('data_fim_envio_doc')
+                                        @error('data_final_para_envio_dos_documentos')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -157,16 +162,16 @@
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="data_resultado_selecao" class="style_campo_titulo">Data do resultado do concurso</label>
-                                        <input type="date" class="form-control style_campo @error('data_resultado_selecao') is-invalid @enderror" id="data_resultado_selecao" name="data_resultado_selecao" value="{{old('data_resultado_selecao') != null ? old('data_resultado_selecao') : $concurso->data_resultado_selecao}}">
+                                        <input type="date" class="form-control style_campo @error('data_do_resultado_do_concurso') is-invalid @enderror" id="data_resultado_selecao" name="data_do_resultado_do_concurso" value="{{old('data_do_resultado_do_concurso') != null ? old('data_do_resultado_do_concurso') : $concurso->data_resultado_selecao}}">
 
-                                        @error('data_resultado_selecao')
+                                        @error('data_do_resultado_do_concurso')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 form-group">
-                                        
+
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="edital_geral" class="style_campo_titulo">Edital geral &nbsp;</label><a href="{{asset('storage/' . $concurso->edital_geral)}}" target="_black">Arquivo atual</a>
@@ -179,10 +184,10 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6 form-group">
-                                        <label for="edital_especifico" class="style_campo_titulo">Edital especifico &nbsp;</label><a href="{{asset('storage/' . $concurso->edital_especifico)}}" target="_black">Arquivo atual</a>
-                                        <input type="file" class="form-control style_campo @error('edital_especifico') is-invalid @enderror" name="edital_especifico" id="edital_especifico" value="{{old('edital_especifico')}}">
+                                        <label for="edital_especifico" class="style_campo_titulo">Edital específico &nbsp;</label><a href="{{asset('storage/' . $concurso->edital_especifico)}}" target="_black">Arquivo atual</a>
+                                        <input type="file" class="form-control style_campo @error('edital_específico') is-invalid @enderror" name="edital_específico" id="edital_especifico" value="{{old('edital_específico')}}">
                                         <small>Para editar o arquivo envie um novo</small>
-                                        @error('edital_especifico')
+                                        @error('edital_específico')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -191,9 +196,9 @@
 
                                     <div class="col-sm-6 form-group">
                                         <label for="declaracao_de_veracidade" class="style_campo_titulo">Declaração de veracidade &nbsp;</label><a href="{{asset('storage/' . $concurso->declaracao_veracidade)}}" target="_black">Arquivo atual</a>
-                                        <input type="file" class="form-control style_campo @error('declaracao_de_veracidade') is-invalid @enderror" name="declaracao_de_veracidade" id="declaracao_de_veracidade" value="{{old('declaracao_de_veracidade')}}">
+                                        <input type="file" class="form-control style_campo @error('declaração_de_veracidade') is-invalid @enderror" name="declaração_de_veracidade" id="declaracao_de_veracidade" value="{{old('declaração_de_veracidade')}}">
                                         <small>Para editar o arquivo envie um novo</small>
-                                        @error('declaracao_de_veracidade')
+                                        @error('declaração_de_veracidade')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -218,7 +223,7 @@
             var escolha = `<div class="col-sm-3" style="border: solid 1px black; border-radius: 5px; padding: 5px; margin: 5px;">
                             <label>Nome da opção</label>
                             <input type="hidden" name="opcoes_id[]" value="0">
-                            <input class="form-control" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]">               
+                            <input class="form-control" type="text" placeholder="Professor de geografia" name="opcoes_vaga[]">
                             <button type="button" onclick="this.parentElement.remove()" class="btn btn-danger">Excluir</button>
                            </div>`;
             $('#opcoes').append(escolha);

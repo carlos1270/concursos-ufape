@@ -20,6 +20,14 @@ class AdminController extends Controller
         return view('usuario.index', compact('usuarios'));
     }
 
+
+    public function createUser()
+    {
+        $concursos = auth()->user()->concursos()->where('data_resultado_selecao', '>', now())->get();
+
+        return view('CRUD-usuario.create')->with(['concursos' => $concursos]);
+    }
+
     public function create()
     {
         $concursos = Concurso::where('data_resultado_selecao', '>', now())->get();
@@ -28,7 +36,7 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        Validator::make($request->all(), User::$rules, User::$messages)->validate();
+        $validator = Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
 
         $data = [
             'nome' => $request['nome'],
@@ -39,10 +47,12 @@ class AdminController extends Controller
         ];
 
         $usuario = new User();
-        $usuario->fill($data);
+        $usuario->fill($data);;
         $usuario->save();
 
-        $usuario->password = $request['password'];
+        if ($request->concurso != null && $request->role == "presidenteBancaExaminadora") {
+            $usuario->concursosChefeBanca()->attach($request->concurso);
+        }
 
         Notification::send($usuario, new UsuarioCadastrado($usuario));
 

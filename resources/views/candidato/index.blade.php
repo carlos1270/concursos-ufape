@@ -31,7 +31,7 @@
                                 @foreach ($inscricoes as $inscricao)
                                     <tr>
                                         <td id="tabela_container_linha">{{ $inscricao->concurso->titulo }}</td>
-                                        <td id="tabela_container_linha">{{ $inscricao->vagas->nome }}</td>
+                                        <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
                                         <td id="tabela_container_linha">{{ $inscricao->status }}</td>
                                         <td id="tabela_container_linha" style="text-align: center;">
                                             <div class="btn-group">

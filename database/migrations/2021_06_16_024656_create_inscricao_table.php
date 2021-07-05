@@ -16,8 +16,9 @@ class CreateInscricaoTable extends Migration
         Schema::create('inscricoes', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->string('titulacao');
-            $table->string('area_conhecimento');
+            // $table->string('titulacao');
+            // $table->string('area_conhecimento');
+            $table->boolean('solicitou_isencao');
             $table->boolean('cotista');
             $table->boolean('pcd');
 

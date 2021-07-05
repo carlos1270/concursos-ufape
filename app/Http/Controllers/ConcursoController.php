@@ -18,7 +18,12 @@ class ConcursoController extends Controller
 {
     public function index()
     {
-        $concursos = Concurso::all();
+        $concursos = collect();
+        if (auth()->user()->role == "presidenteBancaExaminadora") {
+            $concursos = auth()->user()->concursosChefeBanca;
+        } else {
+            $concursos = auth()->user()->concursos;
+        }
         return view('concurso.index', compact('concursos'));
     }
 
@@ -65,7 +70,7 @@ class ConcursoController extends Controller
         $opcoesEditadas = OpcoesVagas::whereIn('id', $request->opcoes_id)->get();
         $opcoesExcluidas = $concurso->vagas->diff($opcoesEditadas);
         if ($opcoesExcluidas != null && $opcoesExcluidas->count() > 0 && $this->podeExcluir($opcoesExcluidas)) {
-            return redirect()->back()->withErrors(['error' => 'A opção ' . $this->errorVaga($opcoesExcluidas)->nome . ' não pode ser excluida pois foi escolhida em algum agendamento'])->withInput();
+            return redirect()->back()->withErrors(['error' => 'A opção ' . $this->errorVaga($opcoesExcluidas)->nome . ' não pode ser excluída pois foi escolhida em algum agendamento'])->withInput();
         }
 
         $concurso->setAtributes($request);
@@ -124,10 +129,10 @@ class ConcursoController extends Controller
     }
 
     /*
-        TODO 
+        TODO
         Checagem se não tem risco em excluir tal opção de seleção
         @param OpcoesVagas $opcao
-        @return Boolean 
+        @return Boolean
     */
 
     public function checarExclusao(OpcoesVagas $opcao)
@@ -183,8 +188,8 @@ class ConcursoController extends Controller
     public function inscricaoCandidato(Request $request)
     {
         $inscricao = Inscricao::find($request->inscricao_id);
-        $candidato = Candidato::where('users_id', $inscricao->users_id)->first();
-        $endereco = Endereco::where('users_id', $inscricao->users_id)->first();
+        $candidato = $inscricao->user->candidato;
+        $endereco = $inscricao->user->endereco;
         return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco'));
     }
 
