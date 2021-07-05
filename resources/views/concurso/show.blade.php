@@ -60,7 +60,7 @@
                             @if($concurso->data_inicio_inscricao <= now() && now() <= $concurso->data_fim_inscricao)
                                 @if (!$inscricao)
                                   <div class="col-md-12" style="margin-bottom:18px">
-                                      <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', ['concurso' => $concurso->id]) }}'"  
+                                      <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', $concurso->id) }}'"  
                                           style="width:100%; height:50px; padding-top:7px; font-size:20px">
                                           <img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição
                                       </button>
@@ -70,7 +70,7 @@
                             <div class="col-md-12">
                               <button class="btn btn-primary" href="" class="card-img-top" alt="..." 
                                 style="width: 100%; margin-right:10px; margin-top:-5px"
-                                onclick ="location.href='{{ route('show.inscricoes') }}'">
+                                onclick ="location.href=''">
                                   Minhas inscrições
                                 </button>
                             </div>
@@ -192,9 +192,11 @@
                                         <div class="form-group" style="width: 100%">
                                             <div class="d-flex justify-content-between" style="width: 100%">
                                                 <div><h5 style=" font-size:19px; margin-top:9px">Edital<br>especifico</h5></div>
-                                                <div style="float: right"><a class="btn btn-light" href="{{asset('storage/'.$concurso->edital_especifico)}}" target="_new" style="" >
-                                                    <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
-                                                    Baixar</a>
+                                                <div style="float: right">
+                                                  <a class="btn btn-light" href="{{asset('storage/'.$concurso->edital_especifico)}}" target="_new" style="" >
+                                                      <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                                      Baixar
+                                                  </a>
                                                 </div>
                                             </div>
                                         </div>

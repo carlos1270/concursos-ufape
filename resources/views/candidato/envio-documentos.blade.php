@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <form method="POST" style="" action="">
+                        <form method="POST" style="" action="{{ route('save.documentos') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -21,9 +21,9 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for="expericencia_didatica" class="style_campo_titulo">Experiência Didática</label>
-                                    <input type="file" class="form-control style_campo" id="expericencia_didatica" name="expericencia_didatica" required/>
-                                    @error('expericencia_didatica')
+                                    <label for="experiencia_didatica" class="style_campo_titulo">Experiência Didática</label>
+                                    <input type="file" class="form-control style_campo" id="experiencia_didatica" name="experiencia_didatica" required/>
+                                    @error('experiencia_didatica')
                                         <span style="color: red">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -44,8 +44,13 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-12 form-group" style="margin-bottom: 4px;">
-                                <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
+
+                            <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao }}"/>
+
+                            <div class="form-row justify-content-center">
+                                <div class="col-md-6 form-group" style="margin-bottom: 4px;">
+                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
+                                </div>
                             </div>
                         </form>
                     </div>

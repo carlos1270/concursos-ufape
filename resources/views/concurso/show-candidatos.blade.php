@@ -49,7 +49,7 @@
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <div>
-                                                        <button class="btn btn-primary" onclick ="location.href='{{ route('inscricao.candidato', ['inscricao' => $inscricao->id]) }}'">
+                                                        <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
                                                             Avaliar 1º Etapa
                                                         </button>
                                                     </div>
@@ -57,7 +57,7 @@
                                                 @if ($inscricao->status == "aprovado")
                                                     <div class="btn-group">
                                                         <div style="margin-left: 5px">
-                                                            <button class="btn btn-primary" onclick ="location.href=''">
+                                                            <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
                                                                 Avaliar 2º Etapa
                                                             </button>
                                                         </div>

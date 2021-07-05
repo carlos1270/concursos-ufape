@@ -37,14 +37,14 @@
                                             <div class="btn-group">
                                                 <div>
                                                     <button class="btn btn-primary" 
-                                                        onclick ="location.href='{{ route('minha.inscricao', ['inscricao' => $inscricao->id]) }}'">
+                                                        onclick ="location.href='{{ route('candidato.show', $inscricao->id) }}'">
                                                         <img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" >
                                                     </button>
                                                 </div>
                                                 @if (/*$inscricao->data_inicio_envio_doc <= now() && now() <= $inscricao->data_fim_envio_doc 
                                                         &&*/ $inscricao->status == "aprovado")
                                                     <button class="btn btn-light" style="margin-left: 5px" 
-                                                        onclick ="location.href='{{ route('envio.documentos') }}'">
+                                                        onclick ="location.href='{{ route('envio.documentos.inscricao', $inscricao->id) }}'">
                                                         <img src="{{asset('img/file-download-solid.svg')}}" alt="" width="26px" >
                                                     </button>
                                                 @endif
@@ -62,7 +62,6 @@
                                 <img src="img/img_default_meus_concursos.svg" alt="Imagem default" width="190px">
                                 <h6 class="style_campo_titulo" style="margin-top: 20px;">Você não se candidatou para nenhum concurso</h6>
                             </div>
-                            
                         </div>
                     </div>
                 @endif    

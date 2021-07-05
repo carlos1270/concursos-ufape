@@ -14,15 +14,8 @@
                                 <h6 class="style_card_container_header_subtitulo">Informações pessoais</h6>
                             </div>
                         </div>
-                        <form method="POST" action="{{ route('save.user') }}">
+                        <form method="POST" action="{{ route('user.store') }}">
                             @csrf
-                             @if(session('success'))
-                                <div class="col-md-12">
-                                    <div class="alert alert-success" role="alert">
-                                        <p>{{session('success')}}</p>
-                                    </div>
-                                </div>
-                            @endif
                             @if(session('error'))
                                 <div class="col-md-12">
                                     <div class="alert alert-danger" role="alert">
@@ -90,7 +83,7 @@
                                     <span style="color: red">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div id="concurso-presidente" class="form-group" style="display: none">
+                            {{-- <div id="concurso-presidente" class="form-group" style="display: none">
                                 <label for="concurso-disponiveis" class="style_campo_titulo">Concurso a ser avaliado <span style="color: red; font-weight: bold;">*</span></label>
                                 <select id="concurso-disponiveis" name="concurso-disponiveis" class="custom-select">
                                     @foreach ($concursos as $concurso)
@@ -101,7 +94,7 @@
                                 @error('concurso')
                                     <span style="color: red">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="col-md-12" style="margin-bottom: 5px;">
                                 <hr>
                             </div>
@@ -115,7 +108,7 @@
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     $('#role').change(function(){
         var role = $('#role').val();
         if(role == "presidenteBancaExaminadora"){
@@ -126,5 +119,5 @@
             document.getElementById("concurso-disponiveis").required = false;
         }
     });
-</script>
+</script> --}}
 @endsection

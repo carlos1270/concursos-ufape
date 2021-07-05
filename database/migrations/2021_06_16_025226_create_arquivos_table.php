@@ -13,10 +13,10 @@ class CreateArquivoTable extends Migration
      */
     public function up()
     {
-        Schema::create('arquivo', function (Blueprint $table) {
+        Schema::create('arquivos', function (Blueprint $table) {
             $table->id();
             $table->string('formacao_academica');
-            $table->string('expericencia_didatica');
+            $table->string('experiencia_didatica');
             $table->string('producao_cientifica');
             $table->string('experiencia_profissional');
 

@@ -25,7 +25,6 @@
                                                 value="{{ Auth::user()->nome . ' ' . Auth::user()->sobrenome }}" disabled/>
                                         </div>
                                     </div>
-
                                     <div class="form-row">
                                         <div class="col-md-6 form-group">
                                             <label for="sexo" class="style_campo_titulo">Sexo <span style="color: red; font-weight: bold;">*</span></label>

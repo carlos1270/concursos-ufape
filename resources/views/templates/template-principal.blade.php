@@ -27,15 +27,19 @@
 
                         <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
                         @auth
-                            <a style="margin-right: 15px;" href="{{ url('/dashboard') }}">Dashboard</a>
+
+                            @if(Auth::user()->role == "presidenteBancaExaminadora")
+                                <a href="{{ route('concursos') }}" :active="request()->routeIs('concursos')" 
+                                    style="margin-right: 15px;">Concursos</a>
+                            @endif
 
                             @if(Auth::user()->role == "candidato")
-                                <a href="{{ route('show.inscricoes') }}" :active="request()->routeIs('show.inscricoes')" 
+                                <a href="{{ route('candidato.index') }}" :active="request()->routeIs('candidato.index')" 
                                     style="margin-right: 15px;">Inscrições</a>
                             @endif
 
                             @if(Auth::user()->role == "admin")
-                                <a href="{{ route('show.users') }}" :active="request()->routeIs('show.users')" 
+                                <a href="{{ route('user.index') }}" :active="request()->routeIs('user.users')" 
                                     style="margin-right: 15px;">Usuários</a>
                             @endif
 

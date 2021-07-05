@@ -213,7 +213,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-reprova-candidato-{{$candidato->id}}" method="POST" action="{{ route('aprovar-reprovar-candidato', ['inscricao' => $inscricao->id]) }}">
+                <form id="form-reprova-candidato-{{$candidato->id}}" method="POST" action="{{ route('aprovar-reprovar-candidato.inscricao', $inscricao->id) }}">
                     <input type="hidden" name="aprovar" value="false">
                     @csrf
                     Tem certeza que deseja reprovar o candidato {{  $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}?
@@ -236,7 +236,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-aprova-candidato-{{$candidato->id}}" method="POST" action="{{ route('aprovar-reprovar-candidato', ['inscricao' => $inscricao->id]) }}">
+                <form id="form-aprova-candidato-{{$candidato->id}}" method="POST" action="{{ route('aprovar-reprovar-candidato.inscricao', $inscricao->id) }}">
                     <input type="hidden" name="aprovar" value="true">
                     @csrf
                     Tem certeza que deseja Aprovar o candidato {{  $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}?

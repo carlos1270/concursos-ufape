@@ -9,7 +9,7 @@
                             <h6 class="style_card_container_header_titulo">Editar concurso</h6>
                             <h6 class="" style="font-weight: normal; color: #909090; margin-top: -10px; margin-bottom: -15px;">Meus concursos > Editar concurso</h6>
                         </div>
-                        <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6>                            </div>
+                        <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6></div>
                     <div class="card-body">
                         <div class="form-row">
                             <div class="col-md-12">
