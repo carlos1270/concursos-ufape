@@ -40,20 +40,28 @@
                                     </div>
                                 </div>
                             @enderror
-                            <table class="table table-responsive-md">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo">Id</th>
+                            <table class="table table-hover table-responsive-sm">
+                                <thead style="border-radius:0px">
+                                    <tr class="shadow-sm" style="border: 1px solid #dee2e6">
+                                        <th scope="col" class="tabela_container_cabecalho_titulo">#</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%; text-align:left;">Concurso</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Status</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $cont = 1;
+                                    @endphp
                                     @foreach ($concursos as $concurso)
                                         <tr>
-                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$concurso->id}}</th>
-                                            <td id="tabela_container_linha">{{$concurso->titulo}}</td>
+                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
+                                            <td id="tabela_container_linha">
+                                                <div class="form-group">
+                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $concurso->id])}}" style="font-size: 18px">{{$concurso->titulo}}</a></div>
+                                                    <div><h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:15px">Criado no dia: {{$concurso->created_at->format('d/m/Y')}}</h6></div>
+                                                </div>
+                                            </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <img src="img/icon_publicado.svg" alt="" width="25px" style="margin-right: 5px;">
@@ -63,10 +71,10 @@
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <div style="margin-right: 10px">
-                                                        <a class="btn btn-success" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
+                                                        <a class="btn btn-success shadow-sm" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
                                                     </div>
                                                     <div style="margin-right: 15px">
-                                                        <a class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" ></a>
+                                                        <a class="btn btn-warning shadow-sm"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" ></a>
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
                                                     <div class="dropdown">
@@ -85,6 +93,9 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        @php
+                                        $cont = $cont +1;
+                                    @endphp
                                     @endforeach
                                 </tbody>
                             </table>
