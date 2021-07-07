@@ -198,7 +198,7 @@
                                     @if (!$avaliacao)
                                         <div class="form-row justify-content-end">
                                             <div class="col-md-12"><hr></div>
-                                            <div class="col-md-6 form-group" style="margin-bottom: 9px;">
+                                            <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
                                                 <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
                                             </div>
                                         </div>
