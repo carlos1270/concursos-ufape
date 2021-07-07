@@ -27,57 +27,39 @@
                                     </div>
                                 </div>
                             @endif
-                            <table class="table table-bordered table-hover tabela_container">
+                            <table class="table table-hover table-responsive-md">
                                 <thead>
-                                    <tr>
+                                    <tr class="shadow-sm" style="border: 1px solid #dee2e6">
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Posição</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 50%;">Nome</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 50%;">Vaga</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo">Data</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo">Ações</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="text-align:left">Nome completo e CPF</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="text-align:left">Vaga</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo">Data e hora</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo">Avaliar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($inscricoes as $inscricao)
                                         <tr>
                                             <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$inscricao->id}}</th>
-                                            <td id="tabela_container_linha">{{ $inscricao->user->nome }}</td>
-                                            <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
                                             <td id="tabela_container_linha">
-                                                {{date('d/m/Y', strtotime($inscricao->created_at))}}
+                                                <div class="form-group">
+                                                    <h6 style="font-weight: normal;">{{ $inscricao->user->nome }}</h6>
+                                                    <h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:14px; margin-top:-5px">{{ $inscricao->user->candidato->cpf}}</h6>
+                                                </div>
+                                            </td>
+                                            <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
+                                            <td id="tabela_container_linha" style="text-align: center">
+                                                 {{$inscricao->created_at->format('d/m/Y - h:m:s')}}
                                             </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
-                                                @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                    <div class="btn-group">
-                                                        <div>
-                                                            @if ($inscricao->concurso->data_inicio_inscricao <= now() && now() <= $inscricao->concurso->data_fim_inscricao)
-                                                                <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
-                                                                    @if (Auth::user()->role == "admin")
-                                                                        Avaliar 1º Etapa
-                                                                    @else
-                                                                        Avaliar
-                                                                    @endif
-                                                                </button>
-                                                            @else
-                                                                <button class="btn btn-primary" disabled>
-                                                                    @if (Auth::user()->role == "admin")
-                                                                        Avaliar 1º Etapa
-                                                                    @else
-                                                                        Avaliar
-                                                                    @endif
-                                                                </button>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if (Auth::user()->role == "admin" || Auth::user()->role == "presidenteBancaExaminadora")
-                                                    @if ($inscricao->status == "aprovado")
+                                                <div class="btn-group">
+                                                    @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
                                                         <div class="btn-group">
-                                                            <div style="margin-left: 5px">
-                                                                @if ($inscricao->concurso->data_inicio_envio_doc <= now() && now() <= $inscricao->concurso->data_fim_envio_doc)
-                                                                    <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
+                                                            <div>
+                                                                @if ($inscricao->concurso->data_inicio_inscricao <= now() && now() <= $inscricao->concurso->data_fim_inscricao)
+                                                                    <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
                                                                         @if (Auth::user()->role == "admin")
-                                                                            Avaliar 2º Etapa
+                                                                            1º Etapa
                                                                         @else
                                                                             Avaliar
                                                                         @endif
@@ -85,7 +67,7 @@
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
                                                                         @if (Auth::user()->role == "admin")
-                                                                            Avaliar 2º Etapa
+                                                                            1º Etapa
                                                                         @else
                                                                             Avaliar
                                                                         @endif
@@ -93,8 +75,33 @@
                                                                 @endif
                                                             </div>
                                                         </div>
-                                                    @endif  
-                                                @endif
+                                                    @endif
+                                                    @if (Auth::user()->role == "admin" || Auth::user()->role == "presidenteBancaExaminadora")
+                                                        @if ($inscricao->status == "aprovado")
+                                                            <div class="btn-group">
+                                                                <div style="margin-left: 5px">
+                                                                    @if ($inscricao->concurso->data_inicio_envio_doc <= now() && now() <= $inscricao->concurso->data_fim_envio_doc)
+                                                                        <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
+                                                                            @if (Auth::user()->role == "admin")
+                                                                                2º Etapa
+                                                                            @else
+                                                                                Avaliar
+                                                                            @endif
+                                                                        </button>
+                                                                    @else
+                                                                        <button class="btn btn-primary" disabled>
+                                                                            @if (Auth::user()->role == "admin")
+                                                                                2º Etapa
+                                                                            @else
+                                                                                Avaliar
+                                                                            @endif
+                                                                        </button>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @endif  
+                                                    @endif
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

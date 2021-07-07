@@ -41,7 +41,7 @@
                                 </div>
                             @enderror
                             <table class="table table-hover table-responsive-sm">
-                                <thead style="border-radius:0px">
+                                <thead>
                                     <tr class="shadow-sm" style="border: 1px solid #dee2e6">
                                         <th scope="col" class="tabela_container_cabecalho_titulo">#</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%; text-align:left;">Concurso</th>
