@@ -31,11 +31,11 @@
                 @endif
                   <div class="card-body">
                       <div class="form-row">
-                        
+
                         <div class="col-md-12" style="margin-bottom: 1.5rem">
                           <h5 class="card-title mb-0" style="font-size:35px; font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">{{$concurso->nome}}</h5>
                         </div>
-  
+
                         <div class="col-md-12" style="margin-top: 5px">
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Descrição</h5></div>
                           <div style="margin-top: 10px"><h5 style="font-weight:normal">{{$concurso->descricao}}</h5></div>
@@ -60,7 +60,7 @@
                             @if($concurso->data_inicio_inscricao <= now() && now() <= $concurso->data_fim_inscricao)
                                 @if (!$inscricao)
                                   <div class="col-md-12" style="margin-bottom:18px">
-                                      <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', $concurso->id) }}'"  
+                                      <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', $concurso->id) }}'"
                                           style="width:100%; height:50px; padding-top:7px; font-size:20px">
                                           <img src="{{asset('img/icon_enviar_proposta.png')}}" class="card-img-top" alt="..." style="width:30px; margin-right:5px">Realizar inscrição
                                       </button>
@@ -98,55 +98,55 @@
                         </div>
                         <div class="card-body">
                           <div class="form-row">
-  
+
                             <div class="col-md-12">
                               <div class="d-flex justify-content-left align-items-center">
                                 <div style="margin-right:10px; margin-top:-20px">
                                   <img class="" src="{{asset('img/icon_submissao.png')}}" alt="" width="40px">
                                 </div>
                                   <div class="form-group">
-                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Inscrições</h5></div>
+                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Inscrições entre</h5></div>
                                     <div><h5 style="font-weight: normal; color:#909090">{{date('d/m/Y',strtotime($concurso->data_inicio_inscricao))}} - {{date('d/m/Y',strtotime($concurso->data_fim_inscricao))}}</h5></div>
                                   </div>
                               </div>
                             </div>
-  
+
                             <div class="col-md-12">
                               <div class="d-flex justify-content-left align-items-center">
                                 <div style="margin-right:10px; margin-top:-20px">
                                   <img class="" src="{{asset('img/isencao_pagamento.png')}}" alt="" width="40px">
                                 </div>
                                   <div class="form-group">
-                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Limite para isenção de inscrição</h5></div>
+                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Solicitar a isenção de inscrição até</h5></div>
                                     <div><h5 style="font-weight: normal; color:#909090">{{date('d/m/Y',strtotime($concurso->data_fim_isencao_inscricao))}}</h5></div>
                                   </div>
                               </div>
                             </div>
-  
+
                             <div class="col-md-12">
                               <div class="d-flex justify-content-left align-items-center">
                                 <div style="margin-right:10px; margin-top:-20px">
                                   <img class="" src="{{asset('img/pagamento.png')}}" alt="" width="40px">
                                 </div>
                                   <div class="form-group">
-                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Limite para pagamento de inscrição</h5></div>
+                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Pagamento de inscrição até</h5></div>
                                     <div><h5 style="font-weight: normal; color:#909090">{{date('d/m/Y',strtotime($concurso->data_fim_pagamento_inscricao))}}</h5></div>
                                   </div>
                               </div>
                             </div>
-  
+
                             <div class="col-md-12">
                               <div class="d-flex justify-content-left align-items-center">
                                 <div style="margin-right:10px; margin-top:-20px">
                                   <img class="" src="{{asset('img/icon_recurso.png')}}" alt="" width="40px">
                                 </div>
                                   <div class="form-group">
-                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Envio de documentos</h5></div>
+                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Envio de documentos entre</h5></div>
                                     <div><h5 style="font-weight: normal; color:#909090">{{date('d/m/Y',strtotime($concurso->data_inicio_envio_doc))}} - {{date('d/m/Y',strtotime($concurso->data_fim_envio_doc))}}</h5></div>
                                   </div>
                               </div>
                             </div>
-  
+
                             <div class="col-md-12" style="margin-bottom: -15px">
                               <div class="d-flex justify-content-left align-items-center">
                                 <div style="margin-right:10px; margin-top:-20px">
@@ -158,7 +158,7 @@
                                   </div>
                               </div>
                             </div>
-  
+
                           </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @else 
+                                @else
                                     <h6 style="color: #909090">O criador do concurso não disponibilizou o edital especifico</h6>
                                 @endif
                             </div>
@@ -233,7 +233,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @else 
+                                @else
                                     <h6 style="color: #909090">O criador do concurso não disponibilizou o documento de veracidade</h6>
                                 @endif
                             </div>
