@@ -83,8 +83,8 @@
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
-                                                            <div class="dropdown-divider"></div>
                                                             @if(Auth::user()->role != "presidenteBancaExaminadora")
+                                                                <div class="dropdown-divider"></div>
                                                                 <a class="dropdown-item" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}">Editar concurso</a>
                                                                 <a class="dropdown-item" data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}" style="color: red; cursor: pointer;">Deletar concurso</a>
                                                             @endif
