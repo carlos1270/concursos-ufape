@@ -2,7 +2,7 @@
 @section('content')
 <div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
     <div class="form-row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-7">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Enviar documentos da segunda fase</h6>
@@ -12,7 +12,10 @@
                         <form method="POST" style="" action="{{ route('save.documentos') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-1s2">
+                                    <h6 style="text-align:justify;">Descrição de como funciona a segunda fase...O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro.</h6>
+                                </div>
+                                <div class="form-group col-md-12">
                                     <label for="formacao_academica" class="style_campo_titulo">Formação Acadêmica</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="formacao_academica" name="formacao_academica" 
                                         value="{{ old('formacao_academica') }}" required/>
@@ -21,7 +24,7 @@
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-12 form-group">
                                     <label for="experiencia_didatica" class="style_campo_titulo">Experiência Didática</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="experiencia_didatica" name="experiencia_didatica" required/>
                                     @error('experiencia_didatica')
@@ -31,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-12 form-group">
                                     <label for="producao_cientifica" class="style_campo_titulo">Produção Científica</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="producao_cientifica" name="producao_cientifica" required/>
                                     @error('producao_cientifica')
@@ -39,7 +42,7 @@
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-12 form-group">
                                     <label for="experiencia_profissional" class="style_campo_titulo">Experiência Profissional</label> @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blanck">Arquivo atual</a> @endif
                                     <input type="file" class="form-control style_campo" id="experiencia_profissional" name="experiencia_profissional" required/>
                                     @error('experiencia_profissional')
@@ -50,8 +53,8 @@
                             </div>
 
                             <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao }}"/>
-
-                            <div class="form-row justify-content-center">
+                            <div><hr></div>
+                            <div class="form-row justify-content-end">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
                                     <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
                                 </div>

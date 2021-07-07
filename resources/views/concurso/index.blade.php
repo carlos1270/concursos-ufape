@@ -40,20 +40,28 @@
                                     </div>
                                 </div>
                             @enderror
-                            <table class="table table-bordered table-hover tabela_container">
+                            <table class="table table-hover table-responsive-sm">
                                 <thead>
-                                    <tr>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo">Id</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Concurso</th>
+                                    <tr class="shadow-sm" style="border: 1px solid #dee2e6">
+                                        <th scope="col" class="tabela_container_cabecalho_titulo">#</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%; text-align:left;">Concurso</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Status</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $cont = 1;
+                                    @endphp
                                     @foreach ($concursos as $concurso)
                                         <tr>
-                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$concurso->id}}</th>
-                                            <td id="tabela_container_linha">{{$concurso->titulo}}</td>
+                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
+                                            <td id="tabela_container_linha">
+                                                <div class="form-group">
+                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $concurso->id])}}" style="font-size: 18px">{{$concurso->titulo}}</a></div>
+                                                    <div><h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:15px">Criado no dia: {{$concurso->created_at->format('d/m/Y')}}</h6></div>
+                                                </div>
+                                            </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <img src="img/icon_publicado.svg" alt="" width="25px" style="margin-right: 5px;">
@@ -62,51 +70,50 @@
                                             </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
-                                                    <div style="margin-right: 15px;">
-                                                        <a class="btn btn-success" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" ></a>
-                                                        <a class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px" ></a>
+                                                    <div style="margin-right: 10px">
+                                                        <a class="btn btn-success shadow-sm" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
+                                                    </div>
+                                                    <div style="margin-right: 15px">
+                                                        <a class="btn btn-warning shadow-sm"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" ></a>
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
-                                                    <div>
-                                                        <a class="btn btn-primary" href="{{route('concurso.show', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" ></a>
-                                                        @if(Auth::user()->role != "presidenteBancaExaminadora")
-                                                            <a class="btn btn-info" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_editar.svg') }}" alt="Editar concurso" width="22px" ></a>
-                                                            <a class="btn btn-danger" data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}"><img src="{{ asset('img/icon_lixeira.svg') }}" alt="Deletar concurso" width="22px" ></a>
-                                                        @endif
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-light dropdown-toggle shadow-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <img class="filter-green" src="{{asset('img/icon_acoes.svg')}}" style="width: 4px;">
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            @if(Auth::user()->role != "presidenteBancaExaminadora")
+                                                                <a class="dropdown-item" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}">Editar concurso</a>
+                                                                <a class="dropdown-item" data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}" style="color: red; cursor: pointer;">Deletar concurso</a>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @php
+                                        $cont = $cont +1;
+                                    @endphp
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer" style="background-color: #fff; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
-                            <div><h6 style="font-weight: bold">Legenda:</h6></div>
+                            <div><h6 style="color: #909090; margin-bottom:1px">Legenda:</h6></div>
                             <div class="form-row">
-                                <div style="margin:5px">
-                                    <button class="btn btn-success" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_candidato.svg" width="20px"/>
-                                    </button> Visualizar Candidatos
+                                <div class="btn-group" style="margin:5px">
+                                    <label style="margin-right: 10px; padding-left:13px;padding-right:13px; border-radius:6px; background-color:#28A745">
+                                        <img class="card-img-left example-card-img-responsive" src="img/icon_candidato.svg" width="15px" style="margin-top: 10px "/>
+                                    </label>
+                                    <h6>Visualizar <br>Candidatos</h6>
                                 </div>
-                                <div style="margin: 5px">
-                                    <button class="btn btn-warning" style="margin-right: 10px" disabled>
-                                    <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="15px"/>
-                                    </button> Consultar o resultado final </div>
-                                <div style="margin: 5px">
-                                        <button class="btn btn-primary" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_visualizar.svg" width="24px"/>
-                                        </button> Visualizar Concurso</div>
-                                @if(Auth::user()->role != "presidenteBancaExaminadora")
-                                    <div style="margin: 5px">
-                                        <button class="btn btn-info" class="btn btn-success" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_editar.svg" width="16px"/>
-                                        </button> Editar Concurso</div>
-                                    <div style="margin: 5px">
-                                        <button class="btn btn-danger" class="btn btn-success" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_lixeira.svg" width="16px"/>
-                                        </button> Deletar Concurso</div>
-                                @endif
+                                <div class="btn-group" style="margin: 5px">
+                                    <label style="margin-right: 10px; padding-left:13px;padding-right:13px; border-radius:6px; background-color:#FFC107">
+                                        <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="12px" style="margin-top: 10px "/>
+                                    </label>
+                                    <h6>Consultar o <br>resultado final</h6></div>
                             </div>
                         </div>
                     @else
