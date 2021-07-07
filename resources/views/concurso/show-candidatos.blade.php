@@ -31,9 +31,9 @@
                                 <thead>
                                     <tr class="shadow-sm" style="border: 1px solid #dee2e6">
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Posição</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="text-align:left">Nome completo e CPF</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="text-align:left">Vaga</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="text-align:left">Nome / Vaga</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Data e hora</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="text-align:center">Status</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Avaliar</th>
                                     </tr>
                                 </thead>
@@ -44,12 +44,22 @@
                                             <td id="tabela_container_linha">
                                                 <div class="form-group">
                                                     <h6 style="font-weight: normal;">{{ $inscricao->user->nome }}</h6>
-                                                    <h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:14px; margin-top:-5px">{{ $inscricao->user->candidato->cpf}}</h6>
+                                                    <h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:14px; margin-top:-5px">{{ $inscricao->vaga->nome }}</h6>
                                                 </div>
                                             </td>
-                                            <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
                                             <td id="tabela_container_linha" style="text-align: center">
                                                  {{$inscricao->created_at->format('d/m/Y - h:m:s')}}
+                                            </td>
+                                            <td id="tabela_container_linha" style="text-align: center">
+                                                @if($inscricao->status == "aprovado")
+                                                    <img src="{{asset('img/icon_aprovado_verde.svg')}}" alt="..." width="25px" data-toggle="tooltip" data-placement="top" title="Candidato aprovado">
+                                                @elseif($inscricao->status == "reprovado")
+                                                    <img src="{{asset('img/icon_reprovado_vermelho.svg')}}" alt="..." width="25px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado"> 
+                                                @elseif($inscricao->status == "Aguardando pagamento")
+                                                    <img src="{{asset('img/icon_pagamento_pendente_colorido.svg')}}" alt="..." width="55px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">  
+                                                @else
+                                                    <img src="{{asset('img/icon_pendente_colorido.svg')}}" alt="..." width="25px" data-toggle="tooltip" data-placement="top" title="Pendente"> 
+                                                @endif
                                             </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
     <div class="form-row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-7"  style="margin-bottom: 2rem">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">{{ $inscricao->user->nome . ' ' . $inscricao->user->sobrenome }}</h6>
@@ -209,6 +209,66 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow bg-white style_card_container">
+                <div class="card-header form-group bg-white" id="style_card_container_header">
+                    <h6 class="style_card_container_header_titulo">Lista de candidatos</h6>
+                </div>
+                <div class="card-body">
+                    <div>
+                    <h6 style="color: #909090; font-weight:normal; font-size:15px; margin-top:-0.5rem;">Candidatos da 1º fase</h6>
+                        <div>
+                            <ul class="list-group">
+                                @foreach ($listaCandidados as $item)
+                                @if (Auth::user()->role == "admin" || Auth::user()->role == "presidenteBancaExaminadora")
+                                    <a onclick ="location.href='{{ route('candidato.inscricao', $item->id) }}'" style="cursor: pointer; margin-bottom:5px">
+                                @else
+                                    <a style="cursor: pointer;margin-bottom:5px">
+                                @endif
+                                        <li class="list-group-item list-group-item-action  @if($inscricao->user->id == $item->user->id) active @else @endif ">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="form-group">
+                                                    <h6>{{$item->user->nome}} {{$item->user->sobrenome}}</h6>
+                                                    <h6 style="font-weight:normal; font-size: 13px; margin-top:-0.5rem; margin-bottom:-1rem;">CPF {{$item->user->candidato->cpf}}</h6>
+                                                </div>
+                                                <div>
+                                                    {{-- Icones de status dos candidatos--}}
+                                                    @if($item->status == "aprovado")
+                                                        @if($inscricao->user->id == $item->user->id)
+                                                            <img src="{{asset('img/icon_aprovado_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato aprovado">
+                                                        @else
+                                                            <img src="{{asset('img/icon_aprovado_verde.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato aprovado">
+                                                        @endif
+                                                    @elseif($item->status == "reprovado")
+                                                        @if($inscricao->user->id == $item->user->id)
+                                                            <img src="{{asset('img/icon_reprovado_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado"> 
+                                                        @else
+                                                            <img src="{{asset('img/icon_reprovado_vermelho.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado"> 
+                                                        @endif
+                                                    @elseif($item->status == "Aguardando pagamento")
+                                                        @if($inscricao->user->id == $item->user->id)
+                                                            <img src="{{asset('img/icon_pagamento_pendente_branco.svg')}}" alt="..." width="40px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">  
+                                                        @else
+                                                            <img src="{{asset('img/icon_pagamento_pendente_colorido.svg')}}" alt="..." width="40px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">  
+                                                        @endif
+                                                    @else
+                                                        @if($inscricao->user->id == $item->user->id)
+                                                            <img src="{{asset('img/icon_pendente_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Pendente">  
+                                                        @else
+                                                            <img src="{{asset('img/icon_pendente_colorido.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Pendente"> 
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </a>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>

@@ -179,7 +179,7 @@ class ConcursoController extends Controller
 
     public function showCandidatos(Request $request)
     {
-        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->get();
+        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
         return view('concurso.show-candidatos', compact('inscricoes'));
     }
 
@@ -188,7 +188,9 @@ class ConcursoController extends Controller
         $inscricao = Inscricao::find($request->inscricao_id);
         $candidato = $inscricao->user->candidato;
         $endereco = $inscricao->user->endereco;
-        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco'));
+
+        $listaCandidados = Inscricao::where('concursos_id', '=', $inscricao->concursos_id)->orderBy('created_at', 'ASC')->get();
+        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco','listaCandidados'));
     }
 
     public function aprovarReprovarCandidato(Request $request)
