@@ -513,3 +513,11 @@ li {
   box-shadow: none;
 }
 /* X  X */
+
+/* 2ª fase */
+.style_titulo_documento{
+    text-align: justify; font-size:17px; color:#1492E6
+}
+.style_subtitulo_documento{
+    text-align: justify; font-size:15px; color:#909090; font-weight:normal
+}
