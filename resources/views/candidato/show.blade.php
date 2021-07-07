@@ -19,7 +19,7 @@
                                 <div class="form-row">
                                     <div class="col-md-12 form-group">
                                         <label class="style_campo_titulo">Nome Completo</label>
-                                        <input type="text" class="form-control style_campo" 
+                                        <input type="text" class="form-control style_campo"
                                             value="{{ Auth::user()->nome . ' ' . Auth::user()->sobrenome }}" disabled/>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12">
-                                        <label for="pcd" class="style_campo_titulo">Portador de necessidades especiais <span style="color: red; font-weight: bold;">*</span></label>
+                                        <label for="pcd" class="style_campo_titulo">Portador de necessidades especiais? <span style="color: red; font-weight: bold;">*</span></label>
                                         @error('pcd')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
                                                 {{ $message }}
