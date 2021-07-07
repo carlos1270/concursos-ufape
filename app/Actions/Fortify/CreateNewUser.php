@@ -50,6 +50,7 @@ class CreateNewUser implements CreatesNewUsers
         $candidato->orgao_emissor = $input['órgao_emissor'];
         $candidato->nome_da_mae = $input['nome_da_mãe'];
         $candidato->estrangeiro = $input['estrangeiro'] == "sim";
+        $candidato->pais_origem = $input['país_de_origem'];
         $candidato->save();
 
         $endereco = new Endereco();

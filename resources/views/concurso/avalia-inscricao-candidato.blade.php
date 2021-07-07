@@ -58,6 +58,14 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
+                                        <label class="style_campo_titulo">País de origem </label>
+                                        <input id="pais_origem" type="text" class="form-control style_campo" value="{{$candidato->pais_origem}}" disabled/>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6 form-group">
                                         <label class="style_campo_titulo">CPF </label>
                                         <input id="cpf" type="text" class="form-control style_campo" value="{{$candidato->cpf}}" disabled/>
                                     </div>
