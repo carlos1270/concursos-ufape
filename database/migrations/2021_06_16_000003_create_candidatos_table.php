@@ -18,6 +18,7 @@ class CreateCandidatosTable extends Migration
             $table->string('cpf')->nullable()->unique();
             $table->string('documento_de_identificacao')->nullable();
             $table->string('orgao_emissor')->nullable();
+            $table->string('pais_origem')->nullable();
             $table->date('data_de_nascimento');
             $table->string('nome_do_pai')->nullable();
             $table->string('nome_da_mae');
