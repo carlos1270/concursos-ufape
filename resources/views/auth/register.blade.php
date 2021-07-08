@@ -601,12 +601,14 @@
             document.getElementById('msg-cpf-obrigatorio').style.display = "none";
             document.getElementById('div-orgao-emissor').style.display = "none";
             document.getElementById('div-cpf').style.display = "none";
+            limparCampos();
             selecionarPais("");
         } else {
             document.getElementById('msg-estrangeiro-pasaporte').style.display = "none";
             document.getElementById('msg-cpf-obrigatorio').style.display = "inline";
             document.getElementById('div-orgao-emissor').style.display = "block";
             document.getElementById('div-cpf').style.display = "block";
+            limparCampos();
             selecionarPais("Brasil");
         }
     }
@@ -614,6 +616,13 @@
     function selecionarPais(pais) {
         var select = document.getElementById('país_de_origem');
         select.value=pais;
+    }
+
+    function limparCampos() {
+        document.getElementById('cpf').value = "";
+        document.getElementById('órgao_emissor').value = "";
+        document.getElementById('documento_de_identificação').value = "";
+        selecionarPais("");
     }
 
     function limpa_formulário_cep() {

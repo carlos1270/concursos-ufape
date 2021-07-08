@@ -15,7 +15,7 @@ class CreateCandidatosTable extends Migration
     {
         Schema::create('candidatos', function (Blueprint $table) {
             $table->id();
-            $table->string('cpf')->nullable()->unique();
+            $table->string('cpf')->nullable();
             $table->string('documento_de_identificacao')->nullable();
             $table->string('orgao_emissor')->nullable();
             $table->string('pais_origem')->nullable();
