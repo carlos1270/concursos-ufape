@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="edital_geral" class="style_campo_titulo">Edital geral <span style="color: red; font-weight: bold;">*</span></label>
-                                        <input type="file" class="form-control style_campo @error('edital_geral') is-invalid @enderror" name="edital_geral" id="edital_geral" value="{{old('edital_geral')}}">
+                                        <input type="file" accept=".pdf" class="form-control style_campo @error('edital_geral') is-invalid @enderror" name="edital_geral" id="edital_geral" value="{{old('edital_geral')}}">
 
                                         @error('edital_geral')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="col-sm-6 form-group">
                                         <label for="edital_especifico" class="style_campo_titulo">Edital específico <span style="color: red; font-weight: bold;">*</span></label>
-                                        <input type="file" class="form-control style_campo @error('edital_específico') is-invalid @enderror" name="edital_específico" id="edital_especifico" value="{{old('edital_específico')}}">
+                                        <input type="file" accept=".pdf" class="form-control style_campo @error('edital_específico') is-invalid @enderror" name="edital_específico" id="edital_especifico" value="{{old('edital_específico')}}">
 
                                         @error('edital_específico')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
@@ -173,7 +173,7 @@
 
                                     <div class="col-sm-6 form-group">
                                         <label for="declaracao_de_veracidade" class="style_campo_titulo">Declaração de veracidade <span style="color: red; font-weight: bold;">*</span></label>
-                                        <input type="file" class="form-control style_campo @error('declaração_de_veracidade') is-invalid @enderror" name="declaração_de_veracidade" id="declaracao_de_veracidade" value="{{old('declaração_de_veracidade')}}">
+                                        <input type="file" accept=".pdf, .docx" class="form-control style_campo @error('declaração_de_veracidade') is-invalid @enderror" name="declaração_de_veracidade" id="declaracao_de_veracidade" value="{{old('declaração_de_veracidade')}}">
 
                                         @error('declaração_de_veracidade')
                                             <div id="validationServer03Feedback" class="invalid-feedback">
