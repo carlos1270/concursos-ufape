@@ -86,13 +86,13 @@
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if (Auth::user()->role == "admin" || Auth::user()->role == "presidenteBancaExaminadora")
+                                                    @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos" ||Auth::user()->role == "presidenteBancaExaminadora")
                                                         @if ($inscricao->status == "aprovado")
                                                             <div class="btn-group">
                                                                 <div style="margin-left: 5px">
                                                                     @if ($inscricao->concurso->data_inicio_envio_doc <= now() && now() <= $inscricao->concurso->data_fim_envio_doc)
                                                                         <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
-                                                                            @if (Auth::user()->role == "admin")
+                                                                            @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
                                                                                 2º Etapa
                                                                             @else
                                                                                 Avaliar
@@ -100,7 +100,7 @@
                                                                         </button>
                                                                     @else
                                                                         <button class="btn btn-primary" disabled>
-                                                                            @if (Auth::user()->role == "admin")
+                                                                            @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
                                                                                 2º Etapa
                                                                             @else
                                                                                 Avaliar

@@ -20,6 +20,7 @@ class CheckUserPresidenteBanca
     {
         if (
             Auth::user()->role == User::ROLE_ENUM['presidenteBancaExaminadora'] ||
+            Auth::user()->role == User::ROLE_ENUM['chefeSetorConcursos'] ||
             Auth::user()->role == User::ROLE_ENUM['admin']
         ) {
             return $next($request);
