@@ -34,9 +34,13 @@
                                         <td id="tabela_container_linha">{{ $inscricao->concurso->titulo }}</td>
                                         <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
                                         <td id="tabela_container_linha">
-                                            <a href="https://consulta.tesouro.fazenda.gov.br/gru_novosite/gerarHTML.asp?codigo_favorecido=156687&gestao=26456**20953&nome_favorecido=UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO&codigo_recolhimento=28883-7&vencimento={{$inscricao->concurso->data_fim_pagamento_inscricao}}&cnpj_cpf={{$inscricao->user->candidato->cpf}}&nome_contribuinte={{$inscricao->user->nome . " " . $inscricao->user->sobrenome}}&valorPrincipal=30,00&valorTotal=30,00&boleto=4">
-                                                Gerar boleto
-                                            </a>
+                                            @if ($inscricao->status == "aprovado")
+                                                Pagamento aprovado
+                                            @else 
+                                                <a href="https://consulta.tesouro.fazenda.gov.br/gru_novosite/gerarHTML.asp?codigo_favorecido=156687&gestao=26456**20953&nome_favorecido=UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO&codigo_recolhimento=28883-7&vencimento={{$inscricao->concurso->data_fim_pagamento_inscricao}}&cnpj_cpf={{$inscricao->user->candidato->cpf}}&nome_contribuinte={{$inscricao->user->nome . " " . $inscricao->user->sobrenome}}&valorPrincipal=30,00&valorTotal=30,00&boleto=4">
+                                                    Gerar boleto
+                                                </a>
+                                            @endif
                                         </td>
                                         <td id="tabela_container_linha">{{ $inscricao->status }}</td>
                                         <td id="tabela_container_linha" style="text-align: center;">
