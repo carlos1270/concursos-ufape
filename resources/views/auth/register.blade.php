@@ -496,7 +496,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="número" class="style_campo_titulo">Número <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('número') is-invalid @enderror" id="número" name="número"
-                                    placeholder="Digite o número de sua casa" value="{{ old('número') }}" />
+                                    placeholder="Digite o número de sua casa" value="{{ old('número') }}" required/>
                                 @error('número')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -506,9 +506,9 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="cidade" class="style_campo_titulo">Cidade </label>
+                                <label for="cidade" class="style_campo_titulo">Cidade <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('cidade') is-invalid @enderror" id="cidade" name="cidade"
-                                    placeholder="Digite a sua cidade" value="{{ old('cidade') }}" />
+                                    placeholder="Digite a sua cidade" value="{{ old('cidade') }}" required/>
                                 @error('cidade')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -615,6 +615,11 @@
 
     function selecionarPais(pais) {
         var select = document.getElementById('país_de_origem');
+        if (pais == "Brasil") {
+            select.disabled = true;
+        } else {
+            select.disabled = false;
+        }
         select.value=pais;
     }
 
