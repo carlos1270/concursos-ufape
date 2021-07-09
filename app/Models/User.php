@@ -46,9 +46,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'logradouro' => 'required|min:4|max:100',
         'bairro' => 'required|min:4|max:100',
         'número' => 'required|min:1|max:100',
-        'cidade' => 'nullable|min:4|max:100',
+        'cidade' => 'required|min:4|max:100',
         'uf'     => 'required',
-        'complemento' => 'nullable|min:4|max:150',
+        'complemento' => 'nullable|min:2|max:150',
     ];
 
     public static $rulesAdmin = [

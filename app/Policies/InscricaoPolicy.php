@@ -44,7 +44,7 @@ class InscricaoPolicy
      */
     public function create(User $user)
     {
-        return !($user->inscricoes->contains('concursos_id', Route::current()->id)) && $user->role == User::ROLE_ENUM['candidato'];
+        return !($user->inscricoes->contains('concursos_id', Route::current()->concurso_id)) && $user->role == User::ROLE_ENUM['candidato'];
     }
 
     /**

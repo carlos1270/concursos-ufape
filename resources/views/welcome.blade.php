@@ -6,7 +6,7 @@
             <img src="{{ asset('img/logo_ufape_concursos.png') }}" alt="Orientação" width="30%"> 
         </div>
         <div class="col-md-8" style="margin-top: 20px;">
-            <h6 style="color: #909090;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </h6>
+            <h6 style="color: #909090;">O sistema de gestão de concursos da UFAPE visa auxiliar no processo de cadastramento de edital, inscrição de candidatos e recebimento de documentos para os processos seletivos para concursos e seleções públicas para professor do magistério superior da referida Universidade.</h6>
         </div>
         
         <div class="col-md-12" style="text-align: left; margin-top: 1.5rem;margin-bottom: -1.1rem;">
@@ -35,7 +35,7 @@
                                     <div><h6 class="style_card_data">{{date('d/m/Y',strtotime($concurso->data_fim_inscricao))}}</h6></div>
                                 </div>
                                 <div class="d-flex justify-content-left">
-                                    <h6 class="style_card_detalhe">{{mb_strimwidth($concurso->descricao, 0, 170, "...")}}</h6>
+                                    <h6 class="style_card_detalhe" style="font-family: Arial, Helvetica, sans-serif;">{{mb_strimwidth($concurso->descricao, 0, 170, "...")}}</h6>
                                 </div>
                                 <div style="text-align: left;">
                                     <hr class="style_card_linha">
