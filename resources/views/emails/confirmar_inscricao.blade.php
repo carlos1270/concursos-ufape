@@ -1,117 +1,61 @@
 @extends('layouts.mail')
-@section('content')
-<div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
-    <div class="form-row justify-content-center">
-        <div class="col-md-9">
-            <div class="card shadow bg-white style_card_container">
-                <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                    <h6 class="style_card_container_header_titulo">Formulário de inscrição</h6>
-                    <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6></div>
-                <div class="card-body">
-                    <div>
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <h6 class="style_card_container_header_subtitulo">Informações pessoais</h6>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <div class="form-row">
-                                    <div class="col-md-12 form-group">
-                                        <label class="style_campo_titulo">Nome Completo</label>
-                                        <input type="text" class="form-control style_campo"
-                                            value="{{ Auth::user()->nome . ' ' . Auth::user()->sobrenome }}" disabled/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <h6 class="style_card_container_header_subtitulo">Escolha a Vaga</h6>
-                                    </div>
-                                </div>
-                                <div  class="form-row">
-                                    <div class="col-md-12 form-group">
-                                        <label for="vagas">Opção <span style="color: red; font-weight: bold;">*</span></label>
-                                        <input type="text" class="form-control" value="{{$inscricao->vaga->nome}}" disabled>
-                                        @error('vaga')
-                                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <h6 class="style_card_container_header_subtitulo">Isenção</h6>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <input id="isencao" type="checkbox" name="desejo_isencao" @if($inscricao->solicitou_isencao) checked @endif disabled>
-                                        <label for="isencao">Solicitar isenção - Declaro atender às condições estabelecidas no edital.</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <h6 class="style_card_container_header_subtitulo">Inscrição</h6>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <label for="cotista" class="style_campo_titulo">Sou declaradamente preto ou pardo e desejo concorrer à vaga reservada pela Lei no 12.990/2014, caso
-                                            exista em Edital Específico. <span style="color: red; font-weight: bold;">*</span></label>
-                                        @error('cotista')
-                                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                        <br>
-                                        <input type="radio" id="cotista-false" name="cotista" value="false" disabled @if(!$inscricao->cotista) checked @endif>
-                                        <label for="cotista-false">Não</label>
-                                        <br>
-                                        <input type="radio" id="cotista-true" name="cotista" value="true" disabled @if($inscricao->cotista) checked @endif>
-                                        <label for="cotista-true">Sim</label>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <label for="pcd" class="style_campo_titulo">Portador de necessidades especiais? <span style="color: red; font-weight: bold;">*</span></label>
-                                        @error('pcd')
-                                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                        <br>
-                                        <input type="radio" id="pcd-false" name="pcd" value="false" disabled @if(!$inscricao->pcd) checked @endif>
-                                        <label for="pcd-false">Não</label>
-                                        <br>
-                                        <input type="radio" id="pcd-true" name="pcd" value="true" disabled @if($inscricao->pcd) checked @endif>
-                                        <label for="pcd-true">Sim</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+<html lang="en">
+
+<body>
+
+    <div style="background-color:#fff; border-radius:12px;height:750px;">
+        <div style="margin-top: 1rem;margin-bottom:1rem;">
+            <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#03A4E2;font-size:30px; margin-top:10px">Confirmação de inscrição</label>
+        </div>
+        <div><hr></div>
+        <div style="background-color: #e2ffe4; padding:1.5rem; border-radius:12px" align="justify">
+            <label style="color:#fff; font-family:Arial, Helvetica, sans-serif; font-weight:normal;font-size:21px; color:#076617; line-height:22px;">
+                Aviso!<br><br>
+                Prezado(a) candidato(a), sua inscrição foi realizada com sucesso, porém só será validada após a confirmação do pagamento da GRU. <b>Os(as) candidatos(as) que solicitaram isenção fiquem atentos(as) ao período de solicitação de isenção e homologação do resultado de isenção, para que, caso não seja validada a sua inscrição você consiga gerar o boleto (GRU) para pagamento da taxa.</b>  
+                <br><br>
+                Atenciosamente,<br>
+                Comissão de Concurso Docente da UFAPE.<br><br>
+                Qualquer dúvida entrar em contato pelo e-mail concurso.<br>
+                concurso.docente@ufape.edu.br<br>
+        </label>
+        </div>
+
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#03A4E2;font-size:22px; margin-top:20px">Informação do candidato</label>
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#000000; font-size:20px; margin-top:10px;">Nome e sobrenome: </label>
+        <label style="font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>{{ Auth::user()->nome . ' ' . Auth::user()->sobrenome }}</b></label>
+        
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#03A4E2;font-size:22px; margin-top:20px">Informações sobre a vaga</label>
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#000000; font-size:20px; margin-top:10px;">Vaga escolhida: </label>
+        <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>{{$inscricao->vaga->nome}}</b></label>
+        
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#000000; font-size:20px; margin-top:10px;">Solicitar isenção? </label>
+        @if($inscricao->solicitou_isencao)
+            <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>Sim</b>, declaro que solicito a isenção de acordo com às condições estabelecidas no edital.</label>
+        @else
+            <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>Não</b>.</label>
+        @endif
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#000000; font-size:20px; margin-top:10px;">Sou declaradamente preto ou pardo e desejo concorrer à vaga reservada pela Lei no 12.990/2014, caso exista em Edital Específico.</label>
+        @if($inscricao->cotista == "true")
+            <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>Sim</b>, sou declaradamente preto ou pardo e desejo concorrer à vaga reservada pela Lei no 12.990/2014.</label>
+        @else
+            <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>Não</b>.</label>
+        @endif
+        <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:#000000; font-size:20px; margin-top:10px;">Portador de necessidades especiais?</label>
+        @if($inscricao->pcd == "true")
+            <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>Sim</b>, sou portador de necessidades especiais.</label>
+        @else
+            <label style="float: left; width:100%;font-family: Arial, Helvetica, sans-serif; margin-top:-5px;color:#909090; font-size:19px"><b>Não</b>.</label>
+        @endif
+        <div style="float: left; width:100%; margin-top:2rem; margin-bottom:2rem; background-color:rgb(231, 252, 255); border-radius:12px; padding:1.5rem;">
+            <a href="{{ route('candidato.show', $inscricao->id) }}" style="font-size:20px">Clique aqui</a><label style="font-size:20px"> para visualizar o formulário de inscrição pelo site.</label>
+        </div>
+        <div style="float: left; width:100%; margin-top:0.2rem; text-align:center">
+            <a href="http://lmts.uag.ufrpe.br/" style="color: #909090">Sistema desenvolvido pelo Laboratório Multidisciplinar de Tecnologias Sociais - LMTS</a>
+        </div>
+        <div style="float: left; width:100%;margin-top:5rem; margin-bottom:5rem">
         </div>
     </div>
-</div>
-
-<script>
-    $(document).ready(function($) {
-        $('#cpf').mask('000.000.000-00');
-        $('#rg').mask('00.000.000');
-        $('#cep').mask('00000-000');
-        $('#pis').mask('000.00000-00-0');
-        var SPMaskBehavior = function(val) {
-                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-            },
-            spOptions = {
-                onKeyPress: function(val, e, field, options) {
-                    field.mask(SPMaskBehavior.apply({}, arguments), options);
-                }
-            };
-        $('#celular').mask(SPMaskBehavior, spOptions);
-    });
-</script>
-@endsection
+    
+</body>
+</html>
