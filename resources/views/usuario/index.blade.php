@@ -43,10 +43,7 @@
                                                 <button class="btn btn-info" onclick ="location.href='{{ route('user.edit', $user->id) }}'">
                                                     <img src="{{ asset('img/icon_editar.svg') }}" alt="Orientação" width="22px" >
                                                 </button>
-                                                <button class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja deletar o usuário?')) 
-                                                    location.href='{{route('user.destroy', $user->id)}}'">
-                                                    <img src="{{ asset('img/icon_lixeira.svg') }}" alt="Orientação" width="22px">
-                                                </button>
+                                                <a class="btn btn-danger" type="button" data-toggle="modal" data-target="#deletar-usuario-{{$user->id}}"><img src="{{ asset('img/icon_lixeira.svg') }}" alt="Deletar usuário" width="22px" ></a>
                                             </div>
                                         </div>
                                     </td>
@@ -76,4 +73,31 @@
         </div>
     </div>
 </div>
+
+@foreach ($usuarios as $user)
+    <div class="modal fade" id="deletar-usuario-{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deletar {{ $user->nome. ' '.  $user->sobrenome }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-delete-usuario-{{$user->id}}" method="POST" action="{{ route('user.destroy', $user->id)}} ">
+                        <input type="hidden" name="_method" value="DELETE">
+                        @csrf
+                        Tem certeza que deseja deletar o usuário {{ $user->nome. ' '.  $user->sobrenome }}?
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" form="form-delete-usuario-{{$user->id}}">Deletar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
 @endsection

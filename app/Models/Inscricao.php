@@ -36,7 +36,7 @@ class Inscricao extends Model
         'pcd',
         'users_id',
         'concursos_id',
-        'vagas_id'
+        'vagas_id',
     ];
 
     public function concurso()
@@ -52,5 +52,10 @@ class Inscricao extends Model
     public function vaga()
     {
         return $this->belongsTo(OpcoesVagas::class, 'vagas_id');
+    }
+
+    public function avaliacao()
+    {
+        return $this->hasOne(Avaliacao::class, 'inscricoes_id');
     }
 }

@@ -2,13 +2,41 @@
 @section('content')
 <div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
     <div class="form-row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Documentos</h6>
                 </div>
                 <div class="card-body">
                     <div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @if ($arquivos == null || $arquivos->dados_pessoais == null)
+                                    <a class="btn btn-light">
+                                        <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                        Dados Pessoais(Documento ainda não enviado)
+                                    </a>
+                                @else
+                                    <a class="btn btn-light" href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_new">
+                                        <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                        Dados Pessoais
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-6">
+                                @if ($arquivos == null || $arquivos->curriculum_vitae_lattes == null)
+                                    <a class="btn btn-light">
+                                        <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                        Curriculum vitae modelo Lattes(Documento ainda não enviado)
+                                    </a>
+                                @else
+                                    <a class="btn btn-light" href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "lattes"])}}" target="_new">
+                                        <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                        Curriculum vitae modelo Lattes
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-row ">
                             <div class="form-group col-md-6">
                                 @if ($arquivos == null || $arquivos->formacao_academica == null)
@@ -69,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Pontuação</h6>
@@ -96,7 +124,7 @@
                                     <form>
                                         @csrf
                                 @else
-                                    <form method="POST" action="{{ route('avalia.documentos.inscricao', $arquivos->inscricoes_id) }}">
+                                    <form method="POST" action="{{ route('avalia.documentos.inscricao', $arquivos->inscricoes_id) }}" enctype="multipart/form-data">
                                     @csrf
                                 @endif
                                     <div class="form-row">
@@ -110,6 +138,16 @@
                                                 @endif 
                                         </div>
                                     </div>
+                                     <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="ficha_avaliacao" class="style_campo_titulo">Ficha de avaliação</label>
+                                            @if($avaliacao != null && $avaliacao->ficha_avaliacao != null) <a href="{{route('visualizar.ficha-avaliacao', $avaliacao->id)}}" target="_blank">Arquivo atual</a> @endif
+                                            <input type="file" class="form-control style_campo" id="ficha_avaliacao" name="ficha_avaliacao"  required/>
+                                            @error('ficha_avaliacao')
+                                                <span style="color: red">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                     </div>
                                     @if (!$avaliacao)
                                         <div class="form-row justify-content-center">
                                             <div class="col-md-6 form-group" style="margin-bottom: 9px;">

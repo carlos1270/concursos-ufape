@@ -64,15 +64,25 @@
                                                 <div class="btn-group">
                                                     <div style="margin-right: 15px;">
                                                         <a class="btn btn-success" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" ></a>
-                                                        <a class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px" ></a>
+                                                        @if ($concurso->data_resultado_selecao <= now())
+                                                            <a class="btn btn-warning" href="{{ route('concurso.resultado', $concurso->id) }}"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px"></a>
+                                                        @else
+                                                            <button class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px" disabled/>
+                                                        @endif
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
-                                                    <div>
-                                                        <a class="btn btn-primary" href="{{route('concurso.show', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" ></a>
-                                                        @if(Auth::user()->role != "presidenteBancaExaminadora")
-                                                            <a class="btn btn-info" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}"><img src="{{ asset('img/icon_editar.svg') }}" alt="Editar concurso" width="22px" ></a>
-                                                            <a class="btn btn-danger" data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}"><img src="{{ asset('img/icon_lixeira.svg') }}" alt="Deletar concurso" width="22px" ></a>
-                                                        @endif
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            ⁝
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
+                                                            @if(Auth::user()->role != "presidenteBancaExaminadora")
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}">Editar concurso</a>
+                                                                <a class="dropdown-item"  data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}"><span style="color: red">Deletar concurso<span></a>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -85,28 +95,15 @@
                             <div><h6 style="font-weight: bold">Legenda:</h6></div>
                             <div class="form-row">
                                 <div style="margin:5px">
-                                    <button class="btn btn-success" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_candidato.svg" width="20px"/>
-                                    </button> Visualizar Candidatos
+                                    <a class="btn btn-success" style="margin-right: 10px">
+                                        <img src="{{ asset('img/icon_candidato.svg') }}" width="20px">
+                                    </a> Visualizar Candidatos
                                 </div>
                                 <div style="margin: 5px">
-                                    <button class="btn btn-warning" style="margin-right: 10px" disabled>
-                                    <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="15px"/>
-                                    </button> Consultar o resultado final </div>
-                                <div style="margin: 5px">
-                                        <button class="btn btn-primary" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_visualizar.svg" width="24px"/>
-                                        </button> Visualizar Concurso</div>
-                                @if(Auth::user()->role != "presidenteBancaExaminadora")
-                                    <div style="margin: 5px">
-                                        <button class="btn btn-info" class="btn btn-success" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_editar.svg" width="16px"/>
-                                        </button> Editar Concurso</div>
-                                    <div style="margin: 5px">
-                                        <button class="btn btn-danger" class="btn btn-success" style="margin-right: 10px" disabled>
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_lixeira.svg" width="16px"/>
-                                        </button> Deletar Concurso</div>
-                                @endif
+                                    <a class="btn btn-warning" style="margin-right: 10px">
+                                        <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="15px"/>
+                                    </a> Consultar o resultado final
+                                </div>
                             </div>
                         </div>
                     @else
@@ -128,25 +125,25 @@
     @foreach ($concursos as $concurso)
         <div class="modal fade" id="deletar-concurso-{{$concurso->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deletar {{$concurso->titulo}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar {{$concurso->titulo}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-delete-concurso-{{$concurso->id}}" method="POST" action="{{route('concurso.destroy', ['concurso' => $concurso->id])}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            @csrf
+                            Tem certeza que deseja deletar o concurso {{$concurso->titulo}}?
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" form="form-delete-concurso-{{$concurso->id}}">Deletar</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form id="form-delete-concurso-{{$concurso->id}}" method="POST" action="{{route('concurso.destroy', ['concurso' => $concurso->id])}}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        @csrf
-                        Tem certeza que deseja deletar o concurso {{$concurso->titulo}}?
-                    </form>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-danger" form="form-delete-concurso-{{$concurso->id}}">Deletar</button>
-                </div>
-            </div>
             </div>
         </div>
     @endforeach
