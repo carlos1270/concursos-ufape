@@ -29,7 +29,12 @@
                                                 {{ $inscricao->avaliacao->nota }}
                                             </td>
                                             <td id="tabela_container_linha">
-                                               <a href="{{route('visualizar.ficha-avaliacao', $inscricao->avaliacao->id)}}" target="_blank">Arquivo atual</a>
+                                                <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $inscricao->avaliacao->id)}}" target="_new">
+                                                    <div class="btn-group">
+                                                        <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
+                                                        <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Baixar</h6>
+                                                    </div>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

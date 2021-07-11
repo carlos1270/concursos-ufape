@@ -244,7 +244,14 @@
                                     @csrf
                                     <div class="col-md-12">
                                         <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
-                                        @if($avaliacao != null && $avaliacao->ficha_avaliacao != null) <a href="{{route('visualizar.ficha-avaliacao', $avaliacao->id)}}" target="_blank">Arquivo atual</a> @endif
+                                        @if($avaliacao != null && $avaliacao->ficha_avaliacao != null)
+                                            <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $avaliacao->id)}}" target="_new">
+                                                <div class="btn-group">
+                                                    <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
+                                                    <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Baixar</h6>
+                                                </div>
+                                            </a>
+                                        @endif
                                         <input type="file" class="form-control form-control-sm" id="ficha_avaliacao" 
                                             style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff" name="ficha_avaliacao"  required/>
                                         @error('ficha_avaliacao')
