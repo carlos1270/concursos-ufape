@@ -9,6 +9,8 @@ use App\Models\Concurso;
 use App\Models\OpcoesVagas;
 use App\Http\Requests\StoreInscricaoRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ConfirmarInscricao;
 
 class CandidatoController extends Controller
 {
@@ -52,6 +54,7 @@ class CandidatoController extends Controller
     public function saveInscricao(StoreInscricaoRequest $request)
     {
         $request->validated();
+        $this->authorize('create', Inscricao::class);
         $vagas = OpcoesVagas::find($request->vaga);
 
         if (!$vagas) {
@@ -67,6 +70,8 @@ class CandidatoController extends Controller
         $inscricao->concursos_id = $vagas->concursos_id;
         $inscricao->vagas_id = $vagas->id;
         $inscricao->save();
+
+        Notification::send(auth()->user(), new ConfirmarInscricao($inscricao));
 
         return redirect()->route('candidato.index')->with('success', 'Sua inscrição foi realizada com sucesso');
     }

@@ -23,6 +23,7 @@
                                 <tr>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 50%;">Concurso</th>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 30%;">Vaga</th>
+                                    <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Pagamento</th>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Status</th>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Ações</th>
                                 </tr>
@@ -32,6 +33,15 @@
                                     <tr>
                                         <td id="tabela_container_linha">{{ $inscricao->concurso->titulo }}</td>
                                         <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
+                                        <td id="tabela_container_linha">
+                                            @if ($inscricao->status == "aprovado")
+                                                Pagamento aprovado
+                                            @else 
+                                                <a target="_black" href="https://consulta.tesouro.fazenda.gov.br/gru_novosite/gerarHTML.asp?codigo_favorecido=156687&gestao=26456**20953&nome_favorecido=UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO&codigo_recolhimento=28883-7&vencimento={{$inscricao->concurso->data_fim_pagamento_inscricao}}&cnpj_cpf={{$inscricao->user->candidato->cpf}}&nome_contribuinte={{$inscricao->user->nome . " " . $inscricao->user->sobrenome}}&valorPrincipal=30,00&valorTotal=30,00&boleto=4">
+                                                    Gerar boleto
+                                                </a>
+                                            @endif
+                                        </td>
                                         <td id="tabela_container_linha">{{ $inscricao->status }}</td>
                                         <td id="tabela_container_linha" style="text-align: center;">
                                             <div class="btn-group">
@@ -57,7 +67,7 @@
                     <div class="card-body">
                         <div class="form-row" style="text-align: center;">
                             <div class="col-md-12" style="margin-top: 5rem; margin-bottom: 10rem;">
-                                <img src="img/img_default_meus_concursos.svg" alt="Imagem default" width="190px">
+                                <img src="{{asset('img/img_default_meus_concursos.svg')}}" alt="Imagem default" width="190px">
                                 <h6 class="style_campo_titulo" style="margin-top: 20px;">Você não se candidatou para nenhum concurso</h6>
                             </div>
                         </div>

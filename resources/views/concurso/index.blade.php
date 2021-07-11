@@ -40,20 +40,28 @@
                                     </div>
                                 </div>
                             @enderror
-                            <table class="table table-bordered table-hover tabela_container">
+                            <table class="table table-hover table-responsive-sm">
                                 <thead>
-                                    <tr>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo">Id</th>
-                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Concurso</th>
+                                    <tr class="shadow-sm" style="border: 1px solid #dee2e6">
+                                        <th scope="col" class="tabela_container_cabecalho_titulo">#</th>
+                                        <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%; text-align:left;">Concurso</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Status</th>
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $cont = 1;
+                                    @endphp
                                     @foreach ($concursos as $concurso)
                                         <tr>
-                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$concurso->id}}</th>
-                                            <td id="tabela_container_linha">{{$concurso->titulo}}</td>
+                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
+                                            <td id="tabela_container_linha">
+                                                <div class="form-group">
+                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $concurso->id])}}" style="font-size: 18px">{{$concurso->titulo}}</a></div>
+                                                    <div><h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:15px">Criado no dia: {{$concurso->created_at->format('d/m/Y')}}</h6></div>
+                                                </div>
+                                            </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
                                                     <img src="img/icon_publicado.svg" alt="" width="25px" style="margin-right: 5px;">
@@ -62,47 +70,58 @@
                                             </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
-                                                    <div style="margin-right: 15px;">
-                                                        <a class="btn btn-success" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="23x" ></a>
+                                                    <div style="margin-right: 10px">
+                                                        <a class="btn btn-success shadow-sm" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
+                                                    </div>
+                                                    <div style="margin-right: 15px">
                                                         @if ($concurso->data_resultado_selecao <= now())
-                                                            <a class="btn btn-warning" href="{{ route('concurso.resultado', $concurso->id) }}"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px"></a>
+                                                            <a class="btn btn-warning shadow-sm" href="{{ route('concurso.resultado', $concurso->id) }}">
+                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
+                                                            </a>
                                                         @else
-                                                            <button class="btn btn-warning"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="18px" disabled/>
+                                                            <a class="btn btn-warning shadow-sm">
+                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
+                                                            </a>
                                                         @endif
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
                                                     <div class="dropdown">
-                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            ⁝
+                                                        <button class="btn btn-light dropdown-toggle shadow-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <img class="filter-green" src="{{asset('img/icon_acoes.svg')}}" style="width: 4px;">
                                                         </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
                                                             @if(Auth::user()->role != "presidenteBancaExaminadora")
                                                                 <div class="dropdown-divider"></div>
                                                                 <a class="dropdown-item" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}">Editar concurso</a>
-                                                                <a class="dropdown-item"  data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}"><span style="color: red">Deletar concurso<span></a>
+                                                                <a class="dropdown-item" data-toggle="modal" data-target="#deletar-concurso-{{$concurso->id}}" style="color: red; cursor: pointer;">Deletar concurso</a>
                                                             @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @php
+                                        $cont = $cont +1;
+                                    @endphp
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer" style="background-color: #fff; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
-                            <div><h6 style="font-weight: bold">Legenda:</h6></div>
+                            <div><h6 style="color: #909090; margin-bottom:1px">Legenda:</h6></div>
                             <div class="form-row">
-                                <div style="margin:5px">
-                                    <a class="btn btn-success" style="margin-right: 10px">
-                                        <img src="{{ asset('img/icon_candidato.svg') }}" width="20px">
-                                    </a> Visualizar Candidatos
+                                <div class="btn-group" style="margin:5px">
+                                    <label style="margin-right: 10px; padding-left:13px;padding-right:13px; border-radius:6px; background-color:#28A745">
+                                        <img class="card-img-left example-card-img-responsive" src="img/icon_candidato.svg" width="15px" style="margin-top: 10px "/>
+                                    </label>
+                                    <h6>Visualizar <br>Candidatos</h6>
                                 </div>
-                                <div style="margin: 5px">
-                                    <a class="btn btn-warning" style="margin-right: 10px">
-                                        <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="15px"/>
-                                    </a> Consultar o resultado final
+                                <div class="btn-group" style="margin: 5px">
+                                    <label style="margin-right: 10px; padding-left:13px;padding-right:13px; border-radius:6px; background-color:#FFC107">
+                                        <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="12px" style="margin-top: 10px "/>
+                                    </label>
+                                    <h6>Consultar o <br>resultado final</h6>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +129,7 @@
                         <div class="card-body">
                             <div class="form-row" style="text-align: center;">
                                 <div class="col-md-12" style="margin-top: 5rem; margin-bottom: 10rem;">
-                                    <img src="img/img_default_meus_concursos.svg" alt="Imagem default" width="190px">
+                                    <img src="{{asset('img/img_default_meus_concursos.svg')}}" alt="Imagem default" width="190px">
                                     <h6 class="style_campo_titulo" style="margin-top: 20px;">Nenhum concurso criado.</h6>
                                     <h6 class="style_campo_titulo" style="font-weight: normal;"><a href="{{route('concurso.create')}}">Clique aqui</a> para criar um concurso</h6>
                                 </div>
