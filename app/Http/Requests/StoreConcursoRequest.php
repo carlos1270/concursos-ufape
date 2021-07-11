@@ -33,7 +33,7 @@ class StoreConcursoRequest extends FormRequest
             'data_limite_para_pagamento'                    => 'required|after:data_de_início_da_inscrição',
             'data_de_início_para_envio_dos_documentos'      => 'required|after:data_de_término_da_inscrição',
             'data_final_para_envio_dos_documentos'          => 'required|after:data_de_início_para_envio_dos_documentos',
-            'data_do_resultado_do_concurso'                 => 'required|after:data_fim_envio_doc',
+            'data_do_resultado_do_concurso'                 => 'required|after:data_final_para_envio_dos_documentos',
             'edital_geral'                                  => 'nullable|file|mimes:pdf|max:2048',
             'edital_específico'                             => 'nullable|file|mimes:pdf|max:2048',
             'declaração_de_veracidade'                      => 'nullable|file|mimes:pdf,docx|max:2048',
