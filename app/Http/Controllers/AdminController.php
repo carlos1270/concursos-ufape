@@ -69,7 +69,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $usuario = User::find($id);
-        $rules = User::$rules;
+        $rules = User::$rulesAdmin;
         $messages = User::$messages;
 
         if (!$request['password']) {
