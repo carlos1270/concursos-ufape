@@ -30,7 +30,7 @@ class UsuarioCadastrado extends Notification
     {
         $this->usuario = $usuario;
         $this->linha_p1 = "Sr(a). " . $this->usuario->nome . ",";
-        $this->linha_p2 = "Informamos que você foi cadastrado no Concursos-UFAPE";
+        $this->linha_p2 = "Informamos que você foi cadastrado no " . config('app.name');
         $this->linha_p3 = "Suas informações de login são: ";
         $this->linha_p4 = "Login: " . $this->usuario->email;
         $this->linha_p5 = "Senha: " . $this->usuario->password;
@@ -62,7 +62,6 @@ class UsuarioCadastrado extends Notification
         }
 
         return (new MailMessage)
-            ->from(env('MAIL_USERNAME'), 'Concursos-UFAPE')
             ->subject(Lang::get('Confirmação de conta'))
             ->line($this->linha_p1)
             ->line($this->linha_p2)
