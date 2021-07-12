@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\EmailDeVerificacao;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -146,5 +148,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function endereco() {
         return $this->hasOne(Endereco::class, 'users_id');
+    }
+
+    public function sendEmailVerificationNotification() {
+        Notification::send($this, new EmailDeVerificacao($this));
     }
 }

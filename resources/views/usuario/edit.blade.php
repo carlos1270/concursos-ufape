@@ -16,6 +16,7 @@
                         </div>
                         <form method="POST" action="{{ route('user.update', $user->id) }}">
                             @csrf
+                            <input type="hidden" name="_method" value="PUT">
                             @if(session('success'))
                                 <div class="col-md-12">
                                     <div class="alert alert-success" role="alert">

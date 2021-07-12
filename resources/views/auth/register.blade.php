@@ -162,8 +162,9 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
+                                <input id="país_de_origem_input_hidden" type="hidden" value="{{old('país_de_origem')}}" name="país_de_origem">
                                 <label for="país_de_origem" class="style_campo_titulo">País de origem <span style="color: red; font-weight: bold;">*</span></label>
-                                <select name="país_de_origem" id="país_de_origem" class="form-control style_campo @error('país_de_origem') is-invalid @enderror" required>
+                                <select id="país_de_origem" class="form-control style_campo @error('país_de_origem') is-invalid @enderror" required onchange="setarInputPais(this)">
                                     <option value="" disabled selected >-- Selecione seu país de origem --</option>
                                     <option @if(old('país_de_origem') == "Brasil") selected @endif value="Brasil">Brasil</option>
                                     <option @if(old('país_de_origem') == "Afeganistão") selected @endif value="Afeganistão">Afeganistão</option>
@@ -616,12 +617,19 @@
 
     function selecionarPais(pais) {
         var select = document.getElementById('país_de_origem');
+        var input = document.getElementById('país_de_origem_input_hidden');
         if (pais == "Brasil") {
             select.disabled = true;
         } else {
             select.disabled = false;
         }
-        select.value=pais;
+        select.value = pais;
+        input.value = pais;
+    }
+
+    function setarInputPais(select) {
+        var input = document.getElementById('país_de_origem_input_hidden');
+        input.value = select.value;
     }
 
     function limparCampos() {

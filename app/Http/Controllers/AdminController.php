@@ -69,7 +69,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $usuario = User::find($id);
-        $rules = User::$rules;
+        $rules = User::$rulesAdmin;
         $messages = User::$messages;
 
         if (!$request['password']) {
@@ -97,12 +97,23 @@ class AdminController extends Controller
 
         $usuario->fill($data)->update();
 
-        return redirect(route('usuario.index'))->with(['success' => 'Usuário editado com sucesso!']);
+        return redirect(route('user.index'))->with(['success' => 'Usuário editado com sucesso!']);
     }
 
     public function destroy($id)
     {
         $usuario = User::find($id);
+        
+        if ($usuario->concursos->count() > 0) {
+            return redirect()->back()->withErrors(['error' => 'Não é possivel deletar o usuário pois ele criou concursos.']);
+        }
+        if ($usuario->inscricoes->count() > 0) {
+            return redirect()->back()->withErrors(['error' => 'Não é possivel deletar o usuário pois existem inscrições realizadas do mesmo.']);
+        }
+        if ($usuario->concursosChefeBanca->count() > 0) {
+            return redirect()->back()->withErrors(['error' => 'Não é possivel deletar o usuário pois ele está vinculado como chefe de banca examinadora em um concurso.']);
+        }
+
         $usuario->delete();
 
         return redirect(route('user.index'))->with(['success' => 'Usuário deletado com sucesso!']);

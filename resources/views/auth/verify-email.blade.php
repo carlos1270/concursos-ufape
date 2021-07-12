@@ -5,13 +5,14 @@
         <div class="col-md-8">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                    <h6 class="style_card_container_header_titulo">Obrigado por se registrar</h6>
+                    <h6 class="style_card_container_header_titulo">Solicitação de criação de usuário feita com sucesso!</h6>
                 </div>
                 <div class="card-body">
                     <div>
                         <div class="col-md-12">
-                            <p>Antes de começar, você poderia verificar seu endereço de e-mail clicando no link que acabamos de
-                                enviar para você? Se você não recebeu o e-mail, teremos o prazer de enviar outro.</p>
+                            <p style="text-align: justify;">
+                                Para efetivar a criação de sua conta, pedimos que acesse o link que acabamos de enviar para você. Caso o e-mail não esteja na caixa de entrada, verifique a pasta de spam ou outras do seu gerenciador de e-mails. Contudo, se não tiver realmente chegado, clique no botão abaixo para enviarmos o e-mail novamente.
+                            </p>
                         </div>
                         @if (session('status') == 'verification-link-sent')
                             <div class="col-md-12">
