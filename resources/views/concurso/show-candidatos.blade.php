@@ -68,19 +68,11 @@
                                                             <div>
                                                                 @if ($inscricao->concurso->data_inicio_inscricao <= now() && now() <= $inscricao->concurso->data_fim_inscricao)
                                                                     <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
-                                                                        @if (Auth::user()->role == "admin")
-                                                                            1º Etapa
-                                                                        @else
-                                                                            Avaliar
-                                                                        @endif
+                                                                        1º Etapa
                                                                     </button>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
-                                                                        @if (Auth::user()->role == "admin")
-                                                                            1º Etapa
-                                                                        @else
-                                                                            Avaliar
-                                                                        @endif
+                                                                       1º Etapa
                                                                     </button>
                                                                 @endif
                                                             </div>
@@ -120,7 +112,7 @@
                         <div class="card-body">
                             <div class="form-row" style="text-align: center;">
                                 <div class="col-md-12" style="margin-top: 5rem; margin-bottom: 10rem;">
-                                    <img src="img/img_default_meus_inscricoes.svg" alt="Imagem default" width="190px">
+                                    <img src="{{ asset('img/img_default_meus_inscricoes.svg') }}" alt="Imagem default" width="190px">
                                     <h6 class="style_campo_titulo" style="margin-top: 20px;">Nenhum candiadato inscreveu-se para esse concurso.</h6>
                                 </div>
                             </div>

@@ -223,25 +223,25 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <div class="form-row ">
-                            @if ($avaliacao)
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>A pontuação já foi salva. </strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                            @if ($arquivos == null)
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong> Só é possível enviar a pontuação quando os arquivos estiverem disponíveis. </strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @else
-                                <form method="POST" action="{{ route('avalia.documentos.inscricao', $arquivos->inscricoes_id) }}" enctype="multipart/form-data">
-                                    @csrf
+                        @if ($avaliacao)
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>A pontuação já foi salva. </strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if ($arquivos == null)
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong> Só é possível enviar a pontuação quando os arquivos estiverem disponíveis. </strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @else
+                            <form method="POST" action="{{ route('avalia.documentos.inscricao', $arquivos->inscricoes_id) }}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-row">
                                     <div class="col-md-12">
                                         <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
                                         @if($avaliacao != null && $avaliacao->ficha_avaliacao != null)
@@ -272,7 +272,7 @@
                                             </div>
                                         </div>
                                         @if (!$avaliacao)
-                                            <div class="form-row justify-content-end">
+                                            <div class="form-row justify-content-center">
                                                 <div class="col-md-12"><hr></div>
                                                 <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
                                                     <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
@@ -280,9 +280,9 @@
                                             </div>
                                         @endif
                                     </div>
-                                </form>
-                            @endif
-                        </div>
+                                </div>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

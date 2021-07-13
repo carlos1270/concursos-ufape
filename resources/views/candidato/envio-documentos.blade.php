@@ -18,7 +18,7 @@
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-1s2">
-                                    <h6 style="text-align:justify;">Descrição de como funciona a segunda fase...O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500, quando uma misturou os caracteres de um texto para criar um espécime de livro.</h6>
+                                    <h6 style="text-align:justify;">Durante esta fase devem ser enviados os documentos marcados como obrigatórios, em formato PDF com tamanho máximo de 2MB por arquivo.</h6>
                                 </div>
 
                                 <div class="form-group col-md-12">
@@ -108,7 +108,7 @@
 
                             <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao->id }}"/>
                             <div><hr></div>
-                            <div class="form-row justify-content-end">
+                            <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
                                     @if ($inscricao->data_inicio_envio_doc <= now() && now() <= $inscricao->data_fim_envio_doc)
                                         <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">

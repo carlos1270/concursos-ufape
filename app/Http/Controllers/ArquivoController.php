@@ -73,29 +73,44 @@ class ArquivoController extends Controller
             Storage::delete('public/' . $arquivos->experiencia_didatica);
         }
 
-        $path_experiencia_didatica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-        $nome_experiencia_didatica = 'experiencia_didatica.pdf';
-        Storage::putFileAs('public/' . $path_experiencia_didatica, $request->experiencia_didatica, $nome_experiencia_didatica);
+        if ($request->experiencia_didatica) {
+            $path_experiencia_didatica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+            $nome_experiencia_didatica = 'experiencia_didatica.pdf';
+            Storage::putFileAs('public/' . $path_experiencia_didatica, $request->experiencia_didatica, $nome_experiencia_didatica);
+        } else {
+            $path_experiencia_didatica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+            $nome_experiencia_didatica = '';
+        }
 
         if ($arquivos && $arquivos->producao_cientifica) {
             Storage::delete('public/' . $arquivos->producao_cientifica);
         }
 
-        $path_producao_cientifica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-        $nome_producao_cientifica = 'producao_cientifica.pdf';
-        Storage::putFileAs('public/' . $path_producao_cientifica, $request->producao_cientifica, $nome_producao_cientifica);
+        if ($request->producao_cientifica) {
+            $path_producao_cientifica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+            $nome_producao_cientifica = 'producao_cientifica.pdf';
+            Storage::putFileAs('public/' . $path_producao_cientifica, $request->producao_cientifica, $nome_producao_cientifica);
+        } else {
+            $path_producao_cientifica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+            $nome_producao_cientifica = '';
+        }
 
         if ($arquivos && $arquivos->experiencia_profissional) {
             Storage::delete('public/' . $arquivos->experiencia_profissional);
         }
 
-        $path_experiencia_profissional = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-        $nome_experiencia_profissional = 'experiencia_profissional.pdf';
-        Storage::putFileAs('public/' . $path_experiencia_profissional, $request->experiencia_profissional, $nome_experiencia_profissional);
+        if ($request->experiencia_profissional) {
+            $path_experiencia_profissional = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+            $nome_experiencia_profissional = 'experiencia_profissional.pdf';
+            Storage::putFileAs('public/' . $path_experiencia_profissional, $request->experiencia_profissional, $nome_experiencia_profissional);
+        } else {
+            $path_experiencia_profissional = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+            $nome_experiencia_profissional = '';
+        }
 
         if (!$arquivos) {
             Arquivo::create([
-                'dados_pessoais'            => $path_dados_pessoais . $nome_dados_pessoais,
+                'dados_pessoais'           => $path_dados_pessoais . $nome_dados_pessoais,
                 'curriculum_vitae_lattes'  => $path_curriculum_vitae_lattes . $nome_curriculum_vitae_lattes,
                 'formacao_academica'       => $path_formacao_academica . $nome_formacao_academica,
                 'experiencia_didatica'     => $path_experiencia_didatica . $nome_experiencia_didatica,

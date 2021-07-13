@@ -191,7 +191,7 @@ class ConcursoController extends Controller
         $endereco = $inscricao->user->endereco;
 
         $listaCandidados = Inscricao::where('concursos_id', '=', $inscricao->concursos_id)->orderBy('created_at', 'ASC')->get();
-        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco','listaCandidados'));
+        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco', 'listaCandidados'));
     }
 
     public function aprovarReprovarCandidato(Request $request)
