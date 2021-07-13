@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -14,8 +16,34 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(1)->create(['email' => 'admin@admin.com']);
-        \App\Models\User::factory(1)->create(['email' => 'chefe@chefe.com', 'role' => User::ROLE_ENUM["chefeSetorConcursos"]]);
-        \App\Models\User::factory(1)->create(['email' => 'presidente@presidente.com', 'role' => User::ROLE_ENUM["presidenteBancaExaminadora"]]);
+        User::create([
+            'nome' => "admin",
+            'sobrenome' => "do sistema",
+            'email' => "admin@admin.com",
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'remember_token' => Str::random(10),
+            'role' => User::ROLE_ENUM["admin"],
+        ]);
+
+        User::create([
+            'nome' => "chefe",
+            'sobrenome' => "da banca",
+            'email' => "chefe@chefe.com",
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'remember_token' => Str::random(10),
+            'role' => User::ROLE_ENUM["chefeSetorConcursos"],
+        ]);
+
+        User::create([
+            'nome' => "chefe",
+            'sobrenome' => "da banca",
+            'email' => "presidente@presidente.com",
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'remember_token' => Str::random(10),
+            'role' => User::ROLE_ENUM["presidenteBancaExaminadora"],
+        ]);
     }
 }
