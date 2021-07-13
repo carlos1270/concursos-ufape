@@ -13,13 +13,14 @@
                             <p style="text-align: justify;">
                                 Para efetivar a criação de sua conta, pedimos que acesse o link que acabamos de enviar para você. Caso o e-mail não esteja na caixa de entrada, verifique a pasta de spam ou outras do seu gerenciador de e-mails. Contudo, se não tiver realmente chegado, clique no botão abaixo para enviarmos o e-mail novamente.
                             </p>
+                            @if (session('status') == 'verification-link-sent')
+                                <p class="alert alert-success">
+                                    Um novo link de verificação foi enviado para o endereço de e-mail fornecido durante o registro.
+                                </p>
+                            @endif
                         </div>
-                        @if (session('status') == 'verification-link-sent')
-                            <div class="col-md-12">
-                                <p>Um novo link de verificação foi enviado para o endereço de e-mail fornecido durante o registro.</p>
-                            </div>
-                        @endif
                         <div class="form-row">
+                            
                             <div class="col-md-6">
                                 <form method="POST" action="{{ route('verification.send') }}">
                                     @csrf

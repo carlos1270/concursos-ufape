@@ -118,7 +118,9 @@
                                     @endforeach
                                 </select>
                                 @error('concurso')
-                                    <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                             <div class="col-md-12" style="margin-bottom: 5px;">

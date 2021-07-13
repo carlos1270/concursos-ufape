@@ -19,7 +19,9 @@
                                 <input type="email" class="form-control style_campo" id="email" name="email" 
                                     value="{{ old('email', $request->email) }}" placeholder="Digite seu e-mail" required autofocus/>
                                 @error('email')
-                                    <span style="color: red">{{ $message }}</span>
+                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
                             <div class="col-md-12 form-group">
@@ -27,7 +29,9 @@
                                 <input type="password" class="form-control style_campo" id="password" name="password"
                                     placeholder="Digite sua senha" required autocomplete="current-password" />
                                 @error('password')
-                                    <span style="color: red">{{ $message }}</span>
+                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
                             <div class="col-md-12 form-group">
