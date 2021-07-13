@@ -25,24 +25,28 @@
                     </a>
                     <div class="form-group" style="margin-bottom: 0px;">
 
-                        <a style="margin-right: 15px;" href="{{ route('index') }}">Início</a>
+                        <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('index') }}">Início</a>
+                        
+                        @if(!Auth::user())
+                            <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('about') }}">Sobre</a>
+                        @endif
                         @auth
                             @if(Auth::user()->role == "candidato")
                                 <a href="{{ route('candidato.index') }}" :active="request()->routeIs('candidato.index')" 
-                                    style="margin-right: 15px;">Inscrições</a>
+                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Inscrições</a>
                             @endif
 
                             @if(Auth::user()->role == "admin")
                                 <a href="{{ route('user.index') }}" :active="request()->routeIs('user.users')" 
-                                    style="margin-right: 15px;">Usuários</a>
+                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Usuários</a>
                             @endif
 
                             @if(Auth::user()->role != "candidato")
                                 <a href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.index')" 
-                                    style="margin-right: 15px;">Concursos</a>
+                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Concursos</a>
                             @endif
                             <div class="btn-group">
-                                <a href="" class="dropdown-toggle" style="margin-right: 15px;" data-toggle="dropdown" 
+                                <a href="" class="dropdown-toggle btn btn-light" style="margin-right: 15px; color:#007bff" data-toggle="dropdown" 
                                     aria-haspopup="true" aria-expanded="false">
                                     Olá, {{ Auth::user()->nome }}
                                 </a>
@@ -52,7 +56,8 @@
                                     </a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-
+                                        <a class="dropdown-item" href="{{ route('about') }}">Sobre</a>
+                                        <hr>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                             Sair
@@ -61,7 +66,7 @@
                                 </div>
                             </div>
                         @else
-                            <a href="{{ route('login') }}" style="margin-right: 15px;">Entrar</a>
+                            <a href="{{ route('login') }}" class="btn btn-light" style="margin-right: 15px; color:#007bff">Entrar</a>
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="btn btn-outline-primary my-2 my-sm-0 shadow-sm">Cadastre-se</a>
