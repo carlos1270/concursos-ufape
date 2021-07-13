@@ -110,7 +110,7 @@
                             <div><hr></div>
                             <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
-                                    @if ($inscricao->data_inicio_envio_doc <= now() && now() <= $inscricao->data_fim_envio_doc)
+                                    @if ($inscricao->data_inicio_envio_doc <= now() && now() >= $inscricao->data_fim_envio_doc)
                                         <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">
                                             Enviar
                                         </button>

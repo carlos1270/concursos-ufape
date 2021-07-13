@@ -1,8 +1,8 @@
 @extends('templates.template-principal')
 @section('content')
-<div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
+<div class="container" style="margin-top: 5rem; margin-bottom: 10rem;">
     <div class="form-row justify-content-center">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Minhas Inscrições</h6>
@@ -31,13 +31,13 @@
                             <tbody>
                                 @foreach ($inscricoes as $inscricao)
                                     <tr>
-                                        <td id="tabela_container_linha">{{ $inscricao->concurso->titulo }}</td>
-                                        <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
+                                        <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->concurso->titulo, 0, 38, "...") }}</td>
+                                        <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->vaga->nome, 0, 20, "...") }}</td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
                                                 Pagamento aprovado
                                             @else 
-                                                <a target="_black" href="https://consulta.tesouro.fazenda.gov.br/gru_novosite/gerarHTML.asp?codigo_favorecido=156687&gestao=26456**20953&nome_favorecido=UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO&codigo_recolhimento=28883-7&vencimento={{$inscricao->concurso->data_fim_pagamento_inscricao}}&cnpj_cpf={{$inscricao->user->candidato->cpf}}&nome_contribuinte={{$inscricao->user->nome . " " . $inscricao->user->sobrenome}}&valorPrincipal=30,00&valorTotal=30,00&boleto=4">
+                                                <a target="_black" href="https://consulta.tesouro.fazenda.gov.br/gru_novosite/gerarHTML.asp?codigo_favorecido=156687&gestao=26456**20953&nome_favorecido=UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO&codigo_recolhimento=28883-7&vencimento={{date('d/m/Y',strtotime($inscricao->concurso->data_fim_pagamento_inscricao))}}&cnpj_cpf={{$inscricao->user->candidato->cpf}}&nome_contribuinte={{$inscricao->user->nome . " " . $inscricao->user->sobrenome}}&valorPrincipal=30,00&valorTotal=30,00&boleto=4">
                                                     Gerar boleto
                                                 </a>
                                             @endif
@@ -51,7 +51,7 @@
                                                         <img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" >
                                                     </button>
                                                 </div>
-                                                @if ($inscricao->data_inicio_envio_doc >= now() && $inscricao->status == "aprovado")
+                                                @if ($inscricao->data_inicio_envio_doc <= now() && $inscricao->status == "aprovado")
                                                     <a class="btn btn-primary" style="margin-left: 5px; border-radius: 4px;" href="{{ route('envio.documentos.inscricao', $inscricao->id) }}">
                                                         Enviar documentos
                                                     </a>

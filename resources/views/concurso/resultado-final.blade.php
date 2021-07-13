@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <div class="form-row" style="text-align: center;">
                                 <div class="col-md-12" style="margin-top: 5rem; margin-bottom: 10rem;">
-                                    <img src="img/img_default_meus_inscricoes.svg" alt="Imagem default" width="190px">
+                                    <img src="{{asset('img/img_default_meus_etapas.svg')}}" alt="Imagem default" width="190px">
                                     <h6 class="style_campo_titulo" style="margin-top: 20px;">Resultado final ainda não está disponível.</h6>
                                 </div>
                             </div>
