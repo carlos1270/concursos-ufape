@@ -21,7 +21,9 @@ use App\Http\Controllers\ArquivoController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('index');
 
-Route::get('/dashboard', function () {
+Route::get('/sobre', function() { return view('about'); })->name('about');
+
+Route::get('/dashboard', function() {
     return redirect(route('index'));
 })->name('dashboard');
 
