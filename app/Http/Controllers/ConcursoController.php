@@ -10,6 +10,7 @@ use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ConcursoController extends Controller
@@ -190,7 +191,7 @@ class ConcursoController extends Controller
         $endereco = $inscricao->user->endereco;
 
         $listaCandidados = Inscricao::where('concursos_id', '=', $inscricao->concursos_id)->orderBy('created_at', 'ASC')->get();
-        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco','listaCandidados'));
+        return view('concurso.avalia-inscricao-candidato', compact('inscricao', 'candidato', 'endereco', 'listaCandidados'));
     }
 
     public function aprovarReprovarCandidato(Request $request)
@@ -222,11 +223,26 @@ class ConcursoController extends Controller
     {
         Validator::make($request->all(), Avaliacao::$rules, Avaliacao::$messages)->validate();
 
+        $inscricao = Inscricao::find($request->inscricao_id);
+
+        $path_ficha_avaliacao = 'concursos/' . $inscricao->concurso->id . '/inscricoes/' . $inscricao->id . '/avaliacao/';
+        $nome_ficha_avaliacao = 'ficha_avaliacao.pdf';
+        Storage::putFileAs('public/' . $path_ficha_avaliacao, $request->ficha_avaliacao, $nome_ficha_avaliacao);
+
         Avaliacao::create([
-            'nota' => $request->nota,
-            'inscricoes_id' => $request->inscricao_id
+            'nota'            => $request->nota,
+            'ficha_avaliacao' => $path_ficha_avaliacao . $nome_ficha_avaliacao,
+            'inscricoes_id'   => $inscricao->id
         ]);
 
-        return redirect()->route('concurso.index')->with('mensage', 'Pontuação salva com sucesso!');
+        return redirect()->route('concurso.index')->with('mensage', 'Pontuação salva e ficha de avaliação salva com sucesso!');
+    }
+
+    public function showResultadoFinal(Request $request)
+    {
+        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->get();
+        $inscricoes = $inscricoes->sortBy('nota');
+
+        return view('concurso.resultado-final', compact('inscricoes'));
     }
 }

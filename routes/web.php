@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
     Route::get('/envio-documentos/inscricao/{inscricao_id}', [CandidatoController::class, 'showEnvioDocumentos'])
         ->name('envio.documentos.inscricao');
 
-    Route::post('/save-documentos', [CandidatoController::class, 'saveDocumentos'])
+    Route::post('/save-documentos', [ArquivoController::class, 'store'])
         ->name('save.documentos');
 });
 
@@ -70,6 +70,9 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserPresidenteBanca'])->gro
 
     Route::post('/avalia-documentos/inscricao/{inscricao_id}', [ConcursoController::class, 'savePontuacaoDocumentosCandidato'])
         ->name('avalia.documentos.inscricao');
+
+    Route::get('/concurso/resultado/{concurso_id}', [ConcursoController::class, 'showResultadoFinal'])
+        ->name('concurso.resultado');
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->group(function () {
@@ -79,3 +82,5 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->gr
 
 Route::resource('concurso', ConcursoController::class);
 Route::get('/visualizar-arquivo/{arquivo}/{cod}', [ArquivoController::class, 'show'])->name('visualizar.arquivo')->middleware('auth');
+Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, 'showFichAvaliacao'])
+    ->name('visualizar.ficha-avaliacao')->middleware('auth');

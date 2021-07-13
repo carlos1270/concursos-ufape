@@ -68,16 +68,31 @@
                                                             <div>
                                                                 @if ($inscricao->concurso->data_inicio_inscricao <= now() && now() <= $inscricao->concurso->data_fim_inscricao)
                                                                     <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
-                                                                        @if (Auth::user()->role == "admin")
-                                                                            1º Etapa
+                                                                        1º Etapa
+                                                                    </button>
+                                                                @else
+                                                                    <button class="btn btn-primary" disabled>
+                                                                       1º Etapa
+                                                                    </button>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                    @if ($inscricao->status == "aprovado")
+                                                        <div class="btn-group">
+                                                            <div style="margin-left: 5px">
+                                                                @if ($inscricao->concurso->data_inicio_envio_doc <= now() && now() <= $inscricao->concurso->data_fim_envio_doc)
+                                                                    <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
+                                                                        @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
+                                                                            2º Etapa
                                                                         @else
                                                                             Avaliar
                                                                         @endif
                                                                     </button>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
-                                                                        @if (Auth::user()->role == "admin")
-                                                                            1º Etapa
+                                                                        @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
+                                                                            2º Etapa
                                                                         @else
                                                                             Avaliar
                                                                         @endif
@@ -85,31 +100,6 @@
                                                                 @endif
                                                             </div>
                                                         </div>
-                                                    @endif
-                                                    @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos" ||Auth::user()->role == "presidenteBancaExaminadora")
-                                                        @if ($inscricao->status == "aprovado")
-                                                            <div class="btn-group">
-                                                                <div style="margin-left: 5px">
-                                                                    @if ($inscricao->concurso->data_inicio_envio_doc <= now() && now() <= $inscricao->concurso->data_fim_envio_doc)
-                                                                        <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
-                                                                            @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                                2º Etapa
-                                                                            @else
-                                                                                Avaliar
-                                                                            @endif
-                                                                        </button>
-                                                                    @else
-                                                                        <button class="btn btn-primary" disabled>
-                                                                            @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                                2º Etapa
-                                                                            @else
-                                                                                Avaliar
-                                                                            @endif
-                                                                        </button>
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        @endif  
                                                     @endif
                                                 </div>
                                             </td>
@@ -122,7 +112,7 @@
                         <div class="card-body">
                             <div class="form-row" style="text-align: center;">
                                 <div class="col-md-12" style="margin-top: 5rem; margin-bottom: 10rem;">
-                                    <img src="img/img_default_meus_inscricoes.svg" alt="Imagem default" width="190px">
+                                    <img src="{{ asset('img/img_default_meus_inscricoes.svg') }}" alt="Imagem default" width="190px">
                                     <h6 class="style_campo_titulo" style="margin-top: 20px;">Nenhum candiadato inscreveu-se para esse concurso.</h6>
                                 </div>
                             </div>
