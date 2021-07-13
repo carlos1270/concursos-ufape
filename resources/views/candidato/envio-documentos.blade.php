@@ -32,7 +32,9 @@
                                     <input type="file" class="form-control style_campo" id="dados_pessoais" name="dados_pessoais" 
                                         value="{{ old('dados_pessoais') }}" required/>
                                     @error('dados_pessoais')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
@@ -46,7 +48,9 @@
                                     <input type="file" class="form-control style_campo" id="curriculum_vitae_lattes" name="curriculum_vitae_lattes" 
                                         value="{{ old('curriculum_vitae_lattes') }}" required/>
                                     @error('curriculum_vitae_lattes')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
@@ -62,7 +66,9 @@
                                     <input type="file" class="form-control style_campo" id="formacao_academica" name="formacao_academica" 
                                         value="{{ old('formacao_academica') }}" required/>
                                     @error('formacao_academica')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
@@ -74,7 +80,9 @@
                                     </h6>
                                     <input type="file" class="form-control style_campo" id="experiencia_didatica" name="experiencia_didatica"/>
                                     @error('experiencia_didatica')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
@@ -88,7 +96,9 @@
                                     </h6>
                                     <input type="file" class="form-control style_campo" id="producao_cientifica" name="producao_cientifica"/>
                                     @error('producao_cientifica')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
@@ -100,7 +110,9 @@
                                     </h6>
                                     <input type="file" class="form-control style_campo" id="experiencia_profissional" name="experiencia_profissional"/>
                                     @error('experiencia_profissional')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>

@@ -28,7 +28,9 @@
                                         <input type="email" class="form-control style_campo" id="email" name="email" 
                                             :value="old('email')" placeholder="Digite seu e-mail" required autofocus/>
                                         @error('email')
-                                            <span style="color: red">{{ $message }}</span>
+                                            <div id="validationServer03Feedback" class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 

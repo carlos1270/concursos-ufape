@@ -37,7 +37,9 @@
                                     <input type="text" class="form-control style_campo" id="nome" name="nome"
                                         placeholder="Digite seu nome" value="{{ $user->nome }}" required autofocus autocomplete="nome"/>
                                     @error('nome')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
@@ -45,7 +47,9 @@
                                     <input type="text" class="form-control style_campo" id="sobrenome" name="sobrenome"
                                         value="{{ $user->sobrenome }}" placeholder="Digite seu sobrenome" required />
                                     @error('sobrenome')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -60,7 +64,9 @@
                                     <input type="email" class="form-control style_campo" id="email" name="email"
                                         placeholder="Digite seu e-mail" value="{{ $user->email }}" required />
                                     @error('email')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -70,7 +76,9 @@
                                     <input type="password" class="form-control style_campo" id="password" name="password"
                                         placeholder="Digite sua senha" autocomplete="new-password"/>
                                     @error('password')
-                                        <span style="color: red">{{ $message }}</span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 form-group">
