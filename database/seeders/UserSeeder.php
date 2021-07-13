@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'nome' => "chefe",
-            'sobrenome' => "da banca",
+            'sobrenome' => "de setor",
             'email' => "chefe@chefe.com",
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'nome' => "chefe",
+            'nome' => "presidente",
             'sobrenome' => "da banca",
             'email' => "presidente@presidente.com",
             'email_verified_at' => now(),
