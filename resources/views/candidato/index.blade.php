@@ -51,7 +51,7 @@
                                                         <img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" >
                                                     </button>
                                                 </div>
-                                                @if ($inscricao->data_inicio_envio_doc >= now() && $inscricao->status == "aprovado")
+                                                @if ($inscricao->data_inicio_envio_doc <= now() && $inscricao->status == "aprovado")
                                                     <a class="btn btn-primary" style="margin-left: 5px; border-radius: 4px;" href="{{ route('envio.documentos.inscricao', $inscricao->id) }}">
                                                         Enviar documentos
                                                     </a>
