@@ -31,8 +31,8 @@
                             <tbody>
                                 @foreach ($inscricoes as $inscricao)
                                     <tr>
-                                        <td id="tabela_container_linha">{{ $inscricao->concurso->titulo }}</td>
-                                        <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
+                                        <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->concurso->titulo, 0, 20, "...") }}</td>
+                                        <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->vaga->nome, 0, 20, "...") }}</td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
                                                 Pagamento aprovado
