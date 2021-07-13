@@ -1,8 +1,8 @@
 @extends('templates.template-principal')
 @section('content')
-<div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
+<div class="container" style="margin-top: 5rem; margin-bottom: 10rem;">
     <div class="form-row justify-content-center">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Minhas Inscrições</h6>
@@ -31,7 +31,7 @@
                             <tbody>
                                 @foreach ($inscricoes as $inscricao)
                                     <tr>
-                                        <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->concurso->titulo, 0, 20, "...") }}</td>
+                                        <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->concurso->titulo, 0, 38, "...") }}</td>
                                         <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->vaga->nome, 0, 20, "...") }}</td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
