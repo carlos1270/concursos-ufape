@@ -74,7 +74,15 @@
                                                         <a class="btn btn-success shadow-sm" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
                                                     </div>
                                                     <div style="margin-right: 15px">
-                                                        <a class="btn btn-warning shadow-sm"><img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" ></a>
+                                                        @if ($concurso->data_resultado_selecao <= now())
+                                                            <a class="btn btn-warning shadow-sm" href="{{ route('concurso.resultado', $concurso->id) }}">
+                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
+                                                            </a>
+                                                        @else
+                                                            <a class="btn btn-warning shadow-sm">
+                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
                                                     <div class="dropdown">
@@ -113,7 +121,8 @@
                                     <label style="margin-right: 10px; padding-left:13px;padding-right:13px; border-radius:6px; background-color:#FFC107">
                                         <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="12px" style="margin-top: 10px "/>
                                     </label>
-                                    <h6>Consultar o <br>resultado final</h6></div>
+                                    <h6>Consultar o <br>resultado final</h6>
+                                </div>
                             </div>
                         </div>
                     @else
@@ -135,25 +144,25 @@
     @foreach ($concursos as $concurso)
         <div class="modal fade" id="deletar-concurso-{{$concurso->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deletar {{$concurso->titulo}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar {{$concurso->titulo}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-delete-concurso-{{$concurso->id}}" method="POST" action="{{route('concurso.destroy', ['concurso' => $concurso->id])}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            @csrf
+                            Tem certeza que deseja deletar o concurso {{$concurso->titulo}}?
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" form="form-delete-concurso-{{$concurso->id}}">Deletar</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form id="form-delete-concurso-{{$concurso->id}}" method="POST" action="{{route('concurso.destroy', ['concurso' => $concurso->id])}}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        @csrf
-                        Tem certeza que deseja deletar o concurso {{$concurso->titulo}}?
-                    </form>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-danger" form="form-delete-concurso-{{$concurso->id}}">Deletar</button>
-                </div>
-            </div>
             </div>
         </div>
     @endforeach

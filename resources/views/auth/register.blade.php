@@ -6,7 +6,8 @@
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Cadastre-se</h6>
-                    <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6></div>
+                    <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -73,7 +74,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="nome" class="style_campo_titulo">Nome <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('nome') is-invalid @enderror" id="nome" name="nome"
-                                    placeholder="Digite seu nome" value="{{ old('nome') }}" required autocomplete="nome"/>
+                                    placeholder="Digite seu nome" value="{{ old('nome') }}" minlength="5" maxlength="200" required autocomplete="nome"/>
                                 @error('nome')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -83,7 +84,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="sobrenome" class="style_campo_titulo">Sobrenome <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('sobrenome') is-invalid @enderror" id="sobrenome" name="sobrenome"
-                                    value="{{ old('sobrenome') }}" placeholder="Digite seu sobrenome" required />
+                                    value="{{ old('sobrenome') }}" placeholder="Digite seu sobrenome" minlength="5" maxlength="200" required />
                                 @error('sobrenome')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -95,7 +96,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="nome_do_pai" class="style_campo_titulo">Nome do pai</label>
                                 <input type="text" class="form-control style_campo @error('nome_do_pai') is-invalid @enderror" id="nome_do_pai" name="nome_do_pai"
-                                    placeholder="Digite o nome de seu pai" value="{{ old('nome_do_pai') }}" />
+                                    placeholder="Digite o nome de seu pai" value="{{ old('nome_do_pai') }}" minlength="10" maxlength="200" />
                                 @error('nome_do_pai')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -105,7 +106,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="nome_da_mãe" class="style_campo_titulo">Nome da mãe <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('nome_da_mãe') is-invalid @enderror" id="nome_da_mãe" name="nome_da_mãe"
-                                    placeholder="Digite o nome da sua mãe" value="{{ old('nome_da_mãe') }}" required />
+                                    placeholder="Digite o nome da sua mãe" value="{{ old('nome_da_mãe') }}" minlength="10" maxlength="200" required />
                                 @error('nome_da_mãe')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
@@ -594,6 +595,30 @@
             };
         $('.celular').mask(SPMaskBehavior, spOptions);
         $('#cep').mask('00000-000');
+        $("#nome").mask("#", {
+            maxlength: true,
+            translation: {
+                '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }
+            }
+        });
+        $("#sobrenome").mask("#", {
+            maxlength: true,
+            translation: {
+                '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }
+            }
+        });
+        $("#nome_do_pai").mask("#", {
+            maxlength: true,
+            translation: {
+                '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }
+            }
+        });
+        $("#nome_do_mãe").mask("#", {
+            maxlength: true,
+            translation: {
+                '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }
+            }
+        });
     });
 
     function exibirMsg(input) {

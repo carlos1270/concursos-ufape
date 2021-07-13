@@ -20,7 +20,7 @@
             -webkit-box-shadow: 2px 10px 53px -6px rgba(0,0,0,0.16);
             -moz-box-shadow: 2px 10px 53px -6px rgba(0,0,0,0.16);">
                 <div class="container">
-                    <a class="navbar-brand">
+                    <a class="navbar-brand" href="{{ route('index') }}">
                         <img src="{{ asset('img/logo_ufape_concursos.png') }}" alt="Orientação" width="100px"> 
                     </a>
                     <div class="form-group" style="margin-bottom: 0px;">
