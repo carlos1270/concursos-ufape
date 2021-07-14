@@ -27,9 +27,9 @@
 
                         <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('index') }}">Início</a>
                         
-                        @if(!Auth::user())
+                        {{-- @if(!Auth::user())
                             <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('about') }}">Sobre</a>
-                        @endif
+                        @endif --}}
                         @auth
                             @if(Auth::user()->role == "candidato")
                                 <a href="{{ route('candidato.index') }}" :active="request()->routeIs('candidato.index')" 
@@ -56,8 +56,8 @@
                                     </a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <a class="dropdown-item" href="{{ route('about') }}">Sobre</a>
-                                        <hr>
+                                        {{-- <a class="dropdown-item" href="{{ route('about') }}">Sobre</a>
+                                        <hr> --}}
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                             Sair
