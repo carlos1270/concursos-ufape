@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArquivosTable extends Migration
+class AddColunasArquivoAvaliacao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,26 @@ class CreateArquivosTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('arquivos');
+
         Schema::create('arquivos', function (Blueprint $table) {
             $table->id();
-            
+
+            $table->string('dados_pessoais');
+            $table->string('curriculum_vitae_lattes');
             $table->string('formacao_academica');
-            $table->string('experiencia_didatica');
-            $table->string('producao_cientifica');
-            $table->string('experiencia_profissional');
+            $table->string('experiencia_didatica')->nullable();
+            $table->string('producao_cientifica')->nullable();
+            $table->string('experiencia_profissional')->nullable();
 
             $table->unsignedBigInteger('inscricoes_id');
             $table->foreign('inscricoes_id')->references('id')->on('inscricoes');
 
             $table->timestamps();
+        });
+
+        Schema::table('avaliacoes', function (Blueprint $table) {
+            $table->string('ficha_avaliacao');
         });
     }
 
@@ -35,6 +43,6 @@ class CreateArquivosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arquivo');
+        //
     }
 }

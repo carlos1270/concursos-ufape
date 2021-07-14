@@ -113,18 +113,18 @@ class ArquivoController extends Controller
                 'dados_pessoais'           => $path_dados_pessoais . $nome_dados_pessoais,
                 'curriculum_vitae_lattes'  => $path_curriculum_vitae_lattes . $nome_curriculum_vitae_lattes,
                 'formacao_academica'       => $path_formacao_academica . $nome_formacao_academica,
-                'experiencia_didatica'     => $path_experiencia_didatica . $nome_experiencia_didatica,
-                'producao_cientifica'      => $path_producao_cientifica . $nome_producao_cientifica,
-                'experiencia_profissional' => $path_experiencia_profissional . $nome_experiencia_profissional,
+                'experiencia_didatica'     => $nome_experiencia_didatica != '' ? $path_experiencia_didatica . $nome_experiencia_didatica : null,
+                'producao_cientifica'      => $nome_producao_cientifica != '' ? $path_producao_cientifica . $nome_producao_cientifica : null,
+                'experiencia_profissional' => $nome_experiencia_profissional != '' ? $path_experiencia_profissional . $nome_experiencia_profissional : null,
                 'inscricoes_id'            => $request->inscricao
             ]);
         } else if ($arquivos != null) {
             $arquivos->dados_pessoais = $path_dados_pessoais . $nome_dados_pessoais;
             $arquivos->curriculum_vitae_lattes = $path_curriculum_vitae_lattes . $nome_curriculum_vitae_lattes;
             $arquivos->formacao_academica = $path_formacao_academica . $nome_formacao_academica;
-            $arquivos->experiencia_didatica = $path_experiencia_didatica . $nome_experiencia_didatica;
-            $arquivos->producao_cientifica = $path_producao_cientifica . $nome_producao_cientifica;
-            $arquivos->experiencia_profissional = $path_experiencia_profissional . $nome_experiencia_profissional;
+            $arquivos->experiencia_didatica = $nome_experiencia_didatica != '' ? $path_experiencia_didatica . $nome_experiencia_didatica : null;
+            $arquivos->producao_cientifica = $nome_producao_cientifica != '' ? $path_producao_cientifica . $nome_producao_cientifica : null;
+            $arquivos->experiencia_profissional = $nome_experiencia_profissional != '' ? $path_experiencia_profissional . $nome_experiencia_profissional : null;
             $arquivos->inscricoes_id = $request->inscricao;
             $arquivos->update();
         }
@@ -146,22 +146,22 @@ class ArquivoController extends Controller
 
         switch ($cod) {
             case "Dados-pessoais":
-                return response()->file('storage/' . $arquivos->dados_pessoais);
+                return Storage::disk()->exists('public/' . $arquivos->dados_pessoais) ? response()->file('storage/' . $arquivos->dados_pessoais) : abort(404);
                 break;
             case "Lattes":
-                return response()->file('storage/' . $arquivos->curriculum_vitae_lattes);
+                return Storage::disk()->exists('public/' . $arquivos->curriculum_vitae_lattes) ? response()->file('storage/' . $arquivos->curriculum_vitae_lattes) : abort(404);
                 break;
             case "Formacao-academica":
-                return response()->file('storage/' . $arquivos->formacao_academica);
+                return Storage::disk()->exists('public/' . $arquivos->formacao_academica) ? response()->file('storage/' . $arquivos->formacao_academica) : abort(404);
                 break;
             case "Experiencia-didatica":
-                return response()->file('storage/' . $arquivos->experiencia_didatica);
+                return Storage::disk()->exists('public/' . $arquivos->experiencia_didatica) && $arquivos->experiencia_didatica != null ? response()->file('storage/' . $arquivos->experiencia_didatica) : abort(404);
                 break;
             case "Producao-cientifica":
-                return response()->file('storage/' . $arquivos->producao_cientifica);
+                return Storage::disk()->exists('public/' . $arquivos->producao_cientifica) && $arquivos->producao_cientifica != null ? response()->file('storage/' . $arquivos->producao_cientifica) : abort(404);
                 break;
             case "Experiencia-profissional":
-                return response()->file('storage/' . $arquivos->experiencia_profissional);
+                return Storage::disk()->exists('public/' . $arquivos->experiencia_profissional) && $arquivos->experiencia_profissional != null ? response()->file('storage/' . $arquivos->experiencia_profissional) : abort(404);
                 break;
             default:
                 return abort(404);
