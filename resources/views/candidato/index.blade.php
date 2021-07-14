@@ -37,7 +37,7 @@
                                             @if ($inscricao->status == "aprovado")
                                                 Pagamento aprovado
                                             @else 
-                                                <a target="_black" href="https://consulta.tesouro.fazenda.gov.br/gru_novosite/gerarHTML.asp?codigo_favorecido=156687&gestao=26456**20953&nome_favorecido=UNIVERSIDADE FEDERAL DO AGRESTE DE PERNAMBUCO&codigo_recolhimento=28883-7&vencimento={{date('d/m/Y',strtotime($inscricao->concurso->data_fim_pagamento_inscricao))}}&cnpj_cpf={{$inscricao->user->candidato->cpf}}&nome_contribuinte={{$inscricao->user->nome . " " . $inscricao->user->sobrenome}}&valorPrincipal=30,00&valorTotal=30,00&boleto=4">
+                                                <a target="_black" href="http://consulta.tesouro.fazenda.gov.br/gru_novosite/gru_simples.asp">
                                                     Gerar boleto
                                                 </a>
                                             @endif
