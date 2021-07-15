@@ -10,11 +10,7 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        @if ($inscricao->data_inicio_envio_doc <= now() && now() <= $inscricao->data_fim_envio_doc)
-                            <form method="POST" style="" action="{{ route('save.documentos') }}" enctype="multipart/form-data">
-                        @else
-                            <form method="POST" enctype="multipart/form-data">
-                        @endif
+                        <form action="{{route('documentos.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-1s2">

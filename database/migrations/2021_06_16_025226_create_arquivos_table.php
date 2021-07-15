@@ -15,8 +15,7 @@ class CreateArquivosTable extends Migration
     {
         Schema::create('arquivos', function (Blueprint $table) {
             $table->id();
-            $table->string('dados_pessoais');
-            $table->string('curriculum_vitae_lattes');
+            
             $table->string('formacao_academica');
             $table->string('experiencia_didatica')->nullable();
             $table->string('producao_cientifica')->nullable();

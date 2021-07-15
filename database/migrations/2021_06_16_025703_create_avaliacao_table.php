@@ -17,7 +17,6 @@ class CreateAvaliacaoTable extends Migration
             $table->id();
 
             $table->double('nota');
-            $table->string('ficha_avaliacao');
             $table->unsignedBigInteger('inscricoes_id');
             $table->foreign('inscricoes_id')->references('id')->on('inscricoes');
 
