@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
         ->name('envio.documentos.inscricao');
 
     Route::post('/save-documentos', [ArquivoController::class, 'store'])
-        ->name('save.documentos');
+        ->name('documentos.store');
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso'])->group(function () {
