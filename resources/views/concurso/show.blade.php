@@ -35,10 +35,10 @@
                         <div class="col-md-12" style="margin-bottom: 1.5rem">
                           <h5 class="card-title mb-0" style="font-size:35px; font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">{{$concurso->nome}}</h5>
                         </div>
-
+                        
                         <div class="col-md-12" style="margin-top: 5px">
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Descrição</h5></div>
-                          <div style="margin-top: 10px"><h5 style="font-weight:normal">{{$concurso->descricao}}</h5></div>
+                          <div style="margin-top: 10px"><textarea id="descricao-concurso" disabled>{{$concurso->descricao}}</textarea></div>
                         </div>
                       </div>
                   </div>
@@ -259,7 +259,7 @@
                                         <div class="d-flex justify-content-between" style="width: 100%">
                                             <div>
                                               <h5 style=" font-size:19px; margin-top:9px">Para acesso aos resultados do concurso, acesse o portal da UFAPE, na seção Concursos / Professor do magistério superior. Endereço:
-                                                <a href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
+                                                <a target="_black" href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
                                               </h5>
                                             </div>
                                             {{-- <div>
@@ -289,5 +289,11 @@
     function shareTwitter(url) {
       window.open("https://twitter.com/intent/tweet?url="+url, "Compartilhar com o facebook", "height=1000,width=1000");
     }
+
+    $(document).ready(function() {
+      var textarea = document.getElementById('descricao-concurso');
+      // console.log(textarea.scrollHeight);
+      textarea.style.height = textarea.scrollHeight + "px";
+    });
   </script>
 @endsection
