@@ -363,6 +363,25 @@
 
 /* X Card X */
 
+/* card de descrição */
+
+#descricao-concurso {
+    resize: none;
+    font-weight: normal;
+    font-size: 20px; 
+    width: 100%;
+    overflow: hidden;
+    border: none;
+    text-align: justify;
+}
+
+#descricao-concurso:disabled {
+    background-color: white;
+    color: rgb(27, 27, 27);
+}
+
+/* X card de descrição X */
+
 /*  Card_container  */
 .style_card_container{
     border-radius: 25px;border-width: 0px;
