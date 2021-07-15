@@ -35,19 +35,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'nome' => 'required|string|min:4|max:50',
         'sobrenome' => 'required|string|min:4|max:50',
         'nome_do_pai' => 'nullable|string|min:8|max:100',
-        'nome_da_mãe' => 'required|string|min:8|max:100',
+        'nome_da_mae' => 'required|string|min:8|max:100',
         'data_de_nascimento' => 'required|date',
-        'país_de_origem' => 'required',
+        'pais_de_origem' => 'required',
         'estrangeiro'   => 'required',
-        'documento_de_identificação' => 'required|string|min:8|max:50',
-        'órgao_emissor' => 'required_if:estrangeiro,não',
-        'cpf' => 'required_if:estrangeiro,não|cpf|min:11|max:12|unique:candidatos',
+        'documento_de_identificacao' => 'required|string|min:8|max:50',
+        'orgao_emissor' => 'required_if:estrangeiro,nao',
+        'cpf' => 'required_if:estrangeiro,nao|cpf|min:11|max:12|unique:candidatos',
         'telefone' => 'nullable|min:10|max:20',
         'celular' => 'required|min:10|max:20',
         'cep' => 'required',
         'logradouro' => 'required|min:4|max:100',
         'bairro' => 'required|min:4|max:100',
-        'número' => 'required|min:1|max:100',
+        'numero' => 'required|min:1|max:100',
         'cidade' => 'required|min:4|max:100',
         'uf'     => 'required',
         'complemento' => 'nullable|min:2|max:150',
@@ -80,8 +80,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'concurso.required_if' => 'Escolha o concurso a qual o chefe da banca pertencerá.',
         'cpf.required_if' => 'O campo CPF é obrigatório quando não for estrangeiro.',
         'cpf.unique' => 'Esse CPF já está cadastrado.',
-        'órgao_emissor.required_if' => 'O órgão emissor é obrigatório quando não for estrangeiro.',
-        'país_de_origem.required' => 'O campo país de origem é obrigatório.',
+        'orgao_emissor.required_if' => 'O órgão emissor é obrigatório quando não for estrangeiro.',
+        'pais_de_origem.required' => 'O campo país de origem é obrigatório.',
     ];
 
     /**
@@ -138,19 +138,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Inscricao::class, 'users_id');
     }
 
-    public function concursosChefeBanca() {
+    public function concursosChefeBanca()
+    {
         return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'users_id', 'concursos_id');
     }
 
-    public function candidato() {
+    public function candidato()
+    {
         return $this->hasOne(Candidato::class, 'users_id');
     }
 
-    public function endereco() {
+    public function endereco()
+    {
         return $this->hasOne(Endereco::class, 'users_id');
     }
 
-    public function sendEmailVerificationNotification() {
+    public function sendEmailVerificationNotification()
+    {
         Notification::send($this, new EmailDeVerificacao($this));
     }
 }

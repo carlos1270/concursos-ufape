@@ -21,14 +21,16 @@ use App\Http\Controllers\ArquivoController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('index');
 
-Route::get('/sobre', function() { return view('about'); })->name('about');
+Route::get('/sobre', function () {
+    return view('about');
+})->name('about');
 
-Route::get('/dashboard', function() {
+Route::get('/dashboard', function () {
     return redirect(route('index'));
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/user/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
+    Route::get('/user-password-edit', [ProfileController::class, 'showPassword'])->name('user.password.edit');
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(function () {
@@ -38,6 +40,10 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(function () {
 
     Route::resource('candidato', CandidatoController::class);
+
+    Route::get('/user-profile-edit', [ProfileController::class, 'showProfileInfo'])->name('user.profile.edit');
+
+    Route::post('/user-profile-update', [ProfileController::class, 'updateProfileInfo'])->name('user.profile.update');
 
     Route::get('/inscricao/concurso/{concurso_id}', [CandidatoController::class, 'inscreverseConcurso'])
         ->name('inscricao.concurso');
