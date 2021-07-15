@@ -380,6 +380,10 @@
     color: rgb(27, 27, 27);
 }
 
+#descricao-concurso:hover {
+    cursor: auto;
+}
+
 /* X card de descrição X */
 
 /*  Card_container  */
