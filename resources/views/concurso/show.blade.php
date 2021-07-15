@@ -240,6 +240,40 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom:30px">
+                  <div class="card card_conteudo shadow bg-white" style="border-radius:12px; border-width:0px;">
+                      <div class="card-header" style="border-top-left-radius: 12px; border-top-right-radius: 12px; background-color: #fff">
+                          <div class="d-flex justify-content-between align-items-center" style="margin-top: 9px; margin-bottom:6px">
+                            <h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6">Resultados</h5>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-left align-items-center" style="margin-bottom: -15px">
+                                    {{-- <div style="margin-right:10px; margin-top:-15px">
+                                        <img class="" src="{{asset('img/icon_modelo.png')}}" alt="" width="40px">
+                                    </div> --}}
+                                    <div class="form-group" style="width: 100%">
+                                        <div class="d-flex justify-content-between" style="width: 100%">
+                                            <div>
+                                              <h5 style=" font-size:19px; margin-top:9px">Para acesso aos resultados do concurso, acesse o portal da UFAPE, na seção Concursos / Professor do magistério superior. Endereço:
+                                                <a href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
+                                              </h5>
+                                            </div>
+                                            {{-- <div>
+                                                <a class="btn btn-light" href="{{asset('storage/'.$concurso->edital_geral)}}" target="_new" style="" >
+                                                <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                                Baixar</a>
+                                            </div> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
