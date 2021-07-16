@@ -35,7 +35,7 @@
                         <div class="col-md-12" style="margin-bottom: 1.5rem">
                           <h5 class="card-title mb-0" style="font-size:35px; font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">{{$concurso->nome}}</h5>
                         </div>
-                        
+
                         <div class="col-md-12" style="margin-top: 5px">
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Descrição</h5></div>
                           <div style="margin-top: 10px"><textarea id="descricao-concurso" disabled>{{$concurso->descricao}}</textarea></div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="card-body">
                           <div class="form-row">
-                            @if($concurso->data_inicio_inscricao <= now() && now() <= $concurso->data_fim_inscricao)
+                            @if($concurso->data_inicio_inscricao <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $concurso->data_fim_inscricao)
                                 @if (!$inscricao)
                                   <div class="col-md-12" style="margin-bottom:18px">
                                       <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', $concurso->id) }}'"
