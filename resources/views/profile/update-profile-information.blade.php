@@ -56,10 +56,10 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="nome_da_mae" class="style_campo_titulo">Nome da mãe </label>
-                                <input type="text" class="form-control style_campo @error('nome_da_mae') is-invalid @enderror" id="nome_da_mae" name="nome_da_mae"
+                                <label for="nome_da_mãe" class="style_campo_titulo">Nome da mãe </label>
+                                <input type="text" class="form-control style_campo @error('nome_da_mãe') is-invalid @enderror" id="nome_da_mãe" name="nome_da_mãe"
                                     placeholder="Digite o nome da sua mãe" value="{{ Auth::user()->candidato->nome_da_mae }}" minlength="10" maxlength="200" />
-                                @error('nome_da_mae')
+                                @error('nome_da_mãe')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -139,10 +139,10 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="numero" class="style_campo_titulo">Número </label>
-                                <input type="text" class="form-control style_campo @error('numero') is-invalid @enderror" id="numero" name="numero"
+                                <label for="número" class="style_campo_titulo">Número </label>
+                                <input type="text" class="form-control style_campo @error('número') is-invalid @enderror" id="número" name="número"
                                     placeholder="Digite o número de sua casa" value="{{ Auth::user()->endereco->numero}}"/>
-                                @error('numero')
+                                @error('número')
                                     <div id="validationServer03Feedback" class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -254,7 +254,7 @@
                 '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }
             }
         });
-        $("#nome_do_mae").mask("#", {
+        $("#nome_do_mãe").mask("#", {
             maxlength: true,
             translation: {
                 '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }

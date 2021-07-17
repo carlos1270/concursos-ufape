@@ -45,12 +45,12 @@ class CreateNewUser implements CreatesNewUsers
         $candidato->telefone = $input['telefone'];
         $candidato->users_id = $usuario->id;
         $candidato->nome_do_pai = $input['nome_do_pai'];
-        $candidato->documento_de_identificacao = $input['documento_de_identificacao'];
+        $candidato->documento_de_identificacao = $input['documento_de_identificação'];
         $candidato->data_de_nascimento = $input['data_de_nascimento'];
-        $candidato->orgao_emissor = $input['orgao_emissor'];
-        $candidato->nome_da_mae = $input['nome_da_mae'];
+        $candidato->orgao_emissor = $input['órgao_emissor'];
+        $candidato->nome_da_mae = $input['nome_da_mãe'];
         $candidato->estrangeiro = $input['estrangeiro'] == "sim";
-        $candidato->pais_origem = $input['pais_de_origem'];
+        $candidato->pais_origem = $input['país_de_origem'];
         $candidato->save();
 
         $endereco = new Endereco();
@@ -58,7 +58,7 @@ class CreateNewUser implements CreatesNewUsers
         $endereco->cep = $input['cep'];
         $endereco->logradouro = $input['logradouro'];
         $endereco->complemento = $input['complemento'];
-        $endereco->numero = $input['numero'];
+        $endereco->numero = $input['número'];
         $endereco->bairro = $input['bairro'];
         $endereco->cidade = $input['cidade'];
         $endereco->uf = $input['uf'];
