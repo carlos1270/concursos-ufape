@@ -38,7 +38,7 @@
 
                         <div class="col-md-12" style="margin-top: 5px">
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Descrição</h5></div>
-                          <div style="margin-top: 10px"><h5 style="font-weight:normal">{{$concurso->descricao}}</h5></div>
+                          <div style="margin-top: 10px"><textarea id="descricao-concurso" disabled>{{$concurso->descricao}}</textarea></div>
                         </div>
                       </div>
                   </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="card-body">
                           <div class="form-row">
-                            @if($concurso->data_inicio_inscricao <= now() && now() <= $concurso->data_fim_inscricao)
+                            @if($concurso->data_inicio_inscricao <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $concurso->data_fim_inscricao)
                                 @if (!$inscricao)
                                   <div class="col-md-12" style="margin-bottom:18px">
                                       <button class="btn btn-success " onclick ="location.href='{{ route('inscricao.concurso', $concurso->id) }}'"
@@ -240,6 +240,40 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                <div class="col-md-12" style="margin-bottom:30px">
+                  <div class="card card_conteudo shadow bg-white" style="border-radius:12px; border-width:0px;">
+                      <div class="card-header" style="border-top-left-radius: 12px; border-top-right-radius: 12px; background-color: #fff">
+                          <div class="d-flex justify-content-between align-items-center" style="margin-top: 9px; margin-bottom:6px">
+                            <h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6">Resultados</h5>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-left align-items-center" style="margin-bottom: -15px">
+                                    {{-- <div style="margin-right:10px; margin-top:-15px">
+                                        <img class="" src="{{asset('img/icon_modelo.png')}}" alt="" width="40px">
+                                    </div> --}}
+                                    <div class="form-group" style="width: 100%">
+                                        <div class="d-flex justify-content-between" style="width: 100%">
+                                            <div>
+                                              <h5 style=" font-size:19px; margin-top:9px">Para acesso aos resultados do concurso, acesse o portal da UFAPE, na seção Concursos / Professor do magistério superior. Endereço:
+                                                <a target="_black" href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
+                                              </h5>
+                                            </div>
+                                            {{-- <div>
+                                                <a class="btn btn-light" href="{{asset('storage/'.$concurso->edital_geral)}}" target="_new" style="" >
+                                                <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
+                                                Baixar</a>
+                                            </div> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
@@ -255,5 +289,11 @@
     function shareTwitter(url) {
       window.open("https://twitter.com/intent/tweet?url="+url, "Compartilhar com o facebook", "height=1000,width=1000");
     }
+
+    $(document).ready(function() {
+      var textarea = document.getElementById('descricao-concurso');
+      // console.log(textarea.scrollHeight);
+      textarea.style.height = textarea.scrollHeight + "px";
+    });
   </script>
 @endsection

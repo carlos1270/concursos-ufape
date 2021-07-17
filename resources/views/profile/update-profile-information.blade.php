@@ -6,6 +6,7 @@
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Editar Perfil</h6>
+                    <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('user.profile.update') }}">
@@ -24,7 +25,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="nome" class="style_campo_titulo">Nome </label>
+                                <label for="nome" class="style_campo_titulo">Nome <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('nome') is-invalid @enderror" id="nome" name="nome"
                                     placeholder="Digite seu nome" value="{{ Auth::user()->nome }}" minlength="5" maxlength="200" autocomplete="nome"/>
                                 @error('nome')
@@ -34,7 +35,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="sobrenome" class="style_campo_titulo">Sobrenome </label>
+                                <label for="sobrenome" class="style_campo_titulo">Sobrenome <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('sobrenome') is-invalid @enderror" id="sobrenome" name="sobrenome"
                                     value="{{ Auth::user()->sobrenome }}" placeholder="Digite seu sobrenome" minlength="5" maxlength="200" />
                                 @error('sobrenome')
@@ -56,7 +57,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="nome_da_mãe" class="style_campo_titulo">Nome da mãe </label>
+                                <label for="nome_da_mãe" class="style_campo_titulo">Nome da mãe <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('nome_da_mãe') is-invalid @enderror" id="nome_da_mãe" name="nome_da_mãe"
                                     placeholder="Digite o nome da sua mãe" value="{{ Auth::user()->candidato->nome_da_mae }}" minlength="10" maxlength="200" />
                                 @error('nome_da_mãe')
@@ -68,7 +69,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="data_de_nascimento" class="style_campo_titulo">Data de nascimento </label>
+                                <label for="data_de_nascimento" class="style_campo_titulo">Data de nascimento <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="date" class="form-control style_campo @error('data_de_nascimento') is-invalid @enderror" id="data_de_nascimento" name="data_de_nascimento"
                                     value="{{ Auth::user()->candidato->data_de_nascimento }}"/>
                                 @error('data_de_nascimento')
@@ -80,7 +81,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="telefone" class="style_campo_titulo">Telefone </label>
+                                <label for="telefone" class="style_campo_titulo">Telefone</label>
                                 <input type="text" class="form-control style_campo @error('telefone') is-invalid @enderror celular" id="telefone" name="telefone"
                                     placeholder="Digite o seu número de telefone" value="{{ Auth::user()->candidato->telefone }}"/>
                                 @error('telefone')
@@ -90,7 +91,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="celular" class="style_campo_titulo">Celular </label>
+                                <label for="celular" class="style_campo_titulo">Celular <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('celular') is-invalid @enderror celular" id="celular" name="celular"
                                     placeholder="Digite o seu número de celular" value="{{ Auth::user()->candidato->celular }}" />
                                 @error('celular')
@@ -107,7 +108,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="cep" class="style_campo_titulo">CEP </label>
+                                <label for="cep" class="style_campo_titulo">CEP <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('cep') is-invalid @enderror" id="cep" name="cep"
                                     placeholder="Digite o número do CEP onde mora" value="{{ Auth::user()->endereco->cep }}" onblur="pesquisacep(this.value);"/>
                                 @error('cep')
@@ -117,7 +118,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="logradouro" class="style_campo_titulo">Logradouro (rua, avenida, etc) </label>
+                                <label for="logradouro" class="style_campo_titulo">Logradouro (rua, avenida, etc) <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('logradouro') is-invalid @enderror" id="logradouro" name="logradouro"
                                     placeholder="Digite o nome do seu logradouro" value="{{ Auth::user()->endereco->logradouro }}" />
                                 @error('logradouro')
@@ -129,7 +130,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="bairro" class="style_campo_titulo">Bairro </label>
+                                <label for="bairro" class="style_campo_titulo">Bairro <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('bairro') is-invalid @enderror" id="bairro" name="bairro"
                                     placeholder="Digite o bairro onde mora" value="{{ Auth::user()->endereco->bairro }}" />
                                 @error('bairro')
@@ -139,7 +140,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="número" class="style_campo_titulo">Número </label>
+                                <label for="número" class="style_campo_titulo">Número <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('número') is-invalid @enderror" id="número" name="número"
                                     placeholder="Digite o número de sua casa" value="{{ Auth::user()->endereco->numero}}"/>
                                 @error('número')
@@ -151,7 +152,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6 form-group">
-                                <label for="cidade" class="style_campo_titulo">Cidade </label>
+                                <label for="cidade" class="style_campo_titulo">Cidade <span style="color: red; font-weight: bold;">*</span></label>
                                 <input type="text" class="form-control style_campo @error('cidade') is-invalid @enderror" id="cidade" name="cidade"
                                     placeholder="Digite a sua cidade" value="{{ Auth::user()->endereco->cidade }}"/>
                                 @error('cidade')
@@ -161,7 +162,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="uf" class="style_campo_titulo">UF </label></label>
+                                <label for="uf" class="style_campo_titulo">UF <span style="color: red; font-weight: bold;">*</span></label></label>
                                 <select class="form-control style_campo @error('uf') is-invalid @enderror" id="uf" name="uf">
                                     <option value="" disabled selected hidden>-- Selecione o UF --</option>
                                     <option @if(Auth::user()->endereco->uf == 'AC') selected @endif value="AC">Acre</option>
