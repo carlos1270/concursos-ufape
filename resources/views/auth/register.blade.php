@@ -620,7 +620,6 @@
             }
         });
     });
-
     function exibirMsg(input) {
         if (input.value == "sim") {
             document.getElementById('msg-estrangeiro-pasaporte').style.display = "inline";
@@ -638,7 +637,6 @@
             selecionarPais("Brasil");
         }
     }
-
     function selecionarPais(pais) {
         var select = document.getElementById('país_de_origem');
         var input = document.getElementById('país_de_origem_input_hidden');
@@ -650,19 +648,16 @@
         select.value = pais;
         input.value = pais;
     }
-
     function setarInputPais(select) {
         var input = document.getElementById('país_de_origem_input_hidden');
         input.value = select.value;
     }
-
     function limparCampos() {
         document.getElementById('cpf').value = "";
         document.getElementById('órgao_emissor').value = "";
         document.getElementById('documento_de_identificação').value = "";
         selecionarPais("");
     }
-
     function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
             document.getElementById('logradouro').value=("");
@@ -670,7 +665,6 @@
             document.getElementById('cidade').value=("");
             document.getElementById('uf').value=("");
     }
-
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
             //Atualiza os campos com os valores.
@@ -678,7 +672,6 @@
             document.getElementById('bairro').value=(conteudo.bairro);
             document.getElementById('cidade').value=(conteudo.localidade);
             document.getElementById('uf').value=(conteudo.uf);
-
         } //end if.
         else {
             //CEP não Encontrado.
@@ -686,37 +679,26 @@
             alert("CEP não encontrado.");
         }
     }
-
     function pesquisacep(valor) {
-
         //Nova variável "cep" somente com dígitos.
         var cep = valor.replace(/\D/g, '');
-
         //Verifica se campo cep possui valor informado.
         if (cep != "") {
-
             //Expressão regular para validar o CEP.
             var validacep = /^[0-9]{8}$/;
-
             //Valida o formato do CEP.
             if(validacep.test(cep)) {
-
                 //Preenche os campos com "..." enquanto consulta webservice.
                 document.getElementById('logradouro').value="...";
                 document.getElementById('bairro').value="...";
                 document.getElementById('cidade').value="...";
                 document.getElementById('uf').value="...";
-
-
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
-
                 //Sincroniza com o callback.
                 script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
                 //Insere script no documento e carrega o conteúdo.
                 document.body.appendChild(script);
-
             } //end if.
             else {
                 //cep é inválido.
@@ -729,7 +711,6 @@
             limpa_formulário_cep();
         }
     };
-
     function visualizarSenha(button) {
         var img = button.children[0];
         var input = button.parentElement.parentElement.children[0];
@@ -741,17 +722,14 @@
             img.src = "{{asset('img/icon_visualizar_white.svg')}}";
         }
     }
-
     function alterarImagem(button) {
         var img = button.children[0];
         var input = button.parentElement.parentElement.children[0];
-
         if (img.src == "{{asset('img/icon_visualizar_cinza.svg')}}") {
             img.src = "{{asset('img/icon_visualizar_white.svg')}}";
         } else if (img.src == "{{asset('img/icon_visualizar_white.svg')}}") {
             img.src = "{{asset('img/icon_visualizar_cinza.svg')}}";
         }
-
         if (img.src == "{{asset('img/icon_no_visualizar_cinza.svg')}}") {
             img.src = "{{asset('img/icon_no_visualizar_white.svg')}}";
         } else if (img.src == "{{asset('img/icon_no_visualizar_white.svg')}}") {

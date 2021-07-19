@@ -138,19 +138,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Inscricao::class, 'users_id');
     }
 
-    public function concursosChefeBanca() {
+    public function concursosChefeBanca()
+    {
         return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'users_id', 'concursos_id');
     }
 
-    public function candidato() {
+    public function candidato()
+    {
         return $this->hasOne(Candidato::class, 'users_id');
     }
 
-    public function endereco() {
+    public function endereco()
+    {
         return $this->hasOne(Endereco::class, 'users_id');
     }
 
-    public function sendEmailVerificationNotification() {
+    public function sendEmailVerificationNotification()
+    {
         Notification::send($this, new EmailDeVerificacao($this));
     }
 }

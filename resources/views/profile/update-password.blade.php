@@ -61,7 +61,7 @@
                                     <hr/>
                                     <div class="form-row">
                                         <div class="col-md-12 form-group" style="margin-bottom: 9px;">
-                                            <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
+                                            <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Editar</button>
                                         </div>
                                     </div>
                                 </form>

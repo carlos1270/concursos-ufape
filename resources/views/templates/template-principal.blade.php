@@ -26,10 +26,6 @@
                     <div class="form-group" style="margin-bottom: 0px;">
 
                         <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('index') }}">Início</a>
-                        
-                        {{-- @if(!Auth::user())
-                            <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('about') }}">Sobre</a>
-                        @endif --}}
                         @auth
                             @if(Auth::user()->role == "candidato")
                                 <a href="{{ route('candidato.index') }}" :active="request()->routeIs('candidato.index')" 
@@ -51,13 +47,14 @@
                                     Olá, {{ Auth::user()->nome }}
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a type="button" class="dropdown-item" onclick ="location.href='{{ route('profile.show') }}'">
-                                        Editar perfil
+                                    <a type="button" class="dropdown-item" onclick ="location.href='{{ route('user.profile.edit') }}'">
+                                        Editar Perfil
+                                    </a>
+                                    <a type="button" class="dropdown-item" onclick ="location.href='{{ route('user.password.edit') }}'">
+                                        Editar Senha
                                     </a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        {{-- <a class="dropdown-item" href="{{ route('about') }}">Sobre</a>
-                                        <hr> --}}
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                             Sair
