@@ -33,13 +33,20 @@
                       <div class="form-row">
 
                         <div class="col-md-12" style="margin-bottom: 1.5rem">
-                          <h5 class="card-title mb-0" style="font-size:35px; font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">{{$concurso->nome}}</h5>
+                          <h5 class="card-title mb-0" style="font-size:35px; font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">{{$concurso->titulo}}</h5>
                         </div>
 
                         <div class="col-md-12" style="margin-top: 5px">
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Descrição</h5></div>
                           <div style="margin-top: 10px"><textarea id="descricao-concurso" disabled>{{$concurso->descricao}}</textarea></div>
                         </div>
+                        {{--<div class="col-md-12" style="margin-top: 5px">
+                          <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Avisos</h5></div>
+                          <div style="margin-top: 10px">
+                            <div class="alert alert-warning" role="alert">
+                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.                            </div>
+                          </div>
+                        </div>--}}
                       </div>
                   </div>
               </div>
