@@ -252,7 +252,7 @@
                                                 </div>
                                             </a>
                                         @endif
-                                        <input type="file" class="form-control form-control-sm" id="ficha_avaliacao" 
+                                        <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror" id="ficha_avaliacao" 
                                             style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff" name="ficha_avaliacao"  required/>
                                         @error('ficha_avaliacao')
                                             <span style="color: red">{{ $message }}</span>
@@ -289,4 +289,12 @@
         </div>   
     </div>
 </div>
+<script>
+    $("input").change(function(){
+        if(this.files[0].size > 10485760){
+            alert("O arquivo deve ter no máximo 10 MB!");
+            this.value = "";
+        };
+    });
+</script>
 @endsection
