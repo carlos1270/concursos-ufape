@@ -231,6 +231,12 @@
                                 </button>
                             </div>
                         @endif
+                        <div class="form-row">
+                            <div class="col-md-12 form-group">
+                                <a href="{{route('baixar.anexo', ['name'=> 'Ficha de avaliação.docx'])}}"  class="btn btn-success" 
+                                    target="_blank" style="color:white;">Baixar Ficha de avaliação</a>
+                            </div>
+                        </div>
                         @if ($arquivos == null)
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong> Só é possível enviar a pontuação quando os arquivos estiverem disponíveis. </strong>
@@ -239,30 +245,39 @@
                                 </button>
                             </div>
                         @else
-                            <form method="POST" action="{{ route('avalia.documentos.inscricao', $arquivos->inscricoes_id) }}" enctype="multipart/form-data">
+                            @if ($avaliacao && Auth::user()->role == "chefeSetorConcursos")
+                                <form>
+                            @else
+                                <form method="POST" action="{{ route('avalia.documentos.inscricao', $arquivos->inscricoes_id) }}" enctype="multipart/form-data">
+                            @endif
                                 @csrf
                                 <div class="form-row">
                                     <div class="col-md-12">
-                                        <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
+                                        @if (Auth::user()->role == "chefeSetorConcursos")
+                                            <label for="ficha_avaliacao" class="form-label style_campo_titulo">Arquivo de pontuação</label>
+                                        @endif
                                         @if($avaliacao != null && $avaliacao->ficha_avaliacao != null)
                                             <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $avaliacao->id)}}" target="_new">
                                                 <div class="btn-group">
                                                     <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
-                                                    <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Baixar</h6>
+                                                    <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Arquivo de pontuação</h6>
                                                 </div>
                                             </a>
                                         @endif
-                                        <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror" id="ficha_avaliacao" 
-                                            style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff" name="ficha_avaliacao"  required/>
-                                        @error('ficha_avaliacao')
-                                            <span style="color: red">{{ $message }}</span>
-                                        @enderror
+                                        @if ($avaliacao == null && Auth::user()->role != "chefeSetorConcursos")
+                                            <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
+                                            <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror" 
+                                                id="ficha_avaliacao" style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff" name="ficha_avaliacao"  required/>
+                                            @error('ficha_avaliacao')
+                                                <span style="color: red">{{ $message }}</span>
+                                            @enderror
+                                        @endif
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-row">
                                             <div class="col-md-12 form-group">
                                                 <label for="nota" class="style_campo_titulo">Pontuação total</label>
-                                                <input type="number" id="nota" name="nota" min="0" max="100"
+                                                <input type="number" step=any id="nota" name="nota" min="0" max="100"
                                                     class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
                                                     @if ($avaliacao)
                                                         value="{{ $avaliacao->nota }}"/>
@@ -271,7 +286,7 @@
                                                     @endif 
                                             </div>
                                         </div>
-                                        @if (!$avaliacao)
+                                        @if (!$avaliacao && Auth::user()->role != "chefeSetorConcursos")
                                             <div class="form-row justify-content-center">
                                                 <div class="col-md-12"><hr></div>
                                                 <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
@@ -291,8 +306,8 @@
 </div>
 <script>
     $("input").change(function(){
-        if(this.files[0].size > 10485760){
-            alert("O arquivo deve ter no máximo 10 MB!");
+        if(this.files[0].size > 2097152){
+            alert("O arquivo deve ter no máximo 2MB!");
             this.value = "";
         };
     });

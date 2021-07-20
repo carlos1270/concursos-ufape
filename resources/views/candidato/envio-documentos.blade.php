@@ -125,7 +125,7 @@
                             <div><hr></div>
                             <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
-                                    @if ($inscricao->data_inicio_envio_doc <= now() && now() >= $inscricao->data_fim_envio_doc)
+                                    @if ($inscricao->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) >= $inscricao->data_fim_envio_doc)
                                         <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">
                                             Enviar
                                         </button>
@@ -141,8 +141,8 @@
 </div>
 <script>
     $("input").change(function(){
-        if(this.files[0].size > 10485760){
-            alert("O arquivo deve ter no máximo 10 MB!");
+        if(this.files[0].size > 2097152){
+            alert("O arquivo deve ter no máximo 2MB!");
             this.value = "";
         };
     });

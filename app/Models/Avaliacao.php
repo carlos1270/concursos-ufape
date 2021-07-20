@@ -12,16 +12,17 @@ class Avaliacao extends Model
     protected $table = 'avaliacoes';
 
     public static $rules = [
-        'nota'            => 'required|min:0|max:100',
-        'ficha_avaliacao' => 'required|file|mimes:pdf|max:10240'
+        'nota'            => 'required|numeric|min:0|max:100',
+        'ficha_avaliacao' => 'required|file|mimes:pdf|max:2048'
     ];
 
     public static $messages = [
         'nota.required'               => 'A pontuação total é obrigatória.',
+        'nota.min'                    => 'A pontuação total deve ser um número.',
         'nota.min'                    => 'A pontuação total deve ser no mínimo 0.',
         'nota.max'                    => 'A pontuação total deve ser no máximo 100.',
         'ficha_avaliacao.required'    => 'O arquivo de ficha de avaliação é obrigatório.',
-        'ficha_avaliacao.max'         => 'O tamanho máximo do arquivo de ficha de avaliação são 10MB.',
+        'ficha_avaliacao.max'         => 'O tamanho máximo do arquivo de ficha de avaliação são 2MB.',
         'ficha_avaliacao.mimes'       => 'O arquivo de ficha de avaliação só pode ser um PDF.',
     ];
 
