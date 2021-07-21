@@ -66,15 +66,9 @@
                                                     @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
                                                         <div class="btn-group">
                                                             <div>
-                                                                @if ($inscricao->concurso->data_inicio_inscricao <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $inscricao->concurso->data_fim_inscricao)
-                                                                    <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
-                                                                        1º Etapa
-                                                                    </button>
-                                                                @else
-                                                                    <button class="btn btn-primary" disabled>
-                                                                       1º Etapa
-                                                                    </button>
-                                                                @endif
+                                                                <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
+                                                                    1º Etapa
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     @endif
