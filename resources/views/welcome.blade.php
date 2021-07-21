@@ -24,7 +24,7 @@
                                         <img src="img/img_default.png" alt="Imagem default" width="70px"> 
                                     </div>
                                     <div class="form-group" style="text-align: left;">
-                                        <h6 class="style_card_titulo">{{$concurso->titulo}}</h6>
+                                        <h6 class="style_card_titulo"><a href="{{route('concurso.show', ['concurso' => $concurso->id])}}">{{$concurso->titulo}}</a></h6>
                                         <h6 class="style_card_subtitulo">{{$concurso->qtd_vagas}} @if($concurso->qtd_vagas < 2) vaga. @else vagas.@endif</h6>
                                         <hr>
                                     </div>
@@ -65,7 +65,7 @@
                                             <img src="img/img_default.png" alt="Imagem default" width="70px"> 
                                         </div>
                                         <div class="form-group" style="text-align: left;">
-                                            <h6 class="style_card_titulo">{{$concurso->titulo}}</h6>
+                                            <h6 class="style_card_titulo"><a href="{{route('concurso.show', ['concurso' => $concurso->id])}}">{{$concurso->titulo}}</a></h6>
                                             <h6 class="style_card_subtitulo">{{$concurso->qtd_vagas}} @if($concurso->qtd_vagas < 2) vaga. @else vagas.@endif</h6>
                                             <hr>
                                         </div>
