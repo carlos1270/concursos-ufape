@@ -245,4 +245,20 @@ class ConcursoController extends Controller
 
         return view('concurso.resultado-final', compact('inscricoes'));
     }
+
+    public function AdicionarUserBanca($user_id, $concurso_id) 
+    {
+        $concurso = Concurso::find($concurso_id);
+        $concurso->chefeDaBanca()->attach($user_id);
+
+        return redirect()->back()->with(['success' => "Usuário adicionado a banca do concurso."]);
+    }
+
+    public function RemoverUserBanca($user_id, $concurso_id) 
+    {
+        $concurso = Concurso::find($concurso_id);
+        $concurso->chefeDaBanca()->detach($user_id);
+
+        return redirect()->back()->with(['success' => "Usuário removido da banca do concurso."]);
+    }
 }

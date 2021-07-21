@@ -118,4 +118,38 @@ class AdminController extends Controller
 
         return redirect(route('user.index'))->with(['success' => 'Usuário deletado com sucesso!']);
     }
+
+    public function usuarioDeBanca($id) {
+        $concurso = Concurso::find($id);
+        $usuarios = User::where('role', User::ROLE_ENUM["presidenteBancaExaminadora"])->get();
+
+        return view('usuario.banca_examinadora', compact('usuarios', 'concurso'));
+    }
+
+    public function createUserBanca(Request $request, $id) {
+        $concurso = Concurso::find($id); 
+
+        Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
+
+        $data = [
+            'nome' => $request['nome'],
+            'sobrenome' => $request['sobrenome'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'role' => $request['role']
+        ];
+
+        $usuario = new User();
+        $usuario->fill($data);
+        $usuario->role = "presidenteBancaExaminadora";
+        $usuario->save();
+
+        $usuario->concursosChefeBanca()->attach($id);
+
+        $usuario->password = $request['password'];
+
+        Notification::send($usuario, new UsuarioCadastrado($usuario));
+
+        return redirect()->back()->with(['success' => 'Usuário cadastrado com sucesso.']);
+    }
 }
