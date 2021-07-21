@@ -249,6 +249,7 @@ class ConcursoController extends Controller
     public function AdicionarUserBanca($user_id, $concurso_id) 
     {
         $concurso = Concurso::find($concurso_id);
+        $this->authorize('operacoesUserBanca', $concurso);
         $concurso->chefeDaBanca()->attach($user_id);
 
         return redirect()->back()->with(['success' => "Usuário adicionado a banca do concurso."]);
@@ -257,6 +258,7 @@ class ConcursoController extends Controller
     public function RemoverUserBanca($user_id, $concurso_id) 
     {
         $concurso = Concurso::find($concurso_id);
+        $this->authorize('operacoesUserBanca', $concurso);
         $concurso->chefeDaBanca()->detach($user_id);
 
         return redirect()->back()->with(['success' => "Usuário removido da banca do concurso."]);

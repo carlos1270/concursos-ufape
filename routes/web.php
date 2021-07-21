@@ -88,12 +88,12 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->gr
     Route::get("/anexo/{name}", [ArquivoController::class, 'downloadFichaAvaliacao'])->name('baixar.anexo');
 });
 
-Route::get('/adicionar-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'AdicionarUserBanca'])->name('concurso.adicionar.banca');
-Route::get('/remover-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'RemoverUserBanca'])->name('concurso.remover.banca');
+Route::get('/adicionar-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'AdicionarUserBanca'])->name('concurso.adicionar.banca')->middleware('auth');
+Route::get('/remover-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'RemoverUserBanca'])->name('concurso.remover.banca')->middleware('auth');
 Route::resource('concurso', ConcursoController::class);
 
 Route::get('/visualizar-arquivo/{arquivo}/{cod}', [ArquivoController::class, 'show'])->name('visualizar.arquivo')->middleware('auth');
 Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, 'showFichAvaliacao'])
     ->name('visualizar.ficha-avaliacao')->middleware('auth');
-Route::get('/{concurso}/usuarios-banca-examinadora', [AdminController::class, 'usuarioDeBanca'])->name('users.listar.banca');
-Route::post('/cadastrar-usuario-banca/{concurso}', [AdminController::class, 'createUserBanca'])->name('user.create.banca');
+Route::get('/{concurso}/usuarios-banca-examinadora', [AdminController::class, 'usuarioDeBanca'])->name('users.listar.banca')->middleware('auth');
+Route::post('/cadastrar-usuario-banca/{concurso}', [AdminController::class, 'createUserBanca'])->name('user.create.banca')->middleware('auth');

@@ -121,6 +121,7 @@ class AdminController extends Controller
 
     public function usuarioDeBanca($id) {
         $concurso = Concurso::find($id);
+        $this->authorize('operacoesUserBanca', $concurso);
         $usuarios = User::where('role', User::ROLE_ENUM["presidenteBancaExaminadora"])->get();
 
         return view('usuario.banca_examinadora', compact('usuarios', 'concurso'));
@@ -128,7 +129,7 @@ class AdminController extends Controller
 
     public function createUserBanca(Request $request, $id) {
         $concurso = Concurso::find($id); 
-
+        $this->authorize('operacoesUserBanca', $concurso);
         Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
 
         $data = [
