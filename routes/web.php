@@ -84,6 +84,8 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserPresidenteBanca'])->gro
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->group(function () {
     Route::get('/show-candidatos/concurso/{concurso_id}', [ConcursoController::class, 'showCandidatos'])
         ->name('show.candidatos.concurso');
+
+    Route::get("/anexo/{name}", [ArquivoController::class, 'downloadFichaAvaliacao'])->name('baixar.anexo');
 });
 
 Route::resource('concurso', ConcursoController::class);
