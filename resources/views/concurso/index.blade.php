@@ -90,10 +90,10 @@
                                                             <img class="filter-green" src="{{asset('img/icon_acoes.svg')}}" style="width: 4px;">
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
                                                             @if(Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                <a class="dropdown-item" href="{{route('users.listar.banca', ['concurso' => $concurso->id])}}">Adicionar usuário de banca</a>
+                                                                <a class="dropdown-item" href="{{route('users.listar.banca', ['concurso' => $concurso->id])}}">Banca examinadora</a>
                                                             @endif
+                                                            <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
                                                             @if(Auth::user()->role != "presidenteBancaExaminadora")
                                                                 <div class="dropdown-divider"></div>
                                                                 <a class="dropdown-item" href="{{route('concurso.edit', ['concurso' => $concurso->id])}}">Editar concurso</a>
