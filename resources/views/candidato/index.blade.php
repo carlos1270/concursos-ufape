@@ -35,10 +35,10 @@
                                         <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->vaga->nome, 0, 20, "...") }}</td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
-                                                Pagamento aprovado
+                                                Pagamento Aprovado
                                             @else 
                                                 <a target="_black" href="http://consulta.tesouro.fazenda.gov.br/gru_novosite/gru_simples.asp">
-                                                    Gerar boleto
+                                                    Gerar Boleto
                                                 </a>
                                             @endif
                                         </td>
@@ -59,7 +59,7 @@
                                                 </div>
                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= now() && $inscricao->status == "aprovado")
                                                     <a class="btn btn-primary" style="margin-left: 5px; border-radius: 4px;" href="{{ route('envio.documentos.inscricao', $inscricao->id) }}">
-                                                        Enviar documentos
+                                                        Enviar Documentos
                                                     </a>
                                                 @endif
                                             </div>
