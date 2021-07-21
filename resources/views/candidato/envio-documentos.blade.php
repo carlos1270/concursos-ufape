@@ -18,8 +18,8 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="dados_pessoais" class="style_campo_titulo">Dados Pessoais <span style="color: red; font-weight: bold;">*</span></label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_blank">Arquivo atual</a> @endif
+                                    <label for="dados_pessoais" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Dados Pessoais</label>
+                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação - CNH ou caso o candidato seja estrangeiro, cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, 
                                         cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro), documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos conforme Lei nº 4.375/1964,
@@ -36,8 +36,8 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="curriculum_vitae_lattes" class="style_campo_titulo">Curriculum vitae modelo Lattes <span style="color: red; font-weight: bold;">*</span></label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank">Arquivo atual</a> @endif
+                                    <label for="curriculum_vitae_lattes" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Curriculum vitae modelo Lattes</label>
+                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         Curriculum Vitae modelo Lattes com as devidas comprovações.
                                     </h6>
@@ -53,8 +53,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="formacao_academica" class="style_campo_titulo">Formação Acadêmica <span style="color: red; font-weight: bold;">*</span></label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blank">Arquivo atual</a> @endif
+                                    <label for="formacao_academica" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Formação Acadêmica</label>
+                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         A formação acadêmica pode ser comprovada através de cópias de documentos como o certificado de Graduação e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior, ou diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior. 
                                         Tais documentos devem ser reconhecidos nacionalmente ou, se obtidos no exterior, devem ser devidamente revalidados e, se em língua estrangeira, devem estar traduzidos por tradutor juramentado. Caso o(a) candidato(a) ainda não possua algum dos documentos a que se refere a alínea “g”, poderá apresentar, para esta fase, declaração de provável conclusão expedida pela Instituição de Ensino de origem do(a) candidato(a), conforme o caso, devendo constar expressamente na declaração a data da conclusão ou provável conclusão e o cumprimento integral das exigências para tal.
@@ -69,8 +69,8 @@
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <label for="experiencia_didatica" class="style_campo_titulo">Experiência Didática</label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blank">Arquivo atual</a> @endif
+                                    <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Didática</label>
+                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         Documentos escaneados que comprovem a experência didática do candidato.
                                     </h6>
@@ -85,8 +85,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
-                                    <label for="producao_cientifica" class="style_campo_titulo">Produção Científica</label> 
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank">Arquivo atual</a> @endif
+                                    <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Produção Científica</label> 
+                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         Documentos escaneados de produções científicas do candidato.
                                     </h6>
@@ -99,8 +99,8 @@
                                     @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <label for="experiencia_profissional" class="style_campo_titulo">Experiência Profissional</label> 
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank">Arquivo atual</a> @endif
+                                    <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Profissional</label> 
+                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         Documentos escaneados que comprovam a experiência profissional do candidato.
                                     </h6>
