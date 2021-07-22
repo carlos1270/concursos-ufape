@@ -5,8 +5,11 @@
         <div class="col-md-11">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                    <h6 class="style_card_container_header_titulo">Usuários de banca examinadora</h6>
-                    <a id="criar-user" class="btn btn-primary" data-toggle="modal" data-target="#create-user-banca" style="margin-top:10px; cursor:pointer; color: white;">Criar usuário de banca examinadora</a>
+                    <div class="form-group">
+                        <h6 class="style_card_container_header_titulo">Usuários de banca examinadora</h6>
+                        <h6 class="" style="font-weight: normal; color: #909090; margin-top: -10px; margin-bottom: -15px;">Meus concursos > Banca examinadora</h6>
+                    </div>
+                    <h6 class="style_card_container_header_campo_obrigatorio"><a id="criar-user" class="btn btn-primary" data-toggle="modal" data-target="#create-user-banca" style="margin-top:10px; cursor:pointer; color: white;">Criar usuário de banca examinadora</a></h6>
                 </div>
                 <div class="card-body">
                     @if(session('success'))

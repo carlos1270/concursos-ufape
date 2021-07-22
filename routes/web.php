@@ -7,6 +7,7 @@ use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ArquivoController;
+use App\Http\Controllers\NotasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +98,14 @@ Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, '
     ->name('visualizar.ficha-avaliacao')->middleware('auth');
 Route::get('/{concurso}/usuarios-banca-examinadora', [AdminController::class, 'usuarioDeBanca'])->name('users.listar.banca')->middleware('auth');
 Route::post('/cadastrar-usuario-banca/{concurso}', [AdminController::class, 'createUserBanca'])->name('user.create.banca')->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/notas/{concurso}', [NotasController::class, 'index'])->name('notas.index');
+    Route::get('/notas/{concurso}/criar', [NotasController::class, 'create'])->name('notas.create');
+    Route::post('/notas/{concurso}/salvar', [NotasController::class, 'store'])->name('notas.store');
+    Route::get('/notas/{nota}/editar/{concurso}', [NotasController::class, 'edit'])->name('notas.edit');
+    Route::put('/notas/{nota}/atualizar', [NotasController::class, 'update'])->name('notas.update');
+    Route::delete('/notas/{nota}/deletar', [NotasController::class, 'destroy'])->name('notas.destroy');
+});
+Route::get('/notas/{nota}/anexo', [NotasController::class, 'anexo'])->name('notas.anexo');
+Route::get('/notas-do-concurso', [NotasController::class, 'get'])->name('notas.get');

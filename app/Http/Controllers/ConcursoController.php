@@ -8,6 +8,7 @@ use App\Models\Avaliacao;
 use App\Models\Concurso;
 use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
+use App\Models\NotaDeTexto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -46,12 +47,15 @@ class ConcursoController extends Controller
     public function show($id)
     {
         $concurso = Concurso::find($id);
+        $notas_aviso = $concurso->notas()->where('tipo', NotaDeTexto::ENUM_TIPO['aviso'])->get();
+        $notas_notificacao = $concurso->notas()->where('tipo', NotaDeTexto::ENUM_TIPO['notificacao'])->get();
+        $notas_resultado = $concurso->notas()->where('tipo', NotaDeTexto::ENUM_TIPO['resultado'])->get();
         $inscricao = null;
         if (Auth::check()) {
             $inscricao = Inscricao::where('concursos_id', $concurso->id)->where('users_id', Auth::user()->id)->first();
         }
 
-        return view('concurso.show', compact('concurso', 'inscricao'));
+        return view('concurso.show', compact('concurso', 'inscricao', 'notas_aviso', 'notas_notificacao', 'notas_resultado'));
     }
 
     public function edit($id)
