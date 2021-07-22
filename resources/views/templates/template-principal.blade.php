@@ -52,9 +52,11 @@
                                     Olá, {{ Auth::user()->nome }}
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a type="button" class="dropdown-item" onclick ="location.href='{{ route('user.profile.edit') }}'">
-                                        Editar Perfil
-                                    </a>
+                                    @if(Auth::user()->role == "candidato")
+                                        <a type="button" class="dropdown-item" onclick ="location.href='{{ route('user.profile.edit') }}'">
+                                            Editar Perfil
+                                        </a>
+                                    @endif
                                     <a type="button" class="dropdown-item" onclick ="location.href='{{ route('user.password.edit') }}'">
                                         Editar Senha
                                     </a>
