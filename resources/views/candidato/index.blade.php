@@ -42,7 +42,13 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td id="tabela_container_linha">{{ $inscricao->status }}</td>
+                                        <td id="tabela_container_linha">
+                                            @if ($inscricao->status == "aprovado")
+                                                Aprovado
+                                            @else 
+                                                {{$inscricao->status}}
+                                            @endif
+                                        </td>
                                         <td id="tabela_container_linha" style="text-align: center;">
                                             <div class="btn-group">
                                                 <div>
