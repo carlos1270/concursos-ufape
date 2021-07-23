@@ -544,3 +544,8 @@ li {
 .style_subtitulo_documento{
     text-align: justify; font-size:15px; color:#909090; font-weight:normal
 }
+
+li { 
+    line-height: 25px;
+    list-style: disc;
+}

@@ -15,19 +15,25 @@
                             <div class="form-row">
                                 <div class="form-group col-md-1s2">
                                     <h6 style="text-align:justify;">
-                                        Durante esta fase devem ser enviados os documentos escaneados marcados como obrigatórios, em formato PDF com tamanho máximo de 10MB por arquivo. 
-                                        São de inteira e exclusiva responsabilidade do(a) candidato(a) as informações e a documentação por ele(a) fornecidas para a inscrição.
-                                        As inscrições que não cumprirem integralmente as condições previstas neste Edital são indeferidas pela Comissão de Seleção e Admissão, designada pelo Colegiado do Programa.
+                                        Os documentos devem estar legíveis, devidamente escaneados e em PDF. As versões escaneadas devem
+                                        ser enviadas em seis (06) arquivos, com tamanho máximo de cada arquivo: 2MB.
                                     </h6>
                                 </div>
-
                                 <div class="form-group col-md-12">
                                     <label for="dados_pessoais" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Dados Pessoais</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
-                                        Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação - CNH ou caso o candidato seja estrangeiro, cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, 
-                                        cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro), documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos conforme Lei nº 4.375/1964,
-                                        documento oficial que comprove que o candidato não possui antecedentes criminais.
+                                        <ul>
+                                            <li>Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação - CNH.</li>
+                                            <li>Cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, caso o candidato seja estrangeiro.</li>
+                                            <li>Cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro).</li>
+                                            <li>Certidão de quitação eleitoral (emitida pelo site do TRE ou cartório eleitoral).</li>
+                                            <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano em 
+                                                completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
+                                            </li>
+                                            <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
+                                            <li>Comprovante do pagamento da taxa de inscrição.</li>
+                                        </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('dados_pessoais') is-invalid @enderror" 
                                         id="dados_pessoais" name="dados_pessoais" required/>
@@ -43,7 +49,9 @@
                                     <label for="curriculum_vitae_lattes" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Curriculum vitae modelo Lattes</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
-                                        Curriculum Vitae modelo Lattes com as devidas comprovações.
+                                        <ul>
+                                            <li>Curriculum Vitae modelo Lattes com as devidas comprovações(as comprovações devem ser enviadas nos pŕoximos arquivos).</li>
+                                        </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('curriculum_vitae_lattes') is-invalid @enderror" id="curriculum_vitae_lattes" 
                                         name="curriculum_vitae_lattes" required/>
@@ -60,8 +68,9 @@
                                     <label for="formacao_academica" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Formação Acadêmica</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
-                                        A formação acadêmica pode ser comprovada através de cópias de documentos como o certificado de Graduação e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior, ou diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior. 
-                                        Tais documentos devem ser reconhecidos nacionalmente ou, se obtidos no exterior, devem ser devidamente revalidados e, se em língua estrangeira, devem estar traduzidos por tradutor juramentado. Caso o(a) candidato(a) ainda não possua algum dos documentos a que se refere a alínea “g”, poderá apresentar, para esta fase, declaração de provável conclusão expedida pela Instituição de Ensino de origem do(a) candidato(a), conforme o caso, devendo constar expressamente na declaração a data da conclusão ou provável conclusão e o cumprimento integral das exigências para tal.
+                                        <ul>
+                                            <li>Certificado/Diploma de Graduação e/ou Especialização e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior.</li>
+                                        </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('formacao_academica') is-invalid @enderror" 
                                         id="formacao_academica" name="formacao_academica" required/>
@@ -76,7 +85,14 @@
                                     <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Didática</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
-                                        Documentos escaneados que comprovem a experência didática do candidato.
+                                        <ul>
+                                            <li>Tempo de exercício.</li>
+                                            <li>Tempo de exercício como professor no Magistério Superior em Cursos a Distância.</li>
+                                            <li>Participação em Bancas ou Comissões Examinadoras de Graduação e Pós-Graduação.</li>
+                                            <li>Participação em Bancas ou Comissões Examinadoras de Seleção para o Magistério Superior.</li>
+                                            <li>Orientação de Trabalhos Acadêmicos.</li>
+                                            <li>Cursos ministrados (Extensão, Capacitação ou equivalentes na área da Seleção) / Para cada 10 horas</li>
+                                        </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_didatica') is-invalid @enderror" 
                                         id="experiencia_didatica" name="experiencia_didatica"/>
@@ -93,7 +109,13 @@
                                     <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Produção Científica</label> 
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
-                                        Documentos escaneados de produções científicas do candidato.
+                                        <ul>
+                                            <li>Livros publicados.</li>
+                                            <li>Capítulos de Livros publicados.</li>
+                                            <li>Trabalhos publicados em Revistas e/ou periódicos de reconhecido valor científico ou cultural.</li>
+                                            <li>Publicação de Livro Didático ou Material Didático na área da seleção com ISBN.</li>
+                                            <li>Desenvolvimento de patentes com registro definitivo (carta patente).</li>
+                                        </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('producao_cientifica') is-invalid @enderror" 
                                         id="producao_cientifica" name="producao_cientifica"/>
@@ -108,7 +130,14 @@
                                     <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Profissional</label> 
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
-                                        Documentos escaneados que comprovam a experiência profissional do candidato.
+                                        <ul>
+                                            <li>Exercício de cargo ou função de Administração Acadêmica.</li>
+                                            <li>Prêmios e Láureas acadêmicas.</li>
+                                            <li>Bolsas de Pesquisa financiadas por Órgãos de Fomento (exceto Bolsas de Formação)</li>
+                                            <li>Exercício Profissional extrauniversitário, com vínculo empregatício, em área relacionada à matéria da seleção.</li>
+                                            <li>Consultorias relacionadas ao setor de estudos da Seleção.</li>
+                                            <li>Projetos de pesquisa aprovados por Órgãos de Fomento.</li>
+                                        </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_profissional') is-invalid @enderror" 
                                         id="experiencia_profissional" name="experiencia_profissional"/>

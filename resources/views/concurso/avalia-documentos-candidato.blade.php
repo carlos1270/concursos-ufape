@@ -9,16 +9,23 @@
                 </div>
                 <div class="card-body">
                     <div class="form-row">
-
                         <div class="col-md-12">
                             <div class="form-group">
                                 <h6 class="style_titulo_documento">
                                     Dados Pessoais
                                 </h6>
                                 <h6 class="style_subtitulo_documento">
-                                    Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação - CNH ou caso o candidato seja estrangeiro, cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, 
-                                    cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro), documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos conforme Lei nº 4.375/1964,
-                                    documento oficial que comprove que o candidato não possui antecedentes criminais.
+                                    <ul style="margin-left: -20px;">
+                                        <li>Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação - CNH.</li>
+                                        <li>Cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, caso o candidato seja estrangeiro.</li>
+                                        <li>Cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro).</li>
+                                        <li>Certidão de quitação eleitoral (emitida pelo site do TRE ou cartório eleitoral).</li>
+                                        <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano em 
+                                            completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
+                                        </li>
+                                        <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
+                                        <li>Comprovante do pagamento da taxa de inscrição.</li>
+                                    </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->dados_pessoais == null)
                                     <div class="d-flex justify-content-left">
@@ -51,7 +58,9 @@
                                     Curriculum vitae modelo Lattes
                                 </h6>
                                 <h6 class="style_subtitulo_documento">
-                                    Curriculum Vitae modelo Lattes com as devidas comprovações.
+                                    <ul style="margin-left: -20px;">
+                                        <li>Curriculum Vitae modelo Lattes com as devidas comprovações(as comprovações devem ser enviadas nos pŕoximos arquivos).</li>
+                                    </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->curriculum_vitae_lattes == null)
                                     <div class="d-flex justify-content-left">
@@ -84,9 +93,9 @@
                                     Formação acadêmica
                                 </h6>
                                 <h6 class="style_subtitulo_documento">
-                                    A formação acadêmica pode ser comprovada através de cópias de documentos como o certificado de Graduação e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior, ou diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior. 
-                                    Tais documentos devem ser reconhecidos nacionalmente ou, se obtidos no exterior, devem ser devidamente revalidados e, se em língua estrangeira, devem estar traduzidos por tradutor juramentado. Caso o(a) candidato(a) ainda não possua algum dos documentos a que se refere a alínea “g”, poderá apresentar, para esta fase, declaração de provável conclusão expedida pela Instituição de Ensino de origem do(a) candidato(a), 
-                                    conforme o caso, devendo constar expressamente na declaração a data da conclusão ou provável conclusão e o cumprimento integral das exigências para tal.
+                                    <ul style="margin-left: -20px;">
+                                        <li>Certificado/Diploma de Graduação e/ou Especialização e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior.</li>
+                                    </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->formacao_academica == null)
                                     <div class="d-flex justify-content-left">
@@ -119,7 +128,14 @@
                                     Experiência Didática
                                 </h6>
                                 <h6 class="style_subtitulo_documento">
-                                    Documentos escaneados que comprovem a experência didática do candidato.
+                                    <ul style="margin-left: -20px;">
+                                        <li>Tempo de exercício.</li>
+                                        <li>Tempo de exercício como professor no Magistério Superior em Cursos a Distância.</li>
+                                        <li>Participação em Bancas ou Comissões Examinadoras de Graduação e Pós-Graduação.</li>
+                                        <li>Participação em Bancas ou Comissões Examinadoras de Seleção para o Magistério Superior.</li>
+                                        <li>Orientação de Trabalhos Acadêmicos.</li>
+                                        <li>Cursos ministrados (Extensão, Capacitação ou equivalentes na área da Seleção) / Para cada 10 horas</li>
+                                    </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->experiencia_didatica == null)
                                     <div class="d-flex justify-content-left">
@@ -152,7 +168,13 @@
                                     Produção Ciêntifica
                                 </h6>
                                 <h6 class="style_subtitulo_documento">
-                                    Documentos escaneados de produções científicas do candidato.
+                                    <ul style="margin-left: -20px;">
+                                        <li>Livros publicados.</li>
+                                        <li>Capítulos de Livros publicados.</li>
+                                        <li>Trabalhos publicados em Revistas e/ou periódicos de reconhecido valor científico ou cultural.</li>
+                                        <li>Publicação de Livro Didático ou Material Didático na área da seleção com ISBN.</li>
+                                        <li>Desenvolvimento de patentes com registro definitivo (carta patente).</li>
+                                    </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->producao_cientifica == null)
                                     <div class="d-flex justify-content-left">
@@ -185,7 +207,14 @@
                                     Experiência Profissional
                                 </h6>
                                 <h6 class="style_subtitulo_documento">
-                                    Documentos escaneados que comprovam a experiência profissional do candidato.
+                                    <ul style="margin-left: -20px;">
+                                        <li>Exercício de cargo ou função de Administração Acadêmica.</li>
+                                        <li>Prêmios e Láureas acadêmicas.</li>
+                                        <li>Bolsas de Pesquisa financiadas por Órgãos de Fomento (exceto Bolsas de Formação)</li>
+                                        <li>Exercício Profissional extrauniversitário, com vínculo empregatício, em área relacionada à matéria da seleção.</li>
+                                        <li>Consultorias relacionadas ao setor de estudos da Seleção.</li>
+                                        <li>Projetos de pesquisa aprovados por Órgãos de Fomento.</li>
+                                    </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->experiencia_profissional == null)
                                     <div class="d-flex justify-content-left">
