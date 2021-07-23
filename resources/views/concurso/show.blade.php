@@ -295,7 +295,7 @@
                     </div>
                 </div>
                 </div>
-                @if($notas_resultado->count() > 0)
+                {{-- @if($notas_resultado->count() > 0) --}}
                   <div class="col-md-12" style="margin-bottom:30px">
                     <div class="card card_conteudo shadow bg-white" style="border-radius:12px; border-width:0px;">
                         <div class="card-header" style="border-top-left-radius: 12px; border-top-right-radius: 12px; background-color: #fff">
@@ -310,9 +310,12 @@
                                       <div class="form-group" style="width: 100%">
                                           <div class="d-flex justify-content-between" style="width: 100%">
                                               <div>
-                                                @foreach ($notas_resultado as $nota)
+                                                {{-- @foreach ($notas_resultado as $nota)
                                                   <div class="col-md-12" id="nota-{{$nota->id}}"></div>
-                                                @endforeach
+                                                @endforeach --}}
+                                                <h5 style=" font-size:19px; margin-top:9px">Para acesso aos resultados do concurso, acesse o portal da UFAPE, na seção Concursos / Professor do magistério superior. Endereço:
+                                                  <a target="_black" href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
+                                                </h5>
                                               </div>
                                           </div>
                                       </div>
@@ -321,7 +324,7 @@
                           </div>
                       </div>
                   </div>
-                @endif
+                {{-- @endif --}}
             </div>
           </div>
         </div>
@@ -355,20 +358,24 @@
           // console.log(data[.length]);
           if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
-              var divNota = document.getElementById('nota-'+data[i].id);
-              divNota.innerHTML = data[i].texto;
-              divNota.style.backgroundColor = data[i].cor;
-              if (data[i].anexo != null) {
-                divNota.append(criarTagA(data[i].id));
-              }
-              if (data[i].tipo == 3) {
-                divNota.style.borderRadius = "5px";
-                divNota.style.padding = "0px";
-                divNota.style.margin = "0px";
-              } else {
-                divNota.style.borderRadius = "5px";
-                divNota.style.padding = "10px";
-                divNota.style.margin = "3px";
+              try {
+                var divNota = document.getElementById('nota-'+data[i].id);
+                divNota.innerHTML = data[i].texto;
+                divNota.style.backgroundColor = data[i].cor;
+                if (data[i].anexo != null) {
+                  divNota.append(criarTagA(data[i].id));
+                }
+                if (data[i].tipo == 3) {
+                  divNota.style.borderRadius = "5px";
+                  divNota.style.padding = "0px";
+                  divNota.style.margin = "0px";
+                } else {
+                  divNota.style.borderRadius = "5px";
+                  divNota.style.padding = "10px";
+                  divNota.style.margin = "3px";
+                }
+              } catch (error) {
+                console.log(error);
               }
             }
           }
