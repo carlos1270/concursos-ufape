@@ -104,4 +104,9 @@ class ConcursoPolicy
     {
         return $concurso->users_id == $user->id;
     }
+
+    public function operacoesNotasDeTexto(User $user, Concurso $concurso)
+    {
+        return $this->operacoesUserBanca($user, $concurso);
+    }
 }

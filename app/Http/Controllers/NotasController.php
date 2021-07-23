@@ -17,7 +17,9 @@ class NotasController extends Controller
     public function index($id)
     {
         $concurso = Concurso::find($id);
+        $this->authorize('operacoesNotasDeTexto', $concurso);
         $notas = $concurso->notas()->orderBy('created_at')->get();
+        
         return view('notas.index', compact('concurso', 'notas'));
     }
 
@@ -29,6 +31,8 @@ class NotasController extends Controller
     public function create($id)
     {
         $concurso = Concurso::find($id);
+        $this->authorize('operacoesNotasDeTexto', $concurso);
+
         return view('notas.create', compact('concurso'));
     }
 
@@ -40,8 +44,10 @@ class NotasController extends Controller
      */
     public function store(NotaDeTestoStoreRequest $request, $id)
     {
-        $request->validated();
         $concurso = Concurso::find($id);
+        $this->authorize('operacoesNotasDeTexto', $concurso);
+
+        $request->validated();
         $nota = new NotaDeTexto();
         $nota->setAtributes($request, $concurso);
         $nota->save();
@@ -70,7 +76,9 @@ class NotasController extends Controller
     public function edit($nota_id, $concurso_id)
     {
         $nota = NotaDeTexto::find($nota_id);
+        $this->authorize('update', $nota);
         $concurso = Concurso::find($concurso_id);
+        $this->authorize('operacoesNotasDeTexto', $concurso);
        
         return view('notas.edit', compact('nota', 'concurso'));
     }
@@ -84,8 +92,10 @@ class NotasController extends Controller
      */
     public function update(NotaDeTestoStoreRequest $request, $id)
     {
-        $request->validated();
         $nota = NotaDeTexto::find($id);
+        $this->authorize('update', $nota);
+
+        $request->validated();
         $concurso = $nota->concurso;
         $nota->setAtributes($request, $concurso);
         $nota->update();
@@ -103,6 +113,8 @@ class NotasController extends Controller
     public function destroy($id)
     {
         $nota = NotaDeTexto::find($id);
+        $this->authorize('delete', $nota);
+
         $concurso = $nota->concurso;
         $nota->deletar();
 
@@ -113,12 +125,26 @@ class NotasController extends Controller
     {
         $nota = NotaDeTexto::find($id);
 
-        return response()->file("storage/" . $nota->anexo);
+        if ($this->anexo != null && Storage::disk()->exists('public/'.$this->anexo)) {
+            return response()->file("storage/".$nota->anexo);
+        }
+
+        return abort(404);
     }
 
     public function get(Request $request) {
-        $notas = Concurso::find($request->concurso_id)->notas;
+        $concurso = Concurso::find($request->concurso_id);
+    
+        if ($concurso != null) {
+            $notas = $concurso->notas;
 
-        return response()->json($notas);
+            if ($notas->count() > 0) {
+                return response()->json($notas);
+            }
+            
+            return abort(404);
+        }
+
+        return abort(404);
     }
 }
