@@ -535,6 +535,28 @@ li {
 .show > .btn-outline-secondary.dropdown-toggle:focus {
   box-shadow: none;
 }
+
+.style_card_container_header_campo_obrigatorio .input-search {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: none;
+}
+
+.style_card_container_header_campo_obrigatorio .input-search:focus {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: none;
+}
+
+.style_card_container_header_campo_obrigatorio .form-control:focus {
+    background-color: #fff;
+    border-color: rgba(25, 53, 83, 0.25);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(15, 38, 63, 0.25);
+}
+
 /* X  X */
 
 /* 2ª fase */
@@ -549,3 +571,4 @@ li {
     line-height: 25px;
     list-style: disc;
 }
+/* X X*/

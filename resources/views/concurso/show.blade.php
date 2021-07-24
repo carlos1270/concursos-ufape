@@ -40,18 +40,65 @@
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Descrição</h5></div>
                           <div style="margin-top: 10px"><textarea id="descricao-concurso" disabled>{{$concurso->descricao}}</textarea></div>
                         </div>
-                        {{--<div class="col-md-12" style="margin-top: 5px">
+                        {{-- <div class="col-md-12" style="margin-top: 5px">
                           <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Avisos</h5></div>
-                          <div style="margin-top: 10px">
-                            <div class="alert alert-warning" role="alert">
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.                            </div>
-                          </div>
-                        </div>--}}
+                          <div id="editor" style="border:none;"></div>
+                        </div> --}}
                       </div>
                   </div>
               </div>
             </div>
           </div>
+          @if($notas_aviso->count() > 0)
+            <div class="form-row">
+              <div class="col-md-12" style="margin-bottom:20px">
+                <div class="card shadow bg-white" style="border-radius:12px; border-width:0px;">
+                    <div class="card-body">
+                        <div class="form-row">
+                          <div class="col-md-12" style="margin-bottom: 0.5rem">
+                            <h4 class="card-title mb-0" style="font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">Avisos</h4>
+                          </div>
+
+                          @foreach ($notas_aviso as $nota)
+                            <div class="col-md-12" style="margin-top: 5px">
+                              <div id="nota-{{$nota->id}}" style="margin-top: 10px"></div>
+                            </div>
+                          @endforeach
+                          {{-- <div class="col-md-12" style="margin-top: 5px">
+                            <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Avisos</h5></div>
+                            <div id="editor" style="border:none;"></div>
+                          </div> --}}
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          @endif
+          @if($notas_notificacao->count() > 0)
+            <div class="form-row">
+              <div class="col-md-12" style="margin-bottom:20px">
+                <div class="card shadow bg-white" style="border-radius:12px; border-width:0px;">
+                    <div class="card-body">
+                        <div class="form-row">
+                          <div class="col-md-12" style="margin-bottom: 0.5rem">
+                            <h4 class="card-title mb-0" style="font-family:Arial, Helvetica, sans-serif; color:#0842A0; font-weight:bold">Notificações</h4>
+                          </div>
+
+                          @foreach ($notas_notificacao as $nota)
+                            <div class="col-md-12" style="margin-top: 5px">
+                              <div id="nota-{{$nota->id}}" style="margin-top: 10px"></div>
+                            </div>
+                          @endforeach
+                          {{-- <div class="col-md-12" style="margin-top: 5px">
+                            <div><h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6;">Avisos</h5></div>
+                            <div id="editor" style="border:none;"></div>
+                          </div> --}}
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          @endif
         </div>
         <div class="col-md-4">
             <div class="form-row">
@@ -248,44 +295,42 @@
                     </div>
                 </div>
                 </div>
-                <div class="col-md-12" style="margin-bottom:30px">
-                  <div class="card card_conteudo shadow bg-white" style="border-radius:12px; border-width:0px;">
-                      <div class="card-header" style="border-top-left-radius: 12px; border-top-right-radius: 12px; background-color: #fff">
-                          <div class="d-flex justify-content-between align-items-center" style="margin-top: 9px; margin-bottom:6px">
-                            <h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6">Resultados</h5>
-                          </div>
-                      </div>
-                      <div class="card-body">
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <div class="d-flex justify-content-left align-items-center" style="margin-bottom: -15px">
-                                    {{-- <div style="margin-right:10px; margin-top:-15px">
-                                        <img class="" src="{{asset('img/icon_modelo.png')}}" alt="" width="40px">
-                                    </div> --}}
-                                    <div class="form-group" style="width: 100%">
-                                        <div class="d-flex justify-content-between" style="width: 100%">
-                                            <div>
-                                              <h5 style=" font-size:19px; margin-top:9px">Para acesso aos resultados do concurso, acesse o portal da UFAPE, na seção Concursos / Professor do magistério superior. Endereço:
-                                                <a target="_black" href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
-                                              </h5>
-                                            </div>
-                                            {{-- <div>
-                                                <a class="btn btn-light" href="{{asset('storage/'.$concurso->edital_geral)}}" target="_new" style="" >
-                                                <img class="" src="{{asset('img/file-download-solid.svg')}}" style="width:20px"><br>
-                                                Baixar</a>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                </div>
+                {{-- @if($notas_resultado->count() > 0) --}}
+                  <div class="col-md-12" style="margin-bottom:30px">
+                    <div class="card card_conteudo shadow bg-white" style="border-radius:12px; border-width:0px;">
+                        <div class="card-header" style="border-top-left-radius: 12px; border-top-right-radius: 12px; background-color: #fff">
+                            <div class="d-flex justify-content-between align-items-center" style="margin-top: 9px; margin-bottom:6px">
+                              <h5 class="card-title mb-0" style="font-size:25px; font-family:Arial, Helvetica, sans-serif; color:#1492E6">Resultados</h5>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="card-body">
+                          <div class="form-row">
+                              <div class="col-md-12">
+                                  <div class="d-flex justify-content-left align-items-center" style="margin-bottom: -15px">
+                                      <div class="form-group" style="width: 100%">
+                                          <div class="d-flex justify-content-between" style="width: 100%">
+                                              <div>
+                                                {{-- @foreach ($notas_resultado as $nota)
+                                                  <div class="col-md-12" id="nota-{{$nota->id}}"></div>
+                                                @endforeach --}}
+                                                <h5 style=" font-size:19px; margin-top:9px">Para acesso aos resultados do concurso, acesse o portal da UFAPE, na seção Concursos / Professor do magistério superior. Endereço:
+                                                  <a target="_black" href="http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso">http://ufape.edu.br/br/professor-magist%C3%A9rio-superior-concurso</a>
+                                                </h5>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                {{-- @endif --}}
             </div>
           </div>
         </div>
     </div>
   </div>
+  <script scr="{{asset('ckeditor/ckeditor.js')}}"></script>
   <script>
     function shareWhatsapp(url) {
       window.open("https://api.whatsapp.com/send?text="+url, "Compartilhar com o facebook", "height=1000,width=1000");
@@ -301,6 +346,77 @@
       var textarea = document.getElementById('descricao-concurso');
       // console.log(textarea.scrollHeight);
       textarea.style.height = textarea.scrollHeight + "px";
+
+      $.ajax({
+        url: "{{route('notas.get')}}",
+        method: 'get',
+        type: 'get',
+        data: {
+            concurso_id: "{{$concurso->id}}",
+        },
+        success: function(data){
+          // console.log(data[.length]);
+          if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+              try {
+                var divNota = document.getElementById('nota-'+data[i].id);
+                divNota.innerHTML = data[i].texto;
+                divNota.style.backgroundColor = data[i].cor;
+                if (data[i].anexo != null) {
+                  divNota.append(criarTagA(data[i].id));
+                }
+                if (data[i].tipo == 3) {
+                  divNota.style.borderRadius = "5px";
+                  divNota.style.padding = "0px";
+                  divNota.style.margin = "0px";
+                } else {
+                  divNota.style.borderRadius = "5px";
+                  divNota.style.padding = "10px";
+                  divNota.style.margin = "3px";
+                }
+              } catch (error) {
+                console.log(error);
+              }
+            }
+          }
+        },
+      });
     });
+
+    function criarTagA(id){
+      var a = document.createElement("a");
+      a.href = "{{url('/')}}/notas/"+id+"/anexo";
+      a.class = "btn btn-success";
+      a.textContent = "Anexo";
+      a.onmouseover = mudarFundoEscuro(a);
+      a.onmouseout = mudarFundoNormal(a);
+      a.target = "_black";
+      a.style.display = "inline-block";
+      a.style.color = "#fff";
+      a.style.textAlign = "center";
+      a.style.verticalAlign = "middle";
+      a.style.webkitUserSelect = "none";
+      a.style.msUserSelect = "none";
+      a.style.userSelect = "none";
+      a.style.backgroundColor = "#28A745";
+      a.style.border = "1px solid #28A745";
+      a.style.padding = "0.375rem 0.75rem";
+      a.style.fontSize = "1rem";
+      a.style.lineHeight = "1rem";
+      a.style.borderRadius = "0.25rem";
+      a.style.transition = "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;";
+      a.style.textDecoration = "none";
+      return a;
+    }
+
+    function mudarFundoEscuro(a) {
+      a.style.backgroundColor = "#218838";
+      a.style.border = "1px solid #1e7e34";
+    }
+
+    function mudarFundoNormal(a) {
+      a.style.backgroundColor = "#28A745";
+      a.style.border = "1px solid #28A745";
+    }
   </script>
 @endsection

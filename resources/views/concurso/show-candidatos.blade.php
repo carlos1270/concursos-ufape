@@ -5,7 +5,15 @@
             <div class="col-md-11">
                 <div class="card shadow bg-white style_card_container">
                     <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                        <h6 class="style_card_container_header_titulo">Candidatos</h6>
+                        <div class="form-group">
+                            <h6 class="style_card_container_header_titulo">Candidatos</h6>
+                            <h6 class="" style="font-weight: normal; color: #909090; margin-top: -10px; margin-bottom: -15px;">Meus concursos > Visualizar candidatos</h6>
+                        </div>
+                        <div class="form-group">
+                            <div class="style_card_container_header_campo_obrigatorio">
+                                <input type="text" class="form-control input-search" placeholder="Buscar pelo nome" autofocus onkeyup="busca(this.value)">
+                            </div>      
+                        </div>     
                     </div>
                     @if($inscricoes->count() > 0)
                         <div class="card-body">
@@ -37,13 +45,13 @@
                                         <th scope="col" class="tabela_container_cabecalho_titulo">Avaliar</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="candidatos">
                                     @foreach ($inscricoes as $inscricao)
                                         <tr>
                                             <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$inscricao->id}}</th>
                                             <td id="tabela_container_linha">
                                                 <div class="form-group">
-                                                    <h6 style="font-weight: normal;">{{ $inscricao->user->nome }}</h6>
+                                                    <h6 style="font-weight: normal;">{{$inscricao->user->nome}}</h6>
                                                     <h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:14px; margin-top:-5px">{{ $inscricao->vaga->nome }}</h6>
                                                 </div>
                                             </td>
@@ -116,4 +124,24 @@
             </div>
         </div>
     </div>
+    <script>
+        function busca(nome) {
+            var candidatos = document.getElementById('candidatos').children;
+            if(nome.length > 2) {      
+                for(var i = 0; i < candidatos.length; i++) {
+                    var nomeLinha = candidatos[i].children[1].children[0].children[0].textContent;
+                    console.log(nomeLinha);
+                    if(nomeLinha.substr(0).indexOf(nome) >= 0) {
+                        candidatos[i].style.display = "";
+                    } else {
+                        candidatos[i].style.display = "none";
+                    }
+                }
+            } else {
+                for(var i = 0; i < candidatos.length; i++) {
+                    candidatos[i].style.display = "";
+                }
+            }
+        }
+    </script>
 @endsection
