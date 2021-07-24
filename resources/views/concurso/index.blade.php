@@ -74,15 +74,9 @@
                                                         <a class="btn btn-success shadow-sm" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
                                                     </div>
                                                     <div style="margin-right: 15px">
-                                                        @if ($concurso->data_resultado_selecao <= now())
-                                                            <a class="btn btn-warning shadow-sm" href="{{ route('concurso.resultado', $concurso->id) }}">
-                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
-                                                            </a>
-                                                        @else
-                                                            <a class="btn btn-warning shadow-sm">
-                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
-                                                            </a>
-                                                        @endif
+                                                        <a class="btn btn-warning shadow-sm" href="{{ route('concurso.resultado', $concurso->id) }}">
+                                                            <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
+                                                        </a>
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
                                                     <div class="dropdown">

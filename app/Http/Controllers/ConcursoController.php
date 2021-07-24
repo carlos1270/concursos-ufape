@@ -215,25 +215,49 @@ class ConcursoController extends Controller
     public function avaliarDocumentosCandidato(Request $request)
     {
         $arquivos = Arquivo::where('inscricoes_id', $request->inscricao_id)->first();
-        $avaliacao = Avaliacao::where('inscricoes_id',  $request->inscricao_id)->first();
-        return view('concurso.avalia-documentos-candidato')->with(['arquivos' => $arquivos, 'avaliacao' => $avaliacao]);
+        $inscricao = Inscricao::find($request->inscricao_id);
+        return view('concurso.avalia-documentos-candidato')->with(['arquivos' => $arquivos, 'inscricao' => $inscricao]);
     }
 
     public function savePontuacaoDocumentosCandidato(Request $request)
     {
-        Validator::make($request->all(), Avaliacao::$rules, Avaliacao::$messages)->validate();
+        $avaliacao = Avaliacao::where("inscricoes_id", $request->inscricao_id)->first();
+
+        if (!$avaliacao) {
+            Validator::make($request->all(), Avaliacao::$rules, Avaliacao::$messages)->validate();
+        } else {
+            Validator::make($request->all(), [
+                'nota'            => 'numeric|min:0|max:100',
+                'ficha_avaliacao' => 'file|mimes:pdf|max:2048'
+            ], Avaliacao::$messages)->validate();
+        }
 
         $inscricao = Inscricao::find($request->inscricao_id);
 
-        $path_ficha_avaliacao = 'concursos/' . $inscricao->concurso->id . '/inscricoes/' . $inscricao->id . '/avaliacao/';
-        $nome_ficha_avaliacao = 'ficha_avaliacao.pdf';
-        Storage::putFileAs('public/' . $path_ficha_avaliacao, $request->ficha_avaliacao, $nome_ficha_avaliacao);
+        if ($avaliacao && $request->ficha_avaliacao) {
+            Storage::delete('public/' . $avaliacao->ficha_avaliacao);
 
-        Avaliacao::create([
-            'nota'            => $request->nota,
-            'ficha_avaliacao' => $path_ficha_avaliacao . $nome_ficha_avaliacao,
-            'inscricoes_id'   => $inscricao->id
-        ]);
+            $path_ficha_avaliacao = 'concursos/' . $inscricao->concurso->id . '/inscricoes/' . $inscricao->id . '/avaliacao/';
+            $nome_ficha_avaliacao = 'ficha_avaliacao.pdf';
+            Storage::putFileAs('public/' . $path_ficha_avaliacao, $request->ficha_avaliacao, $nome_ficha_avaliacao);
+        }
+
+        if ($avaliacao && $request->nota) {
+            $avaliacao->nota = $request->nota;
+            $avaliacao->update();
+        }
+
+        if (!$avaliacao) {
+            $path_ficha_avaliacao = 'concursos/' . $inscricao->concurso->id . '/inscricoes/' . $inscricao->id . '/avaliacao/';
+            $nome_ficha_avaliacao = 'ficha_avaliacao.pdf';
+            Storage::putFileAs('public/' . $path_ficha_avaliacao, $request->ficha_avaliacao, $nome_ficha_avaliacao);
+
+            Avaliacao::create([
+                'nota'            => $request->nota,
+                'ficha_avaliacao' => $path_ficha_avaliacao . $nome_ficha_avaliacao,
+                'inscricoes_id'   => $inscricao->id
+            ]);
+        }
 
         return redirect()->route('concurso.index')->with('mensage', 'Pontuação salva e ficha de avaliação salva com sucesso!');
     }
@@ -246,7 +270,7 @@ class ConcursoController extends Controller
         return view('concurso.resultado-final', compact('inscricoes'));
     }
 
-    public function AdicionarUserBanca($user_id, $concurso_id) 
+    public function AdicionarUserBanca($user_id, $concurso_id)
     {
         $concurso = Concurso::find($concurso_id);
         $this->authorize('operacoesUserBanca', $concurso);
@@ -255,7 +279,7 @@ class ConcursoController extends Controller
         return redirect()->back()->with(['success' => "Usuário adicionado a banca do concurso."]);
     }
 
-    public function RemoverUserBanca($user_id, $concurso_id) 
+    public function RemoverUserBanca($user_id, $concurso_id)
     {
         $concurso = Concurso::find($concurso_id);
         $this->authorize('operacoesUserBanca', $concurso);

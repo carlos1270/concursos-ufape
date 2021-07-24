@@ -67,7 +67,7 @@
                                                         <div class="btn-group">
                                                             <div>
                                                                 <button class="btn btn-primary" onclick ="location.href='{{ route('candidato.inscricao', $inscricao->id) }}'">
-                                                                    1º Etapa
+                                                                    Inscrição
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -75,20 +75,20 @@
                                                     @if ($inscricao->status == "aprovado")
                                                         <div class="btn-group">
                                                             <div style="margin-left: 5px">
-                                                                @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $inscricao->concurso->data_fim_envio_doc)
+                                                                @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())))
                                                                     <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
                                                                         @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                            2º Etapa
+                                                                            Avaliação de Títulos
                                                                         @else
-                                                                            Avaliar
+                                                                            Avaliação de Títulos
                                                                         @endif
                                                                     </button>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
                                                                         @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                            2º Etapa
+                                                                            Avaliação de Títulos
                                                                         @else
-                                                                            Avaliar
+                                                                            Avaliação de Títulos
                                                                         @endif
                                                                     </button>
                                                                 @endif

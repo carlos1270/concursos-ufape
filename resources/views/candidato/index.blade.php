@@ -69,6 +69,17 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="card-footer" style="background-color: #fff; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                        <div><h6 style="color: #909090; margin-bottom:1px">Legenda:</h6></div>
+                        <div class="form-row">
+                            <div class="btn-group" style="margin:5px">
+                                <label style="margin-right: 10px; padding-left:13px; padding-right:13px; border-radius:6px; background-color:#007bff">
+                                    <img class="card-img-left example-card-img-responsive" src="{{ asset('img/icon_visualizar.svg') }}" width="25px" style="margin-top: 10px "/>
+                                </label>
+                                <h6>Minha <br>inscrição</h6>
+                            </div>
+                        </div>
+                    </div>
                 @else
                     <div class="card-body">
                         <div class="form-row" style="text-align: center;">

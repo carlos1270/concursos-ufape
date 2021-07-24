@@ -93,7 +93,7 @@ Route::get('/remover-usuario/banca/{user}/{concurso}', [ConcursoController::clas
 Route::resource('concurso', ConcursoController::class);
 
 Route::get('/visualizar-arquivo/{arquivo}/{cod}', [ArquivoController::class, 'show'])->name('visualizar.arquivo')->middleware('auth');
-Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, 'showFichAvaliacao'])
+Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, 'showFichaAvaliacao'])
     ->name('visualizar.ficha-avaliacao')->middleware('auth');
 Route::get('/{concurso}/usuarios-banca-examinadora', [AdminController::class, 'usuarioDeBanca'])->name('users.listar.banca')->middleware('auth');
 Route::post('/cadastrar-usuario-banca/{concurso}', [AdminController::class, 'createUserBanca'])->name('user.create.banca')->middleware('auth');

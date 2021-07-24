@@ -34,7 +34,7 @@
                         @auth
                             @if(Auth::user()->role == "candidato")
                                 <a href="{{ route('candidato.index') }}" :active="request()->routeIs('candidato.index')" 
-                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Inscrições</a>
+                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Minhas Inscrições</a>
                             @endif
 
                             @if(Auth::user()->role == "admin")
@@ -44,7 +44,7 @@
 
                             @if(Auth::user()->role != "candidato")
                                 <a href="{{ route('concurso.index') }}" :active="request()->routeIs('concurso.index')" 
-                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Concursos</a>
+                                    class="btn btn-light" style="margin-right: 15px; color:#007bff">Meus Concursos</a>
                             @endif
                             <div class="btn-group">
                                 <a href="" class="dropdown-toggle btn btn-light" style="margin-right: 15px; color:#007bff" data-toggle="dropdown" 
