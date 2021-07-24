@@ -20,11 +20,21 @@
                                         <li>Cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, caso o candidato seja estrangeiro.</li>
                                         <li>Cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro).</li>
                                         <li>Certidão de quitação eleitoral (emitida pelo site do TRE ou cartório eleitoral).</li>
-                                        <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano 
-                                            em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
+                                        <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro
+                                            do ano em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
                                         </li>
                                         <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
                                         <li>Comprovante do pagamento da taxa de inscrição.</li>
+                                        <li>Documento que comprove a formação na área/matéria conforme Edital Específico. 
+                                            A formação acadêmica pode ser comprovada através de cópias de documentos como: i) Certificado de Graduação e/ou 
+                                            Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior; 
+                                            ii) OU diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, 
+                                            emitido pela Instituição de Ensino Superior.
+                                        </li>
+                                        <li>Histórico Escolar em que se verifique que o candidato cursou a disciplina objeto da seleção OU 
+                                            disciplina(s) equivalente(s) à matéria objeto da seleção.
+                                        </li>
+                                        <li>Declaração de Veracidade documental.</li>
                                     </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->dados_pessoais == null)
@@ -59,7 +69,9 @@
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
-                                        <li>Curriculum Vitae modelo Lattes com as devidas comprovações(as comprovações devem ser enviadas nos pŕoximos arquivos).</li>
+                                         <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações. 
+                                            Essas comprovações devem ser enviadas pelos arquivos abaixo.
+                                        </li>
                                     </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->curriculum_vitae_lattes == null)
@@ -86,15 +98,22 @@
                                 @endif
                             </div>
                         </div>
-
+                        <div class="form-group col-md-12">
+                            <h6 class="style_titulo_documento" style="color: black; margin-top: 5px;">
+                                Documentos a serem pontuados na tabela de avaliação de títulos
+                            </h6>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <h6 class="style_titulo_documento">
-                                    Formação acadêmica
+                                    Grupo I - Formação Acadêmica
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
-                                        <li>Certificado/Diploma de Graduação e/ou Especialização e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior.</li>
+                                        <li>Graduação.</li>
+                                        <li>Especialização.</li>
+                                        <li>Mestrado.</li>
+                                        <li>Doutorado em Programa reconhecido pelo CNE e credenciado pela CAPES.</li>
                                     </ul>
                                 </h6>
                                 @if ($arquivos == null || $arquivos->formacao_academica == null)
@@ -125,7 +144,7 @@
                         <div class="col-md-12" style="margin-top: 5px">
                             <div class="form-group">
                                 <h6 class="style_titulo_documento">
-                                    Experiência Didática
+                                    Grupo II - Experiência Didática
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
@@ -165,7 +184,7 @@
                         <div class="col-md-12" style="margin-top: 5px">
                             <div class="form-group">
                                 <h6 class="style_titulo_documento">
-                                    Produção Ciêntifica
+                                    Grupo III - Produção Científica
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
@@ -204,7 +223,7 @@
                         <div class="col-md-12" style="margin-top: 5px">
                             <div class="form-group">
                                 <h6 class="style_titulo_documento">
-                                    Experiência Profissional
+                                    Grupo IV - Experiência Profissional
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
@@ -262,7 +281,7 @@
                                 @endif
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
-                                        <label for="nota" class="style_campo_titulo">Pontuação total</label>
+                                        <label for="nota" class="style_campo_titulo" style="margin-top: 10px;">Pontuação total</label>
                                         <input type="number" step=any id="nota" name="nota" min="0" max="100"
                                             class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
                                             value="{{ $inscricao->avaliacao->nota }}"/>

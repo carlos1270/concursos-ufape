@@ -28,11 +28,21 @@
                                             <li>Cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, caso o candidato seja estrangeiro.</li>
                                             <li>Cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro).</li>
                                             <li>Certidão de quitação eleitoral (emitida pelo site do TRE ou cartório eleitoral).</li>
-                                            <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano 
-                                                em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
+                                            <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro
+                                                do ano em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
                                             </li>
                                             <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
                                             <li>Comprovante do pagamento da taxa de inscrição.</li>
+                                            <li>Documento que comprove a formação na área/matéria conforme Edital Específico. 
+                                                A formação acadêmica pode ser comprovada através de cópias de documentos como: i) Certificado de Graduação e/ou 
+                                                Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior; 
+                                                ii) OU diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, 
+                                                emitido pela Instituição de Ensino Superior.
+                                            </li>
+                                            <li>Histórico Escolar em que se verifique que o candidato cursou a disciplina objeto da seleção OU 
+                                                disciplina(s) equivalente(s) à matéria objeto da seleção.
+                                            </li>
+                                            <li>Declaração de Veracidade documental.</li>
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('dados_pessoais') is-invalid @enderror" 
@@ -50,7 +60,9 @@
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
-                                            <li>Curriculum Vitae modelo Lattes com as devidas comprovações (as comprovações devem ser enviadas nos próximos arquivos).</li>
+                                            <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações. 
+                                                Essas comprovações devem ser enviadas pelos arquivos abaixo.
+                                            </li>
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('curriculum_vitae_lattes') is-invalid @enderror" id="curriculum_vitae_lattes" 
@@ -65,11 +77,19 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="formacao_academica" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Formação Acadêmica</label>
+                                    <label class="style_campo_titulo" style="color: black; font-weight: bolder;">Documentos a serem pontuados na tabela de avaliação de títulos</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="formacao_academica" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Grupo I - Formação Acadêmica</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
-                                            <li>Certificado/Diploma de Graduação e/ou Especialização e/ou Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior.</li>
+                                            <li>Graduação.</li>
+                                            <li>Especialização.</li>
+                                            <li>Mestrado.</li>
+                                            <li>Doutorado em Programa reconhecido pelo CNE e credenciado pela CAPES.</li>
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('formacao_academica') is-invalid @enderror" 
@@ -82,7 +102,7 @@
                                     @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Didática</label>
+                                    <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo II - Experiência Didática</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
@@ -106,7 +126,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
-                                    <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Produção Científica</label> 
+                                    <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo III - Produção Científica</label> 
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
@@ -127,7 +147,7 @@
                                     @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Profissional</label> 
+                                    <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo IV - Experiência Profissional</label> 
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
