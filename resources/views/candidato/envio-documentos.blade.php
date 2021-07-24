@@ -5,7 +5,7 @@
         <div class="col-md-7">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                    <h6 class="style_card_container_header_titulo">Enviar documentos da segunda fase</h6>
+                    <h6 class="style_card_container_header_titulo">Etapa - Avaliação de Títulos</h6>
                     <h6 class="style_card_container_header_campo_obrigatorio"><span style="color: red; font-weight: bold;">*</span> Campo obrigatório</h6>
                 </div>
                 <div class="card-body">
@@ -20,29 +20,29 @@
                                     </h6>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="dados_pessoais" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Dados Pessoais</label>
+                                    <label for="dados_pessoais" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Documentos Pessoais</label>
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
-                                            <li>Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação - CNH.</li>
+                                            <li>Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação – CNH.</li>
                                             <li>Cópia autenticada do Passaporte ou de Cédula de Identidade de Estrangeiro, caso o candidato seja estrangeiro.</li>
                                             <li>Cartão do Cadastro de Pessoa Física - CPF (dispensado para o candidato estrangeiro).</li>
                                             <li>Certidão de quitação eleitoral (emitida pelo site do TRE ou cartório eleitoral).</li>
-                                            <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano em 
-                                                completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
+                                            <li>Documento comprobatório da quitação com serviço militar, para os candidatos do sexo masculino a partir de 1º dia de janeiro do ano 
+                                                em completar 18 (dezoito) anos de idade até 31 de dezembro do ano em que completar 45 (quarenta e cinco) anos.
                                             </li>
                                             <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
                                             <li>Comprovante do pagamento da taxa de inscrição.</li>
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('dados_pessoais') is-invalid @enderror" 
-                                        id="dados_pessoais" name="dados_pessoais" required/>
+                                        id="dados_pessoais" name="dados_pessoais" @if($arquivos == null) required @endif/>
                                     @error('dados_pessoais')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
 
                                 <div class="form-group col-md-12">
@@ -50,17 +50,17 @@
                                     @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
-                                            <li>Curriculum Vitae modelo Lattes com as devidas comprovações(as comprovações devem ser enviadas nos pŕoximos arquivos).</li>
+                                            <li>Curriculum Vitae modelo Lattes com as devidas comprovações (as comprovações devem ser enviadas nos próximos arquivos).</li>
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('curriculum_vitae_lattes') is-invalid @enderror" id="curriculum_vitae_lattes" 
-                                        name="curriculum_vitae_lattes" required/>
+                                        name="curriculum_vitae_lattes" @if($arquivos == null) required @endif/>
                                     @error('curriculum_vitae_lattes')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -73,13 +73,13 @@
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('formacao_academica') is-invalid @enderror" 
-                                        id="formacao_academica" name="formacao_academica" required/>
+                                        id="formacao_academica" name="formacao_academica" @if($arquivos == null) required @endif/>
                                     @error('formacao_academica')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Didática</label>
@@ -91,7 +91,7 @@
                                             <li>Participação em Bancas ou Comissões Examinadoras de Graduação e Pós-Graduação.</li>
                                             <li>Participação em Bancas ou Comissões Examinadoras de Seleção para o Magistério Superior.</li>
                                             <li>Orientação de Trabalhos Acadêmicos.</li>
-                                            <li>Cursos ministrados (Extensão, Capacitação ou equivalentes na área da Seleção) / Para cada 10 horas</li>
+                                            <li>Cursos ministrados (Extensão, Capacitação ou equivalentes na área da Seleção) / Para cada 10 horas.</li>
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_didatica') is-invalid @enderror" 
@@ -101,7 +101,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -124,7 +124,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Experiência Profissional</label> 
@@ -133,7 +133,7 @@
                                         <ul>
                                             <li>Exercício de cargo ou função de Administração Acadêmica.</li>
                                             <li>Prêmios e Láureas acadêmicas.</li>
-                                            <li>Bolsas de Pesquisa financiadas por Órgãos de Fomento (exceto Bolsas de Formação)</li>
+                                            <li>Bolsas de Pesquisa financiadas por Órgãos de Fomento (exceto Bolsas de Formação).</li>
                                             <li>Exercício Profissional extrauniversitário, com vínculo empregatício, em área relacionada à matéria da seleção.</li>
                                             <li>Consultorias relacionadas ao setor de estudos da Seleção.</li>
                                             <li>Projetos de pesquisa aprovados por Órgãos de Fomento.</li>
@@ -146,7 +146,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
 
