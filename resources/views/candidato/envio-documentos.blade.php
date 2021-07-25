@@ -10,6 +10,11 @@
                 </div>
                 <div class="card-body">
                     <div>
+                        @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $inscricao->concurso->data_fim_envio_doc)
+                            <form action="{{route('documentos.store')}}" method="POST" enctype="multipart/form-data">
+                        @else
+                            <form>
+                        @endif
                         <form action="{{route('documentos.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
@@ -21,7 +26,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="dados_pessoais" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Documentos Pessoais</label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
+                                    @if($arquivos && $arquivos->dados_pessoais) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Dados-pessoais"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
                                             <li>Carteira de Identidade ou do Documento de Identidade Profissional (Conselhos de Classes) ou da Carteira Nacional de Habilitação – CNH.</li>
@@ -46,18 +51,18 @@
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('dados_pessoais') is-invalid @enderror" 
-                                        id="dados_pessoais" name="dados_pessoais" @if($arquivos == null) required @endif/>
+                                        id="dados_pessoais" name="dados_pessoais" @if(!$arquivos) required @endif/>
                                     @error('dados_pessoais')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->dados_pessoais)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
 
                                 <div class="form-group col-md-12">
                                     <label for="curriculum_vitae_lattes" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Curriculum vitae modelo Lattes</label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
+                                    @if($arquivos && $arquivos->curriculum_vitae_lattes) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
                                             <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações. 
@@ -66,13 +71,13 @@
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('curriculum_vitae_lattes') is-invalid @enderror" id="curriculum_vitae_lattes" 
-                                        name="curriculum_vitae_lattes" @if($arquivos == null) required @endif/>
+                                        name="curriculum_vitae_lattes" @if(!$arquivos) required @endif/>
                                     @error('curriculum_vitae_lattes')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->curriculum_vitae_lattes)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -83,7 +88,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="formacao_academica" class="style_campo_titulo" style="color: black; font-weight: bolder;"><span style="color: red; font-weight: bold;">*</span> Grupo I - Formação Acadêmica</label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
+                                    @if($arquivos && $arquivos->formacao_academica) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Formacao-academica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
                                             <li>Graduação.</li>
@@ -93,17 +98,17 @@
                                         </ul>
                                     </h6>
                                     <input type="file" accept=".pdf" class="form-control style_campo @error('formacao_academica') is-invalid @enderror" 
-                                        id="formacao_academica" name="formacao_academica" @if($arquivos == null) required @endif/>
+                                        id="formacao_academica" name="formacao_academica" @if(!$arquivos) required @endif/>
                                     @error('formacao_academica')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->formacao_academica)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo II - Experiência Didática</label>
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
+                                    @if($arquivos && $arquivos->experiencia_didatica) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-didatica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
                                             <li>Tempo de exercício.</li>
@@ -121,13 +126,13 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->experiencia_didatica)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
                                     <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo III - Produção Científica</label> 
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
+                                    @if($arquivos && $arquivos->producao_cientifica) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
                                             <li>Livros publicados.</li>
@@ -144,11 +149,11 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->producao_cientifica)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo IV - Experiência Profissional</label> 
-                                    @if($arquivos != null) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
+                                    @if($arquivos && $arquivos->experiencia_profissional) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
                                             <li>Exercício de cargo ou função de Administração Acadêmica.</li>
@@ -166,15 +171,15 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos != null)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->experiencia_profissional)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
                                 </div>
                             </div>
 
-                            <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao->id }}"/>
+                            <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao->concurso->id }}"/>
                             <div><hr></div>
                             <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
-                                    @if ($inscricao->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) >= $inscricao->data_fim_envio_doc)
+                                    @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $inscricao->concurso->data_fim_envio_doc)
                                         <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">
                                             Enviar
                                         </button>

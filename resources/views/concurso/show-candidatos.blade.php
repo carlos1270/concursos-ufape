@@ -85,19 +85,11 @@
                                                             <div style="margin-left: 5px">
                                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())))
                                                                     <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
-                                                                        @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                            Avaliação de Títulos
-                                                                        @else
-                                                                            Avaliação de Títulos
-                                                                        @endif
+                                                                        Avaliação de Títulos
                                                                     </button>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
-                                                                        @if (Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
-                                                                            Avaliação de Títulos
-                                                                        @else
-                                                                            Avaliação de Títulos
-                                                                        @endif
+                                                                        Avaliação de Títulos
                                                                     </button>
                                                                 @endif
                                                             </div>

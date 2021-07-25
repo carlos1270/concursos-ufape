@@ -37,7 +37,7 @@
                                         <li>Declaração de Veracidade documental.</li>
                                     </ul>
                                 </h6>
-                                @if ($arquivos == null || $arquivos->dados_pessoais == null)
+                                @if (!$arquivos || !$arquivos->dados_pessoais)
                                     <div class="d-flex justify-content-left">
                                         <div>
                                             <a class="btn btn-primary">
@@ -74,7 +74,7 @@
                                         </li>
                                     </ul>
                                 </h6>
-                                @if ($arquivos == null || $arquivos->curriculum_vitae_lattes == null)
+                                @if (!$arquivos || !$arquivos->curriculum_vitae_lattes)
                                     <div class="d-flex justify-content-left">
                                         <div>
                                             <a class="btn btn-primary">
@@ -116,7 +116,7 @@
                                         <li>Doutorado em Programa reconhecido pelo CNE e credenciado pela CAPES.</li>
                                     </ul>
                                 </h6>
-                                @if ($arquivos == null || $arquivos->formacao_academica == null)
+                                @if (!$arquivos || !$arquivos->formacao_academica)
                                     <div class="d-flex justify-content-left">
                                         <div>
                                             <a class="btn btn-primary">
@@ -156,7 +156,7 @@
                                         <li>Cursos ministrados (Extensão, Capacitação ou equivalentes na área da Seleção) / Para cada 10 horas.</li>
                                     </ul>
                                 </h6>
-                                @if ($arquivos == null || $arquivos->experiencia_didatica == null)
+                                @if (!$arquivos || !$arquivos->experiencia_didatica)
                                     <div class="d-flex justify-content-left">
                                         <div>
                                             <a class="btn btn-primary">
@@ -195,7 +195,7 @@
                                         <li>Desenvolvimento de patentes com registro definitivo (carta patente).</li>
                                     </ul>
                                 </h6>
-                                @if ($arquivos == null || $arquivos->producao_cientifica == null)
+                                @if (!$arquivos || !$arquivos->producao_cientifica)
                                     <div class="d-flex justify-content-left">
                                         <div>
                                             <a class="btn btn-primary">
@@ -235,7 +235,7 @@
                                         <li>Projetos de pesquisa aprovados por Órgãos de Fomento.</li>
                                     </ul>
                                 </h6>
-                                @if ($arquivos == null || $arquivos->experiencia_profissional == null)
+                                @if (!$arquivos || !$arquivos->experiencia_profissional)
                                     <div class="d-flex justify-content-left">
                                         <div>
                                             <a class="btn btn-primary">
@@ -271,7 +271,7 @@
                                             target="_blank" style="color:white;">Baixar Ficha de avaliação</a>
                                     </div>
                                 </div>
-                                @if($inscricao->avaliacao != null && $inscricao->avaliacao->ficha_avaliacao != null)
+                                @if($inscricao->avaliacao && $inscricao->avaliacao->ficha_avaliacao)
                                     <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $inscricao->avaliacao->id)}}" target="_new">
                                         <div class="btn-group">
                                             <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
@@ -307,7 +307,7 @@
                                         target="_blank" style="color:white;">Baixar Ficha de avaliação</a>
                                 </div>
                             </div>
-                            @if ($arquivos == null)
+                            @if (!$arquivos)
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <strong> Só é possível enviar a pontuação quando os arquivos estiverem disponíveis.</strong>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -323,7 +323,7 @@
                                     @csrf
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            @if($inscricao->avaliacao != null && $inscricao->avaliacao->ficha_avaliacao != null)
+                                            @if($inscricao->avaliacao && $inscricao->avaliacao->ficha_avaliacao)
                                                 <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $inscricao->avaliacao->id)}}" target="_new">
                                                     <div class="btn-group">
                                                         <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
