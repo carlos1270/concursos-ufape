@@ -13,9 +13,9 @@ class Arquivo extends Model
         'dados_pessoais'           => 'required|file|mimes:pdf|max:2048',
         'curriculum_vitae_lattes'  => 'required|file|mimes:pdf|max:2048',
         'formacao_academica'       => 'required|file|mimes:pdf|max:2048',
-        'experiencia_didatica'     => 'file|mimes:pdf|max:2048',
-        'producao_cientifica'      => 'file|mimes:pdf|max:2048',
-        'experiencia_profissional' => 'file|mimes:pdf|max:2048',
+        'experiencia_didatica'     => 'nullable|file|mimes:pdf|max:2048',
+        'producao_cientifica'      => 'nullable|file|mimes:pdf|max:2048',
+        'experiencia_profissional' => 'nullable|file|mimes:pdf|max:2048',
     ];
 
     public static $messages = [

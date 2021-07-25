@@ -74,15 +74,9 @@
                                                         <a class="btn btn-success shadow-sm" href="{{ route('show.candidatos.concurso', $concurso->id) }}"><img src="{{ asset('img/icon_candidato.svg') }}" alt="Candidatos inscritos no concurso {{$concurso->titulo}}" width="16.5px" ></a>
                                                     </div>
                                                     <div style="margin-right: 15px">
-                                                        @if ($concurso->data_resultado_selecao <= now())
-                                                            <a class="btn btn-warning shadow-sm" href="{{ route('concurso.resultado', $concurso->id) }}">
-                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
-                                                            </a>
-                                                        @else
-                                                            <a class="btn btn-warning shadow-sm">
-                                                                <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
-                                                            </a>
-                                                        @endif
+                                                        <a class="btn btn-warning shadow-sm" href="{{ route('concurso.resultado', $concurso->id) }}">
+                                                            <img src="{{ asset('img/icon_consultar_resultado.svg') }}" alt="Resultado do concurso {{$concurso->titulo}}" width="13px" >
+                                                        </a>
                                                     </div>
                                                     <div style="border-left: 1px solid #d1d1d1; margin-right: 15px;"></div>
                                                     <div class="dropdown">
@@ -90,6 +84,10 @@
                                                             <img class="filter-green" src="{{asset('img/icon_acoes.svg')}}" style="width: 4px;">
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                            @if(Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
+                                                                <a class="dropdown-item" href="{{route('users.listar.banca', ['concurso' => $concurso->id])}}">Banca examinadora</a>
+                                                                {{-- <a class="dropdown-item" href="{{route('notas.index', ['concurso' => $concurso->id])}}">Notas de texto</a> --}}
+                                                            @endif
                                                             <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
                                                             @if(Auth::user()->role != "presidenteBancaExaminadora")
                                                                 <div class="dropdown-divider"></div>

@@ -6,126 +6,110 @@ use Illuminate\Http\Request;
 use App\Models\Arquivo;
 use App\Models\Avaliacao;
 use App\Models\Inscricao;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArquivoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        Validator::make($request->all(), Arquivo::$rules, Arquivo::$messages)->validate();
+        $arquivos = Arquivo::where('inscricoes_id', $request->inscricao)->first();
+
+        if (!$arquivos) {
+            Validator::make($request->all(), Arquivo::$rules, Arquivo::$messages)->validate();
+        } else {
+            Validator::make($request->all(), [
+                'dados_pessoais'           => 'nullable|file|mimes:pdf|max:2048',
+                'curriculum_vitae_lattes'  => 'nullable|file|mimes:pdf|max:2048',
+                'formacao_academica'       => 'nullable|file|mimes:pdf|max:2048',
+                'experiencia_didatica'     => 'nullable|file|mimes:pdf|max:2048',
+                'producao_cientifica'      => 'nullable|file|mimes:pdf|max:2048',
+                'experiencia_profissional' => 'nullable|file|mimes:pdf|max:2048',
+            ], Arquivo::$messages)->validate();
+        }
 
         $arquivos = Arquivo::where('inscricoes_id', $request->inscricao)->first();
         $inscricao = Inscricao::find($request->inscricao);
         $concurso = $inscricao->concurso;
 
-        if ($arquivos && $arquivos->curriculum_vitae_lattes) {
-            Storage::delete('public/' . $arquivos->dados_pessoais);
-        }
-
-        $path_dados_pessoais = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-        $nome_dados_pessoais = 'curriculum_vitae_lattes.pdf';
-        Storage::putFileAs('public/' . $path_dados_pessoais, $request->dados_pessoais, $nome_dados_pessoais);
-
-        if ($arquivos && $arquivos->curriculum_vitae_lattes) {
-            Storage::delete('public/' . $arquivos->curriculum_vitae_lattes);
-        }
-
-        $path_curriculum_vitae_lattes = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-        $nome_curriculum_vitae_lattes = 'curriculum_vitae_lattes.pdf';
-        Storage::putFileAs('public/' . $path_curriculum_vitae_lattes, $request->curriculum_vitae_lattes, $nome_curriculum_vitae_lattes);
-
-        if ($arquivos && $arquivos->formacao_academica) {
-            Storage::delete('public/' . $arquivos->formacao_academica);
-        }
-
-        $path_formacao_academica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-        $nome_formacao_academica = 'formacao_academica.pdf';
-        Storage::putFileAs('public/' . $path_formacao_academica, $request->formacao_academica, $nome_formacao_academica);
-
-        if ($arquivos && $arquivos->experiencia_didatica) {
-            Storage::delete('public/' . $arquivos->experiencia_didatica);
-        }
-
-        if ($request->experiencia_didatica) {
-            $path_experiencia_didatica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-            $nome_experiencia_didatica = 'experiencia_didatica.pdf';
-            Storage::putFileAs('public/' . $path_experiencia_didatica, $request->experiencia_didatica, $nome_experiencia_didatica);
-        } else {
-            $path_experiencia_didatica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-            $nome_experiencia_didatica = '';
-        }
-
-        if ($arquivos && $arquivos->producao_cientifica) {
-            Storage::delete('public/' . $arquivos->producao_cientifica);
-        }
-
-        if ($request->producao_cientifica) {
-            $path_producao_cientifica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-            $nome_producao_cientifica = 'producao_cientifica.pdf';
-            Storage::putFileAs('public/' . $path_producao_cientifica, $request->producao_cientifica, $nome_producao_cientifica);
-        } else {
-            $path_producao_cientifica = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-            $nome_producao_cientifica = '';
-        }
-
-        if ($arquivos && $arquivos->experiencia_profissional) {
-            Storage::delete('public/' . $arquivos->experiencia_profissional);
-        }
-
-        if ($request->experiencia_profissional) {
-            $path_experiencia_profissional = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-            $nome_experiencia_profissional = 'experiencia_profissional.pdf';
-            Storage::putFileAs('public/' . $path_experiencia_profissional, $request->experiencia_profissional, $nome_experiencia_profissional);
-        } else {
-            $path_experiencia_profissional = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
-            $nome_experiencia_profissional = '';
-        }
+        $path = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
+        $experiencia_didatica_arquivo = true;
+        $producao_cientifica_arquivo = true;
+        $experiencia_profissiona_arquivo = true;
 
         if (!$arquivos) {
+            $this->saveDocument($concurso->id, $request->inscricao, $request->dados_pessoais, 'dados_pessoais.pdf');
+            $this->saveDocument($concurso->id, $request->inscricao, $request->curriculum_vitae_lattes, 'curriculum_vitae_lattes.pdf');
+            $this->saveDocument($concurso->id, $request->inscricao, $request->formacao_academica, 'formacao_academica.pdf');
+
+            if ($request->experiencia_didatica) {
+                $this->saveDocument($concurso->id, $request->inscricao, $request->experiencia_didatica, 'experiencia_didatica.pdf');
+            } else {
+                $experiencia_didatica_arquivo = false;
+            }
+
+            if ($request->producao_cientifica) {
+                $this->saveDocument($concurso->id, $request->inscricao, $request->producao_cientifica, 'producao_cientifica.pdf');
+            } else {
+                $producao_cientifica_arquivo = false;
+            }
+
+            if ($request->experiencia_profissional) {
+                $this->saveDocument($concurso->id, $request->inscricao, $request->experiencia_profissional, 'experiencia_profissional.pdf');
+            } else {
+                $experiencia_profissiona_arquivo = false;
+            }
+
             Arquivo::create([
-                'dados_pessoais'           => $path_dados_pessoais . $nome_dados_pessoais,
-                'curriculum_vitae_lattes'  => $path_curriculum_vitae_lattes . $nome_curriculum_vitae_lattes,
-                'formacao_academica'       => $path_formacao_academica . $nome_formacao_academica,
-                'experiencia_didatica'     => $nome_experiencia_didatica != '' ? $path_experiencia_didatica . $nome_experiencia_didatica : null,
-                'producao_cientifica'      => $nome_producao_cientifica != '' ? $path_producao_cientifica . $nome_producao_cientifica : null,
-                'experiencia_profissional' => $nome_experiencia_profissional != '' ? $path_experiencia_profissional . $nome_experiencia_profissional : null,
+                'dados_pessoais'           => $path . 'dados_pessoais.pdf',
+                'curriculum_vitae_lattes'  => $path . 'curriculum_vitae_lattes.pdf',
+                'formacao_academica'       => $path . 'formacao_academica.pdf',
+                'experiencia_didatica'     => $experiencia_didatica_arquivo ? $path . 'experiencia_didatica.pdf' : null,
+                'producao_cientifica'      => $producao_cientifica_arquivo ? $path . 'producao_cientifica.pdf' : null,
+                'experiencia_profissional' => $experiencia_profissiona_arquivo ? $path . 'experiencia_profissional.pdf' : null,
                 'inscricoes_id'            => $request->inscricao
             ]);
-        } else if ($arquivos != null) {
-            $arquivos->dados_pessoais = $path_dados_pessoais . $nome_dados_pessoais;
-            $arquivos->curriculum_vitae_lattes = $path_curriculum_vitae_lattes . $nome_curriculum_vitae_lattes;
-            $arquivos->formacao_academica = $path_formacao_academica . $nome_formacao_academica;
-            $arquivos->experiencia_didatica = $nome_experiencia_didatica != '' ? $path_experiencia_didatica . $nome_experiencia_didatica : null;
-            $arquivos->producao_cientifica = $nome_producao_cientifica != '' ? $path_producao_cientifica . $nome_producao_cientifica : null;
-            $arquivos->experiencia_profissional = $nome_experiencia_profissional != '' ? $path_experiencia_profissional . $nome_experiencia_profissional : null;
-            $arquivos->inscricoes_id = $request->inscricao;
+        } else {
+            if ($request->dados_pessoais) {
+                Storage::delete('public/' . $arquivos->dados_pessoais);
+                $this->saveDocument($concurso->id, $request->inscricao, $request->dados_pessoais, 'dados_pessoais.pdf');
+            }
+
+            if ($request->curriculum_vitae_lattes) {
+                Storage::delete('public/' . $arquivos->curriculum_vitae_lattes);
+                $this->saveDocument($concurso->id, $request->inscricao, $request->curriculum_vitae_lattes, 'curriculum_vitae_lattes.pdf');
+            }
+
+            if ($request->formacao_academica) {
+                Storage::delete('public/' . $arquivos->formacao_academica);
+                $this->saveDocument($concurso->id, $request->inscricao, $request->formacao_academica, 'formacao_academica.pdf');
+            }
+
+            if ($request->experiencia_didatica && $arquivos->experiencia_didatica) {
+                Storage::delete('public/' . $arquivos->experiencia_didatica);
+                $this->saveDocument($concurso->id, $request->inscricao, $request->experiencia_didatica, 'experiencia_didatica.pdf');
+            } else if ($request->experiencia_didatica) {
+                $this->saveDocument($concurso->id, $request->inscricao, $request->experiencia_didatica, 'experiencia_didatica.pdf');
+                $arquivos->experiencia_didatica = $path . 'experiencia_didatica.pdf';
+            }
+
+            if ($request->producao_cientifica && $arquivos->producao_cientifica) {
+                Storage::delete('public/' . $arquivos->producao_cientifica);
+                $this->saveDocument($concurso->id, $request->inscricao, $request->producao_cientifica, 'producao_cientifica.pdf');
+            } else if ($request->producao_cientifica) {
+                $this->saveDocument($concurso->id, $request->inscricao, $request->producao_cientifica, 'producao_cientifica.pdf');
+                $arquivos->producao_cientifica = $path . 'producao_cientifica.pdf';
+            }
+
+            if ($request->experiencia_profissional && $arquivos->experiencia_profissional) {
+                Storage::delete('public/' . $arquivos->experiencia_profissional);
+                $this->saveDocument($concurso->id, $request->inscricao, $request->experiencia_profissional, 'experiencia_profissional.pdf');
+            } else if ($request->experiencia_profissional) {
+                $this->saveDocument($concurso->id, $request->inscricao, $request->experiencia_profissional, 'experiencia_profissional.pdf');
+                $arquivos->experiencia_profissional = $path . 'experiencia_profissional.pdf';
+            }
+
             $arquivos->update();
         }
 
@@ -133,12 +117,6 @@ class ArquivoController extends Controller
             e serão examinados pela banca avaliadora.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($arquivo, $cod)
     {
         $arquivos = Arquivo::find($arquivo);
@@ -170,44 +148,22 @@ class ArquivoController extends Controller
         return abort(404);
     }
 
-    public function showFichAvaliacao($avaliacao)
+    public function showFichaAvaliacao($avaliacao)
     {
         $avaliacao = Avaliacao::find($avaliacao);
-
         return response()->file('storage/' . $avaliacao->ficha_avaliacao);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function downloadFichaAvaliacao($name)
     {
-        //
+        $file = public_path() . "/anexo/" . $name;
+        $headers = array('Content-Type: application/docx',);
+        return Response::download($file, 'modelo_ficha_avaliacao.docx', $headers);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    private function saveDocument($IDConcurso, $IDinscricao, $arquivo, $nome)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $path = 'concursos/' . $IDConcurso . '/inscricoes/' . $IDinscricao . '/';
+        Storage::putFileAs('public/' . $path, $arquivo, $nome);
     }
 }

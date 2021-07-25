@@ -91,4 +91,22 @@ class ConcursoPolicy
     {
         //
     }
+
+    /**
+     * Checa se o usuário pode cadastrar o remover examinadores para um concurso
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Concurso  $concurso
+     * @return mixed
+     */
+
+    public function operacoesUserBanca(User $user, Concurso $concurso)
+    {
+        return $concurso->users_id == $user->id;
+    }
+
+    public function operacoesNotasDeTexto(User $user, Concurso $concurso)
+    {
+        return $this->operacoesUserBanca($user, $concurso);
+    }
 }

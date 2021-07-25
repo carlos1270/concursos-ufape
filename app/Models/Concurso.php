@@ -100,4 +100,8 @@ class Concurso extends Model
     public function chefeDaBanca() {
         return $this->belongsToMany(User::class, 'chefe_da_banca', 'concursos_id', 'users_id');
     }
+
+    public function notas() {
+        return $this->hasMany(NotaDeTexto::class, 'concursos_id');
+    }
 }

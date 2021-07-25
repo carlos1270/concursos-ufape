@@ -7,6 +7,7 @@ use App\Http\Controllers\CandidatoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ArquivoController;
+use App\Http\Controllers\NotasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +22,16 @@ use App\Http\Controllers\ArquivoController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('index');
 
-Route::get('/sobre', function() { return view('about'); })->name('about');
+Route::get('/sobre', function () {
+    return view('about');
+})->name('about');
 
-Route::get('/dashboard', function() {
+Route::get('/dashboard', function () {
     return redirect(route('index'));
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/user/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
+    Route::get('/user-password-edit', [ProfileController::class, 'showPassword'])->name('user.password.edit');
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(function () {
@@ -38,6 +41,10 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserAdmin'])->group(functio
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(function () {
 
     Route::resource('candidato', CandidatoController::class);
+
+    Route::get('/user-profile-edit', [ProfileController::class, 'showProfileInfo'])->name('user.profile.edit');
+
+    Route::post('/user-profile-update', [ProfileController::class, 'updateProfileInfo'])->name('user.profile.update');
 
     Route::get('/inscricao/concurso/{concurso_id}', [CandidatoController::class, 'inscreverseConcurso'])
         ->name('inscricao.concurso');
@@ -78,9 +85,27 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserPresidenteBanca'])->gro
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->group(function () {
     Route::get('/show-candidatos/concurso/{concurso_id}', [ConcursoController::class, 'showCandidatos'])
         ->name('show.candidatos.concurso');
+
+    Route::get("/anexo/{name}", [ArquivoController::class, 'downloadFichaAvaliacao'])->name('baixar.anexo');
 });
 
+Route::get('/adicionar-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'AdicionarUserBanca'])->name('concurso.adicionar.banca')->middleware('auth');
+Route::get('/remover-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'RemoverUserBanca'])->name('concurso.remover.banca')->middleware('auth');
 Route::resource('concurso', ConcursoController::class);
+
 Route::get('/visualizar-arquivo/{arquivo}/{cod}', [ArquivoController::class, 'show'])->name('visualizar.arquivo')->middleware('auth');
-Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, 'showFichAvaliacao'])
+Route::get('/visualizar-ficha-avaliacao/{arquivo}', [ArquivoController::class, 'showFichaAvaliacao'])
     ->name('visualizar.ficha-avaliacao')->middleware('auth');
+Route::get('/{concurso}/usuarios-banca-examinadora', [AdminController::class, 'usuarioDeBanca'])->name('users.listar.banca')->middleware('auth');
+Route::post('/cadastrar-usuario-banca/{concurso}', [AdminController::class, 'createUserBanca'])->name('user.create.banca')->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/notas/{concurso}', [NotasController::class, 'index'])->name('notas.index');
+    Route::get('/notas/{concurso}/criar', [NotasController::class, 'create'])->name('notas.create');
+    Route::post('/notas/{concurso}/salvar', [NotasController::class, 'store'])->name('notas.store');
+    Route::get('/notas/{nota}/editar/{concurso}', [NotasController::class, 'edit'])->name('notas.edit');
+    Route::put('/notas/{nota}/atualizar', [NotasController::class, 'update'])->name('notas.update');
+    Route::delete('/notas/{nota}/deletar', [NotasController::class, 'destroy'])->name('notas.destroy');
+});
+Route::get('/notas/{nota}/anexo', [NotasController::class, 'anexo'])->name('notas.anexo');
+Route::get('/notas-do-concurso', [NotasController::class, 'get'])->name('notas.get');

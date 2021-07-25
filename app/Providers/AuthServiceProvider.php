@@ -5,7 +5,13 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Concurso;
+use App\Models\Arquivo;
+use App\Models\Inscricao;
+use App\Models\NotaDeTexto;
 use App\Policies\ConcursoPolicy;
+use App\Policies\InscricaoPolicy;
+use App\Policies\ArquivoPolicy;
+use App\Policies\NotaDeTextoPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         Concurso::class =>  ConcursoPolicy::class,
         Inscricao::class => InscricaoPolicy::class,
         Arquivo::class => ArquivoPolicy::class,
+        NotaDeTexto::class => NotaDeTextoPolicy::class,
     ];
 
     /**

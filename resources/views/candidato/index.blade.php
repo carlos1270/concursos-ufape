@@ -35,14 +35,20 @@
                                         <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->vaga->nome, 0, 20, "...") }}</td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
-                                                Pagamento aprovado
+                                                Pagamento Aprovado
                                             @else 
                                                 <a target="_black" href="http://consulta.tesouro.fazenda.gov.br/gru_novosite/gru_simples.asp">
-                                                    Gerar boleto
+                                                    Gerar Boleto
                                                 </a>
                                             @endif
                                         </td>
-                                        <td id="tabela_container_linha">{{ $inscricao->status }}</td>
+                                        <td id="tabela_container_linha">
+                                            @if ($inscricao->status == "aprovado")
+                                                Aprovado
+                                            @else 
+                                                {{$inscricao->status}}
+                                            @endif
+                                        </td>
                                         <td id="tabela_container_linha" style="text-align: center;">
                                             <div class="btn-group">
                                                 <div>
@@ -53,7 +59,7 @@
                                                 </div>
                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= now() && $inscricao->status == "aprovado")
                                                     <a class="btn btn-primary" style="margin-left: 5px; border-radius: 4px;" href="{{ route('envio.documentos.inscricao', $inscricao->id) }}">
-                                                        Enviar documentos
+                                                        Enviar Documentos
                                                     </a>
                                                 @endif
                                             </div>
@@ -62,6 +68,17 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card-footer" style="background-color: #fff; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+                        <div><h6 style="color: #909090; margin-bottom:1px">Legenda:</h6></div>
+                        <div class="form-row">
+                            <div class="btn-group" style="margin:5px">
+                                <label style="margin-right: 10px; padding-left:13px; padding-right:13px; border-radius:6px; background-color:#007bff">
+                                    <img class="card-img-left example-card-img-responsive" src="{{ asset('img/icon_visualizar.svg') }}" width="25px" style="margin-top: 10px "/>
+                                </label>
+                                <h6>Minha <br>inscrição</h6>
+                            </div>
+                        </div>
                     </div>
                 @else
                     <div class="card-body">
