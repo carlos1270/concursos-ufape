@@ -186,13 +186,11 @@ class ConcursoController extends Controller
     public function showCandidatos(Request $request)
     {
         $concurso = Concurso::find($request->concurso_id);
-        
         if ($request->filtro != null) {
             $inscricoes = $this->filtrarInscricoes($request);
         } else {
             $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
         }
-        
         return view('concurso.show-candidatos', compact('inscricoes', 'concurso', 'request'));
     }
 
@@ -299,7 +297,7 @@ class ConcursoController extends Controller
 
         return redirect()->back()->with(['success' => "Usuário removido da banca do concurso."]);
     }
-
+    
     private function filtrarInscricoes(Request $request)
     {
         $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
@@ -313,7 +311,6 @@ class ConcursoController extends Controller
 
             $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->whereIn('users_id', $candidatos->pluck('users_id'))->get();
         }
-    
         return $inscricoes;
     }
 }

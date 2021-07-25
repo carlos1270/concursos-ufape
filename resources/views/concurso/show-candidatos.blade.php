@@ -155,7 +155,9 @@
     </div>
 
     <script>
-        $('.cpf').mask('00000000000');
+        $(document).ready(function () {
+            $('.cpf').mask('00000000000'); 
+        });
 
         function exibirCampo(input, id) {
             if (input.checked) {
