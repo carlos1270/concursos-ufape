@@ -9,6 +9,7 @@ use App\Models\Concurso;
 use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use App\Models\NotaDeTexto;
+use App\Models\Candidato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -184,8 +185,15 @@ class ConcursoController extends Controller
 
     public function showCandidatos(Request $request)
     {
-        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
-        return view('concurso.show-candidatos', compact('inscricoes'));
+        $concurso = Concurso::find($request->concurso_id);
+
+        if ($request->filtro != null) {
+            $inscricoes = $this->filtrarInscricoes($request);
+        } else {
+            $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
+        }
+
+        return view('concurso.show-candidatos', compact('inscricoes', 'concurso', 'request'));
     }
 
     public function inscricaoCandidato(Request $request)
@@ -290,5 +298,22 @@ class ConcursoController extends Controller
         $concurso->chefeDaBanca()->detach($user_id);
 
         return redirect()->back()->with(['success' => "Usuário removido da banca do concurso."]);
+    }
+    
+    private function filtrarInscricoes(Request $request)
+    {
+        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
+
+        $query = Candidato::query()->join('users', 'candidatos.users_id', '=', 'users.id');
+
+        if ($request->check_cpf && $request->cpf != null) {
+            $query = $query->where('cpf', 'ilike', "%".$request->cpf."%");
+
+            $candidatos = $query->get();
+
+            $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->whereIn('users_id', $candidatos->pluck('users_id'))->get();
+        }
+
+        return $inscricoes;
     }
 }

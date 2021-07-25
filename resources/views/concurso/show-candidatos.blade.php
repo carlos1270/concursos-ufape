@@ -11,7 +11,10 @@
                         </div>
                         <div class="form-group">
                             <div class="style_card_container_header_campo_obrigatorio">
-                                <input type="text" class="form-control input-search" placeholder="Buscar pelo nome" autofocus onkeyup="busca(this.value)">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filtros">Filtrar</button>
+                                @if($request->filtro != null)
+                                    <a type="button" class="btn btn-secondary" href="{{route('show.candidatos.concurso', $concurso->id)}}">Limpar filtros</a>
+                                @endif
                             </div>      
                         </div>     
                     </div>
@@ -116,7 +119,53 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-filtros" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Filtrar candidatos</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-filtros" method="GET" action="{{route('show.candidatos.concurso', $concurso->id)}}">
+                    <input type="hidden" name="filtro" value="1">
+                    <input type="hidden" name="concurso_id" value="{{$concurso->id}}">
+                    <div class="form-row">
+                        <div id="check-input-cpf" class="col-sm-4 form-group">
+                            <input id="check_cpf" type="checkbox" class="input-search" name="check_cpf" onchange="exibirCampo(this, 'input-cpf')" @if($request->check_cpf) checked @endif>
+                            <label for="check_cpf">Por CPF.</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div id="input-cpf" class="col-sm-6 form-group" style="{{$request->cpf != null ? 'display: block;' : 'display: none;'}}">
+                            <input type="text" class="form-control input-search cpf" name="cpf" placeholder="Digite o CPF" value="{{$request->cpf != null ? $request->cpf : ""}}">
+                            <small>Obs.: digitar somente números.</small>
+                        </div>  
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary" form="form-filtros">Filtrar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
     <script>
+        $(document).ready(function () {
+            $('.cpf').mask('00000000000'); 
+        });
+
+        function exibirCampo(input, id) {
+            if (input.checked) {
+                document.getElementById(id).style.display = "block";
+            } else {
+                document.getElementById(id).style.display = "none";
+            }
+        }
         function busca(nome) {
             var candidatos = document.getElementById('candidatos').children;
             if(nome.length > 2) {      
