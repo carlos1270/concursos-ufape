@@ -6,7 +6,7 @@
 
     <div style="background-color:#fff; border-radius:12px;height:750px;">
         <div style="margin-top: 1rem;margin-bottom:1rem;">
-            <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:black;font-size:20px; margin-top:10px">Prezado(a) {{Auth::user()->nome . ' ' . Auth::user()->sobrenome}},</label>
+            <label style="float: left; width:100%; font-family: Arial, Helvetica, sans-serif; color:black;font-size:20px; margin-top:10px">Prezado(a) {{$inscricao->user->nome . ' ' . $inscricao->user->sobrenome}},</label>
         </div>
         <div><br></div>
         <div style="margin-top: 1rem; margin-bottom:4rem;">
