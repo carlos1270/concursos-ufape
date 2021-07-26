@@ -88,11 +88,11 @@
                                                             <div style="margin-left: 5px">
                                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())))
                                                                     <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
-                                                                        Avaliação de Títulos
+                                                                        Prova de Títulos
                                                                     </button>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
-                                                                        Avaliação de Títulos
+                                                                        Prova de Títulos
                                                                     </button>
                                                                 @endif
                                                             </div>

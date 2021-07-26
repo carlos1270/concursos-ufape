@@ -57,7 +57,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos && $arquivos->dados_pessoais)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->dados_pessoais)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
 
                                 <div class="form-group col-md-12">
@@ -77,7 +77,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos && $arquivos->curriculum_vitae_lattes)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->curriculum_vitae_lattes)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -104,7 +104,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos && $arquivos->formacao_academica)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->formacao_academica)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="experiencia_didatica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo II - Experiência Didática</label>
@@ -126,7 +126,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos && $arquivos->experiencia_didatica)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->experiencia_didatica)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -149,7 +149,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos && $arquivos->producao_cientifica)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->producao_cientifica)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo IV - Experiência Profissional</label> 
@@ -171,7 +171,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    @if($arquivos && $arquivos->experiencia_profissional)<small>Obs: Para substituir o arquivo atual envie um novo</small>@endif
+                                    @if($arquivos && $arquivos->experiencia_profissional)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
                             </div>
 

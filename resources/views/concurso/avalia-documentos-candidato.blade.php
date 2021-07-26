@@ -12,7 +12,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <h6 class="style_titulo_documento">
-                                    Dados Pessoais
+                                    Documentos Pessoais
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
