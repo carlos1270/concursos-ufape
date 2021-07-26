@@ -320,6 +320,8 @@ class ConcursoController extends Controller
     public function indexInscraoChefeConcurso(Request $request, $id) 
     {
         $concurso = Concurso::find($id);
+        $this->authorize('createInscricaoChefeConcurso', $concurso);
+
         $usuarios_candidatos = User::where('role', User::ROLE_ENUM['candidato'])->get();
 
         if ($request->filtro != null) {
@@ -353,7 +355,20 @@ class ConcursoController extends Controller
 
     public function inscreverCandidato($concurso_id, $user_id) {
         $concurso = Concurso::find($concurso_id);
+        $this->authorize('createInscricaoChefeConcurso', $concurso);
+
         $user = User::find($user_id);
+        if ($user != null) {
+            if ($user->role != User::ROLE_ENUM['candidato']) {
+                return redirect(route('inscricao.chefe.concurso', $concurso->id))->withErrors(['error' => 'Para realizar uma inscrição o usuário deve ser um candidato.']);
+            }
+            $inscricao = $user->inscricoes()->where('concursos_id', $concurso->id)->first();
+            if ($inscricao != null) {
+                return redirect(route('inscricao.chefe.concurso', $concurso->id))->withErrors(['error' => 'Já existe uma inscrição para esse candidato.']);
+            }
+        } else {
+            return redirect(route('inscricao.chefe.concurso', $concurso->id))->withErrors(['error' => 'Usuário não encontrado.']);
+        }
 
         return view('concurso.inscricao_candidato', compact('concurso', 'user'));
     }

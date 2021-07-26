@@ -79,7 +79,9 @@ class CandidatoController extends Controller
 
     public function storeInscricaoChefe(StoreInscricaoRequest $request) {
         $request->validated();
+
         $vaga = OpcoesVagas::find($request->vaga);
+        $this->authorize('createInscricaoChefeConcurso', $vaga->concurso);
         if (!$vaga) {
             return redirect()->back()->with('vagas', 'Selecione uma vaga valida')->withInput();
         }
