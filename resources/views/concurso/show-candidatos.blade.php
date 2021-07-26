@@ -15,6 +15,7 @@
                                 @if($request->filtro != null)
                                     <a type="button" class="btn btn-secondary" href="{{route('show.candidatos.concurso', $concurso->id)}}">Limpar filtros</a>
                                 @endif
+                                <a type="button" class="btn btn-success" href="{{route('inscricao.chefe.concurso', ['concurso' => $concurso->id])}}">Inscrever candidato</a>
                             </div>      
                         </div>     
                     </div>
@@ -91,11 +92,11 @@
                                                             <div style="margin-left: 5px">
                                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())))
                                                                     <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
-                                                                        Avaliação de Títulos
+                                                                        Prova de Títulos
                                                                     </button>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
-                                                                        Avaliação de Títulos
+                                                                        Prova de Títulos
                                                                     </button>
                                                                 @endif
                                                             </div>

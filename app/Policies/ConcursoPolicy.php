@@ -30,7 +30,7 @@ class ConcursoPolicy
      */
     public function view(User $user, Concurso $concurso)
     {
-        return $concurso->user->id == $user->id;
+        return $this->ehDonoDoConcurso($user, $concurso);
     }
 
     /**
@@ -53,7 +53,7 @@ class ConcursoPolicy
      */
     public function update(User $user, Concurso $concurso)
     {
-        return $concurso->user->id == $user->id;
+        return $this->ehDonoDoConcurso($user, $concurso);
     }
 
     /**
@@ -65,7 +65,7 @@ class ConcursoPolicy
      */
     public function delete(User $user, Concurso $concurso)
     {
-        return $concurso->user->id == $user->id;
+        return $this->ehDonoDoConcurso($user, $concurso);
     }
 
     /**
@@ -102,11 +102,36 @@ class ConcursoPolicy
 
     public function operacoesUserBanca(User $user, Concurso $concurso)
     {
-        return $concurso->users_id == $user->id;
+        return $this->ehDonoDoConcurso($user, $concurso);
     }
+
+    /**
+    * Regra para criar notas de texto em um concurso
+    *
+    * @param  \App\Models\User  $user
+    * @param  \App\Models\Inscricao  $inscricao
+    * @return mixed
+    */
 
     public function operacoesNotasDeTexto(User $user, Concurso $concurso)
     {
-        return $this->operacoesUserBanca($user, $concurso);
+        return $this->ehDonoDoConcurso($user, $concurso);
+    }
+
+    /**
+    * Regra para criar uma inscrição como chefe do concurso
+    *
+    * @param  \App\Models\User  $user
+    * @param  \App\Models\Inscricao  $inscricao
+    * @return mixed
+    */
+    public function createInscricaoChefeConcurso(User $user, Concurso $concurso) 
+    {
+        return $this->ehDonoDoConcurso($user, $concurso);
+    }
+
+    private function ehDonoDoConcurso(User $user, Concurso $concurso)
+    {
+        return $concurso->users_id == $user->id;
     }
 }
