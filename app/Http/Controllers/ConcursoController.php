@@ -277,9 +277,8 @@ class ConcursoController extends Controller
     public function showResultadoFinal(Request $request)
     {
         $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->get();
-        $inscricoes = $inscricoes->sortBy('nota');
-
-        return view('concurso.resultado-final', compact('inscricoes'));
+        $avaliacoes = Avaliacao::whereIn('inscricoes_id', $inscricoes->pluck('id'))->orderBy('nota', 'desc')->get();
+        return view('concurso.resultado-final', compact('avaliacoes'));
     }
 
     public function AdicionarUserBanca($user_id, $concurso_id)
@@ -299,7 +298,7 @@ class ConcursoController extends Controller
 
         return redirect()->back()->with(['success' => "Usuário removido da banca do concurso."]);
     }
-    
+
     private function filtrarInscricoes(Request $request)
     {
         $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->orderBy('created_at', 'ASC')->get();
@@ -307,7 +306,7 @@ class ConcursoController extends Controller
         $query = Candidato::query()->join('users', 'candidatos.users_id', '=', 'users.id');
 
         if ($request->check_cpf && $request->cpf != null) {
-            $query = $query->where('cpf', 'ilike', "%".$request->cpf."%");
+            $query = $query->where('cpf', 'ilike', "%" . $request->cpf . "%");
 
             $candidatos = $query->get();
 
