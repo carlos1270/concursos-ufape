@@ -51,15 +51,12 @@
                                         </td>
                                         <td id="tabela_container_linha" style="text-align: center;">
                                             <div class="btn-group">
-                                                <div>
-                                                    <button class="btn btn-primary" 
-                                                        onclick ="location.href='{{ route('candidato.show', $inscricao->id) }}'">
-                                                        <img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" >
-                                                    </button>
-                                                </div>
+                                                <a class="btn btn-primary" style="margin-left: 5px; border-radius: 4px;" href="{{ route('candidato.show', $inscricao->id) }}">
+                                                    <img src="{{ asset('img/icon_visualizar.svg') }}" alt="Visualizar concurso" width="26px" >
+                                                </a>
                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= now() && $inscricao->status == "aprovado")
                                                     <a class="btn btn-primary" style="margin-left: 5px; border-radius: 4px;" href="{{ route('envio.documentos.inscricao', $inscricao->id) }}">
-                                                        Enviar Documentos
+                                                        <img src="{{ asset('img/icon_enviar.svg') }}" alt="Enviar documentos" width="26px" >
                                                     </a>
                                                 @endif
                                             </div>
@@ -78,6 +75,14 @@
                                 </label>
                                 <h6>Minha <br>inscrição</h6>
                             </div>
+                            @if ($inscricao->concurso->data_inicio_envio_doc <= now() && $inscricao->status == "aprovado")
+                                <div class="btn-group" style="margin:5px">
+                                    <label style="margin-right: 10px; padding-left:13px; padding-right:13px; border-radius:6px; background-color:#007bff">
+                                        <img class="card-img-left example-card-img-responsive" src="{{ asset('img/icon_enviar.svg') }}" width="25px" style="margin-top: 7px "/>
+                                    </label>
+                                    <h6>Enviar <br>documentos</h6>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @else
