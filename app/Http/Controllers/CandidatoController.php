@@ -7,6 +7,7 @@ use App\Models\Candidato;
 use App\Models\Inscricao;
 use App\Models\Concurso;
 use App\Models\OpcoesVagas;
+use App\Models\User;
 use App\Http\Requests\StoreInscricaoRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -74,5 +75,33 @@ class CandidatoController extends Controller
         Notification::send(auth()->user(), new ConfirmarInscricao($inscricao));
 
         return redirect()->route('candidato.index')->with('success', 'Sua inscrição foi realizada com sucesso');
+    }
+
+    public function storeInscricaoChefe(StoreInscricaoRequest $request) {
+        $request->validated();
+        $vaga = OpcoesVagas::find($request->vaga);
+        if (!$vaga) {
+            return redirect()->back()->with('vagas', 'Selecione uma vaga valida')->withInput();
+        }
+
+        $user = User::find($request->user_id);
+        $inscricao = $user->inscricoes()->where('concursos_id', $request->concurso_id)->first();
+        if ($inscricao != null) {
+            return redirect()->back()->withErrors(['user' => 'Já existe uma inscrição para esse candidato.']);
+        }
+
+        $inscricao = new Inscricao();
+        $inscricao->status = "Aguardando pagamento";
+        $inscricao->cotista = $request->cotista;
+        $inscricao->pcd = $request->pcd;
+        $inscricao->solicitou_isencao = $request->desejo_isencao == "on";
+        $inscricao->users_id = $user->id;
+        $inscricao->concursos_id = $vaga->concursos_id;
+        $inscricao->vagas_id = $vaga->id;
+        $inscricao->save();
+
+        Notification::send($user, new ConfirmarInscricao($inscricao));
+
+        return redirect(route('inscricao.chefe.concurso', $request->concurso_id))->with(['success' => 'Inscrição realizada com sucesso.']);
     }
 }

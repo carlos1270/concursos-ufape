@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
+use App\Models\Concurso;
 
 class StoreInscricaoRequest extends FormRequest
 {
@@ -14,6 +15,10 @@ class StoreInscricaoRequest extends FormRequest
      */
     public function authorize()
     {
+        if ($this->concurso_id != null) {
+            $concurso = Concurso::find($this->concurso_id);
+            return auth()->user()->role == User::ROLE_ENUM['candidato'] || auth()->user()->id == $concurso->users_id;
+        }
         return auth()->user()->role == User::ROLE_ENUM['candidato'];
     }
 

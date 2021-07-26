@@ -10,6 +10,7 @@ use App\Models\Inscricao;
 use App\Models\OpcoesVagas;
 use App\Models\NotaDeTexto;
 use App\Models\Candidato;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -314,5 +315,46 @@ class ConcursoController extends Controller
         }
 
         return $inscricoes;
+    }
+
+    public function indexInscraoChefeConcurso(Request $request, $id) 
+    {
+        $concurso = Concurso::find($id);
+        $usuarios_candidatos = User::where('role', User::ROLE_ENUM['candidato'])->get();
+
+        if ($request->filtro != null) {
+            $usuarios_candidatos = $this->filtrarCandidatos($request);
+        }
+
+        $usuarios = collect();
+        foreach ($usuarios_candidatos as $usuario_candidato) {
+            if ($usuario_candidato->inscricoes()->where('concursos_id', $concurso->id)->first() == null) {
+                $usuarios->push($usuario_candidato);
+            }
+        }
+        
+        return view('concurso.index_inscrever_candidato', compact('concurso', 'usuarios', 'request'));
+    }
+
+    private function filtrarCandidatos(Request $request) 
+    {
+        $query = User::query()->join('candidatos', 'candidatos.users_id', '=', 'users.id');
+
+        if ($request->check_cpf && $request->cpf != null) {
+            $query = $query->where('cpf', 'ilike', "%" . $request->cpf . "%");
+        }
+
+        if ($request->check_email && $request->email != null) {
+            $query = $query->where('email', 'like', "%" . $request->email . "%");
+        }
+
+        return $query->get();
+    }
+
+    public function inscreverCandidato($concurso_id, $user_id) {
+        $concurso = Concurso::find($concurso_id);
+        $user = User::find($user_id);
+
+        return view('concurso.inscricao_candidato', compact('concurso', 'user'));
     }
 }
