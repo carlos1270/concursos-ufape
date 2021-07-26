@@ -36,4 +36,9 @@ class Avaliacao extends Model
     {
         return $this->belongsToMany(Grupo::class, 'inscricoes_avalicoes', 'avaliacao_id', 'grupo_id')->withPivot('nota');
     }
+
+    public function inscricao()
+    {
+        return $this->belongsTo(Inscricao::class, 'inscricoes_id');
+    }
 }

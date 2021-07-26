@@ -100,6 +100,10 @@ Route::get('/{concurso}/usuarios-banca-examinadora', [AdminController::class, 'u
 Route::post('/cadastrar-usuario-banca/{concurso}', [AdminController::class, 'createUserBanca'])->name('user.create.banca')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/inscrever-candidato/{concurso}', [ConcursoController::class, 'indexInscraoChefeConcurso'])->name('inscricao.chefe.concurso');
+    Route::get('/inscrever-candidato/{concurso}/{user}', [ConcursoController::class, 'inscreverCandidato'])->name('inscrever.candidato');
+    Route::post('/inscrever-candidato/save', [CandidatoController::class, 'storeInscricaoChefe'])->name('save.inscricao.chefe');
+
     Route::get('/notas/{concurso}', [NotasController::class, 'index'])->name('notas.index');
     Route::get('/notas/{concurso}/criar', [NotasController::class, 'create'])->name('notas.create');
     Route::post('/notas/{concurso}/salvar', [NotasController::class, 'store'])->name('notas.store');

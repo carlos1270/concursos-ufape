@@ -15,6 +15,7 @@
                                 @if($request->filtro != null)
                                     <a type="button" class="btn btn-secondary" href="{{route('show.candidatos.concurso', $concurso->id)}}">Limpar filtros</a>
                                 @endif
+                                <a type="button" class="btn btn-success" href="{{route('inscricao.chefe.concurso', ['concurso' => $concurso->id])}}">Inscrever candidato</a>
                             </div>      
                         </div>     
                     </div>
@@ -49,9 +50,12 @@
                                     </tr>
                                 </thead>
                                 <tbody id="candidatos">
+                                    @php
+                                        $cont = 1;
+                                    @endphp
                                     @foreach ($inscricoes as $inscricao)
                                         <tr>
-                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$inscricao->id}}</th>
+                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
                                             <td id="tabela_container_linha">
                                                 <div class="form-group">
                                                     <h6 style="font-weight: normal;">{{$inscricao->user->nome}}</h6>
@@ -101,6 +105,9 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                    @php
+                                        $cont = $cont +1;
+                                    @endphp
                                     @endforeach
                                 </tbody>
                             </table>

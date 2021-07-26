@@ -18,7 +18,7 @@ class OpcoesVagas extends Model
 
     public function concurso()
     {
-        return $this->belongsTo(Concurso::class, 'concurso_id');
+        return $this->belongsTo(Concurso::class, 'concursos_id');
     }
 
     public function inscricoes()
