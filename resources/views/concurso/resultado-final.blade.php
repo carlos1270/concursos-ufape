@@ -20,16 +20,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($inscricoes as $inscricao)
+                                    @php
+                                        $cont = 1;
+                                    @endphp
+                                    @foreach ($avaliacoes as $avaliacao)
                                         <tr>
-                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$inscricao->id}}</th>
-                                            <td id="tabela_container_linha">{{ $inscricao->user->nome }}</td>
-                                            <td id="tabela_container_linha">{{ $inscricao->vaga->nome }}</td>
+                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
+                                            <td id="tabela_container_linha">{{ $avaliacao->inscricao->user->nome }}</td>
+                                            <td id="tabela_container_linha">{{ $avaliacao->inscricao->vaga->nome }}</td>
                                             <td id="tabela_container_linha">
-                                                {{ $inscricao->avaliacao->nota }}
+                                                {{ $avaliacao->nota }}
                                             </td>
                                             <td id="tabela_container_linha">
-                                                <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $inscricao->avaliacao->id)}}" target="_new">
+                                                <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $avaliacao->id)}}" target="_new">
                                                     <div class="btn-group">
                                                         <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
                                                         <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Baixar</h6>
@@ -37,6 +40,9 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                    @php
+                                        $cont = $cont +1;
+                                    @endphp
                                     @endforeach
                                 </tbody>
                             </table>
