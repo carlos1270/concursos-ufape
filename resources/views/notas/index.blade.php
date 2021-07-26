@@ -11,7 +11,7 @@
                         </div>
                         <h6 class="style_card_container_header_campo_obrigatorio"><a href="{{route('notas.create', ['concurso' => $concurso->id])}}" class="btn btn-primary" style="margin-top:10px;">Criar nota</a></h6>
                     </div>
-                    
+
                     @if($notas->count() > 0)
                         <div class="card-body">
                             @if(session('mensage'))
@@ -75,7 +75,7 @@
                                                         </div>
                                                         @break
                                                 @endswitch
-                                                
+
                                             </td>
                                             <td id="tabela_container_linha" style="text-align: center;">
                                                 <div class="btn-group">
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif    
+                    @endif
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger" form="form-delete-nota-{{$nota->id}}">Deletar</button>
+                        <button type="submit" class="btn btn-danger" form="form-delete-nota-{{$nota->id}}" onclick="this.disabled=true;this.form.submit();">Deletar</button>
                     </div>
                 </div>
             </div>

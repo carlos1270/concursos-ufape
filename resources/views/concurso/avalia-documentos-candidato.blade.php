@@ -25,13 +25,13 @@
                                         </li>
                                         <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
                                         <li>Comprovante do pagamento da taxa de inscrição.</li>
-                                        <li>Documento que comprove a formação na área/matéria conforme Edital Específico. 
-                                            A formação acadêmica pode ser comprovada através de cópias de documentos como: i) Certificado de Graduação e/ou 
-                                            Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior; 
-                                            ii) OU diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, 
+                                        <li>Documento que comprove a formação na área/matéria conforme Edital Específico.
+                                            A formação acadêmica pode ser comprovada através de cópias de documentos como: i) Certificado de Graduação e/ou
+                                            Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior;
+                                            ii) OU diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga,
                                             emitido pela Instituição de Ensino Superior.
                                         </li>
-                                        <li>Histórico Escolar em que se verifique que o candidato cursou a disciplina objeto da seleção OU 
+                                        <li>Histórico Escolar em que se verifique que o candidato cursou a disciplina objeto da seleção OU
                                             disciplina(s) equivalente(s) à matéria objeto da seleção.
                                         </li>
                                         <li>Declaração de Veracidade documental.</li>
@@ -69,7 +69,7 @@
                                 </h6>
                                 <h6>
                                     <ul style="margin-left: -20px;">
-                                         <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações. 
+                                         <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações.
                                             Essas comprovações devem ser enviadas pelos arquivos abaixo.
                                         </li>
                                     </ul>
@@ -267,7 +267,7 @@
                                 </h6>
                                 <div class="form-row">
                                     <div class="col-md-12 form-group">
-                                        <a href="{{route('baixar.anexo', ['name'=> 'Ficha_de_avaliacao.docx'])}}"  class="btn btn-success" 
+                                        <a href="{{route('baixar.anexo', ['name'=> 'Ficha_de_avaliacao.docx'])}}"  class="btn btn-success"
                                             target="_blank" style="color:white;">Baixar Ficha de avaliação</a>
                                     </div>
                                 </div>
@@ -283,7 +283,7 @@
                                     <div class="col-md-6 form-group">
                                         <label for="nota" class="style_campo_titulo" style="margin-top: 10px;">Pontuação total</label>
                                         <input type="number" step=any id="nota" name="nota" min="0" max="100"
-                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
+                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato"
                                             value="{{ $inscricao->avaliacao->nota }}"/>
                                     </div>
                                 </div>
@@ -303,7 +303,7 @@
                         <div>
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
-                                    <a href="{{route('baixar.anexo', ['name'=> 'Ficha_de_avaliacao.docx'])}}"  class="btn btn-success" 
+                                    <a href="{{route('baixar.anexo', ['name'=> 'Ficha_de_avaliacao.docx'])}}"  class="btn btn-success"
                                         target="_blank" style="color:white;">Baixar Ficha de avaliação</a>
                                 </div>
                             </div>
@@ -334,8 +334,8 @@
                                         </div>
                                         <div class="col-md-12" style="margin-top: 10px;">
                                              <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
-                                            <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror" 
-                                                id="ficha_avaliacao" style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff" 
+                                            <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror"
+                                                id="ficha_avaliacao" style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff"
                                                 name="ficha_avaliacao" @if ($inscricao->avaliacao && !$inscricao->avaliacao->ficha_avaliacao) required @endif/>
                                             @error('ficha_avaliacao')
                                                 <span style="color: red">{{ $message }}</span>
@@ -360,7 +360,7 @@
                                             <div class="form-row justify-content-center">
                                                 <div class="col-md-12"><hr></div>
                                                 <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
-                                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
+                                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" onclick="this.disabled=true;this.form.submit();">Enviar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -370,7 +370,7 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         @endif
     </div>
 </div>
