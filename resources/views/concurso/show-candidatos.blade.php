@@ -95,9 +95,9 @@
                                                                         Prova de Títulos
                                                                     </a>
                                                                 @else
-                                                                    <a class="btn btn-primary" disabled>
+                                                                    <button class="btn btn-primary" disabled>
                                                                         Prova de Títulos
-                                                                    </a>
+                                                                    </button>
                                                                 @endif
                                                             </div>
                                                         </div>
