@@ -19,7 +19,7 @@
                                 <div class="form-row">
                                     <div class="col-md-12 form-group">
                                         <label class="style_campo_titulo">Nome Completo</label>
-                                        <input type="text" class="form-control style_campo" 
+                                        <input type="text" class="form-control style_campo"
                                             value="{{$inscricao->user->nome . ' ' . $inscricao->user->sobrenome}}" disabled/>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                         <label for="estado" class="style_campo_titulo">Logradouro </label>
                                         <input type="text" class="form-control style_campo" value="{{$endereco->logradouro}}" disabled/>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label for="estado" class="style_campo_titulo">Estado </label>
-                                        <select name="" id="estado" class="form-control" disabled> 
+                                        <select name="" id="estado" class="form-control" disabled>
                                             <option @if($endereco->uf == 'AC') selected @endif value="AC">Acre</option>
                                             <option @if($endereco->uf == 'AL') selected @endif value="AL">Alagoas</option>
                                             <option @if($endereco->uf == 'AP') selected @endif value="AP">Amapá</option>
@@ -152,7 +152,7 @@
                                     <div class="col-md-12">
                                         <h6 class="style_card_container_header_subtitulo">Vaga Escolhida</h6>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
@@ -204,7 +204,7 @@
                                 <hr/>
                                 <div class="form-row">
                                     <div class="col-md-6 form-group" style="margin-bottom: 9px;">
-                                        <button class="btn btn-danger shadow-sm" style="width: 100%;" 
+                                        <button class="btn btn-danger shadow-sm" style="width: 100%;"
                                             data-toggle="modal" data-target="#reprovar-candidato-{{$candidato->id}}">
                                             Reprovado
                                         </button>
@@ -254,21 +254,21 @@
                                                         @endif
                                                     @elseif($item->status == "reprovado")
                                                         @if($inscricao->user->id == $item->user->id)
-                                                            <img src="{{asset('img/icon_reprovado_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado"> 
+                                                            <img src="{{asset('img/icon_reprovado_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado">
                                                         @else
-                                                            <img src="{{asset('img/icon_reprovado_vermelho.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado"> 
+                                                            <img src="{{asset('img/icon_reprovado_vermelho.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado">
                                                         @endif
                                                     @elseif($item->status == "Aguardando pagamento")
                                                         @if($inscricao->user->id == $item->user->id)
-                                                            <img src="{{asset('img/icon_pagamento_pendente_branco.svg')}}" alt="..." width="40px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">  
+                                                            <img src="{{asset('img/icon_pagamento_pendente_branco.svg')}}" alt="..." width="40px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">
                                                         @else
-                                                            <img src="{{asset('img/icon_pagamento_pendente_colorido.svg')}}" alt="..." width="40px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">  
+                                                            <img src="{{asset('img/icon_pagamento_pendente_colorido.svg')}}" alt="..." width="40px" data-toggle="tooltip" data-placement="top" title="Aguardando pagamento">
                                                         @endif
                                                     @else
                                                         @if($inscricao->user->id == $item->user->id)
-                                                            <img src="{{asset('img/icon_pendente_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Pendente">  
+                                                            <img src="{{asset('img/icon_pendente_branco.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Pendente">
                                                         @else
-                                                            <img src="{{asset('img/icon_pendente_colorido.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Pendente"> 
+                                                            <img src="{{asset('img/icon_pendente_colorido.svg')}}" alt="..." width="20px" data-toggle="tooltip" data-placement="top" title="Pendente">
                                                         @endif
                                                     @endif
                                                 </div>
@@ -303,7 +303,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                <button type="submit" class="btn btn-danger" form="form-reprova-candidato-{{$candidato->id}}">Sim</button>
+                <button type="submit" class="btn btn-danger" form="form-reprova-candidato-{{$candidato->id}}" onclick="this.disabled=true;this.form.submit();">Sim</button>
             </div>
         </div>
     </div>
@@ -326,7 +326,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                <button type="submit" class="btn btn-success" form="form-aprova-candidato-{{$candidato->id}}">Sim</button>
+                <button type="submit" class="btn btn-success" form="form-aprova-candidato-{{$candidato->id}}" onclick="this.disabled=true;this.form.submit();">Sim</button>
             </div>
         </div>
     </div>

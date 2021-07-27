@@ -78,7 +78,7 @@
                                     <hr>
                                 </div>
                                 <div class="col-md-12" style="margin-bottom: 5px; text-align: right;">
-                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 240px;">Salvar</button>
+                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 240px;" onclick="this.disabled=true;this.form.submit();">Salvar</button>
                                 </div>
                             </form>
                         </div>

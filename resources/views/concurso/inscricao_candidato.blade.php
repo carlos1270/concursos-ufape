@@ -25,7 +25,7 @@
                                             <label class="style_campo_titulo">Nome Completo</label>
                                             <input type="text" class="form-control style_campo"
                                                 value="{{$user->nome . ' ' . $user->sobrenome }}" disabled/>
-                                            
+
                                             @error('user')
                                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                                     {{ $message }}
@@ -108,7 +108,7 @@
                                         <div class="col-md-6 form-group" style="margin-bottom: 9px;">
                                         </div>
                                         <div class="col-md-6 form-group" style="margin-bottom: 9px;">
-                                            <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">Enviar</button>
+                                            <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" onclick="this.disabled=true;this.form.submit();">Enviar</button>
                                         </div>
                                     </div>
                                 </form>

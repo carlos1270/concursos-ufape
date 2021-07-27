@@ -6,8 +6,8 @@
                 <div class="card shadow bg-white style_card_container">
                     <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                         <h6 class="style_card_container_header_titulo">
-                            @if(Auth::user()->role == "presidenteBancaExaminadora") 
-                                Meus concursos como presidente da banca examinadora 
+                            @if(Auth::user()->role == "presidenteBancaExaminadora")
+                                Meus concursos como presidente da banca examinadora
                             @else
                                 @if (Auth::user()->role == "admin")
                                     Concursos
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif    
+                    @endif
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger" form="form-delete-concurso-{{$concurso->id}}">Deletar</button>
+                        <button type="submit" class="btn btn-danger" form="form-delete-concurso-{{$concurso->id}}" onclick="this.disabled=true;this.form.submit();">Deletar</button>
                     </div>
                 </div>
             </div>

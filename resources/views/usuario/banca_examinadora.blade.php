@@ -52,10 +52,10 @@
                                     <td id="tabela_container_linha" style="text-align: center;">
                                         <div class="btn-group">
                                             <div>
-                                                <button class="btn btn-info" onclick ="location.href='{{ route('concurso.adicionar.banca', ['user' => $user->id, 'concurso' => $concurso->id]) }}'" @if($concurso->chefeDaBanca->contains('id', $user->id)) disabled @endif>
+                                                <button class="btn btn-info" onclick ="this.disabled=true;location.href='{{ route('concurso.adicionar.banca', ['user' => $user->id, 'concurso' => $concurso->id]) }}'" @if($concurso->chefeDaBanca->contains('id', $user->id)) disabled @endif>
                                                     Adicionar a banca
                                                 </button>
-                                                <button class="btn btn-danger"onclick ="location.href='{{ route('concurso.remover.banca', ['user' => $user->id, 'concurso' => $concurso->id]) }}'" @if(!$concurso->chefeDaBanca->contains('id', $user->id)) disabled @endif>
+                                                <button class="btn btn-danger"onclick ="this.disabled=true;location.href='{{ route('concurso.remover.banca', ['user' => $user->id, 'concurso' => $concurso->id]) }}'" @if(!$concurso->chefeDaBanca->contains('id', $user->id)) disabled @endif>
                                                     Remover da banca
                                                 </button>
                                             </div>
@@ -169,7 +169,7 @@
                     <hr>
                 </div>
                 <div class="col-md-12 form-group" style="margin-bottom: 9px;">
-                    <button class="btn btn-success shadow-sm" style="width: 100%;">Cadastrar</button>
+                    <button class="btn btn-success shadow-sm" style="width: 100%;" onclick="this.disabled=true;this.form.submit();">Cadastrar</button>
                 </div>
             </form>
         </div>
