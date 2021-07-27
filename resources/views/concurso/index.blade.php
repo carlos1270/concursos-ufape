@@ -86,7 +86,7 @@
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                                             @if(Auth::user()->role == "admin" || Auth::user()->role == "chefeSetorConcursos")
                                                                 <a class="dropdown-item" href="{{route('users.listar.banca', ['concurso' => $concurso->id])}}">Banca examinadora</a>
-                                                                {{-- <a class="dropdown-item" href="{{route('notas.index', ['concurso' => $concurso->id])}}">Notas de texto</a> --}}
+                                                                <a class="dropdown-item" href="{{route('notas.index', ['concurso' => $concurso->id])}}">Notas de texto</a>
                                                             @endif
                                                             <a class="dropdown-item" href="{{route('concurso.show', ['concurso' => $concurso->id])}}">Visualizar concurso</a>
                                                             @if(Auth::user()->role != "presidenteBancaExaminadora")
