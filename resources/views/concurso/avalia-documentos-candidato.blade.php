@@ -2,7 +2,7 @@
 @section('content')
 <div class="container" style="margin-top: 5rem; margin-bottom: 8rem;">
     <div class="form-row justify-content-center">
-        <div class="@if($arquivos->inscricao->concurso->users_id == auth()->user()->id) col-md-10 @elseif(auth()->user()->role == "presidenteBancaExaminadora") col-md-4 @endif" style="margin-bottom: 2rem;">
+        <div class="@if($inscricao->concurso->users_id == auth()->user()->id) col-md-10 @elseif(auth()->user()->role == "presidenteBancaExaminadora") col-md-4 @endif" style="margin-bottom: 2rem;">
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Etapa - Avaliação de Títulos</h6>
