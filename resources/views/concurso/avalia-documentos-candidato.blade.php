@@ -278,13 +278,25 @@
                                             <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Arquivo de pontuação</h6>
                                         </div>
                                     </a>
+                                @else 
+                                    <button class="btn btn-primary" href="#" disabled>
+                                        <div class="btn-group">
+                                            <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Avaliação não registrada.</h6>
+                                        </div>
+                                    </button>
                                 @endif
                                 <div class="form-row">
                                     <div class="col-md-6 form-group">
                                         <label for="nota" class="style_campo_titulo" style="margin-top: 10px;">Pontuação total</label>
-                                        <input type="number" step=any id="nota" name="nota" min="0" max="100"
+                                        @if($inscricao->avaliacao != null)
+                                            <input type="number" step=any id="nota" name="nota" min="0" max="100"
                                             class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
-                                            value="{{ $inscricao->avaliacao->nota }}"/>
+                                            value="{{$inscricao->avaliacao->nota}}" disabled/>
+                                        @else 
+                                            <input type="text" step=any id="nota" name="nota" min="0" max="100"
+                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
+                                            value="Avaliação não registrada." disabled/>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
