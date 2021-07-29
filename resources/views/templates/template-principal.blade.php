@@ -7,7 +7,8 @@
     
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-
+        <link rel="icon" type="image/png" href="{{asset('img/icon-app.png')}}">
+        
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -28,9 +29,9 @@
                     <div class="form-group" style="margin-bottom: 0px;">
 
                         <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('index') }}">Início</a>
-                        {{-- @if(!Auth::user())
+                        @if(!Auth::user())
                             <a class="btn btn-light" style="margin-right: 15px; color:#007bff" href="{{ route('about') }}">Sobre</a>
-                        @endif --}}
+                        @endif
                         
                         @auth
                             @if(Auth::user()->role == "candidato")
@@ -61,8 +62,8 @@
                                     <a type="button" class="dropdown-item" onclick ="location.href='{{ route('user.password.edit') }}'">
                                         Editar Senha
                                     </a>
-                                    {{-- <a class="dropdown-item" href="{{ route('about') }}">Sobre</a>
-                                        <hr> --}}
+                                    <a class="dropdown-item" href="{{ route('about') }}">Sobre</a>
+                                        <hr>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <a class="dropdown-item" href="{{ route('logout') }}"
