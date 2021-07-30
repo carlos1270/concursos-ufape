@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Concurso;
 use App\Models\NotaDeTexto;
 use App\Http\Requests\NotaDeTestoStoreRequest;
+use Illuminate\Support\Facades\Storage;
 
 class NotasController extends Controller
 {
@@ -125,7 +126,7 @@ class NotasController extends Controller
     {
         $nota = NotaDeTexto::find($id);
 
-        if ($this->anexo != null && Storage::disk()->exists('public/'.$this->anexo)) {
+        if ($nota->anexo != null && Storage::disk()->exists('public/'.$nota->anexo)) {
             return response()->file("storage/".$nota->anexo);
         }
 

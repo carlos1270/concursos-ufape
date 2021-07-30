@@ -28,7 +28,7 @@ class NotaDeTestoStoreRequest extends FormRequest
             'tipo'                  => 'required',
             'cor_do_fundo_da_nota'  => 'nullable',
             'texto_da_nota'         => 'required|max:1000',
-            'anexo'                 => 'nullable',
+            'anexo'                 => 'nullable|file|mimes:pdf|max:2048',
         ];
     }
 }
