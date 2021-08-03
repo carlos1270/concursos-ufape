@@ -303,7 +303,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                <button type="submit" class="btn btn-danger" form="form-reprova-candidato-{{$candidato->id}}" onclick="this.disabled=true;this.form.submit();">Sim</button>
+                <button type="submit" class="btn btn-danger" form="form-reprova-candidato-{{$candidato->id}}" id="submeterFormBotao">Sim</button>
             </div>
         </div>
     </div>
@@ -326,7 +326,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                <button type="submit" class="btn btn-success" form="form-aprova-candidato-{{$candidato->id}}" onclick="this.disabled=true;this.form.submit();">Sim</button>
+                <button type="submit" class="btn btn-success" form="form-aprova-candidato-{{$candidato->id}}" id="submeterFormBotao">Sim</button>
             </div>
         </div>
     </div>

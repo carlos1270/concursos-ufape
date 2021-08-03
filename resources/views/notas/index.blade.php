@@ -50,7 +50,7 @@
                                             <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
                                             <td id="tabela_container_linha">
                                                 <div class="form-group">
-                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $nota->id])}}" style="font-size: 18px">{{$nota->titulo}}</a></div>
+                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $concurso->id])}}" style="font-size: 18px">{{$nota->titulo}}</a></div>
                                                     <div><h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:15px">Criado no dia: {{$nota->created_at->format('d/m/Y')}}</h6></div>
                                                 </div>
                                             </td>
@@ -147,7 +147,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-danger" form="form-delete-nota-{{$nota->id}}" onclick="this.disabled=true;this.form.submit();">Deletar</button>
+                        <button type="submit" class="btn btn-danger" form="form-delete-nota-{{$nota->id}}" id="submeterFormBotao">Deletar</button>
                     </div>
                 </div>
             </div>

@@ -104,7 +104,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-danger" form="form-delete-user-{{$user->id}}" onclick="this.disabled=true;this.form.submit();">Deletar</button>
+            <button type="submit" class="btn btn-danger" form="form-delete-user-{{$user->id}}" id="submeterFormBotao">Deletar</button>
             </div>
         </div>
         </div>

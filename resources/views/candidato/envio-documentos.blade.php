@@ -180,7 +180,7 @@
                             <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
                                     @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $inscricao->concurso->data_fim_envio_doc)
-                                        <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" onclick="this.disabled=true;this.form.submit();">
+                                        <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">
                                             Enviar
                                         </button>
                                     @endif
