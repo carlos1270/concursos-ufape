@@ -50,7 +50,7 @@
                                             <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
                                             <td id="tabela_container_linha">
                                                 <div class="form-group">
-                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $nota->id])}}" style="font-size: 18px">{{$nota->titulo}}</a></div>
+                                                    <div style="margin-bottom: -3px"><a  href="{{route('concurso.show', ['concurso' => $concurso->id])}}" style="font-size: 18px">{{$nota->titulo}}</a></div>
                                                     <div><h6 style="font-weight: normal; color:#909090; font-style: italic; font-size:15px">Criado no dia: {{$nota->created_at->format('d/m/Y')}}</h6></div>
                                                 </div>
                                             </td>
