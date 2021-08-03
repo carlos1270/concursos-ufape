@@ -169,7 +169,7 @@
                     <hr>
                 </div>
                 <div class="col-md-12 form-group" style="margin-bottom: 9px;">
-                    <button class="btn btn-success shadow-sm" style="width: 100%;" onclick="this.disabled=true;this.form.submit();">Cadastrar</button>
+                    <button class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">Cadastrar</button>
                 </div>
             </form>
         </div>

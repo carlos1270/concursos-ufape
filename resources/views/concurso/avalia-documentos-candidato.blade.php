@@ -278,7 +278,7 @@
                                             <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Arquivo de pontuação</h6>
                                         </div>
                                     </a>
-                                @else 
+                                @else
                                     <button class="btn btn-primary" href="#" disabled>
                                         <div class="btn-group">
                                             <h6 style="margin-left: 10px; margin-top:5px; color:#fff">Avaliação não registrada.</h6>
@@ -290,11 +290,11 @@
                                         <label for="nota" class="style_campo_titulo" style="margin-top: 10px;">Pontuação total</label>
                                         @if($inscricao->avaliacao != null)
                                             <input type="number" step=any id="nota" name="nota" min="0" max="100"
-                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
+                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato"
                                             value="{{$inscricao->avaliacao->nota}}" disabled/>
-                                        @else 
+                                        @else
                                             <input type="text" step=any id="nota" name="nota" min="0" max="100"
-                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato" 
+                                            class="form-control style_campo" placeholder="Digite a pontuação do candidato"
                                             value="Avaliação não registrada." disabled/>
                                         @endif
                                     </div>
@@ -372,7 +372,7 @@
                                             <div class="form-row justify-content-center">
                                                 <div class="col-md-12"><hr></div>
                                                 <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
-                                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" onclick="this.disabled=true;this.form.submit();">Enviar</button>
+                                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">Enviar</button>
                                                 </div>
                                             </div>
                                         </div>
