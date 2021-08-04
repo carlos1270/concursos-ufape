@@ -46,4 +46,8 @@ class Controller extends BaseController
         }
         return true;
     }
+
+    public function unauthorized() {
+        abort(403, "THIS ACTION IS UNAUTHORIZED");
+    }
 }

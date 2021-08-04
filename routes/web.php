@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ArquivoController;
 use App\Http\Controllers\NotasController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,3 +114,4 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/notas/{nota}/anexo', [NotasController::class, 'anexo'])->name('notas.anexo');
 Route::get('/notas-do-concurso', [NotasController::class, 'get'])->name('notas.get');
+Route::get('/error/403', [Controller::class, 'unauthorized']);
