@@ -28,8 +28,6 @@ class ArquivoController extends Controller
                 'experiencia_profissional' => 'nullable|file|mimes:pdf|max:2048',
             ], Arquivo::$messages)->validate();
         }
-
-        $arquivos = Arquivo::where('inscricoes_id', $request->inscricao)->first();
         $inscricao = Inscricao::find($request->inscricao);
         $concurso = $inscricao->concurso;
 
@@ -37,8 +35,8 @@ class ArquivoController extends Controller
         $experiencia_didatica_arquivo = true;
         $producao_cientifica_arquivo = true;
         $experiencia_profissiona_arquivo = true;
-
-        if (!$arquivos) {
+        
+        if ($arquivos == null) {
             $this->saveDocument($concurso->id, $request->inscricao, $request->dados_pessoais, 'dados_pessoais.pdf');
             $this->saveDocument($concurso->id, $request->inscricao, $request->curriculum_vitae_lattes, 'curriculum_vitae_lattes.pdf');
             $this->saveDocument($concurso->id, $request->inscricao, $request->formacao_academica, 'formacao_academica.pdf');
@@ -61,15 +59,15 @@ class ArquivoController extends Controller
                 $experiencia_profissiona_arquivo = false;
             }
 
-            Arquivo::create([
-                'dados_pessoais'           => $path . 'dados_pessoais.pdf',
-                'curriculum_vitae_lattes'  => $path . 'curriculum_vitae_lattes.pdf',
-                'formacao_academica'       => $path . 'formacao_academica.pdf',
-                'experiencia_didatica'     => $experiencia_didatica_arquivo ? $path . 'experiencia_didatica.pdf' : null,
-                'producao_cientifica'      => $producao_cientifica_arquivo ? $path . 'producao_cientifica.pdf' : null,
-                'experiencia_profissional' => $experiencia_profissiona_arquivo ? $path . 'experiencia_profissional.pdf' : null,
-                'inscricoes_id'            => $request->inscricao
-            ]);
+            $arquivo = new Arquivo();
+            $arquivo->dados_pessoais = $path . 'dados_pessoais.pdf';
+            $arquivo->curriculum_vitae_lattes =  $path . 'curriculum_vitae_lattes.pdf';
+            $arquivo->formacao_academica = $path . 'formacao_academica.pdf';
+            $arquivo->experiencia_didatica = $experiencia_didatica_arquivo ? $path . 'experiencia_didatica.pdf' : null;
+            $arquivo->producao_cientifica = $producao_cientifica_arquivo ? $path . 'producao_cientifica.pdf' : null;
+            $arquivo->experiencia_profissional = $experiencia_profissiona_arquivo ? $path . 'experiencia_profissional.pdf' : null;
+            $arquivo->inscricoes_id = $request->inscricao;
+            $arquivo->save();
         } else {
             if ($request->dados_pessoais) {
                 Storage::delete('public/' . $arquivos->dados_pessoais);

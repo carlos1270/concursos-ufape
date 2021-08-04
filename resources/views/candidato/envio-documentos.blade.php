@@ -175,7 +175,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao->concurso->id }}"/>
+                            <input type="hidden" id="inscricao" name="inscricao" value="{{$inscricao->id}}"/>
                             <div><hr></div>
                             <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
