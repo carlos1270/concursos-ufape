@@ -127,7 +127,7 @@
                                 <hr>
                             </div>
                             <div class="col-md-12 form-group" style="margin-bottom: 9px;">
-                                <button class="btn btn-success shadow-sm" style="width: 100%;">Cadastrar</button>
+                                <button class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">Cadastrar</button>
                             </div>
                         </form>
                     </div>

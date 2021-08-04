@@ -19,6 +19,8 @@ class CandidatoController extends Controller
     {
         $arquivos = Arquivo::where('inscricoes_id', $id)->first();
         $inscricao = Inscricao::find($id);
+        $this->authorize('showDocumentos', $inscricao);
+
         return view('candidato.envio-documentos')->with([
             'inscricao' => $inscricao,
             'arquivos' => $arquivos

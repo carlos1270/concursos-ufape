@@ -91,9 +91,9 @@
                                                         <div class="btn-group">
                                                             <div style="margin-left: 5px">
                                                                 @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())))
-                                                                    <button class="btn btn-primary" onclick ="location.href='{{ route('avalia.documentos.inscricao', $inscricao->id) }}'">
+                                                                    <a class="btn btn-primary" href="{{route('avalia.documentos.inscricao', $inscricao->id)}}">
                                                                         Prova de Títulos
-                                                                    </button>
+                                                                    </a>
                                                                 @else
                                                                     <button class="btn btn-primary" disabled>
                                                                         Prova de Títulos

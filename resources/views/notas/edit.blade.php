@@ -36,7 +36,7 @@
                                                 <option @if(old('tipo') == 1) selected @endif value="1">Aviso</option>
                                                 <option @if(old('tipo') == 2) selected @endif value="2">Notificação</option>
                                                 <option @if(old('tipo') == 3) selected @endif value="3">Resultado</option>
-                                            @else 
+                                            @else
                                                 <option @if($nota->tipo == 1) selected @endif value="1">Aviso</option>
                                                 <option @if($nota->tipo == 2) selected @endif value="2">Notificação</option>
                                                 <option @if($nota->tipo == 3) selected @endif value="3">Resultado</option>
@@ -84,7 +84,7 @@
                                     <hr>
                                 </div>
                                 <div class="col-md-12" style="margin-bottom: 5px; text-align: right;">
-                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 240px;">Salvar</button>
+                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 240px;" id="submeterFormBotao">Salvar</button>
                                 </div>
                             </form>
                         </div>
@@ -114,7 +114,7 @@
 
             config.removeButtons = 'Image,Table';
         };
-        
+
         CKEDITOR.replace('texto_da_nota');
     </script>
 @endsection

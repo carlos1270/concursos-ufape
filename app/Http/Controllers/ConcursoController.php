@@ -208,6 +208,7 @@ class ConcursoController extends Controller
     public function aprovarReprovarCandidato(Request $request)
     {
         $inscricao = Inscricao::find($request->inscricao_id);
+        $concurso = $inscricao->concurso;
         $mensagem = "";
 
         if ($request->aprovar == "true") {
@@ -218,9 +219,9 @@ class ConcursoController extends Controller
             $mensagem = "Candidato reprovado com sucesso!";
         }
 
-        $inscricao->save();
+        $inscricao->update();
 
-        return redirect()->route('show.candidatos.concurso', $inscricao->id)->with('success', $mensagem);
+        return redirect(route('show.candidatos.concurso', $concurso->id))->with('success', $mensagem);
     }
 
     public function avaliarDocumentosCandidato(Request $request)

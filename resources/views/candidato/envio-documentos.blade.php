@@ -38,19 +38,19 @@
                                             </li>
                                             <li>Documento oficial que comprove que o candidato não possui antecedentes criminais.</li>
                                             <li>Comprovante do pagamento da taxa de inscrição.</li>
-                                            <li>Documento que comprove a formação na área/matéria conforme Edital Específico. 
-                                                A formação acadêmica pode ser comprovada através de cópias de documentos como: i) Certificado de Graduação e/ou 
-                                                Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior; 
-                                                ii) OU diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga, 
+                                            <li>Documento que comprove a formação na área/matéria conforme Edital Específico.
+                                                A formação acadêmica pode ser comprovada através de cópias de documentos como: i) Certificado de Graduação e/ou
+                                                Mestrado e/ou Doutorado conforme exigência para a vaga, emitido pela Instituição de Ensino Superior;
+                                                ii) OU diploma de Graduação E/OU Mestrado E/OU Doutorado conforme exigência para a vaga,
                                                 emitido pela Instituição de Ensino Superior.
                                             </li>
-                                            <li>Histórico Escolar em que se verifique que o candidato cursou a disciplina objeto da seleção OU 
+                                            <li>Histórico Escolar em que se verifique que o candidato cursou a disciplina objeto da seleção OU
                                                 disciplina(s) equivalente(s) à matéria objeto da seleção.
                                             </li>
                                             <li>Declaração de Veracidade documental.</li>
                                         </ul>
                                     </h6>
-                                    <input type="file" accept=".pdf" class="form-control style_campo @error('dados_pessoais') is-invalid @enderror" 
+                                    <input type="file" accept=".pdf" class="form-control style_campo @error('dados_pessoais') is-invalid @enderror"
                                         id="dados_pessoais" name="dados_pessoais" @if(!$arquivos) required @endif/>
                                     @error('dados_pessoais')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -65,12 +65,12 @@
                                     @if($arquivos && $arquivos->curriculum_vitae_lattes) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Lattes"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
-                                            <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações. 
+                                            <li>Cópia do Curriculum Vitae modelo Lattes com as devidas comprovações.
                                                 Essas comprovações devem ser enviadas pelos arquivos abaixo.
                                             </li>
                                         </ul>
                                     </h6>
-                                    <input type="file" accept=".pdf" class="form-control style_campo @error('curriculum_vitae_lattes') is-invalid @enderror" id="curriculum_vitae_lattes" 
+                                    <input type="file" accept=".pdf" class="form-control style_campo @error('curriculum_vitae_lattes') is-invalid @enderror" id="curriculum_vitae_lattes"
                                         name="curriculum_vitae_lattes" @if(!$arquivos) required @endif/>
                                     @error('curriculum_vitae_lattes')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -97,7 +97,7 @@
                                             <li>Doutorado em Programa reconhecido pelo CNE e credenciado pela CAPES.</li>
                                         </ul>
                                     </h6>
-                                    <input type="file" accept=".pdf" class="form-control style_campo @error('formacao_academica') is-invalid @enderror" 
+                                    <input type="file" accept=".pdf" class="form-control style_campo @error('formacao_academica') is-invalid @enderror"
                                         id="formacao_academica" name="formacao_academica" @if(!$arquivos) required @endif/>
                                     @error('formacao_academica')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -119,7 +119,7 @@
                                             <li>Cursos ministrados (Extensão, Capacitação ou equivalentes na área da Seleção) / Para cada 10 horas.</li>
                                         </ul>
                                     </h6>
-                                    <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_didatica') is-invalid @enderror" 
+                                    <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_didatica') is-invalid @enderror"
                                         id="experiencia_didatica" name="experiencia_didatica"/>
                                     @error('experiencia_didatica')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -131,7 +131,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 form-group">
-                                    <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo III - Produção Científica</label> 
+                                    <label for="producao_cientifica" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo III - Produção Científica</label>
                                     @if($arquivos && $arquivos->producao_cientifica) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Producao-cientifica"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
@@ -142,7 +142,7 @@
                                             <li>Desenvolvimento de patentes com registro definitivo (carta patente).</li>
                                         </ul>
                                     </h6>
-                                    <input type="file" accept=".pdf" class="form-control style_campo @error('producao_cientifica') is-invalid @enderror" 
+                                    <input type="file" accept=".pdf" class="form-control style_campo @error('producao_cientifica') is-invalid @enderror"
                                         id="producao_cientifica" name="producao_cientifica"/>
                                     @error('producao_cientifica')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -152,7 +152,7 @@
                                     @if($arquivos && $arquivos->producao_cientifica)<small><strong>Obs:</strong> Caso queira substituir o arquivo enviado por outro, basta anexá-lo novamente.</small>@endif
                                 </div>
                                 <div class="col-md-12 form-group">
-                                    <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo IV - Experiência Profissional</label> 
+                                    <label for="experiencia_profissional" class="style_campo_titulo" style="color: black; font-weight: bolder;">Grupo IV - Experiência Profissional</label>
                                     @if($arquivos && $arquivos->experiencia_profissional) <a href="{{route('visualizar.arquivo', ['arquivo' => $arquivos->id, 'cod' => "Experiencia-profissional"])}}" target="_blank"><img src="{{asset('img/file-pdf-solid.svg')}}" alt="arquivo atual" style="width: 16px;"></a> @endif
                                     <h6 class="style_subtitulo_documento" style="color: black">
                                         <ul>
@@ -164,7 +164,7 @@
                                             <li>Projetos de pesquisa aprovados por Órgãos de Fomento.</li>
                                         </ul>
                                     </h6>
-                                    <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_profissional') is-invalid @enderror" 
+                                    <input type="file" accept=".pdf" class="form-control style_campo @error('experiencia_profissional') is-invalid @enderror"
                                         id="experiencia_profissional" name="experiencia_profissional"/>
                                     @error('experiencia_profissional')
                                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -175,12 +175,12 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="inscricao" name="inscricao" value="{{ $inscricao->concurso->id }}"/>
+                            <input type="hidden" id="inscricao" name="inscricao" value="{{$inscricao->id}}"/>
                             <div><hr></div>
                             <div class="form-row justify-content-center">
                                 <div class="col-md-6 form-group" style="margin-bottom: 4px;">
                                     @if ($inscricao->concurso->data_inicio_envio_doc <= date('Y-m-d', strtotime(now())) && date('Y-m-d', strtotime(now())) <= $inscricao->concurso->data_fim_envio_doc)
-                                        <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;">
+                                        <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">
                                             Enviar
                                         </button>
                                     @endif
@@ -190,7 +190,7 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>
     </div>
 </div>
 <script>
