@@ -94,4 +94,16 @@ class InscricaoPolicy
     {
         //
     }
+
+    /**
+     * Determina se a inscrição pode ser vista pelo candidato.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Inscricao  $inscricao
+     * @return mixed
+     */
+
+    public function showDocumentos(User $user, Inscricao $inscricao) {
+        return $inscricao->users_id == $user->id;
+    }
 }
