@@ -58,4 +58,9 @@ class Inscricao extends Model
     {
         return $this->hasOne(Avaliacao::class, 'inscricoes_id');
     }
+
+    public function arquivos()
+    {
+        return $this->hasOne(Arquivo::class, 'inscricoes_id');
+    }
 }

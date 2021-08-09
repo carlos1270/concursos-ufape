@@ -24,7 +24,8 @@
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 50%;">Concurso</th>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 30%;">Vaga</th>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Pagamento</th>
-                                    <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Status</th>
+                                    <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Inscrição</th>
+                                    <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Prova de títulos</th>
                                     <th scope="col" class="tabela_container_cabecalho_titulo" style="width: 100%;">Ações</th>
                                 </tr>
                             </thead>
@@ -35,7 +36,7 @@
                                         <td id="tabela_container_linha">{{ mb_strimwidth($inscricao->vaga->nome, 0, 20, "...") }}</td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
-                                                Pagamento Aprovado
+                                                Aprovado
                                             @else 
                                                 <a target="_black" href="http://consulta.tesouro.fazenda.gov.br/gru_novosite/gru_simples.asp">
                                                     Gerar Boleto
@@ -44,9 +45,16 @@
                                         </td>
                                         <td id="tabela_container_linha">
                                             @if ($inscricao->status == "aprovado")
-                                                Aprovado
+                                                Deferida
+                                            @elseif($inscricao->status == "reprovado") 
+                                                Indeferida
+                                            @endif
+                                        </td>
+                                        <td id="tabela_container_linha">
+                                            @if ($inscricao->arquivos != null)
+                                                Em análise
                                             @else 
-                                                {{$inscricao->status}}
+                                                Não enviado
                                             @endif
                                         </td>
                                         <td id="tabela_container_linha" style="text-align: center;">
@@ -80,7 +88,7 @@
                                     <label style="margin-right: 10px; padding-left:13px; padding-right:13px; border-radius:6px; background-color:#007bff">
                                         <img class="card-img-left example-card-img-responsive" src="{{ asset('img/icon_enviar.svg') }}" width="25px" style="margin-top: 7px "/>
                                     </label>
-                                    <h6>Enviar <br>documentos</h6>
+                                    <h6>Prova de <br>títulos</h6>
                                 </div>
                             @endif
                         </div>
