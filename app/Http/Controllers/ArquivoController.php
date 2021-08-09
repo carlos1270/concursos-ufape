@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Arquivo;
 use App\Models\Avaliacao;
 use App\Models\Inscricao;
+use App\Notifications\EnvioDocumentosNotification;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,8 +18,8 @@ class ArquivoController extends Controller
     {
         $arquivos = Arquivo::where('inscricoes_id', $request->inscricao)->first();
         $inscricao = Inscricao::find($request->inscricao);
-        $this->authorize('enviarDocumentos', $inscricao);
-        // dd($request);
+        //$this->authorize('enviarDocumentos', $inscricao);
+
         if (!$arquivos) {
             Validator::make($request->all(), Arquivo::$rules, Arquivo::$messages)->validate();
         } else {
@@ -30,15 +32,15 @@ class ArquivoController extends Controller
                 'experiencia_profissional' => 'nullable|file|mimes:pdf|max:2048',
             ], Arquivo::$messages)->validate();
         }
-        
+
         $concurso = $inscricao->concurso;
 
         $path = 'concursos/' . $concurso->id . '/inscricoes/' . $request->inscricao . '/';
         $experiencia_didatica_arquivo = true;
         $producao_cientifica_arquivo = true;
         $experiencia_profissiona_arquivo = true;
-        
-        if ($arquivos == null) {
+
+        if (!$arquivos) {
             $this->saveDocument($concurso->id, $request->inscricao, $request->dados_pessoais, 'dados_pessoais.pdf');
             $this->saveDocument($concurso->id, $request->inscricao, $request->curriculum_vitae_lattes, 'curriculum_vitae_lattes.pdf');
             $this->saveDocument($concurso->id, $request->inscricao, $request->formacao_academica, 'formacao_academica.pdf');
@@ -70,6 +72,10 @@ class ArquivoController extends Controller
             $arquivo->experiencia_profissional = $experiencia_profissiona_arquivo ? $path . 'experiencia_profissional.pdf' : null;
             $arquivo->inscricoes_id = $request->inscricao;
             $arquivo->save();
+
+            if (auth()->user()->role == "candidato") {
+                Notification::send(auth()->user(), new EnvioDocumentosNotification(auth()->user(), false));
+            }
         } else {
             if ($request->dados_pessoais) {
                 Storage::delete('public/' . $arquivos->dados_pessoais);
@@ -108,15 +114,18 @@ class ArquivoController extends Controller
             }
 
             $arquivos->update();
+
+            if (auth()->user()->role == "candidato") {
+                Notification::send(auth()->user(), new EnvioDocumentosNotification(auth()->user(), true));
+            }
         }
 
         if (auth()->user()->role == "chefeSetorConcursos" || auth()->user()->role == "admin") {
             return redirect(route('avalia.documentos.inscricao', $inscricao->id))->with(['success' => 'Documentos enviados com sucesso.']);
-        } 
+        }
 
         return redirect(route('candidato.index'))->with('success', 'Seus documentos foram enviados 
                 e serão examinados pela banca avaliadora.');
-        
     }
 
     public function show($arquivo, $cod)

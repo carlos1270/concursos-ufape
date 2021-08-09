@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Http\Requests\StoreInscricaoRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\ConfirmarInscricao;
+use App\Notifications\ConfirmarInscricaoNotification;
 
 class CandidatoController extends Controller
 {
@@ -74,12 +74,13 @@ class CandidatoController extends Controller
         $inscricao->vagas_id = $vagas->id;
         $inscricao->save();
 
-        Notification::send(auth()->user(), new ConfirmarInscricao($inscricao));
+        Notification::send(auth()->user(), new ConfirmarInscricaoNotification($inscricao));
 
         return redirect()->route('candidato.index')->with('success', 'Sua inscrição foi realizada com sucesso');
     }
 
-    public function storeInscricaoChefe(StoreInscricaoRequest $request) {
+    public function storeInscricaoChefe(StoreInscricaoRequest $request)
+    {
         $request->validated();
 
         $vaga = OpcoesVagas::find($request->vaga);
@@ -104,7 +105,7 @@ class CandidatoController extends Controller
         $inscricao->vagas_id = $vaga->id;
         $inscricao->save();
 
-        Notification::send($user, new ConfirmarInscricao($inscricao));
+        Notification::send($user, new ConfirmarInscricaoNotification($inscricao));
 
         return redirect(route('inscricao.chefe.concurso', $request->concurso_id))->with(['success' => 'Inscrição realizada com sucesso.']);
     }
