@@ -68,6 +68,9 @@
                                             <td id="tabela_container_linha" style="text-align: center">
                                                 @if($inscricao->status == "aprovado")
                                                     <img src="{{asset('img/icon_aprovado_verde.svg')}}" alt="..." width="25px" data-toggle="tooltip" data-placement="top" title="Candidato aprovado">
+                                                    @if($inscricao->arquivos != null)
+                                                        <img src="{{asset('img/icons-document-blue.png')}}" alt="..." width="25px" data-toggle="tooltip" data-placement="top" title="Candidato enviou os documentos">
+                                                    @endif
                                                 @elseif($inscricao->status == "reprovado")
                                                     <img src="{{asset('img/icon_reprovado_vermelho.svg')}}" alt="..." width="25px" data-toggle="tooltip" data-placement="top" title="Candidato reprovado"> 
                                                 @elseif($inscricao->status == "Aguardando pagamento")
