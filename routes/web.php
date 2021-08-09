@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ArquivoController;
 use App\Http\Controllers\NotasController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +53,12 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserCandidato'])->group(fun
     Route::post('/save-inscricao', [CandidatoController::class, 'saveInscricao'])
         ->name('save.inscricao');
 
-    Route::get('/envio-documentos/inscricao/{inscricao_id}', [CandidatoController::class, 'showEnvioDocumentos'])
-        ->name('envio.documentos.inscricao');
-
-    Route::post('/save-documentos', [ArquivoController::class, 'store'])
-        ->name('documentos.store');
 });
+
+Route::get('/envio-documentos/inscricao/{inscricao_id}', [CandidatoController::class, 'showEnvioDocumentos'])
+        ->name('envio.documentos.inscricao')->middleware('auth');
+Route::post('/save-documentos', [ArquivoController::class, 'store'])
+        ->name('documentos.store')->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified', 'CheckUserChefeConcurso'])->group(function () {
     Route::get('/candidato/inscricao/{inscricao_id}', [ConcursoController::class, 'inscricaoCandidato'])
@@ -113,3 +114,4 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/notas/{nota}/anexo', [NotasController::class, 'anexo'])->name('notas.anexo');
 Route::get('/notas-do-concurso', [NotasController::class, 'get'])->name('notas.get');
+Route::get('/error/403', [Controller::class, 'unauthorized']);

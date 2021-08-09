@@ -6,8 +6,20 @@
             <div class="card shadow bg-white style_card_container">
                 <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
                     <h6 class="style_card_container_header_titulo">Etapa - Avaliação de Títulos</h6>
+                    @if($inscricao->concurso->users_id == auth()->user()->id)
+                        <a class="btn btn-primary" href="{{route('envio.documentos.inscricao', $inscricao->id)}}" style="margin-top: 10px;">Enviar documentos</a>
+                    @endif
                 </div>
                 <div class="card-body">
+                    @if(session('success'))
+                        <div class="row">
+                            <div class="col-md-12" style="margin-top: 5px;">
+                                <div class="alert alert-success" role="alert">
+                                    <p>{{session('success')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -344,15 +356,17 @@
                                                 </a>
                                             @endif
                                         </div>
-                                        <div class="col-md-12" style="margin-top: 10px;">
-                                             <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
-                                            <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror"
-                                                id="ficha_avaliacao" style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff"
-                                                name="ficha_avaliacao" @if ($inscricao->avaliacao && !$inscricao->avaliacao->ficha_avaliacao) required @endif/>
-                                            @error('ficha_avaliacao')
-                                                <span style="color: red">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                        @if(auth()->user()->role == "presidenteBancaExaminadora")
+                                            <div class="col-md-12" style="margin-top: 10px;">
+                                                <label for="ficha_avaliacao" class="form-label style_campo_titulo">Selecione o arquivo de pontuação</label>
+                                                <input type="file" accept=".pdf" class="form-control form-control-sm @error('ficha_avaliacao') is-invalid @enderror"
+                                                    id="ficha_avaliacao" style="margin-left:-10px;margin-bottom:1rem; border:0px solid #fff"
+                                                    name="ficha_avaliacao" @if ($inscricao->avaliacao && !$inscricao->avaliacao->ficha_avaliacao) required @endif/>
+                                                @error('ficha_avaliacao')
+                                                    <span style="color: red">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        @endif
                                         <div class="col-md-12">
                                             <div class="form-row">
                                                 <div class="col-md-12 form-group">
@@ -362,6 +376,9 @@
                                                         @if ($inscricao->avaliacao && !$inscricao->avaliacao->nota)
                                                             required
                                                         @endif
+                                                        @if($inscricao->concurso->users_id == auth()->user()->id)
+                                                            disabled
+                                                        @endif
                                                         @if ($inscricao->avaliacao)
                                                             value="{{ $inscricao->avaliacao->nota }}"/>
                                                         @else
@@ -369,12 +386,14 @@
                                                         @endif
                                                 </div>
                                             </div>
-                                            <div class="form-row justify-content-center">
-                                                <div class="col-md-12"><hr></div>
-                                                <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
-                                                    <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">Enviar</button>
+                                            @if(auth()->user()->role == "presidenteBancaExaminadora")
+                                                <div class="form-row justify-content-center">
+                                                    <div class="col-md-12"><hr></div>
+                                                    <div class="col-md-6 form-group" style="margin-bottom: 2.5px;">
+                                                        <button type="submit" class="btn btn-success shadow-sm" style="width: 100%;" id="submeterFormBotao">Enviar</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </form>
