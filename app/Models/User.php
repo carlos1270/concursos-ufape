@@ -11,7 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\EmailDeVerificacao;
+use App\Notifications\EmailDeVerificacaoNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -140,7 +140,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function concursosChefeBanca()
     {
-        return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'users_id', 'concursos_id');
+        return $this->belongsToMany(Concurso::class, 'chefe_da_banca', 'users_id', 'concursos_id')->withPivot('chefe');
     }
 
     public function candidato()
@@ -155,6 +155,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendEmailVerificationNotification()
     {
-        Notification::send($this, new EmailDeVerificacao($this));
+        Notification::send($this, new EmailDeVerificacaoNotification($this));
     }
 }

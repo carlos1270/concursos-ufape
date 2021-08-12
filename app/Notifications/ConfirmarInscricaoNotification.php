@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Inscricao;
 
-class ConfirmarInscricao extends Notification
+class ConfirmarInscricaoNotification extends Notification
 {
     use Queueable;
 
@@ -43,11 +43,12 @@ class ConfirmarInscricao extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)->view(
-            'emails.confirmar_inscricao', ['inscricao' => $this->inscricao]
+            'emails.confirmar_inscricao',
+            ['inscricao' => $this->inscricao]
         );
-                    // ->line('The introduction to the notification.')
-                    // ->action('Notification Action', url('/'))
-                    // ->line('Thank you for using our application!');
+        // ->line('The introduction to the notification.')
+        // ->action('Notification Action', url('/'))
+        // ->line('Thank you for using our application!');
     }
 
     /**

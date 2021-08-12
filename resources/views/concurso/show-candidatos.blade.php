@@ -23,7 +23,9 @@
                                 @if($request->filtro != null)
                                     <a type="button" class="btn btn-secondary" href="{{route('show.candidatos.concurso', $concurso->id)}}">Limpar filtros</a>
                                 @endif
-                                <a type="button" class="btn btn-success" href="{{route('inscricao.chefe.concurso', ['concurso' => $concurso->id])}}">Inscrever candidato</a>
+                                @if(auth()->user()->role != "presidenteBancaExaminadora")
+                                    <a type="button" class="btn btn-success" href="{{route('inscricao.chefe.concurso', ['concurso' => $concurso->id])}}">Inscrever candidato</a>
+                                @endif
                             </div>
                         </div>
                     </div>

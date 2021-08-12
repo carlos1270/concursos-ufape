@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Concurso;
 use App\Models\User;
-use App\Notifications\UsuarioCadastrado;
+use App\Notifications\UsuarioCadastradoNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -55,7 +55,7 @@ class AdminController extends Controller
 
         $usuario->password = $request['password'];
 
-        Notification::send($usuario, new UsuarioCadastrado($usuario));
+        Notification::send($usuario, new UsuarioCadastradoNotification($usuario));
 
         return redirect(route('user.index'))->with(['success' => 'Cadastro realizado com sucesso!']);
     }
@@ -103,7 +103,7 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $usuario = User::find($id);
-        
+
         if ($usuario->concursos->count() > 0) {
             return redirect()->back()->withErrors(['error' => 'Não é possivel deletar o usuário pois ele criou concursos.']);
         }
@@ -119,16 +119,27 @@ class AdminController extends Controller
         return redirect(route('user.index'))->with(['success' => 'Usuário deletado com sucesso!']);
     }
 
-    public function usuarioDeBanca($id) {
+    public function usuarioDeBanca($id)
+    {
         $concurso = Concurso::find($id);
         $this->authorize('operacoesUserBanca', $concurso);
-        $usuarios = User::where('role', User::ROLE_ENUM["presidenteBancaExaminadora"])->get();
+        
+        $usuariosMembros = collect();
+        $membrosDoConcurso = $concurso->chefeDaBanca()->orderBy('nome')->get();
+        $users = User::where('role', User::ROLE_ENUM["presidenteBancaExaminadora"])->orderBy('nome')->get();
 
-        return view('usuario.banca_examinadora', compact('usuarios', 'concurso'));
+        foreach ($users as $user) {
+            if (!$membrosDoConcurso->contains('id', $user->id)) {
+                $usuariosMembros->push($user);
+            }
+        }
+
+        return view('usuario.banca_examinadora', compact('usuariosMembros', 'membrosDoConcurso', 'concurso'));
     }
 
-    public function createUserBanca(Request $request, $id) {
-        $concurso = Concurso::find($id); 
+    public function createUserBanca(Request $request, $id)
+    {
+        $concurso = Concurso::find($id);
         $this->authorize('operacoesUserBanca', $concurso);
         Validator::make($request->all(), User::$rulesAdmin, User::$messages)->validate();
 
@@ -149,8 +160,23 @@ class AdminController extends Controller
 
         $usuario->password = $request['password'];
 
-        Notification::send($usuario, new UsuarioCadastrado($usuario));
+        Notification::send($usuario, new UsuarioCadastradoNotification($usuario));
 
         return redirect()->back()->with(['success' => 'Usuário cadastrado com sucesso.']);
+    }
+
+    public function definirPresidente(Request $request) {
+        $concurso = Concurso::find($request->concurso); 
+        $this->authorize('operacoesUserBanca', $concurso);
+
+        foreach ($concurso->chefeDaBanca as $user) {
+            if ($request->presidente == $user->id) {
+                $concurso->chefeDaBanca()->updateExistingPivot($user->id, ['chefe' => true]);
+            } else {
+                $concurso->chefeDaBanca()->updateExistingPivot($user->id, ['chefe' => false]);
+            }
+        }
+        
+        return redirect()->back()->with(['success' => 'Presidente da banca examinadora salvo com sucesso.']);
     }
 }
