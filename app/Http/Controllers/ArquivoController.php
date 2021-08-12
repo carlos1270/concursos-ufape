@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Arquivo;
 use App\Models\Avaliacao;
+use App\Models\Concurso;
 use App\Models\Inscricao;
 use App\Notifications\EnvioDocumentosNotification;
 use Illuminate\Http\Response;
@@ -200,8 +201,10 @@ class ArquivoController extends Controller
 
     public function downloadDocumentosTodosCandidatos(Request $request)
     {
+        $concurso = Concurso::find($request->concurso_id);
+        $this->authorize('viewCandidatos', $concurso);
         $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->get();
-        $filename = $inscricoes->first()->concurso->titulo.' - Documentos dos Candidatos.zip';
+        $filename = 'Documentos dos Candidatos.zip';
         $zip = new ZipArchive();
         $zip->open($filename, ZipArchive::CREATE);
 
@@ -212,7 +215,7 @@ class ArquivoController extends Controller
 
             if(isset($arquivos)){
                 $temArquivo = true;
-                $nomeCandidato = $arquivos->inscricao->user->nome . ' ' . $arquivos->inscricao->user->sobrenome;
+                $nomeCandidato = $arquivos->inscricao->user->nome . ' ' . $arquivos->inscricao->user->sobrenome . ' - ' . $arquivos->inscricoes_id;
                 $path = 'app'. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'concursos' . DIRECTORY_SEPARATOR . $arquivos->inscricao->concursos_id . DIRECTORY_SEPARATOR . 'inscricoes' . DIRECTORY_SEPARATOR . $inscricao->id;
 
                 $zip->addEmptyDir($nomeCandidato);
