@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use App\Models\User;
 use Config;
 
-class EmailDeVerificacao extends Notification
+class EmailDeVerificacaoNotification extends Notification
 {
     use Queueable;
     public static $toMailCallback;
@@ -53,13 +53,14 @@ class EmailDeVerificacao extends Notification
         }
 
         return (new MailMessage)->markdown(
-            'emails.verificar_cadastro', ['user' => $this->user, 'route_verificar' => $verificationUrl]
+            'emails.verificar_cadastro',
+            ['user' => $this->user, 'route_verificar' => $verificationUrl]
         );
-            // ->subject('Verifique o endereço de e-mail')
-            // ->line('Pedimos que clique no botão abaixo para verificar seu endereço de e-mail. Esta ação é necessária para evitar a criação de usuários falsos, robôs ou mesmo o uso indevido de seu acesso por terceiros.')
-            // ->action('Verifique o endereço de e-mail', $verificationUrl)
-            // ->line('Se você não solicitou a criação desta conta, ignore este e-mail.')
-            // ->with(['user' => $this]);
+        // ->subject('Verifique o endereço de e-mail')
+        // ->line('Pedimos que clique no botão abaixo para verificar seu endereço de e-mail. Esta ação é necessária para evitar a criação de usuários falsos, robôs ou mesmo o uso indevido de seu acesso por terceiros.')
+        // ->action('Verifique o endereço de e-mail', $verificationUrl)
+        // ->line('Se você não solicitou a criação desta conta, ignore este e-mail.')
+        // ->with(['user' => $this]);
     }
 
     /**
