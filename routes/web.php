@@ -88,6 +88,12 @@ Route::middleware(['auth:sanctum', 'verified', 'CheckUserIsNotCandadidato'])->gr
         ->name('show.candidatos.concurso');
 
     Route::get("/anexo/{name}", [ArquivoController::class, 'downloadFichaAvaliacao'])->name('baixar.anexo');
+
+    Route::get('/baixar-documentos/inscricao/{inscricao_id}', [ArquivoController::class, 'downloadDocumentosCandidato'])
+        ->name('baixar.documentos.candidato');
+
+    Route::get('/baixar-documentos-todos-candidatos/concurso/{concurso_id}', [ArquivoController::class, 'downloadDocumentosTodosCandidatos'])
+        ->name('baixar.documentos.todos.candidatos');
 });
 
 Route::get('/adicionar-usuario/banca/{user}/{concurso}', [ConcursoController::class, 'AdicionarUserBanca'])->name('concurso.adicionar.banca')->middleware('auth');

@@ -8,6 +8,28 @@
                     <h6 class="style_card_container_header_titulo">Etapa - Prova de Títulos</h6>
                     @if($inscricao->concurso->users_id == auth()->user()->id)
                         <a class="btn btn-primary" href="{{route('envio.documentos.inscricao', $inscricao->id)}}" style="margin-top: 10px;">Enviar documentos</a>
+                        @if (!$arquivos)
+                            <div class="d-flex justify-content-left">
+                                <div>
+                                    <a class="btn btn-primary">
+                                        <div class="btn-group">
+                                            <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
+                                            <h6 style="margin-left: 5px; margin-top:1px; margin-bottom: 1px; color:#fff">Baixar documentos</h6>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div style="margin-left:10px">
+                                    <h6 style="color: red">Documentos ainda <br>não foram enviados.</h6>
+                                </div>
+                            </div>
+                        @else
+                            <a class="btn btn-primary" href="{{route('baixar.documentos.candidato', $inscricao->id)}}">
+                                <div class="btn-group">
+                                    <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
+                                    <h6 style="margin-left: 5px; margin-top:1px; margin-bottom: 1px; color:#fff">Baixar documentos</h6>
+                                </div>
+                            </a>
+                        @endif
                     @endif
                 </div>
                 <div class="card-body">

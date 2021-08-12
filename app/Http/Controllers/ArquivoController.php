@@ -11,6 +11,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use ZipArchive;
 
 class ArquivoController extends Controller
 {
@@ -124,7 +126,7 @@ class ArquivoController extends Controller
             return redirect(route('avalia.documentos.inscricao', $inscricao->id))->with(['success' => 'Documentos enviados com sucesso.']);
         }
 
-        return redirect(route('candidato.index'))->with('success', 'Seus documentos foram enviados 
+        return redirect(route('candidato.index'))->with('success', 'Seus documentos foram enviados
                 e serão examinados pela banca avaliadora.');
     }
 
@@ -157,6 +159,91 @@ class ArquivoController extends Controller
                 break;
         }
         return abort(404);
+    }
+
+    public function downloadDocumentosCandidato($id)
+    {
+        $arquivos = Arquivo::where('inscricoes_id', $id)->first();
+        $this->authorize('view', $arquivos);
+
+        $nomeCandidato = $arquivos->inscricao->user->nome . ' ' . $arquivos->inscricao->user->sobrenome;
+
+        $filename = $nomeCandidato.'.zip';
+        $zip = new ZipArchive();
+        $zip->open($filename, ZipArchive::CREATE);
+        $path = 'app'. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'concursos' . DIRECTORY_SEPARATOR . $arquivos->inscricao->concursos_id . DIRECTORY_SEPARATOR . 'inscricoes' . DIRECTORY_SEPARATOR . $id;
+
+
+        $files = File::files(storage_path($path));
+        foreach($files as $file){
+            if (!$file->isDir()) {
+                $relativeName = basename($file);
+                $zip->addFile($file, $relativeName);
+            }
+        }
+        $zip->close();
+        header('Content-type: application/zip');
+        header('Content-Disposition: attachment; filename="'.basename($filename).'"');
+        header("Content-length: " . filesize($filename));
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        ob_clean();
+        flush();
+
+        readfile($filename);
+
+        ignore_user_abort(true);
+        unlink($filename);
+        exit();
+    }
+
+    public function downloadDocumentosTodosCandidatos(Request $request)
+    {
+        $inscricoes = Inscricao::where('concursos_id', $request->concurso_id)->get();
+        $filename = $inscricoes->first()->concurso->titulo.' - Documentos dos Candidatos.zip';
+        $zip = new ZipArchive();
+        $zip->open($filename, ZipArchive::CREATE);
+
+        $temArquivo = false;
+
+        foreach($inscricoes as $inscricao){
+            $arquivos = Arquivo::where('inscricoes_id', $inscricao->id)->first();
+
+            if(isset($arquivos)){
+                $temArquivo = true;
+                $nomeCandidato = $arquivos->inscricao->user->nome . ' ' . $arquivos->inscricao->user->sobrenome;
+                $path = 'app'. DIRECTORY_SEPARATOR .'public' . DIRECTORY_SEPARATOR . 'concursos' . DIRECTORY_SEPARATOR . $arquivos->inscricao->concursos_id . DIRECTORY_SEPARATOR . 'inscricoes' . DIRECTORY_SEPARATOR . $inscricao->id;
+
+                $zip->addEmptyDir($nomeCandidato);
+                $files = File::files(storage_path($path));
+                foreach($files as $file){
+                    if (!$file->isDir()) {
+                        $relativeName = basename($file);
+                        $zip->addFile($file, $nomeCandidato.'/'.$relativeName);
+                    }
+                }
+            }
+        }
+
+        $zip->close();
+        if(!$temArquivo){
+            return redirect()->back()->withErrors(['error' => 'Não há documentos submetidos ainda.']);
+        }
+        header('Content-type: application/zip');
+        header('Content-Disposition: attachment; filename="'.basename($filename).'"');
+        header("Content-length: " . filesize($filename));
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        ob_clean();
+        flush();
+
+        readfile($filename);
+
+        ignore_user_abort(true);
+        unlink($filename);
+        exit();
     }
 
     public function showFichaAvaliacao($avaliacao)
