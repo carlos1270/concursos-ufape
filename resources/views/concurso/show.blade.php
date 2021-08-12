@@ -207,7 +207,7 @@
                                   <img class="" src="{{asset('img/icon_resultado_final.png')}}" alt="" width="40px">
                                 </div>
                                   <div class="form-group">
-                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Resultado final</h5></div>
+                                    <div style="margin-bottom: -8px;"><h5 style=" font-size:19px">Resultado Parcial</h5></div>
                                     <div><h5 style="font-weight: normal; color:#909090">{{date('d/m/Y',strtotime($concurso->data_resultado_selecao))}}</h5></div>
                                   </div>
                               </div>

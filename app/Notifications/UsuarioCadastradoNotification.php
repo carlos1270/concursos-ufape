@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 
-class UsuarioCadastrado extends Notification
+class UsuarioCadastradoNotification extends Notification
 {
     use Queueable;
 

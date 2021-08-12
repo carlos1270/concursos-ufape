@@ -5,7 +5,7 @@
             <div class="col-md-11">
                 <div class="card shadow bg-white style_card_container">
                     <div class="card-header d-flex justify-content-between bg-white" id="style_card_container_header">
-                        <h6 class="style_card_container_header_titulo">Resultado Final</h6>
+                        <h6 class="style_card_container_header_titulo">Resultado Parcial</h6>
                     </div>
                     @if($avaliacoes->count() > 0)
                         <div class="card-body">
@@ -25,13 +25,13 @@
                                     @endphp
                                     @foreach ($avaliacoes as $avaliacao)
                                         <tr>
-                                            <th scope="row" id="tabela_container_linha"  style="text-align: center;">{{$cont}}</th>
-                                            <td id="tabela_container_linha">{{ $avaliacao->inscricao->user->nome }}</td>
-                                            <td id="tabela_container_linha">{{ $avaliacao->inscricao->vaga->nome }}</td>
-                                            <td id="tabela_container_linha">
+                                            <th scope="row" id="tabela_container_linha" style="text-align: center; vertical-align: middle;">{{$cont}}</th>
+                                            <td id="tabela_container_linha" style="text-align: center; vertical-align: middle;">{{ $avaliacao->inscricao->user->nome }}</td>
+                                            <td id="tabela_container_linha" style="text-align: center; vertical-align: middle;">{{ $avaliacao->inscricao->vaga->nome }}</td>
+                                            <td id="tabela_container_linha" style="text-align: center; vertical-align: middle;">
                                                 {{ $avaliacao->nota }}
                                             </td>
-                                            <td id="tabela_container_linha">
+                                            <td id="tabela_container_linha" style="text-align: center; vertical-align: middle;">
                                                 <a class="btn btn-primary" href="{{route('visualizar.ficha-avaliacao', $avaliacao->id)}}" target="_new">
                                                     <div class="btn-group">
                                                         <img src="{{asset('img/icon_arquivo_download_branco.svg')}}" style="width:15px">
@@ -52,7 +52,7 @@
                             <div class="form-row" style="text-align: center;">
                                 <div class="col-md-12" style="margin-top: 5rem; margin-bottom: 10rem;">
                                     <img src="{{asset('img/img_default_meus_etapas.svg')}}" alt="Imagem default" width="190px">
-                                    <h6 class="style_campo_titulo" style="margin-top: 20px;">Resultado final ainda não está disponível.</h6>
+                                    <h6 class="style_campo_titulo" style="margin-top: 20px;">Resultado parcial ainda não está disponível.</h6>
                                 </div>
                             </div>
                         </div>
