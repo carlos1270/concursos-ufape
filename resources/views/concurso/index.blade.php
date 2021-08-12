@@ -100,8 +100,8 @@
                                             </td>
                                         </tr>
                                         @php
-                                        $cont = $cont +1;
-                                    @endphp
+                                            $cont = $cont +1;
+                                        @endphp
                                     @endforeach
                                 </tbody>
                             </table>
@@ -119,7 +119,7 @@
                                     <label style="margin-right: 10px; padding-left:13px;padding-right:13px; border-radius:6px; background-color:#FFC107">
                                         <img class="card-img-left example-card-img-responsive" src="img/icon_consultar_resultado.svg" width="12px" style="margin-top: 10px "/>
                                     </label>
-                                    <h6>Consultar o <br>resultado final</h6>
+                                    <h6>Consultar o <br>resultado parcial</h6>
                                 </div>
                             </div>
                         </div>
